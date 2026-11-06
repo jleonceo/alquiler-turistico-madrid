@@ -1,0 +1,152 @@
+{
+ "script": "scripts/cuadro_mando.py",
+ "fecha_datos": "2026-09-17",
+ "fecha_ejecucion": "2026-11-06T20:07:24",
+ "python": "3.13.18",
+ "pandas": "3.1.0",
+ "entradas": [
+  {
+   "ruta": "informes/indicadores.json",
+   "sha256": "b8d28dac0e022e132450fab702314dd3e99258e2ecb1662465609d83eda56cfe"
+  },
+  {
+   "ruta": "data/processed/analisis_anuncios.parquet",
+   "sha256": "29397cb49e50009179d9e7939112207da2ab63ca29c8f2a0ff178840369f3ecc"
+  },
+  {
+   "ruta": "data/processed/analisis_barrios.parquet",
+   "sha256": "edfcfadc021334a02a4f4f6439c8f7f90e7b97cd36cb618b5ec3852b89e0e174"
+  },
+  {
+   "ruta": "data/raw/externos/neighbourhoods.geojson",
+   "sha256": "eba4e3ba50a30adb95ae71b83c1ac0d1ace3e18d06c77db26230bd7195ca8c6d"
+  }
+ ],
+ "salida": {
+  "ruta": "informes/cuadro_mando.html",
+  "bytes": 280546,
+  "sha256": "a2bc9bbda85180d6253894bc7d29e41a186d9354de472414b4c14146d2984cc4"
+ },
+ "filtros": {
+  "distritos": 21,
+  "barrios": 128,
+  "dormitorios": [
+   "0",
+   "1",
+   "2",
+   "3",
+   "4 o más"
+  ],
+  "selecciones_guardadas": 538,
+  "con_cifras": 106,
+  "solo_recuento": 432
+ },
+ "cifras_sin_filtros": {
+  "pisos": 2940,
+  "rent": 11.104171,
+  "rent_sin": 8.328128,
+  "precio": 150.77,
+  "ocupacion": 156.0,
+  "compra": 196260.1875,
+  "compra_sin": 261680.25,
+  "cuartil": 4.050353
+ },
+ "cifras_comparadas_con_indicadores": 252,
+ "minimo": 30,
+ "clases": {
+  "firme": 3,
+  "con aviso": 2,
+  "segunda línea": 4,
+  "fuera del grupo": 27,
+  "menos de 30": 92
+ },
+ "textos": {
+  "titulo_recomendacion": "Busca pisos de hasta 2 habitaciones en Ventas, Numancia y San Diego",
+  "recomendacion": "Son 256 anuncios: 12,1 % sin descuento y 16,2 % con él. Todos los firmes van del 10,8 % al 15,4 %. Firme es estable, no mejor.",
+  "limite": "Es una lista de dónde buscar y no dice si un piso se puede comprar para este uso. Primera acción: Comprobar planta y norma en el Ayuntamiento.",
+  "titulo_dormitorios": "Sin ganador entre estudio, uno y dos",
+  "titulo_barrios": "9 barrios forman el grupo y 3 aguantan las cinco pruebas",
+  "tabla_recomendacion": [
+   [
+    "Firmes de hasta 2 habitaciones",
+    "Cifra"
+   ],
+   [
+    "Anuncios en Airbnb",
+    "256"
+   ],
+   [
+    "Compra por piso, sin descuento",
+    "161.973 €"
+   ],
+   [
+    "Compra por piso, con descuento",
+    "121.480 €"
+   ],
+   [
+    "Ingreso anual por piso",
+    "21.675 €"
+   ],
+   [
+    "Licencias con planta baja",
+    "930 de 1.031"
+   ],
+   [
+    "Licencias con planta baja, firmes",
+    "65 de 72"
+   ],
+   [
+    "Barrios de m² más barato, con descuento",
+    "14,5 %"
+   ]
+  ],
+  "nota_recomendacion": "Rentabilidad bruta, en mediana y sin gastos, en los anuncios en Airbnb de los firmes; el rango es de todos sus pisos, según la foto y el descuento. Valoraciones empieza por bajos y primeras plantas con acceso independiente. Fuera del centro histórico, en el nivel B de la zona 1, el hospedaje cabe en planta baja, inferior a la baja y primera, y siempre con acceso independiente. El ingreso de un bajo no se conoce, porque el de los anuncios mezcla todas las plantas. Qué norma rige en cada barrio no se puede saber con estos datos: hay que preguntarlo en el Ayuntamiento. Elegir por m² barato no se distingue de la lista. Entre barrios, la rentabilidad se asocia más con la ocupación (0,78), la cifra más débil del caso, que con el m² (−0,60).",
+  "texto_mapa": "Numancia supera la mediana de la base; Ventas y San Diego no se distinguen de ella. San Diego queda por debajo de Casco Histórico de Vallecas y de Opañel, que van detrás porque dependen de operadores grandes, el 65 % de sus anuncios. <button class=\"def\" type=\"button\" data-def=\"distingue\">Qué significa</button>",
+  "tabla_mapa": [
+   [
+    "Firmes",
+    "Cuartil bajo",
+    "Sin ocupación",
+    "Con un año o más"
+   ],
+   [
+    "Ventas",
+    "7,1 %",
+    "18,9 %",
+    "3.ª de 26"
+   ],
+   [
+    "Numancia",
+    "5,2 %",
+    "32,4 %",
+    "2.ª de 26"
+   ],
+   [
+    "San Diego",
+    "6,4 %",
+    "20,9 %",
+    "8.ª de 26"
+   ],
+   [
+    "Toda la base",
+    "4,05 %",
+    "24,7 %",
+    "—"
+   ]
+  ],
+  "nota_mapa": "Sin ocupación: pisos fuera del centro. Con un año o más: puesto entre barrios con anuncios de un año o más, porque la ocupación cuenta reseñas de 12 meses y un anuncio nuevo sale bajo. San Diego se sostiene menos con este corte.",
+  "texto_barrios": "Los firmes dependen del tope: salen del grupo al quitar los pisos que llegan a 255 días. Puerta del Ángel está en el grupo y no aguanta ninguna prueba."
+ },
+ "huella_data": {
+  "antes": "f6fc83dad74e3d704d4f248e2b1e4b810aec1a7988afa0ff59e4476238a35917",
+  "despues": "f6fc83dad74e3d704d4f248e2b1e4b810aec1a7988afa0ff59e4476238a35917",
+  "iguales": true
+ },
+ "decisiones_propias": [
+  "Las medianas no se suman: cada selección de los filtros se calcula en Python y el navegador la busca.",
+  "Una selección de menos de 30 pisos guarda solo su recuento, porque su mediana puede ser la cifra de un anuncio.",
+  "La tabla va por clase y por nombre, porque el grupo no tiene un orden cerrado.",
+  "La recomendación sale del campo recomendacion de indicadores.json y se rehace aquí con los pisos de hasta 2 habitaciones de los firmes.",
+  "Las tablas fijas de la recomendación y del mapa no cambian con los filtros: repiten lo que dicen los informes."
+ ]
+}

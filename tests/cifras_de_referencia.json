@@ -1,0 +1,16 @@
+{
+  "_origen": "cifras de control de la lectura de los datos y de la base de decisión. Se comparan con una segunda vía en tests/probar_cifras_por_otro_camino.py y tests/probar_indicadores_por_otro_camino.py",
+  "anuncios_septiembre": 23109,
+  "dias_calendario": 8438629,
+  "resenas": 1524765,
+  "estancia_vacia_septiembre": 1729,
+  "bathrooms_vacia_septiembre": true,
+  "barrios_sin_precio_propio": ["Aeropuerto", "Ambroz", "San Andrés"],
+  "barrios_con_otro_nombre": ["Concepción", "Cármenes", "Fuentelareina", "Jerónimos", "Los Angeles", "Palos de Moguer", "Salvador"],
+  "anuncios_dentro_del_centro": 14150,
+  "base_antes_de_cp_007_a_009": 2976,
+  "base_de_decision": 2940,
+  "barrios_del_grupo": 9,
+  "barrios_tras_temporada": 5,
+  "barrios_firmes": 3
+}

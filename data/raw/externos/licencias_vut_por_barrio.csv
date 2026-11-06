@@ -1,0 +1,1032 @@
+distrito,barrio,planta,viviendas
+Distrito de Centro,Justicia,BAJA Y SOTANO,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,2.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA Y SOTANO,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Sol,PRIMERA,1.0
+Distrito de Centro,Sol,Segunda,3.0
+Distrito de Centro,Sol,SEXTA,2.0
+Distrito de Chamartín,Prosperidad,BAJA,1.0
+Distrito de Chamartín,Prosperidad,BAJA,2.0
+Distrito de Chamartín,Prosperidad,BAJA,1.0
+Distrito de Tetuan,Berruguete,PRIMERA,1.0
+Distrito de Tetuan,Berruguete,BAJA,2.0
+Distrito de Tetuan,Berruguete,BAJA,1.0
+Distrito de Chamberí,Gaztambide,BAJA Y SOTANO,1.0
+Distrito de Chamberí,Gaztambide,BAJA,4.0
+Distrito de Chamberí,Gaztambide,BAJA,1.0
+Distrito de Moncloa-Aravaca,Casa de Campo,BAJA,1.0
+Distrito de Moncloa-Aravaca,Argüelles,BAJA,1.0
+Distrito de Moncloa-Aravaca,Argüelles,BAJA,1.0
+Distrito de Latina,Puerta del Angel,PRIMERA,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Carabanchel,Comillas,PRIMERA,1.0
+Distrito de Carabanchel,Opañel,Baja,1.0
+Distrito de Usera,Moscardó,BAJA,1.0
+Distrito de Usera,Moscardó,Baja,2.0
+Distrito de Usera,Moscardó,BAJA,1.0
+Distrito de Usera,Moscardó,PRIMERA,1.0
+Distrito de Usera,Moscardó,Baja,1.0
+Distrito de Usera,Zofío,BAJA,1.0
+Distrito de Usera,Zofío,BAJA,2.0
+Distrito de Usera,Zofío,BAJA,1.0
+Distrito de Usera,Pradolongo,BAJA,1.0
+Distrito de Usera,Pradolongo,PRIMERA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,Baja,4.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,2.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,2.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,Baja,1.0
+Distrito de Ciudad Lineal,Costillares,BAJA,1.0
+Distrito de Hortaleza,Canillas,BAJA,1.0
+Distrito de Barajas,Timón,BAJA,1.0
+Distrito de Villa de Vallecas,Casco Histórico de Vallecas,Baja,3.0
+Distrito de Arganzuela,Legazpi,BAJA,1.0
+Distrito de Villa de Vallecas,Casco Histórico de Vallecas,Baja,1.0
+Distrito de Retiro,Adelfas,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA Y SOTANO,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,2.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA Y ENTREPLANTA,3.0
+Distrito de Centro,Embajadores,BAJA,2.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,2.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Cortes,BAJA,1.0
+Distrito de Centro,Cortes,BAJA,1.0
+Distrito de Salamanca,Fuente del Berro,BAJA,1.0
+Distrito de Salamanca,Fuente del Berro,SOTANO,1.0
+Distrito de Salamanca,Fuente del Berro,BAJA,3.0
+Distrito de Salamanca,Fuente del Berro,Baja,1.0
+Distrito de Salamanca,Guindalera,TERCERA,1.0
+Distrito de Salamanca,Guindalera,"3  BAJA , 2 BAJA Y SOTANO",5.0
+Distrito de Salamanca,Lista,SEGUNDA,1.0
+Distrito de Tetuan,Almenara,Baja,2.0
+Distrito de Tetuan,Almenara,Baja,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Almenara,Baja,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,Baja,1.0
+Distrito de Fuencarral-El Pardo,Pilar,Baja,1.0
+Distrito de Fuencarral-El Pardo,Pilar,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Pilar,BAJA Y SOTANO,1.0
+Distrito de Fuencarral-El Pardo,La Paz,Baja,2.0
+Distrito de Fuencarral-El Pardo,La Paz,Baja,1.0
+Distrito de Fuencarral-El Pardo,La Paz,Baja,2.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Carabanchel,San Isidro,BAJA,1.0
+Distrito de Carabanchel,San Isidro,PRIMERA,1.0
+Distrito de Carabanchel,San Isidro,BAJA,1.0
+Distrito de Carabanchel,Vista Alegre,BAJA,1.0
+Distrito de Puente de Vallecas,Entrevías,Baja,1.0
+Distrito de Puente de Vallecas,San Diego,BAJA,1.0
+Distrito de Puente de Vallecas,Numancia,BAJA,1.0
+Distrito de Puente de Vallecas,Numancia,PRIMERA,1.0
+Distrito de Puente de Vallecas,Numancia,Baja,1.0
+Distrito de Moratalaz,Marroquina,BAJA,1.0
+Distrito de Moratalaz,Marroquina,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,Baja,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Hortaleza,Pinar del Rey,BAJA,1.0
+Distrito de Barajas,Casco Histórico de Barajas,BAJA,1.0
+Distrito de Barajas,Timón,BAJA,1.0
+Distrito de Barajas,Timón,BAJA,1.0
+Distrito de Chamartín,Ciudad Jardín,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,PRIMERA,1.0
+Distrito de Tetuan,Berruguete,BAJA,10.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,"1 BAJA, 2 PRIMERA Y 2 SEGUNDA",5.0
+Distrito de Tetuan,Valdeacederas,"1 BAJA, 2 PRIMERA",3.0
+Distrito de Usera,Pradolongo,BAJA,1.0
+Distrito de Carabanchel,Opañel,BAJA,3.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Arganzuela,Chopera,BAJA,1.0
+Distrito de Arganzuela,Chopera,BAJA,1.0
+Distrito de Arganzuela,Chopera,BAJA,2.0
+Distrito de Arganzuela,Chopera,BAJA,1.0
+Distrito de Arganzuela,Chopera,BAJA,1.0
+Distrito de Arganzuela,Chopera,BAJA,1.0
+Distrito de Arganzuela,Chopera,BAJA Y PRIMERA,1.0
+Distrito de Arganzuela,Chopera,BAJA,1.0
+Distrito de Arganzuela,Legazpi,BAJA 1UD- PRIMERA 1UD,2.0
+Distrito de Arganzuela,Legazpi,BAJA,2.0
+Distrito de Arganzuela,Delicias,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA Y ENTREPLANTA,2.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Retiro,Estrella,BAJA,1.0
+Distrito de Tetuan,Bellas Vistas,BAJA,2.0
+Distrito de Tetuan,Bellas Vistas,BAJA,1.0
+Distrito de Tetuan,Bellas Vistas,PRIMERA,1.0
+Distrito de Tetuan,Bellas Vistas,Baja,1.0
+Distrito de Tetuan,Bellas Vistas,PRIMERA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,2.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,3.0
+Distrito de Tetuan,Cuatro Caminos,BAJA Y SOTANO,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,PRIMERA,1.0
+Distrito de Chamberí,Rios Rosas,BAJA,1.0
+Distrito de Chamberí,Rios Rosas,BSOTANO,2.0
+Distrito de Chamberí,Vallehermoso,BAJA,1.0
+Distrito de Chamberí,Vallehermoso,BAJA,1.0
+Distrito de Chamberí,Vallehermoso,BAJA,1.0
+Distrito de Chamberí,Vallehermoso,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Peñagrande,BAJA,1.0
+Distrito de Latina,Cármenes,"BAJA, 1ª, 2ª, 3ª,4ª, 5ª",10.0
+Distrito de Latina,Puerta del Angel,BAJA,2.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Carabanchel,Vista Alegre,BAJA,4.0
+Distrito de Carabanchel,Vista Alegre,Baja,1.0
+Distrito de Carabanchel,Vista Alegre,Baja,1.0
+Distrito de Carabanchel,Abrantes,Baja,1.0
+Distrito de Puente de Vallecas,San Diego,BAJA,7.0
+Distrito de Puente de Vallecas,San Diego,BAJA,1.0
+Distrito de Puente de Vallecas,Palomeras Bajas,Baja,1.0
+Distrito de Puente de Vallecas,Palomeras Bajas,Baja,1.0
+Distrito de Ciudad Lineal,Quintana,Baja,1.0
+Distrito de Ciudad Lineal,Concepción,BAJA,1.0
+Distrito de Ciudad Lineal,San Pascual,BAJA,1.0
+Distrito de Villaverde,Los Rosales,Baja,1.0
+Distrito de Villa de Vallecas,Casco Histórico de Vallecas,Baja,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,2.0
+Distrito de Barajas,Timón,BAJA,1.0
+Distrito de Latina,Puerta del Angel,PRIMERA,1.0
+Distrito de Retiro,Ibiza,BAJA,2.0
+Distrito de Salamanca,Goya,BAJA,1.0
+Distrito de Chamartín,Prosperidad,BAJA,3.0
+Distrito de Chamartín,Ciudad Jardín,BAJA,9.0
+Distrito de Chamartín,Ciudad Jardín,BAJA,11.0
+Distrito de Chamartín,Ciudad Jardín,SEMISOTANO,1.0
+Distrito de Chamartin,Hispanoamérica,Baja,5.0
+Distrito de Chamartín,Hispanoamérica,BAJA,3.0
+Distrito de Chamartín,Hispanoamérica,BAJA,1.0
+Distrito de Chamberí,Gaztambide,BAJA Y SOTANO,2.0
+Distrito de Chamberí,Arapiles,BAJA,2.0
+Distrito de Chamberí,Arapiles,BAJA,1.0
+Distrito de Chamberí,Trafalgar,BAJA Y PRIMERA,1.0
+Distrito de Chamberí,Trafalgar,"BAJA, 1ª, 2ª, 3ª",1.0
+Distrito de Chamberí,Trafalgar,BAJA,1.0
+Distrito de Chamberí,Trafalgar,BAJA,4.0
+Distrito de Chamberí,Trafalgar,BAJA,1.0
+Distrito de Chamberí,Trafalgar,BAJA,1.0
+Distrito de Chamberí,Trafalgar,BAJA,1.0
+Distrito de Chamberí,Trafalgar,BAJA Y SOTANO,1.0
+Distrito de Chamberí,Rios Rosas,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,2.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Lucero,BAJA,1.0
+Distrito de Latina,Lucero,BAJA,1.0
+Distrito de Latina,Lucero,Baja,1.0
+Distrito de Usera,Orcasitas,BAJA,1.0
+Distrito de Usera,Orcasitas,BAJA,1.0
+Distrito de Usera,Orcasitas,BAJA,4.0
+Distrito de Usera,Almendrales,PRIMERA,1.0
+Distrito de Usera,Almendrales,Baja,1.0
+Distrito de Puente de Vallecas,Portazgo,BAJA,1.0
+Distrito de Puente de Vallecas,Numancia,Baja,1.0
+Distrito de Puente de Vallecas,Numancia,Baja,1.0
+Distrito de San Blas - Canillejas,Numancia,Baja,1.0
+Distrito de Centro,Numancia,Baja,1.0
+Distrito de Puente de Vallecas,Numancia,BAJA,1.0
+Distrito de Puente de Vallecas,Numancia,"BAJA, PRIMERA Y SEGUNDA",3.0
+Distrito de San Blas - Canillejas,Canillejas,BAJA,1.0
+Distrito de San Blas - Canillejas,Canillejas,Baja y primera,5.0
+Distrito de San Blas - Canillejas,Canillejas,BAJA,2.0
+Distrito de Arganzuela,Delicias,BAJA,2.0
+Distrito de Barajas,Timón,BAJA,1.0
+Distrito de Villaverde,Los Rosales,BAJA,1.0
+Distrito de Vicálvaro,Ambroz,Baja,1.0
+Distrito de Vicálvaro,Ambroz,BAJA,1.0
+Distrito de San Blas - Canillejas,Hellín,Baja,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,2.0
+Distrito de Villa de Vallecas,Casco Histórico de Vallecas,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,2.0
+Distrito de Centro,Justicia,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA Y SOTANO,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,2.0
+Distrito de Centro,Universidad,Cuarta,5.0
+Distrito de Centro,Universidad,PRIMERA,11.0
+Distrito de Salamanca,Lista,BAJA,1.0
+Distrito de Chamartín,El Viso,BAJA,1.0
+Distrito de Chamartín,El Viso,Baja,1.0
+Distrito de Tetuan,Valdeacederas,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,PRIMERA,1.0
+Distrito de Tetuan,Berruguete,PRIMERA,1.0
+Distrito de Tetuan,Berruguete,BAJA,1.0
+Distrito de Tetuan,Berruguete,BAJA,3.0
+Distrito de Chamberí,Gaztambide,BAJA Y SOTANO,1.0
+Distrito de Moncloa-Aravaca,Argüelles,BAJA Y SOTANO,1.0
+Distrito de Moncloa-Aravaca,Argüelles,BAJA,1.0
+Distrito de Moncloa-Aravaca,Argüelles,BAJA,1.0
+Distrito de Moncloa-Aravaca,Argüelles,BAJA,1.0
+Distrito de Moncloa-Aravaca,Argüelles,BAJA,2.0
+Distrito de Moncloa-Aravaca,Argüelles,BAJA,1.0
+Distrito de Moncloa-Aravaca,Argüelles,BAJA,1.0
+Distrito de Moncloa-Aravaca,Argüelles,BAJA,1.0
+Distrito de Latina,Aluche,BAJA,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Carabanchel,Comillas,Baja,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Usera,Almendrales,BAJA,1.0
+Distrito de Usera,Moscardó,Baja,1.0
+Distrito de Usera,Moscardó,BAJA,1.0
+Distrito de Usera,Moscardó,BAJA,1.0
+Distrito de Usera,Moscardó,PRIMERA,1.0
+Distrito de Usera,Moscardó,BAJA,1.0
+Distrito de Usera,Pradolongo,BAJA,2.0
+Distrito de Ciudad Lineal,Ventas,SOTANO,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,Baja,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,2.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,3.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,Baja,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,3.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,Baja,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Hortaleza,Canillas,BAJA,1.0
+Distrito de Hortaleza,Canillas,BAJA Y PRIMERA,1.0
+Distrito de Hortaleza,Canillas,BAJA,1.0
+Distrito de Vicálvaro,Ambroz,BAJA,1.0
+Distrito de San Blas - Canillejas,Simancas,BAJA,2.0
+Distrito de Barajas,Timón,BAJA,2.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Tetuan,Bellas Vistas,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,2 BAJA Y SOTANO,2.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,2.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,CUARTA,3.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA Y SOTANO,2.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA Y SOTANO,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Cortes,BAJA,1.0
+Distrito de Salamanca,Fuente del Berro,PRIMERA,1.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Salamanca,Guindalera,Baja,1.0
+Distrito de Salamanca,Guindalera,BAJA,9.0
+Distrito de Salamanca,Guindalera,BAJA Y SOTANO,1.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Salamanca,Guindalera,BAJA,7.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Tetuan,Castillejos,BAJA,2.0
+Distrito de Tetuan,Almenara,PRIMERA,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,3.0
+Distrito de Carabanchel,Opañel,PRIMERA,1.0
+Distrito de Carabanchel,Opañel,PRIMERA,1.0
+Distrito de Carabanchel,San Isidro,PRIMERA,1.0
+Distrito de Carabanchel,San Isidro,PRIMERA,1.0
+Distrito de Puente de Vallecas,San Diego,BAJA,1.0
+Distrito de Puente de Vallecas,Numancia,BAJA,1.0
+Distrito de Puente de Vallecas,Numancia,BAJA,1.0
+Distrito de Puente de Vallecas,Numancia,BAJA,1.0
+Distrito de Puente de Vallecas,Numancia,"BAJA, PRIMERA Y SEGUNDA",3.0
+Distrito de Puente de Vallecas,Portazgo,BAJA,1.0
+Distrito de Moratalaz,Marroquina,BAJA,1.0
+Distrito de Moratalaz,Media Legua,BAJA,1.0
+Distrito de Moratalaz,Media Legua,BAJA,1.0
+Distrito de Moratalaz,Media Legua,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,SOTANO,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Hortaleza,Pinar del Rey,PRIMERA,1.0
+Distrito de Hortaleza,Pinar del Rey,BAJA Y SOTANO,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Arganzuela,Chopera,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,3.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Retiro,Pacífico,BAJA,1.0
+Distrito de Retiro,Pacífico,BAJA,1.0
+Distrito de Retiro,Pacífico,BAJA,1.0
+Distrito de Retiro,Adelfas,Baja,1.0
+Distrito de Retiro,Estrella,BAJA,1.0
+Distrito de Chamartín,Castilla,BAJA,2.0
+Distrito de Chamartín,Castilla,BAJA,1.0
+Distrito de Tetuan,Bellas Vistas,BAJA,1.0
+Distrito de Tetuan,Bellas Vistas,BAJA,1.0
+Distrito de Tetuan,Bellas Vistas,BAJA,2.0
+Distrito de Tetuan,Cuatro Caminos,Segunda,1.0
+Distrito de Tetuan,Cuatro Caminos,CUARTA,2.0
+Distrito de Tetuan,Cuatro Caminos,PRIMERA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Chamberí,Rios Rosas,BAJA,1.0
+Distrito de Chamberí,Vallehermoso,BAJA,1.0
+Distrito de Moncloa-Aravaca,Valdezarza,BAJA,1.0
+Distrito de Moncloa-Aravaca,Valdezarza,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Puerta del Angel,Baja,3.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Carabanchel,Vista Alegre,BAJA,1.0
+Distrito de Carabanchel,Vista Alegre,BAJA,1.0
+Distrito de Carabanchel,Vista Alegre,BAJA,2.0
+Distrito de Carabanchel,Buenavista,"SEGUNDA, TERCERA, CUARTA",17.0
+Distrito de Carabanchel,Buenavista,BAJA,1.0
+Distrito de Puente de Vallecas,San Diego,Baja,2.0
+Distrito de Puente de Vallecas,San Diego,PRIMERA,1.0
+Distrito de Puente de Vallecas,San Diego,"1 BAJA, 1 PRIMERA, 1 SEGUNDA",3.0
+Distrito de Puente de Vallecas,San Diego,BAJA,1.0
+Distrito de Puente de Vallecas,Palomeras Bajas,Baja,1.0
+Distrito de Puente de Vallecas,Palomeras Bajas,Baja,1.0
+Distrito de Puente de Vallecas,Palomeras Bajas,BAJA,1.0
+Distrito de Puente de Vallecas,Palomeras Bajas,BAJA,2.0
+Distrito de Ciudad Lineal,Quintana,BAJA,1.0
+Distrito de Ciudad Lineal,Colina,BAJA,2.0
+Distrito de Villaverde,Butarque,BAJA,2.0
+Distrito de Villaverde,Los Rosales,BAJA,1.0
+Distrito de Villaverde,Los Rosales,BAJA,1.0
+Distrito de Villaverde,Los Angeles,BAJA,1.0
+Distrito de Villa de Vallecas,Casco Histórico de Vallecas,Baja,1.0
+Distrito de Villa de Vallecas,Casco Histórico de Vallecas,Baja,1.0
+Distrito de Centro,Embajadores,SOTANO,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Salamanca,Fuente del Berro,PRIMERA,1.0
+Distrito de Puente de Vallecas,San Diego,BAJA,1.0
+Distrito de Latina,Cármenes,BAJA,2.0
+Distrito de Latina,Cármenes,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,3.0
+Distrito de Tetuan,Almenara,BAJA,4.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Ciudad Lineal,Quintana,BAJA,1.0
+Distrito de Arganzuela,Legazpi,BAJA,5.0
+Distrito de Arganzuela,Legazpi,BAJA,1.0
+Distrito de Arganzuela,Legazpi,BAJA,1.0
+Distrito de Arganzuela,Legazpi,BAJA,1.0
+Distrito de Arganzuela,Legazpi,BAJA,1.0
+Distrito de Arganzuela,Legazpi,BAJA,1.0
+Distrito de Arganzuela,Legazpi,BAJA,5.0
+Distrito de Moncloa-Aravaca,Ciudad Universitaria,BAJA,1.0
+Distrito de Villaverde,Los Angeles,BAJA,1.0
+Distrito de Retiro,Ibiza,BAJA,1.0
+Distrito de Salamanca,Goya,SOTANO,8.0
+Distrito de Salamanca,Goya,BAJA,1.0
+Distrito de Chamartín,Prosperidad,BAJA,1.0
+Distrito de Chamartín,Prosperidad,BAJA,3.0
+Distrito de Chamartín,Ciudad Jardín,BAJA,1.0
+Distrito de Chamartín,Ciudad Jardín,PRIMERA,2.0
+Distrito de Chamartín,Ciudad Jardín,BAJA,2.0
+Distrito de Chamartín,Ciudad Jardín,BAJA,1.0
+Distrito de Chamartín,Hispanoamérica,BAJA,1.0
+Distrito de Chamberí,Gaztambide,BAJA,1.0
+Distrito de Chamberí,Gaztambide,BAJA,1.0
+Distrito de Chamberí,Arapiles,BAJA,1.0
+Distrito de Chamberí,Arapiles,BAJA,1.0
+Distrito de Chamberí,Arapiles,BAJA,1.0
+Distrito de Chamberí,Trafalgar,BAJA Y SOTANO,1.0
+Distrito de Chamberí,Trafalgar,BAJA Y SOTANO,1.0
+Distrito de Chamberí,Trafalgar,BAJA,1.0
+Distrito de Chamberi,Almagro,Baja,3.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Puerta del Angel,PRIMERA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Lucero,BAJA,1.0
+Distrito de Latina,Aluche,BAJA,2.0
+Distrito de Latina,Aluche,BAJA,1.0
+Distrito de Usera,Orcasitas,BAJA,1.0
+Distrito de Puente de Vallecas,Palomeras Sureste,BAJA,1.0
+Distrito de Puente de Vallecas,Portazgo,BAJA,1.0
+Distrito de Puente de Vallecas,Numancia,Baja,1.0
+Distrito de Puente de Vallecas,Numancia,BAJA,1.0
+Distrito de Villaverde,San Andrés,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Pilar,BAJA,1.0
+Distrito de San Blas-Canillejas,Rosas,BAJA Y PRIMERA,1.0
+Distrito de Centro,Justicia,5ª,1.0
+Distrito de Centro,Justicia,BAJA,1.0
+Distrito de Centro,Justicia,TERCERA,5.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Sol,TERCERA,2.0
+Distrito de Centro,Sol,SEGUNDA,3.0
+Distrito de Centro,Sol,SEPTIMA,1.0
+Distrito de Salamanca,Lista,BAJA,1.0
+Distrito de Salamanca,Castellana,BAJA,1.0
+Distrito de Chamartín,Prosperidad,BAJA,6.0
+Distrito de Chamartín,Prosperidad,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,Baja,1.0
+Distrito de Tetuan,Berruguete,BAJA,1.0
+Distrito de Tetuan,Berruguete,BAJA,2.0
+Distrito de Tetuan,Berruguete,BAJA,3.0
+Distrito de Tetuan,Berruguete,BAJA,2.0
+Distrito de Chamberí,Gaztambide,BAJA,1.0
+Distrito de Moncloa-Aravaca,Casa de Campo,BAJA,1.0
+Distrito de Moncloa-Aravaca,Casa de Campo,BAJA,2.0
+Distrito de Latina,Campamento,BAJA,1.0
+Distrito de Carabanchel,Comillas,Baja,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Carabanchel,Comillas,Baja,1.0
+Distrito de Carabanchel,Comillas,Baja,1.0
+Distrito de Usera,Moscardó,BAJA,1.0
+Distrito de Usera,Moscardó,Baja,1.0
+Distrito de Usera,Moscardó,BAJA,1.0
+Distrito de Usera,Moscardó,PRIMERA,1.0
+Distrito de Usera,Zofío,Baja,1.0
+Distrito de Usera,Pradolongo,Baja,1.0
+Distrito de Usera,Pradolongo,Baja,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,2.0
+Distrito de Ciudad Lineal,Ventas,Baja,2.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,2.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,Baja,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,2.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,Baja,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,Baja,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,4.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,Baja,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Hortaleza,Canillas,BAJA,2.0
+Distrito de Hortaleza,Canillas,BAJA,1.0
+Distrito de Hortaleza,Canillas,Baja,2.0
+Distrito de Villa de Vallecas,Casco Histórico de Vallecas,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,PRIMERA,1.0
+Distrito de Puente de Vallecas,San Diego,Primera,1.0
+Distrito de Moncloa-Aravaca,Valdemarín,"1,2,3,4",48.0
+Distrito de Centro,Palacio,Septima,1.0
+Distrito de Centro,Palacio,Septima,1.0
+Distrito de Centro,Palacio,Septima,1.0
+Distrito de Centro,Palacio,Septima,1.0
+Distrito de Centro,Palacio,DECIMA,1.0
+Distrito de Centro,Palacio,DECIMA,1.0
+Distrito de Centro,Palacio,UNDECIMA,1.0
+Distrito de Centro,Palacio,UNDECIMA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,PRIMERA,2.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,2.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Salamanca,Fuente del Berro,BAJA,1.0
+Distrito de Salamanca,Fuente del Berro,BAJA,1.0
+Distrito de Salamanca,Fuente del Berro,BAJA,1.0
+Distrito de Salamanca,Guindalera,Baja,1.0
+Distrito de Salamanca,Guindalera,BAJA,2.0
+Distrito de Salamanca,Guindalera,BAJA,2.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Salamanca,Guindalera,Baja,2.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Tetuan,Castillejos,Decima,1.0
+Distrito de Tetuan,Castillejos,Decima,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Almenara,PRIMERA,1.0
+Distrito de Tetuan,Almenara,PRIMERA,1.0
+Distrito de Tetuan,Almenara,BAJA Y PRIMERA,2.0
+Distrito de Tetuan,Almenara,BAJA,2.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,Baja,1.0
+Distrito de Tetuan,Valdeacederas,PRIMERA,1.0
+Distrito de Tetuan,Valdeacederas,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,"1 BAJA, 2 PRIMERA",3.0
+Distrito de Tetuan,Valdeacederas,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,BAJA,2.0
+Distrito de Tetuan,Valdeacederas,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Pilar,BAJA,1.0
+Distrito de Fuencarral-El Pardo,La Paz,Baja,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Carabanchel,Opañel,BAJA,3.0
+Distrito de Carabanchel,Opañel,BAJA,1.0
+Distrito de Carabanchel,San Isidro,PRIMERA,1.0
+Distrito de Carabanchel,San Isidro,BAJA,1.0
+Distrito de Carabanchel,San Isidro,BAJA,1.0
+Distrito de Carabanchel,San Isidro,BAJA,1.0
+Distrito de Puente de Vallecas,Entrevías,Baja,1.0
+Distrito de Puente de Vallecas,Numancia,BAJA,1.0
+Distrito de Moratalaz,Marroquina,BAJA,5.0
+Distrito de Moratalaz,Media Legua,BAJA,1.0
+Distrito de Moratalaz,Fontarrón,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,3.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Hortaleza,Pinar del Rey,baja,4.0
+Distrito de Barajas,Timón,Baja,1.0
+Distrito de Hortaleza,Apostol Santiago,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,PRIMERA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Salamanca,Guindalera,BAJA Y SOTANO,1.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,3.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA Y SOTANO,1.0
+Distrito de Arganzuela,Chopera,BAJA,1.0
+Distrito de Arganzuela,Chopera,BAJA,3.0
+Distrito de Arganzuela,Palos de Moguer,"1 BAJA, 1 SOTANO",2.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,3.0
+Distrito de Retiro,Adelfas,BAJA,1.0
+Distrito de Chamartín,Hispanoamérica,BAJA,5.0
+Distrito de Tetuan,Bellas Vistas,BAJA,1.0
+Distrito de Tetuan,Bellas Vistas,BAJA,1.0
+Distrito de Tetuan,Bellas Vistas,BAJA,1.0
+Distrito de Tetuan,Bellas Vistas,Baja,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,Baja,1.0
+Distrito de Tetuan,Cuatro Caminos,Baja,2.0
+Distrito de Tetuan,Cuatro Caminos,PRIMERA,1.0
+Distrito de Tetuan,Castillejos,BAJA,1.0
+Distrito de Tetuan,Castillejos,Baja,3.0
+Distrito de Fuencarral-El Pardo,Peñagrande,BAJA,2.0
+Distrito de Fuencarral-El Pardo,Peñagrande,BAJA,1.0
+Distrito de Moncloa-Aravaca,Valdezarza,BAJA,1.0
+Distrito de Latina,Cármenes,BAJA,1.0
+Distrito de Latina,Puerta del Angel,Baja,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Carabanchel,Vista Alegre,BAJA,1.0
+Distrito de Carabanchel,Vista Alegre,Baja,1.0
+Distrito de Carabanchel,Vista Alegre,Baja,1.0
+Distrito de Carabanchel,Puerta Bonita,Baja,1.0
+Distrito de Carabanchel,Puerta Bonita,Baja,1.0
+Distrito de Carabanchel,Puerta Bonita,BAJA,1.0
+Distrito de Carabanchel,Puerta Bonita,BAJA,1.0
+Distrito de Carabanchel,Buenavista,BAJA,1.0
+Distrito de Carabanchel,Abrantes,BAJA,1.0
+Distrito de Puente de Vallecas,San Diego,BAJA,1.0
+Distrito de Ciudad Lineal,Quintana,BAJA,1.0
+Distrito de Ciudad Lineal,Quintana,BAJA,1.0
+Distrito de Ciudad Lineal,Quintana,BAJA Y ENTREPLANTA,1.0
+Distrito de Ciudad Lineal,Quintana,BAJA,1.0
+Distrito de Ciudad Lineal,Quintana,BAJA,1.0
+Distrito de Ciudad Lineal,Concepción,BAJA Y PRIMERA,1.0
+Distrito de Ciudad Lineal,Concepción,Baja,1.0
+Distrito de Ciudad Lineal,San Pascual,BAJA,1.0
+Distrito de Ciudad Lineal,San Pascual,Baja,1.0
+Distrito de Ciudad Lineal,San Pascual,BAJA,1.0
+Distrito de Villaverde,Los Rosales,BAJA,1.0
+Distrito de Ciudad Lineal,Concepción,BAJA,1.0
+Distrito de Carabanchel,Opañel,Baja,1.0
+Distrito de Carabanchel,Opañel,Baja,1.0
+Distrito de Retiro,Ibiza,BAJA,1.0
+Distrito de Retiro,Niño Jesús,BAJA,1.0
+Distrito de Retiro,Niño Jesús,BAJA,1.0
+Distrito de Retiro,Niño Jesús,BAJA,1.0
+Distrito de Retiro,Niño Jesús,BAJA,1.0
+Distrito de Retiro,Niño Jesús,BAJA,1.0
+Distrito de Retiro,Niño Jesús,BAJA,1.0
+Distrito de Retiro,Niño Jesús,BAJA,1.0
+Distrito de Retiro,Niño Jesús,BAJA,1.0
+Distrito de Retiro,Estrella,BAJA,2.0
+Distrito de Salamanca,Goya,BAJA,2.0
+Distrito de Chamartín,Prosperidad,BAJA,1.0
+Distrito de Chamartín,Prosperidad,BAJA,1.0
+Distrito de Chamartín,Prosperidad,BAJA,1.0
+Distrito de Chamartín,Prosperidad,BAJA,1.0
+Distrito de Chamartín,Ciudad Jardín,BAJA,1.0
+Distrito de Chamartín,Ciudad Jardín,BAJA,1.0
+Distrito de Chamartín,Hispanoamérica,BAJA,1.0
+Distrito de Chamartín,Hispanoamérica,BAJA,4.0
+Distrito de Chamartín,Hispanoamérica,BAJA,1.0
+Distrito de Chamberí,Arapiles,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Puerta del Angel,Baja,1.0
+Distrito de Latina,Puerta del Angel,Baja,1.0
+Distrito de Latina,Puerta del Angel,Baja,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Lucero,BAJA,1.0
+Distrito de Latina,Lucero,BAJA,1.0
+Distrito de Latina,Lucero,BAJA,1.0
+Distrito de Latina,Lucero,SOTANO,2.0
+Distrito de Latina,Lucero,BAJA,1.0
+Distrito de Carabanchel,Abrantes,Baja,1.0
+Distrito de Usera,Almendrales,BAJA,1.0
+Distrito de Usera,Almendrales,BAJA,1.0
+Distrito de Puente de Vallecas,Palomeras Sureste,Baja,1.0
+Distrito de Puente de Vallecas,Palomeras Sureste,baja,1.0
+Distrito de Puente de Vallecas,Palomeras Sureste,baja,1.0
+Distrito de Puente de Vallecas,Portazgo,BAJA,1.0
+Distrito de Puente de Vallecas,Portazgo,Baja,1.0
+Distrito de Puente de Vallecas,Numancia,Baja,2.0
+Distrito de Hortaleza,Valdefuentes,BAJA,1.0
+Distrito de Hortaleza,Valdefuentes,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,2.0
+Distrito de Barajas,Casco Histórico de Barajas,EDIF EXCLUSIVO,7.0
+Distrito de Usera,Almendrales,BAJA,1.0
+Distrito de Villa de Vallecas,Casco Histórico de Vallecas,BAJA,1.0
+Distrito de Centro,Cortes,Primera,2.0
+Distrito de Centro,Cortes,Tercera,2.0
+Distrito de Centro,Cortes,Primera,1.0
+Distrito de Centro,Cortes,Primera,1.0
+Distrito de Centro,Cortes,Primera,1.0
+Distrito de Centro,Cortes,Primera,1.0
+Distrito de Centro,Cortes,Primera,1.0
+Distrito de Centro,Cortes,Tercera,1.0
+Distrito de Centro,Cortes,Tercera,1.0
+Distrito de Centro,Cortes,Tercera,1.0
+Distrito de Centro,Justicia,BAJA,1.0
+Distrito de Centro,Justicia,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA,1.0
+Distrito de Centro,Universidad,BAJA Y SOTANO,1.0
+Distrito de Centro,Sol,BAJA,1.0
+Distrito de Centro,Sol,BAJA,1.0
+Distrito de Chamartín,Prosperidad,"2 BAJA, 2 PRIMERA",4.0
+Distrito de Chamartín,Prosperidad,BAJA,21.0
+Distrito de Tetuan,Valdeacederas,Baja,1.0
+Distrito de Tetuan,Valdeacederas,BAJA,3.0
+Distrito de Tetuan,Valdeacederas,BAJA,3.0
+Distrito de Tetuan,Berruguete,Baja,1.0
+Distrito de Tetuan,Berruguete,BAJA,1.0
+Distrito de Tetuan,Berruguete,BAJA,1.0
+Distrito de Tetuan,Berruguete,BAJA,1.0
+Distrito de Tetuan,Berruguete,Baja,1.0
+Distrito de Tetuan,Berruguete,BAJA,3.0
+Distrito de Tetuan,Berruguete,BAJA,1.0
+Distrito de Tetuan,Berruguete,BAJA,1.0
+Distrito de Tetuan,Berruguete,BAJA,3.0
+Distrito de Chamberí,Gaztambide,BAJA,1.0
+Distrito de Chamberí,Gaztambide,SOTANO,3.0
+Distrito de Chamberí,Gaztambide,SOTANO,2.0
+Distrito de Chamberí,Gaztambide,SOTANO,2.0
+Distrito de Moncloa-Aravaca,Casa de Campo,PRIMERA,1.0
+Distrito de Moncloa-Aravaca,Argüelles,BAJA,1.0
+Distrito de Moncloa-Aravaca,Ciudad Universitaria,BAJA,1.0
+Distrito de Moncloa-Aravaca,Ciudad Universitaria,BAJA,1.0
+Distrito de Moncloa-Aravaca,Valdezarza,BAJA,1.0
+Distrito de Latina,Aluche,BAJA,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Carabanchel,Comillas,BAJA,2.0
+Distrito de Usera,Moscardó,BAJA,3.0
+Distrito de Usera,Moscardó,PRIMERA,1.0
+Distrito de Puente de Vallecas,Entrevías,Baja,3.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,Baja,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,baja,4.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,Baja,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Ciudad Lineal,Pueblo Nuevo,BAJA,1.0
+Distrito de Hortaleza,Canillas,BAJA,1.0
+Distrito de Hortaleza,Canillas,Baja,1.0
+Distrito de Villa de Vallecas,Santa Eugenia,BAJA,2.0
+Distrito de Vicálvaro,Casco Histórico de Vicálvaro,BAJA,2.0
+Distrito de Vicálvaro,Casco Histórico de Vicálvaro,BAJA,1.0
+Distrito de Vicálvaro,Casco Histórico de Vicálvaro,BAJA,1.0
+Distrito de Vicálvaro,Casco Histórico de Vicálvaro,BAJA,1.0
+Distrito de Carabanchel,Comillas,BAJA,1.0
+Distrito de Latina,Aguilas,BAJA,3.0
+Distrito de Ciudad Lineal,Costillares,BAJA,1.0
+Distrito de Tetuan,Berruguete,BAJA,1.0
+Distrito de Usera,Almendrales,BAJA,2.0
+Distrito de Villaverde,San Andrés,BAJA,1.0
+Distrito de Villaverde,San Andrés,5ª,1.0
+Distrito de Villaverde,San Andrés,BAJA,1.0
+Distrito de Villaverde,San Andrés,Cuarta,1.0
+Distrito de Villaverde,San Andrés,BAJA,1.0
+Distrito de Centro,Justicia,BAJA,2.0
+Distrito de Centro,Palacio,BAJA,4.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA Y SOTANO,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Palacio,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA Y SOTANO,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,2.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,2.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Embajadores,BAJA,1.0
+Distrito de Centro,Cortes,BAJA,1.0
+Distrito de Centro,Cortes,BAJA,1.0
+Distrito de Salamanca,Fuente del Berro,BAJA,1.0
+Distrito de Salamanca,Fuente del Berro,Baja,1.0
+Distrito de Salamanca,Fuente del Berro,BAJA,1.0
+Distrito de Salamanca,Fuente del Berro,BAJA,1.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Salamanca,Guindalera,Baja,1.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Salamanca,Guindalera,PRIMERA,1.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Salamanca,Guindalera,BAJA,1.0
+Distrito de Salamanca,Guindalera,BAJA,2.0
+Distrito de Tetuan,Castillejos,BAJA,1.0
+Distrito de Tetuan,Castillejos,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,1.0
+Distrito de Tetuan,Almenara,BAJA,2.0
+Distrito de Tetuan,Valdeacederas,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,BAJA,1.0
+Distrito de Tetuan,Valdeacederas,BAJA,1.0
+Distrito de Fuencarral - El Pardo,Pilar,Baja,3.0
+Distrito de Fuencarral-El Pardo,Pilar,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Pilar,BAJA,2.0
+Distrito de Fuencarral-El Pardo,Pilar,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,PRIMERA,2.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Carabanchel,Opañel,BAJA,1.0
+Distrito de Carabanchel,San Isidro,BAJA,1.0
+Distrito de Carabanchel,San Isidro,BAJA,1.0
+Distrito de Carabanchel,San Isidro,BAJA Y PRIMERA,1.0
+Distrito de Puente de Vallecas,Entrevías,BAJA,1.0
+Distrito de Puente de Vallecas,Numancia,BAJA,1.0
+Distrito de Moratalaz,Marroquina,BAJA,1.0
+Distrito de Moratalaz,Marroquina,Baja,1.0
+Distrito de Moratalaz,Vinateros,Baja,1.0
+Distrito de Ciudad Lineal,Ventas,BAJA,2.0
+Distrito de Ciudad Lineal,Ventas,BAJA,1.0
+Distrito de Hortaleza,Pinar del Rey,BAJA,1.0
+Distrito de Barajas,Casco Histórico de Barajas,BAJA,1.0
+Distrito de Centro,Timón,BAJA,1.0
+Distrito de Hortaleza,Pinar del Rey,BAJA,1.0
+Distrito de Hortaleza,Pinar del Rey,BAJA,1.0
+Distrito de Hortaleza,Apostol Santiago,BAJA,2.0
+Distrito de Arganzuela,Legazpi,BAJA,3.0
+Distrito de Usera,Orcasur,BAJA,1.0
+Distrito de Hortaleza,Canillas,BAJA Y PRIMERA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Valverde,BAJA,1.0
+Distrito de Ciudad Lineal,Concepción,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Imperial,BAJA,1.0
+Distrito de Arganzuela,Acacias,BAJA,2.0
+Distrito de Arganzuela,Acacias,BAJA,2.0
+Distrito de Arganzuela,Chopera,BAJA,1.0
+Distrito de Arganzuela,Chopera,BAJA,3.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,5.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,3.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,1.0
+Distrito de Arganzuela,Palos de Moguer,BAJA,2.0
+Distrito de Retiro,Pacífico,BAJA,1.0
+Distrito de Retiro,Pacífico,BAJA,2.0
+Distrito de Retiro,Pacífico,BAJA Y PRIMERA,1.0
+Distrito de Retiro,Pacífico,BAJA Y PRIMERA,1.0
+Distrito de Retiro,Adelfas,BAJA,1.0
+Distrito de Retiro,Adelfas,BAJA,1.0
+Distrito de Retiro,Estrella,PRIMERA,3.0
+Distrito de Chamartín,Hispanoamérica,BAJA,2.0
+Distrito de Tetuan,Bellas Vistas,BAJA,2.0
+Distrito de Tetuan,Bellas Vistas,PRIMERA,1.0
+Distrito de Tetuan,Bellas Vistas,BAJA,1.0
+Distrito de Tetuan,Bellas Vistas,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,Baja,1.0
+Distrito de Tetuan,Cuatro Caminos,Baja,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de Tetuan,Castillejos,BAJA,1.0
+Distrito de Fuencarral-El Pardo,Fuentelareina,BAJA,4.0
+Distrito de Fuencarral-El Pardo,Pilar,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Carabanchel,Vista Alegre,BAJA,1.0
+Distrito de Carabanchel,Puerta Bonita,Baja,2.0
+Distrito de Carabanchel,Buenavista,BAJA,1.0
+Distrito de Carabanchel,Buenavista,BAJA,1.0
+Distrito de Puente de Vallecas,San Diego,BAJA,1.0
+Distrito de Puente de Vallecas,San Diego,Baja,1.0
+Distrito de Puente de Vallecas,San Diego,"1 PRIMERA, 1 SEGUNDA , 1 TERCERA",3.0
+Distrito de Puente de Vallecas,San Diego,"1 PRIMERA, 1 SEGUNDA , 1 TERCERA",3.0
+Distrito de Puente de Vallecas,San Diego,Baja,1.0
+Distrito de Puente de Vallecas,San Diego,Baja,1.0
+Distrito de Puente de Vallecas,Palomeras Bajas,BAJA,2.0
+Distrito de Puente de Vallecas,Palomeras Bajas,BAJA,1.0
+Distrito de Ciudad Lineal,Quintana,BAJA,1.0
+Distrito de Ciudad Lineal,Concepción,BAJA,1.0
+Distrito de Ciudad Lineal,Concepción,Baja y Primera,2.0
+Distrito de Ciudad Lineal,Concepción,BAJA,4.0
+Distrito de Ciudad Lineal,Concepción,BAJA,1.0
+Distrito de Ciudad Lineal,San Pascual,BAJA,1.0
+Distrito de Ciudad Lineal,San Pascual,BAJA,1.0
+Distrito de Usera,Zofío,BAJA,1.0
+Distrito de Usera,Pradolongo,BAJA,1.0
+Distrito de Puente de Vallecas,San Diego,BAJA,1.0
+Distrito de Tetuan,Cuatro Caminos,BAJA,1.0
+Distrito de San Blas - Canillejas,Canillejas,BAJA Y SOTANO,2.0
+Distrito de San Blas - Canillejas,Canillejas,BAJA,1.0
+Distrito de Retiro,Ibiza,BAJA 1 UD - SEMISOTANO 2 UD,3.0
+Distrito de Retiro,Ibiza,BAJA,1.0
+Distrito de Retiro,Jerónimos,BAJA,1.0
+Distrito de Retiro,Jerónimos,BAJA,1.0
+Distrito de Retiro,Niño Jesús,BAJA,1.0
+Distrito de Retiro,Niño Jesús,BAJA,1.0
+Distrito de Chamartín,Prosperidad,BAJA,1.0
+Distrito de Chamartín,Prosperidad,Baja,1.0
+Distrito de Chamartín,Prosperidad,BAJA,1.0
+Distrito de Chamartín,Ciudad Jardín,BAJA,1.0
+Distrito de Chamartín,Nueva España,BAJA,1.0
+Distrito de Chamberí,Arapiles,BAJA,1.0
+Distrito de Chamberí,Trafalgar,BAJA,1.0
+Distrito de Chamberí,Trafalgar,BAJA,1.0
+Distrito de Chamberí,Trafalgar,BAJA,1.0
+Distrito de Chamberí,Trafalgar,BAJA,1.0
+Distrito de Chamberí,Trafalgar,BAJA,1.0
+Distrito de Latina,Puerta del Angel,BAJA,1.0
+Distrito de Latina,Puerta del Angel,PRIMERA,1.0
+Distrito de Latina,Puerta del Angel,Baja,1.0
+Distrito de Latina,Puerta del Angel,PRIMERA,1.0
+Distrito de Latina,Puerta del Angel,Baja,2.0
+Distrito de Latina,Lucero,Baja,1.0
+Distrito de Latina,Aluche,BAJA,1.0
+Distrito de Usera,San Fermín,BAJA,1.0
+Distrito de Puente de Vallecas,Palomeras Sureste,BAJA,4.0
+Distrito de Puente de Vallecas,Portazgo,BAJA,2.0
+Distrito de Puente de Vallecas,Numancia,BAJA,1.0
+Distrito de San Blas - Canillejas,Canillejas,BAJA,1.0
+Distrito de San Blas - Canillejas,Canillejas,BAJA,1.0
+Distrito de San Blas - Canillejas,Canillejas,Baja,1.0
+Distrito de Tetuan,Almenara,BAJA,2.0
+Distrito de Fuencarral-El Pardo,Pilar,BAJA Y SOTANO,1.0
+Distrito de Hortaleza,Pinar del Rey,BAJA,1.0
+Distrito de Salamanca,Fuente del Berro,BAJA,1.0
+Distrito de Villaverde,San Andrés,BAJA,1.0
+Distrito de Villaverde,San Andrés,CUARTA,1.0
+Distrito de Villaverde,San Andrés,PRIMERA,1.0

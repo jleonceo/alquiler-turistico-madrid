@@ -1,0 +1,104 @@
+/* Hoja de estilos de los informes de los casos de uso. Valores de reglas_de_salida.md §7 (E1 a E8).
+   informe.py la mete dentro del HTML: el informe no carga nada de fuera.
+   Plantilla copiada el 04/10/2026 de fuentes con licencia abierta: la ficha de gráficos de la ONS (título, subtítulo,
+   dibujo y fuente en su propia línea debajo), la escala de espacios de GOV.UK (30 px entre bloques), los huecos del CSS
+   de Observable Framework (4 px bajo el título, 16 antes del dibujo) y las tablas del Gobierno británico (sin rayas
+   entre filas). */
+
+/* E1: fondo siempre blanco. E3: texto #0b0b0b. */
+html, body { margin: 0; background: #ffffff; color: #0b0b0b; }
+
+/* E4: letra. E5: texto a 15 px con interlineado 1,5. TB2: cifras de ancho fijo. */
+body { font-family: "Segoe UI", system-ui, sans-serif; font-size: 15px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+
+/* S1: panel fijo a la izquierda con la lista de páginas; compacto para que quepa entero en 650 px. */
+nav { position: fixed; top: 0; left: 0; bottom: 0; width: 240px; box-sizing: border-box; padding: 24px 16px; border-right: 1px solid #e1e0d9; overflow-y: auto; background: #ffffff; }
+.informe-titulo { font-size: 16px; font-weight: 700; margin: 0 0 4px; }
+.informe-fecha { font-size: 13px; color: #52514e; margin: 0 0 12px; }
+nav button { display: block; width: 100%; text-align: left; font: 15px "Segoe UI", system-ui, sans-serif; line-height: 1.3; color: #0b0b0b; background: #ffffff; border: 0; padding: 3px 0; cursor: pointer; }
+nav button[aria-current="page"] { font-weight: 700; text-decoration: underline; }
+/* S2: las páginas de cada pregunta, los límites y la decisión van juntas bajo su rótulo, sin número delante. */
+nav .grupo { font-size: 13px; font-weight: 700; color: #52514e; margin: 8px 0 0; }
+nav button.sub { padding-left: 12px; }
+
+/* Zona de las páginas. */
+main { margin-left: 240px; padding: 24px 40px 0; max-width: 1100px; }
+/* Un solo ancho para todo lo de la página, el de dos gráficos en fila. */
+.pagina { max-width: 1024px; }
+/* El documento acaba donde acaba el contenido: sin margen debajo del último bloque, la página no se desplaza. */
+.pagina > :last-child { margin-bottom: 0; }
+
+/* E5: título de página 28 px y sección 20 px, en negrita. */
+h1 { font-size: 28px; font-weight: 700; line-height: 1.25; margin: 0 0 12px; }
+h2 { font-size: 20px; font-weight: 700; line-height: 1.3; margin: 20px 0 8px; }
+
+/* T2: párrafos cortos, unos 75 caracteres por línea. */
+.pagina p { max-width: 75ch; margin: 0 0 12px; }
+
+/* S2: la pregunta que contesta la página, debajo del título, en negro y seminegrita para que se vea. */
+.pagina p.pregunta { color: #0b0b0b; font-weight: 600; }
+
+/* C1 y C2: cifras clave en fila, sin icono, borde ni fondo. E5: número a 28 px en negrita, etiqueta a 13.
+   Cuatro casillas iguales: con dos o tres cifras quedan juntas a la izquierda. */
+.cifras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin: 15px 0 30px; }
+.cifra-clave p { margin: 0; }
+.cifra-clave .numero { font-size: 28px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.cifra-clave .etiqueta { font-size: 13px; }
+.cifra-clave .contexto { font-size: 13px; color: #52514e; }
+
+/* G1 y G2, como la ficha de gráficos de la ONS: título que dice la conclusión a 20 px, subtítulo con la medida a 16,
+   el dibujo y la fuente en su propia línea debajo, a 13. 30 px entre bloques (GOV.UK). G7: el SVG va dentro. */
+.grafico { margin: 30px 0; }
+.g-titulo { font-size: 20px; font-weight: 700; line-height: 1.3; margin: 0 0 4px; }
+.g-subtitulo { font-size: 16px; color: #52514e; line-height: 1.5; margin: 0 0 16px; }
+.g-fuente { font-size: 13px; color: #52514e; line-height: 1.5; margin: 8px 0 0; }
+.grafico svg { display: block; max-width: 100%; height: auto; }
+
+/* S3: dos gráficos lado a lado, de 500 px cada uno; con el mismo subtítulo y la misma fuente, van una vez. */
+.fila-bloque { margin: 30px 0; }
+.fila { display: grid; grid-template-columns: repeat(2, minmax(0, 500px)); gap: 24px; }
+.fila .grafico { margin: 0; }
+
+/* Texto con un solo gráfico o una sola tabla: el texto a la izquierda y lo otro a la derecha, con el ancho que le
+   pone informe.py en --ancho-otro. */
+.lado { display: grid; grid-template-columns: minmax(0, 1fr) var(--ancho-otro); gap: 32px; align-items: start; margin: 30px 0; }
+.lado .grafico { margin: 0; }
+.lado table { margin-top: 0; }
+.lado .fuente { margin-bottom: 0; }
+
+/* TB2 y TB4, como las tablas del Gobierno británico: números y sus cabeceras a la derecha, una línea bajo la cabecera
+   y sobre el total, sin rayas entre filas, total en negrita. E5: tabla a 13 px. */
+table { border-collapse: collapse; font-size: 13px; margin: 30px 0 0; }
+th { text-align: left; font-weight: 700; padding: 6px 16px 6px 0; border-bottom: 1px solid #0b0b0b; vertical-align: bottom; }
+td { text-align: left; padding: 6px 16px 6px 0; vertical-align: top; }
+th.num, td.num { text-align: right; }
+tr.total td { font-weight: 700; border-top: 1px solid #0b0b0b; }
+/* Una tabla sin cifras es texto para leer: a 15 px y a todo el ancho. */
+table.texto { font-size: 15px; width: 100%; }
+table.texto td:first-child { font-weight: 600; }
+
+/* F1: la fuente debajo de la tabla, a 13 px. */
+.fuente { font-size: 13px; color: #52514e; margin: 8px 0 30px; }
+
+/* G20: la etiqueta de cada valor al pasar el ratón o con el tabulador. Fondo blanco, borde fino, sin sombra (E6, E8).
+   Los valores reciben el ratón aunque su marca no se vea (los puntos de una línea). */
+svg g.dato { pointer-events: all; }
+svg g.dato:focus { outline: 2px solid #0b0b0b; }
+.etiqueta-dato { position: fixed; z-index: 10; max-width: 320px; padding: 4px 8px; font-size: 13px; line-height: 1.4; color: #0b0b0b; background: #ffffff; border: 1px solid #0b0b0b; pointer-events: none; }
+.etiqueta-dato[hidden] { display: none; }
+
+/* En una ventana estrecha, lo lado a lado y los gráficos en fila van uno debajo de otro, y las cifras, de dos en dos. */
+@media (max-width: 1180px) {
+  .lado { grid-template-columns: 1fr; }
+  .fila { grid-template-columns: 1fr; }
+  .cifras { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Al imprimir, sin panel, con todas las páginas y cada una en su hoja. */
+@media print {
+  nav { display: none; }
+  .etiqueta-dato { display: none; }
+  main { margin-left: 0; }
+  section[hidden] { display: block; }
+  section + section { break-before: page; }
+}

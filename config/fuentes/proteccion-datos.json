@@ -1,0 +1,811 @@
+{
+ "skill": null,
+ "script": "scripts/descargar_datos.py",
+ "fecha_ejecucion": "2026-11-06T11:30:29",
+ "caso": "alquiler-turistico-madrid",
+ "finalidad": "quitar los datos personales antes de cualquier análisis",
+ "datos": "públicos y reales",
+ "estado": "OK",
+ "resultado": {
+  "estado": "OK",
+  "riesgo": "bajo",
+  "siguiente": "diccionario-datos",
+  "resumen": "Supresión de columnas y licencia reducida a su tipo, sin códigos con clave."
+ },
+ "tablas": [
+  {
+   "tabla": "inside_airbnb/listings_2025-12-14.csv.gz",
+   "fichero_salida": "data/raw/listings_2025-12-14.csv.gz",
+   "sha256_salida": "3952b04732669236be58d5271dc4fa54e63f8fa20ef3a0b6a3d76cc98302113d",
+   "filas_entrada": 24616,
+   "filas_salida": 24616,
+   "campos": [
+    {
+     "columna": "listing_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anuncio, que lleva al anfitrión"
+    },
+    {
+     "columna": "picture_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto de la vivienda"
+    },
+    {
+     "columna": "name",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre: puede llevar nombres y direcciones"
+    },
+    {
+     "columna": "description",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre: puede llevar nombres y direcciones"
+    },
+    {
+     "columna": "neighborhood_overview",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre; viene vacía"
+    },
+    {
+     "columna": "host_id",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica al anfitrión"
+    },
+    {
+     "columna": "host_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anfitrión"
+    },
+    {
+     "columna": "host_profile_id",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica al anfitrión"
+    },
+    {
+     "columna": "host_profile_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anfitrión"
+    },
+    {
+     "columna": "host_name",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "nombre del anfitrión"
+    },
+    {
+     "columna": "host_location",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "lugar donde vive el anfitrión"
+    },
+    {
+     "columna": "host_about",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre del anfitrión"
+    },
+    {
+     "columna": "host_thumbnail_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto del anfitrión"
+    },
+    {
+     "columna": "host_picture_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto del anfitrión"
+    },
+    {
+     "columna": "host_neighbourhood",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "lugar del anfitrión; viene vacía"
+    },
+    {
+     "columna": "host_verifications",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "datos del anfitrión; viene vacía"
+    },
+    {
+     "columna": "license",
+     "clase": "indirecto",
+     "tecnica": "generalizacion",
+     "columna_salida": "licencia_nacional, licencia_exencion, licencia_vt, licencia_otro",
+     "resultado": "generalizada",
+     "motivo": "el número identifica la vivienda; basta su tipo"
+    }
+   ]
+  },
+  {
+   "tabla": "inside_airbnb/listings_2026-03-24.csv.gz",
+   "fichero_salida": "data/raw/listings_2026-03-24.csv.gz",
+   "sha256_salida": "6e40bcb19dfd77554a555f1955e9c7faca6b89c455c55ab96189b1b777c3049d",
+   "filas_entrada": 23002,
+   "filas_salida": 23002,
+   "campos": [
+    {
+     "columna": "listing_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anuncio, que lleva al anfitrión"
+    },
+    {
+     "columna": "picture_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto de la vivienda"
+    },
+    {
+     "columna": "name",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre: puede llevar nombres y direcciones"
+    },
+    {
+     "columna": "description",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre: puede llevar nombres y direcciones"
+    },
+    {
+     "columna": "neighborhood_overview",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre; viene vacía"
+    },
+    {
+     "columna": "host_id",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica al anfitrión"
+    },
+    {
+     "columna": "host_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anfitrión"
+    },
+    {
+     "columna": "host_profile_id",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica al anfitrión"
+    },
+    {
+     "columna": "host_profile_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anfitrión"
+    },
+    {
+     "columna": "host_name",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "nombre del anfitrión"
+    },
+    {
+     "columna": "host_location",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "lugar donde vive el anfitrión"
+    },
+    {
+     "columna": "host_about",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre del anfitrión"
+    },
+    {
+     "columna": "host_thumbnail_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto del anfitrión"
+    },
+    {
+     "columna": "host_picture_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto del anfitrión"
+    },
+    {
+     "columna": "host_neighbourhood",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "lugar del anfitrión; viene vacía"
+    },
+    {
+     "columna": "host_verifications",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "datos del anfitrión; viene vacía"
+    },
+    {
+     "columna": "license",
+     "clase": "indirecto",
+     "tecnica": "generalizacion",
+     "columna_salida": "licencia_nacional, licencia_exencion, licencia_vt, licencia_otro",
+     "resultado": "generalizada",
+     "motivo": "el número identifica la vivienda; basta su tipo"
+    }
+   ]
+  },
+  {
+   "tabla": "inside_airbnb/listings_2026-06-20.csv.gz",
+   "fichero_salida": "data/raw/listings_2026-06-20.csv.gz",
+   "sha256_salida": "167b4e2d6f44068107e351b860b2598b631b48f1c68e34b8463edb7f2b3a40bc",
+   "filas_entrada": 22708,
+   "filas_salida": 22708,
+   "campos": [
+    {
+     "columna": "listing_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anuncio, que lleva al anfitrión"
+    },
+    {
+     "columna": "picture_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto de la vivienda"
+    },
+    {
+     "columna": "name",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre: puede llevar nombres y direcciones"
+    },
+    {
+     "columna": "description",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre: puede llevar nombres y direcciones"
+    },
+    {
+     "columna": "neighborhood_overview",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre; viene vacía"
+    },
+    {
+     "columna": "host_id",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica al anfitrión"
+    },
+    {
+     "columna": "host_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anfitrión"
+    },
+    {
+     "columna": "host_profile_id",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica al anfitrión"
+    },
+    {
+     "columna": "host_profile_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anfitrión"
+    },
+    {
+     "columna": "host_name",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "nombre del anfitrión"
+    },
+    {
+     "columna": "host_location",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "lugar donde vive el anfitrión"
+    },
+    {
+     "columna": "host_about",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre del anfitrión"
+    },
+    {
+     "columna": "host_thumbnail_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto del anfitrión"
+    },
+    {
+     "columna": "host_picture_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto del anfitrión"
+    },
+    {
+     "columna": "host_neighbourhood",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "lugar del anfitrión; viene vacía"
+    },
+    {
+     "columna": "host_verifications",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "datos del anfitrión; viene vacía"
+    },
+    {
+     "columna": "license",
+     "clase": "indirecto",
+     "tecnica": "generalizacion",
+     "columna_salida": "licencia_nacional, licencia_exencion, licencia_vt, licencia_otro",
+     "resultado": "generalizada",
+     "motivo": "el número identifica la vivienda; basta su tipo"
+    }
+   ]
+  },
+  {
+   "tabla": "inside_airbnb/listings_2026-09-17.csv.gz",
+   "fichero_salida": "data/raw/listings_2026-09-17.csv.gz",
+   "sha256_salida": "dd050ce73ddc895f3836108ddb3c66d5014adbe84c503f27f3bc0fdcd25a9642",
+   "filas_entrada": 23109,
+   "filas_salida": 23109,
+   "campos": [
+    {
+     "columna": "listing_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anuncio, que lleva al anfitrión"
+    },
+    {
+     "columna": "picture_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto de la vivienda"
+    },
+    {
+     "columna": "name",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre: puede llevar nombres y direcciones"
+    },
+    {
+     "columna": "description",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre: puede llevar nombres y direcciones"
+    },
+    {
+     "columna": "neighborhood_overview",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre; viene vacía"
+    },
+    {
+     "columna": "host_id",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica al anfitrión"
+    },
+    {
+     "columna": "host_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anfitrión"
+    },
+    {
+     "columna": "host_profile_id",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica al anfitrión"
+    },
+    {
+     "columna": "host_profile_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "enlace al anfitrión"
+    },
+    {
+     "columna": "host_name",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "nombre del anfitrión"
+    },
+    {
+     "columna": "host_location",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "lugar donde vive el anfitrión"
+    },
+    {
+     "columna": "host_about",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "texto libre del anfitrión"
+    },
+    {
+     "columna": "host_thumbnail_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto del anfitrión"
+    },
+    {
+     "columna": "host_picture_url",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "foto del anfitrión"
+    },
+    {
+     "columna": "host_neighbourhood",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "lugar del anfitrión; viene vacía"
+    },
+    {
+     "columna": "host_verifications",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "datos del anfitrión; viene vacía"
+    },
+    {
+     "columna": "license",
+     "clase": "indirecto",
+     "tecnica": "generalizacion",
+     "columna_salida": "licencia_nacional, licencia_exencion, licencia_vt, licencia_otro",
+     "resultado": "generalizada",
+     "motivo": "el número identifica la vivienda; basta su tipo"
+    }
+   ]
+  },
+  {
+   "tabla": "inside_airbnb/reviews_2026-09-17.csv.gz",
+   "fichero_salida": "data/raw/reviews_fechas_2026-09-17.csv.gz",
+   "sha256_salida": "a91abde53724e7b31901526b5ccac13af974bf625b997470bd7183ff1197c64f",
+   "filas_entrada": 1524765,
+   "filas_salida": 1524765,
+   "campos": [
+    {
+     "columna": "id",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "de quien reseña o de su texto libre"
+    },
+    {
+     "columna": "reviewer_id",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "de quien reseña o de su texto libre"
+    },
+    {
+     "columna": "reviewer_name",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "de quien reseña o de su texto libre"
+    },
+    {
+     "columna": "comments",
+     "clase": "directo",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "de quien reseña o de su texto libre"
+    }
+   ]
+  },
+  {
+   "tabla": "ayuntamiento/vut_shp.zip",
+   "fichero_salida": "data/raw/externos/licencias_vut_por_barrio.csv",
+   "sha256_salida": "bd071af6c55ec26e59d14683a58703c0602f41515afd843000eecf38d9eb134d",
+   "filas_entrada": 1031,
+   "filas_salida": 1031,
+   "campos": [
+    {
+     "columna": "DIRECCION",
+     "clase": "indirecto",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica la vivienda"
+    },
+    {
+     "columna": "geometry",
+     "clase": "indirecto",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica la vivienda"
+    },
+    {
+     "columna": "EXPEDIENTE",
+     "clase": "indirecto",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica la vivienda"
+    },
+    {
+     "columna": "DECRETO_LU",
+     "clase": "indirecto",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica la vivienda"
+    },
+    {
+     "columna": "RESOLUCION",
+     "clase": "indirecto",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica la vivienda"
+    },
+    {
+     "columna": "EXPEDIEN_1",
+     "clase": "indirecto",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica la vivienda"
+    },
+    {
+     "columna": "DECRETO__L",
+     "clase": "indirecto",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica la vivienda"
+    },
+    {
+     "columna": "RESOLUCI_1",
+     "clase": "indirecto",
+     "tecnica": "supresion",
+     "columna_salida": null,
+     "resultado": "suprimida",
+     "motivo": "identifica la vivienda"
+    }
+   ]
+  },
+  {
+   "tabla": "inside_airbnb/neighbourhoods.geojson",
+   "fichero_salida": "data/raw/externos/neighbourhoods.geojson",
+   "sha256_salida": "eba4e3ba50a30adb95ae71b83c1ac0d1ace3e18d06c77db26230bd7195ca8c6d",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  },
+  {
+   "tabla": "inside_airbnb/neighbourhoods.csv",
+   "fichero_salida": "data/raw/externos/neighbourhoods.csv",
+   "sha256_salida": "3c20e32be7600ce9dbdb3ea7d87f8322fdb8e28a43521250edaf40f486fa7587",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  },
+  {
+   "tabla": "ayuntamiento/ape_00_01.json",
+   "fichero_salida": "data/raw/externos/ape_00_01.json",
+   "sha256_salida": "1907b06dbed1d02f6ab7c86627731380035663b0984c14ffde19d40f5714510c",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  },
+  {
+   "tabla": "ayuntamiento/E3210126_transacciones_tipo_2025.xlsx",
+   "fichero_salida": "data/raw/externos/E3210126_transacciones_tipo_2025.xlsx",
+   "sha256_salida": "da8170471c20a74319ca5154396b4bf445bc3bb8bce16ac1c3f37bdf78cc2d43",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  },
+  {
+   "tabla": "ayuntamiento/E3210226_transacciones_superficie_2025.xlsx",
+   "fichero_salida": "data/raw/externos/E3210226_transacciones_superficie_2025.xlsx",
+   "sha256_salida": "e1b4a702c18164b7fa80e669b59f5553a7166eeeb7eb428e9c16af37c7114887",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  },
+  {
+   "tabla": "ayuntamiento/E3210326_superficie_media_2025.xlsx",
+   "fichero_salida": "data/raw/externos/E3210326_superficie_media_2025.xlsx",
+   "sha256_salida": "c42f7e345a46b757fb7c1b13005993a808a6b8e3c43f2de078a8b16959fd3378",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  },
+  {
+   "tabla": "ayuntamiento/E3210626_precio_declarado_2025.xlsx",
+   "fichero_salida": "data/raw/externos/E3210626_precio_declarado_2025.xlsx",
+   "sha256_salida": "859d10c4568f04ef174b740a0e5ea56d216e2c502a666bdce4d63c6bf0ce846e",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  },
+  {
+   "tabla": "puntos_interes/edificios_monumentales.geojson",
+   "fichero_salida": "data/raw/externos/edificios_monumentales.geojson",
+   "sha256_salida": "f297827d942206a2d2b021da937c44a8094011a6f94bc025d1040e966b9ca967",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  },
+  {
+   "tabla": "puntos_interes/mercados_comercios.geojson",
+   "fichero_salida": "data/raw/externos/mercados_comercios.geojson",
+   "sha256_salida": "3373477707e200556c0faeb50c453d919f62f53f7d20c77556ee9e73a63aa576",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  },
+  {
+   "tabla": "puntos_interes/museos_salas.geojson",
+   "fichero_salida": "data/raw/externos/museos_salas.geojson",
+   "sha256_salida": "d971b178b61210cb6d7d56c2185b69c939529ec7517a4180636bb0ea75de0022",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  },
+  {
+   "tabla": "puntos_interes/parques_jardines.geojson",
+   "fichero_salida": "data/raw/externos/parques_jardines.geojson",
+   "sha256_salida": "fcb8c907be611629afb00033c78e878ae371cd7ad3dc71c366dd037ff4f99e84",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  },
+  {
+   "tabla": "inside_airbnb/calendar_2026-09-17.csv.gz",
+   "fichero_salida": "data/raw/calendar_2026-09-17.csv.gz",
+   "sha256_salida": "a67236bae3044d7f1f87ae0f20901076bf1566cfa3575a8a56b09317459f55cb",
+   "filas_entrada": null,
+   "filas_salida": null,
+   "campos": []
+  }
+ ],
+ "riesgo_que_queda": [
+  "En el trabajo local quedan las coordenadas, que la fuente desplaza hasta 150 m, el número del anuncio y el recuento de anuncios por anfitrión.",
+  "Nada de eso se publica."
+ ]
+}

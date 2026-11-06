@@ -1,0 +1,30 @@
+# Credenciales
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Datos de Inside Airbnb: no se vuelven a publicar. Solo se versionan los ficheros públicos de data/raw/externos/
+data/original/
+data/processed/
+data/raw/*
+!data/raw/externos/
+data/raw/externos/neighbourhoods.*
+data/publicado/
+
+# Lo que genera la cadena y no se publica
+config/fuentes/diccionario-datos-origen.*
+config/metodo/06_borrador_de_hallazgos.md
+config/modelo/registro-transformaciones.md
+config/negocio/
+informes/analisis-exploratorio__*
+informes/calidad-datos.*
+informes/indicadores.md
+informes/correccion-datos.*
+informes/integracion-datos.*
+informes/modelado-datos.*
+informes/transformacion-datos.*

@@ -1,0 +1,23 @@
+{
+ "_origen": "criterios de docs/criterios_de_datos.md y docs/reglas_de_negocio.md. Los scripts lo leen y no llevan estos valores dentro.",
+ "equivalencias_barrio": {"concepcion": "la concepcion", "carmenes": "los carmenes", "fuentelareina": "fuentelarreina",
+                          "jeronimos": "los jeronimos", "los angeles": "angeles", "palos de moguer": "palos de la frontera",
+                          "salvador": "el salvador"},
+ "toman_el_precio_de_su_distrito": ["San Andrés", "Ambroz", "Aeropuerto"],
+ "marco_de_madrid": {"x": [-3.95, -3.45], "y": [40.25, 40.65]},
+ "prefijo_distrito_licencias": "Distrito de ",
+ "poblacion": {"precio_min": 20, "precio_max": 1000, "huespedes_max": 8, "banos_max": 5, "dormitorios_max": 5, "camas_max": 6,
+               "estancia_max": 3, "dias_comparacion": 180},
+ "descuento": 0.75,
+ "tasa_de_uso": 0.5,
+ "radio_atractivo_m": 500,
+ "borde_incierto_m": 150,
+ "pruebas_del_grupo": {"anfitrion_anuncios": 10, "cotizacion_dias": 60, "dormitorios": [1, 2], "pocos_anuncios": 40},
+ "sensibilidad_superficie": {"0": [35, 50], "1": [45, 60], "2": [60, 75]},
+ "controles": {
+   "grupo_esperado": ["Canillejas", "Casco Histórico de Vallecas", "Numancia", "Opañel", "Puerta del Angel", "Quintana", "San Diego", "Ventas", "Vista Alegre"],
+   "firmes_esperados": ["Numancia", "San Diego", "Ventas"],
+   "con_aviso_esperados": ["Casco Histórico de Vallecas", "Opañel"],
+   "base_comparacion_esperada": 7249
+ }
+}
