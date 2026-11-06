@@ -30,7 +30,7 @@ límite oficial. Las coordenadas vienen desplazadas hasta 150 m, así que cerca 
 - **Precio de compra:** superficie × precio oficial del m², con un 25 % de descuento y sin él. El descuento es la capacidad de
   negociación que se supone y no tiene apoyo en los datos. Cambia el nivel y deja el orden intacto.
 - **Precio de mercado:** el m² que piden hoy Fotocasa e Idealista en los tres barrios recomendados, consultado el 06/11/2026.
-  Solo sirve para comparar: repite la compra y la rentabilidad de esos pisos, y no entra en la selección de barrios.
+  Solo sirve para comparar: repite la compra y la rentabilidad de esos pisos. No entra en la selección de barrios.
 - **Rentabilidad bruta:** ingreso anual / precio de compra, en porcentaje. No incluye gastos, impuestos, comunidad, limpieza
   ni comisiones, y no implica beneficio. La rentabilidad neta no se calcula, porque no hay fuente para cada gasto.
 
