@@ -12,6 +12,7 @@ revenue. Calculated flat by flat, the median gross yield is 12.1%, before costs 
 
 This list says where to look, not whether a specific flat can be let to tourists. That depends on planning rules and has to
 be checked flat by flat with the City Council. The occupied days are also an estimate by Inside Airbnb, capped at 255 a year.
+
 If flats at that cap are excluded, the three neighbourhoods drop off the list.
 
 [![CI](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml/badge.svg)](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml)
@@ -22,7 +23,9 @@ pip install -r requirements.txt
 python ejecutar.py --completo
 ```
 
-It requires Python 3.13. The last command downloads the original 240 MB of data from Inside Airbnb, repeats the whole analysis,
+It requires Python 3.13.
+
+The last command downloads the original 240 MB of data from Inside Airbnb, repeats the whole analysis,
 recalculates the figures on this page and runs the tests. The PDF of the executive report needs Microsoft Edge. Without it, the
 PDF already in the repository is kept.
 
@@ -45,7 +48,6 @@ The four large figures in the image cover all the flats analysed. Those for the 
 
 Of the 23,109 Airbnb listings in the city, 14,150 are in the historic centre, where the City Council's RESIDE Plan does not
 allow tourist lets in residential buildings. The analysis therefore uses flats outside the centre.
-
 It uses listings from €20 to €1,000 a night. These limits are a judgement call: there are almost no listings below €20 and only
 164 above €1,000. That leaves 18,573 of the 18,785 priced listings. The other filters, such as size, minimum stay and occupancy,
 then leave the 2,940 flats.
@@ -54,7 +56,9 @@ then leave the 2,940 flats.
 
 A flat's gross yield is its annual rental income divided by its purchase price. The income is the nightly price multiplied by the
 occupied days estimated by Inside Airbnb. The purchase price is calculated from an assumed floor area and the official price per
-m² in the neighbourhood. If the flat were bought 25% below that price, the yield would rise to 16.2%.
+m² in the neighbourhood.
+
+If the flat were bought 25% below that price, the yield would rise to 16.2%.
 
 The neighbourhoods were ranked by yield to see which fell in the top 25%. That ranking changes with the minimum stay and the month
 of the price, so the calculation was repeated 12 times with different values. The 9 neighbourhoods that were in the top 25% in more
@@ -62,10 +66,10 @@ than half of the repetitions were kept.
 
 The next check was whether those 9 depended on one particular group of listings. The calculation was repeated in five more ways,
 for example excluding hosts who have 10 or more listings. The neighbourhoods of Ventas, Numancia and San Diego stayed on the list
-all five times. That is why they are recommended: none of them clearly yields more than the others on the list. Numancia's yield is
-above the median for all the flats analysed, but that cannot be said for certain of Ventas and San Diego.
+all five times.
 
-The neighbourhoods of Casco Histórico de Vallecas and Opañel yield more than San Diego, but they drop off the list when hosts with
+That is why they are recommended: none of them clearly yields more than the others on the list. Numancia's yield is
+above the median for all the flats analysed, but that cannot be said for certain of Ventas and San Diego. The neighbourhoods of Casco Histórico de Vallecas and Opañel yield more than San Diego, but they drop off the list when hosts with
 10 or more listings are excluded.
 
 ![Map of Madrid with the selected neighbourhoods](docs/img/mapa_de_barrios.png)
@@ -93,7 +97,6 @@ Estas cifras coinciden con las del análisis y con las de esta página, en espa�
 Fourteen Python scripts do the work, from download to the three deliverables, covering data quality checks, cleaning, joins,
 exploration, metrics and reports. The three deliverables take their figures from a single file,
 [indicadores.json](informes/indicadores.json).
-
 [A second script](scripts/rehacer_portada.py) redoes the choice of neighbourhoods and the medians on this page from a local table,
 sharing no code with the analysis. The tests also recalculate the metrics by a separate route.
 

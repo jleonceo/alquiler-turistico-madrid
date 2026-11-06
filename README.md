@@ -12,7 +12,9 @@ condiciones, de los 2.940 pisos analizados. En mediana, cada piso costaría 161.
 
 Esta lista dice dónde buscar, pero no si un piso concreto se puede alquilar a turistas. Eso depende de la normativa
 urbanística. Hay que comprobarlo piso a piso en el Ayuntamiento. Los días ocupados son además una estimación de Inside Airbnb,
-con un máximo de 255 días al año. Si se quitan los pisos que llegan a ese máximo, los tres barrios salen de la lista.
+con un máximo de 255 días al año.
+
+Si se quitan los pisos que llegan a ese máximo, los tres barrios salen de la lista.
 
 [![CI](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml/badge.svg)](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml)
 
@@ -22,7 +24,9 @@ pip install -r requirements.txt
 python ejecutar.py --completo
 ```
 
-Hace falta Python 3.13. El último comando descarga los 240 MB originales de Inside Airbnb, repite todo el análisis, recalcula
+Hace falta Python 3.13.
+
+El último comando descarga los 240 MB originales de Inside Airbnb, repite todo el análisis, recalcula
 las cifras de esta página y ejecuta las pruebas. El PDF del informe ejecutivo necesita Microsoft Edge. Sin él, se conserva el
 que ya está en el repositorio.
 
@@ -43,7 +47,6 @@ Las cuatro cifras grandes de la imagen son de todos los pisos analizados. Las de
 
 De los 23.109 anuncios de Airbnb en la ciudad, 14.150 están en el centro histórico, donde el Ayuntamiento, con el Plan RESIDE,
 no admite pisos turísticos en edificios residenciales. Por eso el análisis usa los pisos de fuera del centro.
-
 Se usan los anuncios de 20 a 1.000 € por noche. Esos límites los fija este análisis: por debajo de 20 € casi no hay anuncios
 y por encima de 1.000 € solo hay 164. Dentro quedan 18.573 de los 18.785 anuncios con precio. Después se aplican los demás
 filtros, como el tamaño, la estancia mínima y la ocupación, y quedan los 2.940 pisos.
@@ -52,7 +55,9 @@ filtros, como el tamaño, la estancia mínima y la ocupación, y quedan los 2.94
 
 La rentabilidad bruta de un piso es su ingreso anual dividido entre lo que costaría comprarlo. El ingreso es el precio por
 noche multiplicado por los días ocupados que estima Inside Airbnb. El precio de compra sale de una superficie supuesta y del
-precio oficial del m² del barrio. Si se comprara un 25 % por debajo de ese precio, la rentabilidad subiría al 16,2 %.
+precio oficial del m² del barrio.
+
+Si se comprara un 25 % por debajo de ese precio, la rentabilidad subiría al 16,2 %.
 
 Los barrios se ordenaron por rentabilidad y se miró cuáles quedaban en el 25 % más rentable. Ese orden cambia según la
 estancia mínima o el mes del precio. Por eso el cálculo se repitió 12 veces, con distintos valores. Se quedaron los 9 barrios
@@ -60,10 +65,10 @@ que salieron en ese 25 % en más de la mitad de las repeticiones.
 
 Después se comprobó si esos 9 barrios dependían de un grupo concreto de anuncios. El cálculo se repitió de cinco maneras más,
 por ejemplo sin los anfitriones que tienen 10 anuncios o más. Los barrios de Ventas, Numancia y San Diego siguieron en la lista
-las cinco veces. Se recomiendan por eso: ninguno rinde claramente más que los otros barrios de la lista. Numancia rinde más que
-la mediana de todos los pisos analizados, pero en Ventas y San Diego no se puede asegurar.
+las cinco veces.
 
-Los barrios de Casco Histórico de Vallecas y Opañel rinden más que San Diego, pero salen de la lista si se quitan los anfitriones
+Se recomiendan por eso: ninguno rinde claramente más que los otros barrios de la lista. Numancia rinde más que
+la mediana de todos los pisos analizados, pero en Ventas y San Diego no se puede asegurar. Los barrios de Casco Histórico de Vallecas y Opañel rinden más que San Diego, pero salen de la lista si se quitan los anfitriones
 con 10 anuncios o más.
 
 ![Mapa de Madrid con los barrios seleccionados](docs/img/mapa_de_barrios.png)
@@ -91,7 +96,6 @@ Estas cifras coinciden con las del análisis y con las de esta página, en espa�
 Catorce scripts de Python hacen el trabajo, desde la descarga hasta las tres entregas: calidad, corrección, cruces,
 exploración, indicadores e informes. Las tres entregas toman sus cifras de un único fichero,
 [indicadores.json](informes/indicadores.json).
-
 [Un segundo script](scripts/rehacer_portada.py) rehace la selección de barrios y las medianas de esta página desde una tabla
 local, sin compartir código con el análisis. Las pruebas además recalculan los indicadores por otro camino.
 
