@@ -116,7 +116,7 @@ def comprobar_frases(c):
 def pagina_resumen(inf, c):
     """Resumen: abre con la recomendación y los límites que pesan, sus cifras clave y la tabla de las tres preguntas."""
     rango = f"{Q3}.rango_de_rentabilidad_del_grupo_firme"
-    p = inf.pagina("Buscar hasta 2 habitaciones en Ventas, Numancia y San Diego", "resumen", panel="Resumen", columnas=False)
+    p = inf.pagina("Buscar hasta 2 habitaciones en los barrios de Ventas, Numancia y San Diego", "resumen", panel="Resumen", columnas=False)
     p.cifra_clave(c.pct(f"{REC}.rentabilidad_sin_descuento_pct"), "Rentabilidad sin descuento", "Firmes, hasta 2 habitaciones")
     p.cifra_clave(c.num(f"{REC}.pisos"), "Anuncios en Airbnb", "No son pisos en venta")
     p.cifra_clave(c.eur(f"{REC}.compra_sin_descuento_eur"), "Compra sin descuento", f"Con descuento, {c.eur(REC + '.compra_con_descuento_eur')}")

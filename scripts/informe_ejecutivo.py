@@ -33,7 +33,7 @@ TOPES = {"titulo_y_resumen": 300, "encontrado": 400, "limites": 100, "recomendac
 EDGE = [Path(p) for p in (shutil.which("msedge"), shutil.which("microsoft-edge")) if p]
 EDGE += [Path(os.environ[v]) / "Microsoft/Edge/Application/msedge.exe" for v in ("ProgramFiles(x86)", "ProgramFiles") if v in os.environ]
 ESPERA_PDF = 60  # segundos: Edge puede devolver el control antes de terminar de escribir el PDF 
-TITULO = "La búsqueda empieza por pisos de hasta 2 habitaciones en Ventas, Numancia y San Diego"
+TITULO = "Buscar pisos de hasta 2 habitaciones en los barrios de Ventas, Numancia y San Diego"
 
 # Hoja de impresión del patrón 07, §6: A4, 20 mm, Segoe UI a 11 pt, sin color ni recuadros.
 ESTILO = """@page { size: A4; margin: 20mm; }

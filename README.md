@@ -71,7 +71,7 @@ Barrios que rinden más: 9
 De ellos, siguen en la lista en las 5 repeticiones: Numancia, San Diego y Ventas
 Siguen en 4 de 5: Casco Histórico de Vallecas y Opañel
 
-Pisos de hasta 2 habitaciones en Numancia, San Diego y Ventas: 256 anuncios
+Pisos de hasta 2 habitaciones en los barrios de Numancia, San Diego y Ventas: 256 anuncios
   Precio de compra, en mediana: 161.973 €
   Ingreso al año, en mediana: 21.675 €
   Rentabilidad bruta: 12,1 %

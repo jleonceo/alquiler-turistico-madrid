@@ -128,7 +128,7 @@ def imprimir(r):
     print(f"De ellos, siguen en la lista en las 5 repeticiones: {lista(r['firmes'])}")
     print(f"Siguen en 4 de 5: {lista(r['con_aviso'])}")
     print()
-    print(f"Pisos de hasta 2 habitaciones en {lista(r['firmes'])}: {es(r['pisos_recomendados'])} anuncios")
+    print(f"Pisos de hasta 2 habitaciones en los barrios de {lista(r['firmes'])}: {es(r['pisos_recomendados'])} anuncios")
     print(f"  Precio de compra, en mediana: {es(r['compra_sin_descuento'])} €")
     print(f"  Ingreso al año, en mediana: {es(r['ingreso_anual'])} €")
     print(f"  Rentabilidad bruta: {es(r['rent_sin_descuento'], 1)} %")

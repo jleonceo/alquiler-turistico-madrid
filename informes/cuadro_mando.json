@@ -1,7 +1,7 @@
 {
  "script": "scripts/cuadro_mando.py",
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T20:07:24",
+ "fecha_ejecucion": "2026-11-06T21:48:34",
  "python": "3.13.18",
  "pandas": "3.1.0",
  "entradas": [
@@ -24,8 +24,8 @@
  ],
  "salida": {
   "ruta": "informes/cuadro_mando.html",
-  "bytes": 280546,
-  "sha256": "a2bc9bbda85180d6253894bc7d29e41a186d9354de472414b4c14146d2984cc4"
+  "bytes": 280526,
+  "sha256": "c275fb84df229b4d0e3cf265e28d28593f25e4972389f4722b161e3857deb753"
  },
  "filtros": {
   "distritos": 21,
@@ -61,9 +61,9 @@
   "menos de 30": 92
  },
  "textos": {
-  "titulo_recomendacion": "Busca pisos de hasta 2 habitaciones en Ventas, Numancia y San Diego",
+  "titulo_recomendacion": "Pisos de hasta 2 habitaciones en los barrios de Ventas, Numancia y San Diego",
   "recomendacion": "Son 256 anuncios: 12,1 % sin descuento y 16,2 % con él. Todos los firmes van del 10,8 % al 15,4 %. Firme es estable, no mejor.",
-  "limite": "Es una lista de dónde buscar y no dice si un piso se puede comprar para este uso. Primera acción: Comprobar planta y norma en el Ayuntamiento.",
+  "limite": "Es una lista de dónde buscar: no dice si un piso se puede comprar para este uso. Primera acción: Comprobar planta y norma en el Ayuntamiento.",
   "titulo_dormitorios": "Sin ganador entre estudio, uno y dos",
   "titulo_barrios": "9 barrios forman el grupo y 3 aguantan las cinco pruebas",
   "tabla_recomendacion": [
@@ -100,7 +100,7 @@
     "14,5 %"
    ]
   ],
-  "nota_recomendacion": "Rentabilidad bruta, en mediana y sin gastos, en los anuncios en Airbnb de los firmes; el rango es de todos sus pisos, según la foto y el descuento. Valoraciones empieza por bajos y primeras plantas con acceso independiente. Fuera del centro histórico, en el nivel B de la zona 1, el hospedaje cabe en planta baja, inferior a la baja y primera, y siempre con acceso independiente. El ingreso de un bajo no se conoce, porque el de los anuncios mezcla todas las plantas. Qué norma rige en cada barrio no se puede saber con estos datos: hay que preguntarlo en el Ayuntamiento. Elegir por m² barato no se distingue de la lista. Entre barrios, la rentabilidad se asocia más con la ocupación (0,78), la cifra más débil del caso, que con el m² (−0,60).",
+  "nota_recomendacion": "Rentabilidad bruta, en mediana y sin gastos, en los anuncios en Airbnb de los firmes; el rango es de todos sus pisos, según la foto y el descuento. Valoraciones empieza por bajos y primeras plantas con acceso independiente. Fuera del centro histórico, en el nivel B de la zona 1, el hospedaje cabe en planta baja, inferior a la baja y primera, y siempre con acceso independiente. El ingreso de un bajo no se conoce, porque el de los anuncios mezcla todas las plantas. Qué norma rige en cada barrio no se puede saber aquí: se pregunta en el Ayuntamiento. Elegir por m² barato no se distingue de la lista. Entre barrios, la rentabilidad se asocia más con la ocupación (0,78), la cifra más débil del caso, que con el m² (−0,60).",
   "texto_mapa": "Numancia supera la mediana de la base; Ventas y San Diego no se distinguen de ella. San Diego queda por debajo de Casco Histórico de Vallecas y de Opañel, que van detrás porque dependen de operadores grandes, el 65 % de sus anuncios. <button class=\"def\" type=\"button\" data-def=\"distingue\">Qué significa</button>",
   "tabla_mapa": [
    [

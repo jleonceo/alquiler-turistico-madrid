@@ -1,6 +1,6 @@
 {
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T20:07:22",
+ "fecha_ejecucion": "2026-11-06T21:41:18",
  "script": "scripts/informe_final.py",
  "indicadores": "informes/indicadores.json",
  "indicadores_fecha_ejecucion": "2026-11-06T20:06:56",
@@ -8,7 +8,7 @@
  "paginas": [
   {
    "id": "p1",
-   "titulo": "Buscar hasta 2 habitaciones en Ventas, Numancia y San Diego",
+   "titulo": "Buscar hasta 2 habitaciones en los barrios de Ventas, Numancia y San Diego",
    "tipo": "resumen",
    "palabras": 157,
    "alto_estimado": 632,
