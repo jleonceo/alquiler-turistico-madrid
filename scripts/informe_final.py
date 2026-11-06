@@ -266,7 +266,7 @@ def paginas_cierre(inf, c):
         ["Cuánto rinde", "El precio de compra es el declarado en 2025, y el descuento del 25 % es un supuesto sin apoyo en los datos. La inversión total no consta."],
         ["Casco Histórico de Vallecas", "Airbnb junta en él lo que el Ayuntamiento separa, y su precio oficial puede no representar todo el barrio."],
         ["Por qué ocurre", "Son asociaciones sobre una foto: no dicen por qué un barrio rinde más. El calendario no distingue reservado de bloqueado."],
-    ], fuente="reglas del caso y datos de la foto del 17/09/2026")
+    ], fuente="reglas de negocio y datos de la descarga del 17/09/2026")
 
     p = inf.pagina("Decisiones propuestas", "decision", panel="Decisiones propuestas")
     p.texto("La Dirección de Inversiones tiene que aprobar estas tres acciones. La fecha de ninguna consta. La primera empieza por bajos y primeras plantas.")
@@ -296,7 +296,7 @@ def paginas_anexo(inf, c):
     p = inf.pagina("Datos personales", "anexo", panel="Datos personales", columnas=False)
     p.texto("Qué traía el caso. Los anuncios traían columnas que identifican al anfitrión, enlaces, fotos, nombre, descripción y número de licencia. Las reseñas traían texto, nombre y código de quien reseña. Las licencias traían dirección, punto y números de expediente.",
             "Qué se hizo. Se suprimieron esas columnas, y del número de licencia queda solo su tipo. Es una supresión, sin seudonimización.",
-            "Quién y cuándo. La persona responsable del proyecto lo decidió el 06/11/2026, antes de que los datos entraran en el caso. Quien analizó nunca vio los originales.",
+            "Cuándo. Se decidió el 06/11/2026, antes de que los datos entraran en el análisis, que trabajó siempre sin esas columnas.",
             "Lo que queda. El número del anuncio, con el que se llega a su página pública, las coordenadas, desplazadas hasta 150 m, y el recuento de anuncios por anfitrión, que no dice quién es. Por eso los resultados se dan por barrio y tipo de piso, con un mínimo de 30 pisos, y ninguno decide sobre una persona.")
 
 

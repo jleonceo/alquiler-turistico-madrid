@@ -1,9 +1,9 @@
 {
- "skill": "indicadores-y-analisis",
- "version_skill": "1.0",
+ "etapa": "indicadores-y-analisis",
+ "version_etapa": "1.0",
  "script": "scripts/indicadores.py",
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T20:06:56",
+ "fecha_ejecucion": "2026-11-06T22:35:04",
  "python": "3.13.18",
  "pandas": "3.1.0",
  "entradas": [
@@ -88,7 +88,7 @@
    "funcion": "comparar_con_total",
    "funcion_adaptada": "la medida es una mediana y no una parte de «sí»: el intervalo sale del remuestreo en lugar de Wilson; la lectura frente al total y el número esperado por azar son los del 42.6",
    "poblacion": {
-    "regla": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "regla": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
     "unidad": "anuncio",
@@ -1088,12 +1088,12 @@
   {
    "id": "P2",
    "pregunta": "¿En qué barrios conviene buscarlo, fuera del centro histórico?",
-   "decision": "dónde concentra la búsqueda valoraciones.",
+   "decision": "dónde concentra la búsqueda el equipo de valoraciones.",
    "planteamiento": "metodo/04_planteamientos.md §Pregunta 2",
    "funcion": "comparar_con_total",
    "funcion_adaptada": "en la parte de pisos en el tope se usa tal cual; en la rentabilidad, adaptada a la mediana con remuestreo",
    "poblacion": {
-    "regla": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "regla": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
     "unidad": "anuncio",
@@ -3145,7 +3145,7 @@
    "funcion": "comparar_con_total",
    "funcion_adaptada": "se compara con el primer barrio y no con el total, con el intervalo de la diferencia de medianas que fija el planteamiento",
    "poblacion": {
-    "regla": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "regla": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "fotos del 24/03, 20/06 y 17/09/2026; la ocupación es la de septiembre",
     "filas": 2940,
     "unidad": "anuncio",
@@ -5706,7 +5706,7 @@
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
     "respuesta": "Con 2.940 anuncios, el precio por noche tiene media de 172,71 € y mediana de 150,77 €, con rango de 28,00 a 978,50 €.",
-    "poblacion": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
     "datos": {
@@ -6581,8 +6581,8 @@
     }
    },
    "base_comparacion": {
-    "respuesta": "Con 7.202 anuncios, el precio de vivienda de las reglas §7 tiene media de 184,03 € y mediana de 156,99 €, con rango de 21,03 a 999,00 €.",
-    "poblacion": "base de comparación, reglas §7: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
+    "respuesta": "Con 7.202 anuncios, el precio de vivienda de las reglas §3 tiene media de 184,03 € y mediana de 156,99 €, con rango de 21,03 a 999,00 €.",
+    "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7202,
     "datos": {
@@ -7691,7 +7691,7 @@
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
     "respuesta": "Entre 17 distritos con 30 o más, de Salamanca (190,00 €) a Villa de Vallecas (113,00 €). Entre 36 barrios, de Hispanoamérica (217,50 €) a Casco Histórico de Vallecas (110,00 €). El orden no dice qué barrios se distinguen.",
-    "poblacion": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
     "datos": {
@@ -8286,7 +8286,7 @@
    },
    "base_comparacion": {
     "respuesta": "Entre 19 distritos con 30 o más, de Salamanca (197,00 €) a Moratalaz (81,45 €). Entre 54 barrios, de Recoletos (282,72 €) a Canillejas (87,00 €). El orden no dice qué barrios se distinguen.",
-    "poblacion": "base de comparación, reglas §7: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
+    "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7202,
     "datos": {
@@ -9648,7 +9648,7 @@
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
     "respuesta": "Es una asociación entre 36 barrios con 30 anuncios o más: la correlación por rangos entre su precio mediano y sus anuncios en Airbnb es 0,25.",
-    "poblacion": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
     "datos": {
@@ -9660,7 +9660,7 @@
    },
    "base_comparacion": {
     "respuesta": "Es una asociación entre 54 barrios con 30 anuncios o más: la correlación por rangos entre su precio mediano y sus anuncios en Airbnb es 0,34.",
-    "poblacion": "base de comparación, reglas §7: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
+    "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7202,
     "datos": {
@@ -9678,7 +9678,7 @@
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
     "respuesta": "Por tipo de alquiler: Entire home/apt: 150,77 € (2.940). La base solo tiene pisos. Entre 4 tipos de inmueble con 30 o más, de Entire condo (157,25 €) a Entire loft (136,25 €).",
-    "poblacion": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
     "datos": {
@@ -9773,8 +9773,8 @@
     }
    },
    "base_comparacion": {
-    "respuesta": "Por tipo de alquiler: Entire home/apt: 180,00 € (5.331) · Private room: 79,00 € (1.806) · Shared room: 24,00 € (65). Las habitaciones van con el precio llevado a la vivienda por las reglas §7. Entre 13 tipos de inmueble con 30 o más, de Entire serviced apartment (271,00 €) a Shared room in bed and breakfast (24,00 €).",
-    "poblacion": "base de comparación, reglas §7: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
+    "respuesta": "Por tipo de alquiler: Entire home/apt: 180,00 € (5.331) · Private room: 79,00 € (1.806) · Shared room: 24,00 € (65). Las habitaciones van con el precio llevado a la vivienda por las reglas §3. Entre 13 tipos de inmueble con 30 o más, de Entire serviced apartment (271,00 €) a Shared room in bed and breakfast (24,00 €).",
+    "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7202,
     "datos": {
@@ -10066,7 +10066,7 @@
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
     "respuesta": "Con 2.940 anuncios, la ocupación estimada tiene media de 145,5 días y mediana de 156. Por distrito, de Villa de Vallecas (244,5 días) a Arganzuela (81,0 días). Por barrio, de Casco Histórico de Vallecas (255,0 días) a Atocha (45,0 días).",
-    "poblacion": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
     "datos": {
@@ -10941,7 +10941,7 @@
    },
    "base_comparacion": {
     "respuesta": "Con 7.249 anuncios, la ocupación estimada tiene media de 130,7 días y mediana de 120. Por distrito, de Barajas (186,0 días) a Villaverde (66,0 días). Por barrio, de Palos de Moguer (198,0 días) a Adelfas (21,0 días).",
-    "poblacion": "base de comparación, reglas §7: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
+    "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7249,
     "datos": {
@@ -12046,7 +12046,7 @@
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
     "respuesta": "Parte de anuncios en cada nivel, en toda la base: 1-85 días, 36,2 %; 86-170, 17,5 %; 171-254, 19,7 %; tope de 255, 26,7 %. El tope va del 50,0 % de Villa de Vallecas al 6,2 % de Villaverde.",
-    "poblacion": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
     "datos": {
@@ -12199,7 +12199,7 @@
    },
    "base_comparacion": {
     "respuesta": "Parte de anuncios en cada nivel, en toda la base: 1-85 días, 41,7 %; 86-170, 21,1 %; 171-254, 15,5 %; tope de 255, 21,7 %. El tope va del 46,2 % de Barajas al 1,8 % de Villaverde.",
-    "poblacion": "base de comparación, reglas §7: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
+    "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7249,
     "datos": {
@@ -12374,7 +12374,7 @@
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
     "respuesta": "Por distrito, de Villa de Vallecas (244,5 días) a Arganzuela (81,0 días). Por barrio, de Casco Histórico de Vallecas (255,0 días) a Atocha (45,0 días). En la parte alta el orden no dice nada, por el tope.",
-    "poblacion": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
     "datos": {
@@ -12969,7 +12969,7 @@
    },
    "base_comparacion": {
     "respuesta": "Por distrito, de Barajas (186,0 días) a Villaverde (66,0 días). Por barrio, de Palos de Moguer (198,0 días) a Adelfas (21,0 días). En la parte alta el orden no dice nada, por el tope.",
-    "poblacion": "base de comparación, reglas §7: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
+    "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7249,
     "datos": {
@@ -14331,7 +14331,7 @@
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
     "respuesta": "Es una asociación entre 36 barrios con 30 anuncios o más: la correlación por rangos entre su ocupación mediana y sus anuncios en Airbnb es 0,29.",
-    "poblacion": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
     "datos": {
@@ -14343,7 +14343,7 @@
    },
    "base_comparacion": {
     "respuesta": "Es una asociación entre 54 barrios con 30 anuncios o más: la correlación por rangos entre su ocupación mediana y sus anuncios en Airbnb es 0,44.",
-    "poblacion": "base de comparación, reglas §7: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
+    "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7249,
     "datos": {
@@ -15337,7 +15337,7 @@
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
     "respuesta": "Es una asociación entre 17 distritos con 30 anuncios o más: el m² y el alquiler mediano dan 0,85 en correlación por rangos, y el inmueble oficial, 0,75.",
-    "poblacion": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2913,
     "datos": {
@@ -15356,7 +15356,7 @@
    },
    "base_comparacion": {
     "respuesta": "Es una asociación entre 19 distritos con 30 anuncios o más: el m² y el alquiler mediano dan 0,73 en correlación por rangos, y el inmueble oficial, 0,62.",
-    "poblacion": "base de comparación, reglas §7: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
+    "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7207,
     "datos": {
@@ -15381,7 +15381,7 @@
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
     "respuesta": "Es una asociación entre 17 distritos con 30 anuncios o más: el m² y la ocupación mediana dan −0,14 en correlación por rangos, y el inmueble oficial, −0,12.",
-    "poblacion": "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
+    "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2913,
     "datos": {
@@ -15400,7 +15400,7 @@
    },
    "base_comparacion": {
     "respuesta": "Es una asociación entre 19 distritos con 30 anuncios o más: el m² y la ocupación mediana dan 0,43 en correlación por rangos, y el inmueble oficial, 0,38.",
-    "poblacion": "base de comparación, reglas §7: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
+    "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7207,
     "datos": {
@@ -17795,12 +17795,12 @@
   {
    "nombre": "mínimo de casos por grupo o celda",
    "valor": "30",
-   "origen": "reglas del caso §7"
+   "origen": "reglas §3"
   },
   {
    "nombre": "mínimo en las variantes que lo fijan",
    "valor": "20",
-   "origen": "reglas del caso §7"
+   "origen": "reglas §3"
   },
   {
    "nombre": "confianza del intervalo",
@@ -17851,7 +17851,7 @@
   "Barrios baratos: tantos como barrios tiene el grupo, entre los comparados con 30 pisos o más y, aparte, en toda la ciudad.",
   "La pregunta 1 no agrupa los pisos sin habitación con los de uno, aunque la superficie sea la misma.",
   "Factores y tamaño de la base de comparación: solo sus pisos, como el reconocimiento, porque una habitación no se compara con una vivienda.",
-  "Precio de la base de comparación: el de vivienda de las reglas §7, y el publicado al lado en la pregunta S01.",
+  "Precio de la base de comparación: el de vivienda de las reglas §3, y el publicado al lado en la pregunta S01.",
   "Atractivo dentro del grupo: se parte en dos por la mediana de puntos del grupo, y se resta la mediana del barrio para mirarlo dentro de cada uno.",
   "Estacionalidad: los últimos 24 meses completos, la misma ventana del reconocimiento.",
   "Pisos de un año o más: primera reseña en la fecha de la foto menos un año o antes; es la única fecha de antigüedad del anuncio en los datos.",
@@ -17863,7 +17863,7 @@
   {
    "id": "P-01",
    "pregunta": "Cuándo un barrio depende del tope y cuándo tiene pocos anuncios.",
-   "resuelto_por": "reglas §7, con las cinco pruebas y los tres avisos"
+   "resuelto_por": "reglas §3, con las cinco pruebas y los tres avisos"
   }
  ]
 }

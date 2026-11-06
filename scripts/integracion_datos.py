@@ -19,7 +19,7 @@ import reglas_caso as rc
 # 1. Configuración
 # ---------------------------------------------------------------------------
 
-SKILL = "integracion-datos"
+ETAPA = "integracion-datos"
 VERSION = "06/10/2026 (SC-63)"
 SCRIPT = "scripts/integracion_datos.py"
 VALIDAR = {"1:1": "one_to_one", "N:1": "many_to_one"}
@@ -83,7 +83,7 @@ def cruzar(izq, der, plan, nuevas):
 
 def informe(s):
     """Genera el Markdown a partir del diccionario que se guarda en el JSON."""
-    r = ["# Integración de datos · caso", "", "## Fuente", ""]
+    r = ["# Integración de datos", "", "## Fuente", ""]
     r += [f"- Ejecución: {s['fecha_ejecucion']}.", f"- Con diseño: {s.get('con_diseno')}; {s.get('seguir_sin_aprobacion') or 'aprobado'}."]
     r += [f"- Entrada `{e['ruta']}`: huella {e['sha256']}." for e in s["entradas"]]
     r += ["", "## Resumen", "", s["resultado"].get("resumen", ""), "", "## Tablas y granularidad", "", "- `anuncios_integrado`: un anuncio de la foto de septiembre.", "- `barrios_integrado`: un barrio de Inside Airbnb.", "",
@@ -167,7 +167,7 @@ def principal(s):
 
 def ejecutar():
     """Lanza los cruces y, si algo falla, deja el JSON con estado ERROR antes de avisar."""
-    s = rc.bloque_comun(SKILL, VERSION, SCRIPT)
+    s = rc.bloque_comun(ETAPA, VERSION, SCRIPT)
     try:
         s = principal(s)
     except Exception as error:

@@ -2,7 +2,7 @@
 
 Es la vía independiente: no importa nada de la cadena, recorre la tabla fila a fila con la biblioteca estándar y aplica de
 nuevo las reglas de docs/reglas_de_negocio.md: las 12 variantes, las cinco pruebas y la recomendación. Imprime lo que sale.
-Con --comprobar lo compara además con informes/indicadores.json y con los dos README, y sale con 1 si algo no coincide.
+Con --comprobar lo compara además con informes/indicadores.json y con las versiones en español e inglés de la portada, y sale con 1 si algo no coincide.
 
 Ejecución:
   python scripts/rehacer_portada.py --comprobar
@@ -152,7 +152,7 @@ def contra_indicadores(r, j):
 
 
 def contra_readme(r):
-    """Comprueba que los dos README llevan las cifras rehechas, cada uno con su formato."""
+    """Comprueba que las dos versiones de la portada llevan las cifras rehechas, cada uno con su formato."""
     cifras = {"README.md": [es(r["pisos_base"]), es(r["pisos_recomendados"]), es(r["rent_sin_descuento"], 1) + " %", es(r["rent_con_descuento"], 1) + " %", es(r["compra_sin_descuento"]) + " €", es(r["ingreso_anual"]) + " €"],
               "README.en.md": [en(r["pisos_base"]), en(r["pisos_recomendados"]), en(r["rent_sin_descuento"], 1) + "%", en(r["rent_con_descuento"], 1) + "%", "€" + en(r["compra_sin_descuento"]), "€" + en(r["ingreso_anual"])]}
     fallos = []
@@ -179,5 +179,5 @@ if __name__ == "__main__":
         fallos = comprobar(resultado)
         for f in fallos:
             print(f"NO COINCIDE {f}")
-        print("Estas cifras coinciden con las del análisis y con las de los dos README." if not fallos else f"{len(fallos)} cifras no coinciden.")
+        print("Estas cifras coinciden con las del análisis y con las de esta página, en español y en inglés." if not fallos else f"{len(fallos)} cifras no coinciden.")
         sys.exit(1 if fallos else 0)

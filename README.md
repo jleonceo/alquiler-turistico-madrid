@@ -5,14 +5,14 @@ English version: [README.en.md](README.en.md)
 Una empresa ficticia quiere comprar pisos en Madrid para alquilarlos a turistas y necesita saber por dónde empezar. Este
 análisis responde con datos públicos de Airbnb y del Ayuntamiento de Madrid.
 
-**Resultado:** conviene empezar por pisos de hasta 2 habitaciones en tres barrios de Madrid: Ventas (distrito de Ciudad
-Lineal), Numancia y San Diego (los dos en Puente de Vallecas). El 17/09/2026 había 256 anuncios con esas condiciones, de los 2.940 pisos
-analizados. En mediana, cada piso costaría 161.973 € al precio oficial de 2025 e ingresaría 21.675 € al año. Es una
-rentabilidad bruta del 12,1 %, antes de gastos e impuestos.
+**Resultado:** conviene mirar primero pisos de hasta 2 habitaciones en tres barrios de Madrid: Ventas (distrito de Ciudad
+Lineal), Numancia y San Diego (los dos en el distrito de Puente de Vallecas). El 17/09/2026 había 256 anuncios con esas
+condiciones, de los 2.940 pisos analizados. En mediana, cada piso costaría 161.973 € al precio oficial de 2025 e ingresaría
+21.675 € al año. Calculada piso a piso, la mediana de la rentabilidad bruta es del 12,1 %, antes de gastos e impuestos.
 
 Esta lista dice dónde buscar, pero no si un piso concreto se puede alquilar a turistas. Eso depende de la normativa
-urbanística y hay que comprobarlo piso a piso en el Ayuntamiento. Los días ocupados son además una estimación de
-Inside Airbnb, con un tope de 255 al año. Si se quitan los pisos que llegan a ese tope, los tres barrios salen de la lista.
+urbanística. Hay que comprobarlo piso a piso en el Ayuntamiento. Los días ocupados son además una estimación de Inside Airbnb,
+con un máximo de 255 días al año. Si se quitan los pisos que llegan a ese máximo, los tres barrios salen de la lista.
 
 [![CI](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml/badge.svg)](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml)
 
@@ -22,8 +22,9 @@ pip install -r requirements.txt
 python ejecutar.py --completo
 ```
 
-Hace falta Python 3.13. El último comando descarga los 240 MB originales de Inside Airbnb, repite todo el análisis en unos cinco
-minutos, recalcula las cifras de esta página y ejecuta las pruebas.
+Hace falta Python 3.13. El último comando descarga los 240 MB originales de Inside Airbnb, repite todo el análisis, recalcula
+las cifras de esta página y ejecuta las pruebas. El PDF del informe ejecutivo necesita Microsoft Edge. Sin él, se conserva el
+que ya está en el repositorio.
 
 ## Las tres entregas
 
@@ -36,30 +37,34 @@ minutos, recalcula las cifras de esta página y ejecuta las pruebas.
 
 ![Primera pantalla del cuadro de mando, con la recomendación y sus cifras](docs/img/cuadro_de_mando.png)
 
+Las cuatro cifras grandes de la imagen son de todos los pisos analizados. Las de los tres barrios están en la tabla de la derecha.
+
 ## Por qué no se mira todo Madrid
 
-De los 23.109 anuncios de Airbnb en la ciudad, 14.150 están en el centro histórico, donde el Plan RESIDE del Ayuntamiento
+De los 23.109 anuncios de Airbnb en la ciudad, 14.150 están en el centro histórico, donde el Ayuntamiento, con el Plan RESIDE,
 no admite pisos turísticos en edificios residenciales. Por eso el análisis usa los pisos de fuera del centro.
 
-Se usan los anuncios de 20 a 1.000 € por noche. Esos topes son una decisión: por debajo de 20 € casi no hay anuncios y por
-encima de 1.000 € solo hay 164. Dentro quedan 18.573 de los 18.785 anuncios con precio, suficientes para el análisis.
+Se usan los anuncios de 20 a 1.000 € por noche. Esos límites los fija este análisis: por debajo de 20 € casi no hay anuncios
+y por encima de 1.000 € solo hay 164. Dentro quedan 18.573 de los 18.785 anuncios con precio. Después se aplican los demás
+filtros, como el tamaño, la estancia mínima y la ocupación, y quedan los 2.940 pisos.
 
 ## Cómo se eligieron los barrios
 
-La rentabilidad bruta de un piso es su ingreso anual dividido entre lo que costaría comprarlo. El ingreso se calcula con el precio por
-noche y los días ocupados que estima Inside Airbnb. El precio de compra se calcula con una superficie supuesta y el precio
-oficial del m² del barrio. Si se comprara un 25 % por debajo de ese precio, la rentabilidad subiría al 16,2 %.
+La rentabilidad bruta de un piso es su ingreso anual dividido entre lo que costaría comprarlo. El ingreso es el precio por
+noche multiplicado por los días ocupados que estima Inside Airbnb. El precio de compra sale de una superficie supuesta y del
+precio oficial del m² del barrio. Si se comprara un 25 % por debajo de ese precio, la rentabilidad subiría al 16,2 %.
 
-Los barrios se ordenaron por rentabilidad y se miró cuáles quedaban en el 25 % más rentable. Ese orden cambia con las
-condiciones del cálculo, como la estancia mínima o el mes del precio, así que se repitió con 12 combinaciones. Se quedaron los 9
-barrios que salieron en ese 25 % en más de la mitad de ellas.
+Los barrios se ordenaron por rentabilidad y se miró cuáles quedaban en el 25 % más rentable. Ese orden cambia según la
+estancia mínima o el mes del precio. Por eso el cálculo se repitió 12 veces, con distintos valores. Se quedaron los 9 barrios
+que salieron en ese 25 % en más de la mitad de las repeticiones.
 
-Después se comprobó si esos 9 barrios dependían de un grupo concreto de anuncios. El cálculo se repitió cinco veces más, por
-ejemplo sin los anfitriones que tienen 10 anuncios o más. Ventas, Numancia y San Diego siguieron en la lista las cinco veces. Se recomiendan por esa estabilidad: ninguno rinde claramente más que los otros barrios de la lista. Numancia supera la mediana
-de todos los pisos analizados, mientras que Ventas y San Diego podrían no diferenciarse de ella.
+Después se comprobó si esos 9 barrios dependían de un grupo concreto de anuncios. El cálculo se repitió de cinco maneras más,
+por ejemplo sin los anfitriones que tienen 10 anuncios o más. Los barrios de Ventas, Numancia y San Diego siguieron en la lista
+las cinco veces. Se recomiendan por eso: ninguno rinde claramente más que los otros barrios de la lista. Numancia rinde más que
+la mediana de todos los pisos analizados, pero en Ventas y San Diego no se puede asegurar.
 
-Casco Histórico de Vallecas y Opañel rinden más que San Diego, pero salen de la lista si se quitan los anfitriones con 10 anuncios
-o más.
+Los barrios de Casco Histórico de Vallecas y Opañel rinden más que San Diego, pero salen de la lista si se quitan los anfitriones
+con 10 anuncios o más.
 
 ![Mapa de Madrid con los barrios seleccionados](docs/img/mapa_de_barrios.png)
 
@@ -78,14 +83,17 @@ Pisos de hasta 2 habitaciones en los barrios de Numancia, San Diego y Ventas: 25
   Rentabilidad bruta si la compra baja un 25 %: 16,2 %
   Rentabilidad de todos los pisos de esos barrios, según el mes del precio y el descuento: de 10,8 % a 15,4 %
 
-Estas cifras coinciden con las del análisis y con las de los dos README.
+Estas cifras coinciden con las del análisis y con las de esta página, en español y en inglés.
 ```
 
 ## Cómo está hecho
 
-Trece scripts de Python hacen el trabajo, desde la descarga hasta las tres entregas: calidad, corrección, cruces, exploración,
-indicadores e informes. Las tres entregas toman sus cifras de un único fichero, [indicadores.json](informes/indicadores.json).
-[Un segundo script](scripts/rehacer_portada.py), que no comparte código con el análisis, recalcula las cifras de esta página.
+Catorce scripts de Python hacen el trabajo, desde la descarga hasta las tres entregas: calidad, corrección, cruces,
+exploración, indicadores e informes. Las tres entregas toman sus cifras de un único fichero,
+[indicadores.json](informes/indicadores.json).
+
+[Un segundo script](scripts/rehacer_portada.py) rehace la selección de barrios y las medianas de esta página desde una tabla
+local, sin compartir código con el análisis. Las pruebas además recalculan los indicadores por otro camino.
 
 El detalle está en [el método](docs/metodo.md), [las reglas de negocio](docs/reglas_de_negocio.md),
 [los criterios de datos](docs/criterios_de_datos.md) y [los datos](docs/datos.md).
@@ -98,14 +106,17 @@ El detalle está en [el método](docs/metodo.md), [las reglas de negocio](docs/r
 | [Ayuntamiento de Madrid](https://datos.madrid.es/) | precio y superficie de 2025, ventas, licencias, centro histórico y puntos de interés | reutilización con cita | `data/raw/externos/` |
 | Colegio de Registradores de España | origen del precio y la superficie que publica el Ayuntamiento | se cita junto al Ayuntamiento | `data/raw/externos/` |
 
-Los datos de Inside Airbnb no están aquí porque  pide no volver a
+Los datos de Inside Airbnb no están aquí porque [su política](https://insideairbnb.com/data-policies/) pide no volver a
 publicarlos. Se descargan de su web al repetir el análisis.
 
 ## Límites
 
 - No se conoce la planta ni el acceso de cada piso.
-- Con los anuncios de un año o más, San Diego baja al puesto 8 de 26 en rentabilidad.
-- No se conoce la superficie real, así que no se puede decir qué rinde más: un estudio, una habitación o dos.
+- Con los anuncios de un año o más, San Diego baja al puesto 8 de 26 barrios en rentabilidad.
+- La superficie de cada piso es un supuesto: 50 m² hasta 1 habitación, 65 m² con 2 y más con 3 o más. Por eso no se puede decir
+  qué rinde más: un estudio, una habitación o dos.
+- Solo cuentan los pisos con ocupación estimada, o sea con reseñas en el último año. Quedan fuera los que no funcionan, lo que
+  puede subir la rentabilidad.
 - No se ha medido si otro rango de precio cambiaría los barrios.
 - La rentabilidad no incluye gastos, impuestos, comunidad ni comisiones.
 - El precio de compra es el declarado en 2025.

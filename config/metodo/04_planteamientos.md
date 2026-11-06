@@ -16,8 +16,8 @@ anuncio, con la foto del 17/09/2026. La unidad es el anuncio, que no es un inmue
 
 ## Pregunta 2 · En qué barrios
 
-- Decisión: dónde concentra la búsqueda valoraciones.
-- Medida: rentabilidad bruta mediana por barrio y las doce variantes de las reglas §7.
+- Decisión: dónde concentra la búsqueda el equipo de valoraciones.
+- Medida: rentabilidad bruta mediana por barrio y las doce variantes de las reglas §3.
 - Referencia: la mediana de los barrios con 30 anuncios o más.
 - Mínimo: 30 anuncios en la base; 20 solo en las variantes que lo fijan.
 - Salida: grupo firme, con aviso y segunda línea, cada barrio con recuento, cuartil bajo, parte de pisos en el tope de

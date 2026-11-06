@@ -43,10 +43,10 @@ REFERENCIA = CASO / "tests" / "cifras_de_referencia.json"
 SALIDA_JSON = CASO / "informes" / "calidad-datos.json"
 SALIDA_MD = CASO / "informes" / "calidad-datos.md"
 
-SKILL = "calidad-datos"
+ETAPA = "calidad-datos"
 SCRIPT = "scripts/calidad_datos.py"
-VERSION_SKILL = "1.0"
-FECHA_DATOS = "2026-09-17"  # reglas §5
+VERSION_ETAPA = "1.0"
+FECHA_DATOS = "2026-09-17"  # reglas §2
 TROZO = int(os.environ.get("TROZO_FILAS", 1_000_000))
 
 # 1.2 Parámetros de la medición de calidad.
@@ -58,7 +58,7 @@ COD_PCT = 5
 COLAS = 10
 EXCEL = (20_000, 60_000)
 
-# 1.3 Parámetros de la medición: los del reconocimiento y los de reglas §7.
+# 1.3 Parámetros de la medición: los del reconocimiento y los de reglas §3.
 SEMILLA = 63
 REMUESTREOS = 2000
 MIN_GRUPO = 30
@@ -82,7 +82,7 @@ RUTAS = {**{v: f"{v}.csv.gz" for v in TABLA_FOTO.values()}, CALENDARIO: f"{CALEN
          LICENCIAS: f"externos/{LICENCIAS}.csv", BARRIOS: f"externos/{BARRIOS}.csv"}
 
 # 1.5 Reglas del caso que el código tiene que conocer.
-SIN_PROPIO = ["San Andrés", "Ambroz"]  # reglas §6: toman el precio de su distrito
+SIN_PROPIO = ["San Andrés", "Ambroz"]  # reglas §2: toman el precio de su distrito
 AEROPUERTO = "Aeropuerto"
 CASCO_VALLECAS = "Casco Histórico de Vallecas"
 EQUIV = {"concepcion": "la concepcion", "carmenes": "los carmenes", "fuentelareina": "fuentelarreina",
@@ -91,8 +91,8 @@ EQUIV = {"concepcion": "la concepcion", "carmenes": "los carmenes", "fuentelarei
 COD_TEXTO = {"none", "null", "n/a", "na", "-", "pendiente", "unknown", "desconocido", "sin dato", "s/d", "nan", "?"}
 COD_FECHA = {"0000-00-00", "1900-01-01"}
 # Códigos numéricos que ya tienen significado en las reglas o en los libros.
-DOCUMENTADOS = {("estimated_occupancy_l365d", 0): "reglas §5", ("estimated_occupancy_l365d", 255): "reglas §6",
-                ("availability_365", 0): "reglas §3 y §5"}
+DOCUMENTADOS = {("estimated_occupancy_l365d", 0): "reglas §2", ("estimated_occupancy_l365d", 255): "reglas §2",
+                ("availability_365", 0): "reglas §1 y §5"}
 
 PERSONAL = {"correo": re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+"), "enlace": re.compile(r"https?://|www\.", re.I),
             "teléfono": re.compile(r"(?<![\d.])[6789]\d{8}(?![\d.])"), "documento": re.compile(r"(?<![\w.])\d{8}[A-HJ-NP-TV-Z](?!\w)"),
@@ -152,7 +152,7 @@ def cuantiles(numeros, qs):
 
 
 def banos_de_texto(valor):
-    """Lee los baños del texto del anuncio (reglas §5): medio baño vale 0,5 y «No bathroom», 0."""
+    """Lee los baños del texto del anuncio (reglas §2): medio baño vale 0,5 y «No bathroom», 0."""
     if pd.isna(valor):
         return np.nan
     t = str(valor).lower()
@@ -441,7 +441,7 @@ def buscar_personal(tabla, frec, roles):
 # ---------------------------------------------------------------------------
 
 def tabla_de_barrios(barrios, oficial, equivalencias=True):
-    """Da el precio del m² de cada barrio de Airbnb con las reglas §6. Aeropuerto llega con 0 y queda vacío."""
+    """Da el precio del m² de cada barrio de Airbnb con las reglas §2. Aeropuerto llega con 0 y queda vacío."""
     of_b = oficial.query('nivel == "barrio"')
     of_d = oficial.query('nivel == "distrito"').assign(clave_d=lambda x: x["nombre"].map(sin_guiones))
     b = barrios.rename(columns={"neighbourhood": "barrio", "neighbourhood_group": "distrito"}).copy()
@@ -456,7 +456,7 @@ def tabla_de_barrios(barrios, oficial, equivalencias=True):
 
 
 def superficie_regla(t):
-    """Aplica la superficie de valoraciones (reglas §6), de menor a mayor para que lo último mande."""
+    """Aplica la superficie de valoraciones (reglas §2), de menor a mayor para que lo último mande."""
     b, d = t["banos"], t["bedrooms"]
     s = pd.Series(np.nan, index=t.index, dtype="float64")
     s = s.mask(d <= 1, 50.0).mask(d == 2, 65.0).mask((d == 3) & (b < 2), 90.0).mask((d == 3) & (b >= 2), 110.0)
@@ -479,7 +479,7 @@ def preparar_trabajo(fotos, cal, limite, b):
                           "estimated_occupancy_l365d": "ocupacion", "room_type": "tipo_alquiler"})
     L["dentro"] = shapely.contains_xy(limite, L["longitude"].to_numpy(), L["latitude"].to_numpy())
     L["est_min"] = L["id"].map(cal["est_min"])
-    L["estancia"] = L["minimum_nights"].fillna(L["est_min"])  # reglas §5
+    L["estancia"] = L["minimum_nights"].fillna(L["est_min"])  # reglas §2
     for clave, col in (("mar", "p_mar"), ("jun", "p_jun")):
         L[col] = L["id"].map(fotos[clave].assign(p=precio_de_texto(fotos[clave]["price"])).set_index("id")["p"])
     L["piso"] = L["tipo_alquiler"].eq("Entire home/apt")
@@ -498,12 +498,12 @@ def mascara_fija(L, excluir=None, camas_vacias=False, cero=False):
 
 
 def rentabilidad(t, col_precio="precio", desc=DESCUENTO):
-    """Calcula la rentabilidad bruta de las reglas §6, en porcentaje."""
+    """Calcula la rentabilidad bruta de las reglas §2, en porcentaje."""
     return 100 * t[col_precio] * t["ocupacion"] / (t["sup_regla"] * t["m2"] * desc)
 
 
 def grupo_de(L, excluir=None, camas_vacias=False, por_foto=None, cero=False):
-    """Calcula las doce variantes de las reglas §7 y devuelve los barrios en la mayoría.
+    """Calcula las doce variantes de las reglas §3 y devuelve los barrios en la mayoría.
 
     por_foto quita pisos solo en las variantes que usan el precio de esa columna; cero cuenta los pisos sin ocupación.
     """
@@ -631,13 +631,13 @@ def reglas_documentadas(L, fotos, b, cal):
     publicada = L["minimum_nights"].notna()
     formula = (L["number_of_reviews_ltm"] * 2 * L["minimum_nights"].clip(lower=3)).clip(upper=255)
     salida = [
-        {"regla": "reglas §6: ocupación = reseñas del último año × 2 × el mayor entre 3 y la estancia, con tope de 255", "filas": int(publicada.sum()),
+        {"regla": "reglas §2: ocupación = reseñas del último año × 2 × el mayor entre 3 y la estancia, con tope de 255", "filas": int(publicada.sum()),
          "filas_que_incumplen": int((formula[publicada] != L.loc[publicada, "ocupacion"]).sum())},
-        {"regla": "reglas §6: ingreso anual = precio × ocupación", "filas": int(L["estimated_revenue_l365d"].notna().sum()),
+        {"regla": "reglas §2: ingreso anual = precio × ocupación", "filas": int(L["estimated_revenue_l365d"].notna().sum()),
          "filas_que_incumplen": int(((L["precio"] * L["ocupacion"] - L["estimated_revenue_l365d"]).abs() > 1).sum())},
-        {"regla": "reglas §4: 128 barrios y 21 distritos", "filas": len(b),
+        {"regla": "reglas §1: 128 barrios y 21 distritos", "filas": len(b),
          "filas_que_incumplen": int(abs(b["neighbourhood"].nunique() - 128) + abs(b["neighbourhood_group"].nunique() - 21))},
-        {"regla": "reglas §6: ocupación con tope de 255", "filas": len(L), "filas_que_incumplen": int(L["ocupacion"].gt(255).sum())},
+        {"regla": "reglas §2: ocupación con tope de 255", "filas": len(L), "filas_que_incumplen": int(L["ocupacion"].gt(255).sum())},
     ]
     pisos = mascara_fija(L) & L["precio"].between(20, 1000) & publicada & L["est_min"].notna()
     t = L.loc[pisos]
@@ -783,7 +783,7 @@ def asuntos_de(L, fotos, b, oficial, licencias, puntos, resenas_rep, base_m, dic
 
     sep = TABLA_FOTO["sep"]
     # 7.1 Sin decisión escrita: la lista del paso 3 del cuaderno y lo que ha salido al recorrer las tablas.
-    anadir("precio_vacio", sep, "price", int(vacia_precio.sum()), vacia_precio, opciones=["sigue vacío y el anuncio queda fuera (reglas §5: un vacío no se rellena)", "se toma el de junio y, si no, el de marzo"],
+    anadir("precio_vacio", sep, "price", int(vacia_precio.sum()), vacia_precio, opciones=["sigue vacío y el anuncio queda fuera (reglas §2: un vacío no se rellena)", "se toma el de junio y, si no, el de marzo"],
            medicion=precio_recuperado(), bloque="3.4",
            nota=f"Lista del cuaderno. Son {int((vacia_precio & fuera).sum())} pisos fuera del centro; {int((vacia_precio & fuera & (L['p_jun'].notna() | L['p_mar'].notna())).sum())} tienen precio en junio o marzo.")
     anadir("captura_anterior", sep, "source", int(L["captura_anterior"].sum()), L["captura_anterior"], opciones=["se quedan", "salen de la base"],
@@ -813,10 +813,10 @@ def asuntos_de(L, fotos, b, oficial, licencias, puntos, resenas_rep, base_m, dic
            no_medible="No entran en la base: el filtro de hasta 3 noches, o de 6 en las variantes, ya los quita.", bloque="3.8", nota="Lista del cuaderno.")
     pf = puntos.loc[~puntos["x"].between(-3.95, -3.45) | ~puntos["y"].between(40.25, 40.65)]
     anadir("puntos_de_interes", "puntos de interés", "coordenadas, COD_BARRIO", len(pf), opciones=["se quitan esos puntos", "se buscan sus coordenadas"],
-           no_medible="La rentabilidad no usa los puntos de interés: no pueden cambiar el grupo ni el tipo. Afectan al atractivo, que aún no tiene distancia ni peso (reglas §7).", bloque="3.8",
+           no_medible="La rentabilidad no usa los puntos de interés: no pueden cambiar el grupo ni el tipo. Afectan al atractivo, que aún no tiene distancia ni peso (reglas §3).", bloque="3.8",
            nota=f"Lista del cuaderno. Además, {int(puntos['cod_barrio'].isna().sum())} puntos no traen COD_BARRIO.")
     anadir("licencias_escritura", LICENCIAS, "distrito, planta", int(licencias.duplicated().sum()), opciones=["se normaliza la escritura", "se deja como llega, porque es contexto"],
-           no_medible="La licencia no se une a ningún anuncio (reglas §3): no entra en la rentabilidad.", bloque="3.7",
+           no_medible="La licencia no se une a ningún anuncio (reglas §1): no entra en la rentabilidad.", bloque="3.7",
            nota=f"Lista del cuaderno. Distrito en {licencias['distrito'].nunique()} formas y planta en {plantas.nunique()} tras igualar mayúsculas. Las filas son las iguales a otra; sin número no se puede saber si son licencias distintas.")
     anadir("columnas_vacias", sep, ", ".join(vacias), len(L), opciones=["salen de las tablas de trabajo", "se quedan vacías"], no_medible="Ninguna entra en el cálculo.", bloque="3.2",
            nota="Las filas son las de la foto: la columna falta entera.")
@@ -825,21 +825,21 @@ def asuntos_de(L, fotos, b, oficial, licencias, puntos, resenas_rep, base_m, dic
 
     # 7.2 Con decisión escrita: se cita dónde está y no se mide.
     existe = [
-        ("estancia_vacia", sep, "minimum_nights", int(L["minimum_nights"].isna().sum()), L["minimum_nights"].isna(), "reglas §5: la menor del calendario de los próximos 12 meses", "3.4"),
-        ("banos_vacio", sep, "bathrooms", len(L), None, "reglas §5: los baños se leen del texto; medio baño vale 0,5", "3.2"),
-        ("tamano_vacio", sep, "bedrooms, bathrooms_text", int(tam_vacio.sum()), tam_vacio, "reglas §5: un vacío no se rellena; sin habitaciones o baños no hay superficie y quedan fuera", "3.4"),
-        ("disponibilidad_vacia", sep, "has_availability", int(L["has_availability"].isna().sum()), L["has_availability"].isna(), "reglas §5: un vacío significa que no consta; la base no filtra por esta marca", "3.4"),
-        ("sin_precio_propio", f"{BARRIOS}, {LIBRO_PRECIO}", "neighbourhood", int(sin_propio.sum()), sin_propio, "reglas §6: San Andrés y Ambroz toman el precio de su distrito. Sin pareja del lado oficial quedan: " + sin_pareja_oficial, "3.11"),
-        ("precio_texto", sep, "price", int(L["price"].notna().sum()), None, "reglas §6: el precio publicado, en euros; el símbolo $ es formato", "3.3"),
-        ("ocupacion_cero", sep, "estimated_occupancy_l365d", int(L["ocupacion"].eq(0).sum()), None, "reglas §5 y §7: fuera del ranking, con su peso como riesgo", "3.4"),
-        ("ocupacion_tope", sep, "estimated_occupancy_l365d", int(L["ocupacion"].eq(255).sum()), L["ocupacion"].eq(255), "reglas §6: tope de la fuente; en la parte alta no ordena", "3.8"),
-        ("precio_extremo", sep, "price", int((L["precio"].notna() & ~L["precio"].between(20, 1000)).sum()), None, "reglas §7: precio entre 20 y 1.000 €", "3.8"),
-        ("dormitorios_cero", sep, "bedrooms", int(L["bedrooms"].eq(0).sum()), L["bedrooms"].eq(0), "reglas §6: hasta 1 habitación, 50 m²", "3.8"),
-        ("anuncio_lleno", sep, "availability_365", int((L["availability_365"].eq(0) & L["number_of_reviews_ltm"].gt(0)).sum()), L["availability_365"].eq(0), "reglas §3 y §7: se quedan", "3.10"),
-        ("temporada", sep, "licencia_exencion", int(L["temporada"].sum()), L["temporada"], "reglas §7: se quedan; deciden grupo firme y segunda línea", "3.10"),
-        ("borde", sep, "latitude, longitude", int(cerca.sum()), cerca, "reglas §4: cerca del borde su lado no se puede asegurar y se cuentan", "3.10"),
+        ("estancia_vacia", sep, "minimum_nights", int(L["minimum_nights"].isna().sum()), L["minimum_nights"].isna(), "reglas §2: la menor del calendario de los próximos 12 meses", "3.4"),
+        ("banos_vacio", sep, "bathrooms", len(L), None, "reglas §2: los baños se leen del texto; medio baño vale 0,5", "3.2"),
+        ("tamano_vacio", sep, "bedrooms, bathrooms_text", int(tam_vacio.sum()), tam_vacio, "reglas §2: un vacío no se rellena; sin habitaciones o baños no hay superficie y quedan fuera", "3.4"),
+        ("disponibilidad_vacia", sep, "has_availability", int(L["has_availability"].isna().sum()), L["has_availability"].isna(), "reglas §2: un vacío significa que no consta; la base no filtra por esta marca", "3.4"),
+        ("sin_precio_propio", f"{BARRIOS}, {LIBRO_PRECIO}", "neighbourhood", int(sin_propio.sum()), sin_propio, "reglas §2: San Andrés y Ambroz toman el precio de su distrito. Sin pareja del lado oficial quedan: " + sin_pareja_oficial, "3.11"),
+        ("precio_texto", sep, "price", int(L["price"].notna().sum()), None, "reglas §2: el precio publicado, en euros; el símbolo $ es formato", "3.3"),
+        ("ocupacion_cero", sep, "estimated_occupancy_l365d", int(L["ocupacion"].eq(0).sum()), None, "reglas §2 y §7: fuera del ranking, con su peso como riesgo", "3.4"),
+        ("ocupacion_tope", sep, "estimated_occupancy_l365d", int(L["ocupacion"].eq(255).sum()), L["ocupacion"].eq(255), "reglas §2: tope de la fuente; en la parte alta no ordena", "3.8"),
+        ("precio_extremo", sep, "price", int((L["precio"].notna() & ~L["precio"].between(20, 1000)).sum()), None, "reglas §3: precio entre 20 y 1.000 €", "3.8"),
+        ("dormitorios_cero", sep, "bedrooms", int(L["bedrooms"].eq(0).sum()), L["bedrooms"].eq(0), "reglas §2: hasta 1 habitación, 50 m²", "3.8"),
+        ("anuncio_lleno", sep, "availability_365", int((L["availability_365"].eq(0) & L["number_of_reviews_ltm"].gt(0)).sum()), L["availability_365"].eq(0), "reglas §1 y §7: se quedan", "3.10"),
+        ("temporada", sep, "licencia_exencion", int(L["temporada"].sum()), L["temporada"], "reglas §3: se quedan; deciden grupo firme y segunda línea", "3.10"),
+        ("borde", sep, "latitude, longitude", int(cerca.sum()), cerca, "reglas §1: cerca del borde su lado no se puede asegurar y se cuentan", "3.10"),
         ("foto_sin_precio", TABLA_FOTO["dic"], "price", len(fotos["dic"]), None, "briefing, alcance: diciembre mide la oferta y no trae precio", "3.2"),
-        ("dos_anuncios_iguales", sep, "id", duplicados, None, "reglas §3: dos anuncios son distintos si tienen distinto número", "3.5"),
+        ("dos_anuncios_iguales", sep, "id", duplicados, None, "reglas §1: dos anuncios son distintos si tienen distinto número", "3.5"),
         ("resenas_repetidas", RESENAS, "listing_id, date", resenas_rep, None, "cuaderno, sección 2: son reseñas distintas del mismo día y se cuentan por filas", "3.6"),
     ]
     for clave, tabla, columna, filas, mascara, decision, bloque in existe:
@@ -864,8 +864,8 @@ def celda(texto):
 def informe(s):
     """Genera el Markdown a partir del diccionario que se guarda en el JSON."""
     if s["resultado"]["estado"] == "PARADO":
-        return "# Calidad de datos · caso\n\n" + s["resultado"]["resumen"] + "\n"
-    r = ["# Calidad de datos · caso", "", "Diagnóstico de las tablas tal como llegan. No se ha corregido ningún dato.", "", "## Fuente analizada", ""]
+        return "# Calidad de datos\n\n" + s["resultado"]["resumen"] + "\n"
+    r = ["# Calidad de datos", "", "Diagnóstico de las tablas tal como llegan. No se ha corregido ningún dato.", "", "## Fuente analizada", ""]
     r += [f"- Ejecución: {s['fecha_ejecucion']}, con Python {s['python']} y pandas {s['pandas']}.",
           f"- Fecha de los datos: {s['fecha_datos']}.",
           f"- Se partió del diccionario del origen: {'sí' if s['con_diccionario'] else 'no'}.", ""]
@@ -940,14 +940,14 @@ def informe(s):
     r += ["", "## Reglas lógicas e integridad", ""]
     r += [f"- {x['regla']}: {x['filas_que_incumplen']} de {x['filas']} no la cumplen." for x in s["reglas_documentadas"]]
     e = s["estancia_regla"]
-    r.append(f"- reglas §5, estancia del calendario: sobre {e['pisos_con_las_dos']} pisos con las dos, coincide el {e['coincide_pct']} % y el lado de las 3 noches, el {e['mismo_lado_de_3_pct']} %.")
+    r.append(f"- reglas §2, estancia del calendario: sobre {e['pisos_con_las_dos']} pisos con las dos, coincide el {e['coincide_pct']} % y el lado de las 3 noches, el {e['mismo_lado_de_3_pct']} %.")
     r += ["", "## Cruces entre tablas", ""]
     for c in s["cruces"]:
         extra = f" Antes de igualar el formato: {c['sin_pareja_izquierda_antes']} y {c['sin_pareja_derecha_antes']}." if "sin_pareja_izquierda_antes" in c else ""
         r.append(f"- `{c['izquierda']}` y `{c['derecha']}`: sin pareja {c['sin_pareja_izquierda']} a la izquierda y {c['sin_pareja_derecha']} a la derecha.{extra}" + (" Relación supuesta." if c["supuesta"] else ""))
     x = s["cruces_magnitudes"]
     r += ["", f"De los {x['anuncios']} anuncios de septiembre, el contador de reseñas coincide con las filas en {x['resenas_que_cuadran_con_su_contador']}, los días libres coinciden con el calendario en "
-          f"{x['dias_libres_que_cuadran_con_el_calendario']} y {x['anuncios_fuera_del_poligono_de_su_barrio']} caen fuera del polígono de su barrio. Las coordenadas vienen desplazadas hasta 150 m (reglas §4)."]
+          f"{x['dias_libres_que_cuadran_con_el_calendario']} y {x['anuncios_fuera_del_poligono_de_su_barrio']} caen fuera del polígono de su barrio. Las coordenadas vienen desplazadas hasta 150 m (reglas §1)."]
     r += ["", "## Reglas candidatas para aprobar", ""]
     r += [f"- {c['id']}: {c['regla']} ({', '.join(c['columnas'])}). La incumplirían {c['filas_que_incumplen']} filas." for c in s["reglas_candidatas"]]
     r += ["", "## Resumen de problemas detectados", ""]
@@ -1058,7 +1058,7 @@ def controles_de(L, cal_filas, rev_filas, b, oficial, base_m):
 def principal():
     """Hace el diagnóstico de principio a fin."""
     antes = huellas_de_raw()
-    s = {"skill": SKILL, "version_skill": VERSION_SKILL, "script": SCRIPT, "fecha_datos": FECHA_DATOS,
+    s = {"etapa": ETAPA, "version_etapa": VERSION_ETAPA, "script": SCRIPT, "fecha_datos": FECHA_DATOS,
          "fecha_ejecucion": dt.datetime.now().isoformat(timespec="seconds"), "python": platform.python_version(), "pandas": pd.__version__,
          "con_diccionario": False, "plan_aprobado": {"por": "", "fecha": ""}, "avisos": []}
     s["entradas"] = [{"ruta": r, "sha256": h, "bytes": (CASO / r).stat().st_size, "filas": None, "columnas": None} for r, h in antes.items()]
@@ -1109,12 +1109,12 @@ def principal():
     roles = {t: roles_de(t) for t in frec}
     filas = {t: int(next(iter(f.values())).sum()) for t, f in frec.items()}
 
-    # 10.4 Un dato personal en claro para el trabajo (reglas §9); solo se cuenta, sin copiarlo.
+    # 10.4 Un dato personal en claro para el trabajo (reglas §4); solo se cuenta, sin copiarlo.
     personales = [x for t in frec for x in buscar_personal(t, frec[t], roles[t])]
     s["datos_personales_en_claro"] = personales
     if personales:
         s["resultado"] = {"estado": "PARADO", "riesgo": "alto", "resumen": "Hay datos con forma de dato personal en claro: " + "; ".join(f"{x['tabla']}.{x['columna']}, {x['clase']}, {x['filas']} filas" for x in personales),
-                          "artefactos": ["informes/calidad-datos.json", "informes/calidad-datos.md"], "siguiente": "avisar a la persona responsable (reglas §9)"}
+                          "artefactos": ["informes/calidad-datos.json", "informes/calidad-datos.md"], "siguiente": "avisar a la persona responsable (reglas §4)"}
         guardar(s)
         print(s["resultado"]["estado"], s["resultado"]["resumen"])
         return 0
@@ -1197,7 +1197,7 @@ def principal():
         base = t[[c for c in t.columns if c not in ("lado", "marca")]]
         fila = duplicados_de(TABLA_FOTO[clave], base, ["id"], ["id"])
         fila["logicos"] = int(base.duplicated(["latitude", "longitude", "property_type", "accommodates", "bedrooms"]).sum())
-        fila["nota_logicos"] = "misma coordenada, tipo y tamaño con distinto número; un mismo piso puede tener varios anuncios y no se puede saber (reglas §3)"
+        fila["nota_logicos"] = "misma coordenada, tipo y tamaño con distinto número; un mismo piso puede tener varios anuncios y no se puede saber (reglas §1)"
         duplicados.append(fila)
     duplicados.append(duplicados_de(LICENCIAS, licencias, [], []))
     duplicados.append(duplicados_de(BARRIOS, b_cruda, ["neighbourhood"], []))
@@ -1291,7 +1291,7 @@ def principal():
         {"nombre": "fecha de Excel candidata", "valor": list(EXCEL), "origen": "por defecto"},
         {"nombre": "horizonte de fechas futuras", "valor": hoy, "origen": "por defecto: la fecha de ejecución"},
         {"nombre": "semilla y remuestreos", "valor": [SEMILLA, REMUESTREOS], "origen": "los del reconocimiento"},
-        {"nombre": "mínimo por grupo, variantes y mayoría", "valor": [MIN_GRUPO, list(MIN_VARIANTE), MAYORIA], "origen": "reglas §7"},
+        {"nombre": "mínimo por grupo, variantes y mayoría", "valor": [MIN_GRUPO, list(MIN_VARIANTE), MAYORIA], "origen": "reglas §3"},
     ]
     s.update(
         controles=controles_de(L, filas[CALENDARIO], filas[RESENAS], b_medida, oficial, base_m), inspeccion=inspeccion, geometrias=dicc["geometrias"] if dicc else [],
@@ -1329,7 +1329,7 @@ def ejecutar():
     try:
         return principal()
     except Exception as error:
-        SALIDA_JSON.write_text(json.dumps({"skill": SKILL, "script": SCRIPT, "fecha_datos": FECHA_DATOS, "fecha_ejecucion": dt.datetime.now().isoformat(timespec="seconds"),
+        SALIDA_JSON.write_text(json.dumps({"etapa": ETAPA, "script": SCRIPT, "fecha_datos": FECHA_DATOS, "fecha_ejecucion": dt.datetime.now().isoformat(timespec="seconds"),
                                            "resultado": {"estado": "ERROR", "riesgo": "alto", "resumen": f"Fallo técnico: {error!r}", "artefactos": [], "siguiente": "arreglar el fallo"}},
                                           ensure_ascii=False, indent=1), encoding="utf-8")
         raise

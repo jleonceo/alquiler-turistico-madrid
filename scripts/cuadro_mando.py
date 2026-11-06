@@ -48,7 +48,7 @@ SALIDA_HTML = CASO / "informes" / "cuadro_mando.html"
 SALIDA_JSON = CASO / "informes" / "cuadro_mando.json"
 FECHA_DEL_CASO = "2026-09-17"
 
-# Mínimo de pisos para dar una cifra (reglas §7) y campos que se calculan para cada selección
+# Mínimo de pisos para dar una cifra (reglas §3) y campos que se calculan para cada selección
 MINIMO = 30
 CAMPOS = {"rent": "rent_valoraciones_desc_pct", "rent_sin": "rent_valoraciones_sin_pct", "precio": "precio_eur", "ocupacion": "ocupacion_dias",
           "compra": "compra_valoraciones_desc_eur", "compra_sin": "compra_valoraciones_sin_eur"}
@@ -59,17 +59,17 @@ NOMBRE_TRAMO = {"0": "Estudio", "1": "1 habitación", "2": "2 habitaciones", "3"
 # Columnas de un anuncio que nunca pueden entrar en los datos del HTML
 PROHIBIDAS = {"id", "latitud", "longitud", "anuncios_anfitrion", "distancia_borde_m"}
 
-# Clases del mapa: el orden es el de la leyenda y el de la tabla (reglas §7)
+# Clases del mapa: el orden es el de la leyenda y el de la tabla (reglas §3)
 ORDEN_CLASES = ["firme", "con aviso", "segunda línea", "fuera del grupo", "menos de 30"]
 COLOR_CLASE = {"firme": "#2a78d6", "con aviso": "#eb6834", "segunda línea": "#1baf7a", "fuera del grupo": "#898781", "menos de 30": "url(#rayado)"}
 
-# Nombre para el lector de las cinco pruebas de las reglas §7
+# Nombre para el lector de las cinco pruebas de las reglas §3
 PRUEBAS = {"sin_temporada": ("temporada", "sin los pisos que declaran temporada"), "sin_anfitriones_grandes": ("operadores grandes", "sin los operadores grandes"),
            "sin_cotizaciones_lejanas": ("cotizaciones", "sin las cotizaciones a más de 60 días"), "solo_1_y_2_dormitorios": ("habitaciones", "solo con 1 y 2 habitaciones"),
            "sin_ocupacion_como_cero": ("sin ocupación", "con los pisos sin ocupación contados como cero")}
 AVISO_CORTO = {"depende_del_tope": "depende del tope", "pocos_anuncios": "pocos anuncios", "cuartil_bajo": "cuartil bajo"}
 
-# Definición de cada cifra, de una línea, con las palabras de las reglas §3, §6, §7 y §12
+# Definición de cada cifra, de una línea, con las palabras de las reglas §1, §6, §7 y §12
 DEFINICIONES = {
     "piso": "Piso: anuncio de una vivienda entera fuera del centro histórico, con los filtros de la base de decisión. Un mismo inmueble puede tener varios anuncios. La planta y el acceso no constan.",
     "precio": "Precio por noche: el publicado en el anuncio, en mediana. Es una cotización para unas fechas, con descuentos dentro. No es el precio medio del año.",
@@ -174,7 +174,7 @@ def clave(distrito, barrio, dormitorios):
 
 
 def cifras_de(t):
-    """Calcula las cifras de una selección; con menos de 30 pisos solo da el recuento (reglas §7 y §9)."""
+    """Calcula las cifras de una selección; con menos de 30 pisos solo da el recuento (reglas §3 y §9)."""
     salida = {"pisos": len(t)}
     if len(t) < MINIMO:
         return salida
@@ -745,7 +745,7 @@ function dibujarBarrios() {
     if (!s) return;
     if (s.pisos >= MIN) filas.push({b, s, f: D.barrios[b]}); else menos.push({b, s});
   });
-  // La tabla va por clase y por nombre: el grupo no tiene un orden cerrado (reglas §7)
+  // La tabla va por clase y por nombre: el grupo no tiene un orden cerrado (reglas §3)
   filas.sort((a, b) => ORDEN_CLASE[a.f.clase] - ORDEN_CLASE[b.f.clase] || a.b.localeCompare(b.b, "es"));
   const suma = filas.reduce((a, x) => a + x.s.pisos, 0), sumaMenos = menos.reduce((a, x) => a + x.s.pisos, 0);
   const cifraPlana = (id, etiqueta, valor, contexto, def, tip) => ({id, etiqueta, valor, texto: num(valor), contexto, def, tip});

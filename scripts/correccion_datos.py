@@ -26,14 +26,14 @@ import reglas_caso as rc
 # 1. Configuración
 # ---------------------------------------------------------------------------
 
-SKILL = "correccion-datos"
+ETAPA = "correccion-datos"
 VERSION = "1.0"
 SCRIPT = "scripts/correccion_datos.py"
 PRECIO_VALIDO = re.compile(r"^\$\d{1,3}(,\d{3})*\.\d{2}$")
 MAGNITUDES = ["estimated_occupancy_l365d", "estimated_revenue_l365d", "number_of_reviews", "accommodates"]
 PARAMETROS = [{"nombre": "forma de los nombres de columna", "valor": "los del origen, ya en minúsculas; los libros, con nombres nuevos", "origen": "por defecto"},
-              {"nombre": "etiqueta del vacío en una categórica", "valor": "no se usa: ningún vacío se etiqueta", "origen": "reglas del caso §5"},
-              {"nombre": "marca de lo imputado", "valor": "no se usa: no se imputa nada", "origen": "reglas del caso §5"},
+              {"nombre": "etiqueta del vacío en una categórica", "valor": "no se usa: ningún vacío se etiqueta", "origen": "reglas §2"},
+              {"nombre": "marca de lo imputado", "valor": "no se usa: no se imputa nada", "origen": "reglas §2"},
               {"nombre": "si los datos van a un modelo", "valor": "no van", "origen": "ficha §6"},
               {"nombre": "formato de la tabla corregida", "valor": "Parquet", "origen": "por defecto"}]
 # Lo que leen las tres preguntas y las cinco pruebas de la foto de septiembre: sin una de ellas no se puede contestar.
@@ -208,13 +208,13 @@ def fichas_de(m):
     base = dict(deshacer=deshacer)
     return [
         {**base, "clave": "correccion-cp-001", "titulo": "CP-001 precio vacío y precio a número", "tabla": f"las fotos con precio, `price`", "estaba": f"texto con símbolo y comas; en septiembre, {m['precio_vacio']} vacíos.",
-         "problema": "el precio no se podía usar como número.", "decision": "CP-001: el vacío sigue vacío. El símbolo es formato (reglas §6).", "hecho": "se censaron los formatos y se quitó el símbolo y las comas.",
+         "problema": "el precio no se podía usar como número.", "decision": "CP-001: el vacío sigue vacío. El símbolo es formato (reglas §2).", "hecho": "se censaron los formatos y se quitó el símbolo y las comas.",
          "codigo": "df['price'] = pd.to_numeric(df['price'].str.replace(r'[$,]', '', regex=True))", "comprobacion": f"formatos de septiembre {m['censo_sep']}; {m['precio_raros']} valores fuera del formato; suma por Decimal y por pandas iguales al céntimo.",
          "quedo": f"número, con {m['precio_vacio']} vacíos en septiembre."},
         {**base, "clave": "correccion-cp-002", "titulo": "CP-002 anuncios de captura anterior", "tabla": f"{sep}, `source`", "estaba": f"{m['captura']} anuncios con la marca de captura anterior.", "problema": "podían ser anuncios viejos.",
          "decision": "CP-002: se quedan.", "hecho": "se deja una marca, sin quitar ninguno.", "codigo": "df['captura_anterior'] = df['source'].eq('previous scrape')", "comprobacion": f"{m['captura']} marcados en septiembre.", "quedo": "columna `captura_anterior`."},
         {**base, "clave": "correccion-cp-003", "titulo": "CP-003 Aeropuerto toma el precio de su distrito", "tabla": "barrios, `toma_precio_de_distrito`", "estaba": "el libro le pone 0.", "problema": "no tenía precio oficial.",
-         "decision": "CP-003 y reglas §6: precio de su distrito, igual que San Andrés y Ambroz.", "hecho": "se marca en el maestro; el precio se resuelve en la transformación.", "codigo": "df['toma_precio_de_distrito'] = df['barrio'].isin(['San Andrés', 'Ambroz', 'Aeropuerto'])",
+         "decision": "CP-003 y reglas §2: precio de su distrito, igual que San Andrés y Ambroz.", "hecho": "se marca en el maestro; el precio se resuelve en la transformación.", "codigo": "df['toma_precio_de_distrito'] = df['barrio'].isin(['San Andrés', 'Ambroz', 'Aeropuerto'])",
          "comprobacion": f"{m['barrios_distrito']} barrios marcados.", "quedo": "los tres barrios marcados."},
         {**base, "clave": "correccion-cp-004", "titulo": "CP-004 siete nombres de barrio", "tabla": "barrios, `clave_oficial`", "estaba": "siete barrios con otra escritura en el libro.", "problema": "sin casar quedaban sin precio.", "decision": "CP-004: se aprueban las siete.",
          "hecho": "mapeo cerrado en scripts/decisiones_correccion.json.", "codigo": "df['clave_oficial'] = directa.replace(dec['equivalencias_barrio'])", "comprobacion": f"{m['equivalencias']} barrios cambian de clave.", "quedo": "cada barrio con su clave oficial."},
@@ -223,7 +223,7 @@ def fichas_de(m):
         {**base, "clave": "correccion-cp-006", "titulo": "CP-006 camas vacías, sin relleno", "tabla": f"{sep}, `beds`", "estaba": f"{m['camas_vacias']} vacías en septiembre.", "problema": "no se sabe si pasan el tope.", "decision": "CP-006: no pasan el tope.", "hecho": "se dejan vacías; la marca la pone la transformación.",
          "codigo": "# sin cambio en la corrección", "comprobacion": f"{m['camas_vacias']} vacías antes y después.", "quedo": "vacías."},
         {**base, "clave": "correccion-cp-007", "titulo": "CP-007 cero baños", "tabla": f"{sep}, `banos`, `marca_cero_banos`", "estaba": f"{m['cero_banos']} anuncios con cero baños.", "problema": "dudosos en un piso.", "decision": "CP-007: salen de la base de decisión; la fila se queda.",
-         "hecho": "los baños se leen del texto (reglas §5, medio baño 0,5) y se marca el cero.", "codigo": "df['banos'] = df['bathrooms_text'].map(cd.banos_de_texto)\ndf['marca_cero_banos'] = df['banos'].eq(0)", "comprobacion": f"{m['banos_vacios']} vacíos en `banos`, los mismos que en el texto; {m['medio_bano']} con medio baño.",
+         "hecho": "los baños se leen del texto (reglas §2, medio baño 0,5) y se marca el cero.", "codigo": "df['banos'] = df['bathrooms_text'].map(cd.banos_de_texto)\ndf['marca_cero_banos'] = df['banos'].eq(0)", "comprobacion": f"{m['banos_vacios']} vacíos en `banos`, los mismos que en el texto; {m['medio_bano']} con medio baño.",
          "quedo": "columna `banos` y su marca."},
         {**base, "clave": "correccion-cp-008", "titulo": "CP-008 tipo sin vivienda entera", "tabla": f"{sep}, `marca_no_vivienda`", "estaba": f"{m['no_vivienda']} pisos de un tipo que no empieza por Entire.", "problema": "contradicen ser piso.", "decision": "CP-008: salen de la base de decisión; la fila se queda.",
          "hecho": "se marcan.", "codigo": "piso & ~df['property_type'].str.startswith('Entire')", "comprobacion": f"{m['no_vivienda']} marcados.", "quedo": "columna `marca_no_vivienda`."},
@@ -309,7 +309,7 @@ def principal(s):
     if personales:
         s["datos_personales_en_claro"] = personales
         s["resultado"] = {"estado": "PARADO", "riesgo": "alto", "resumen": "Hay datos con forma de dato personal en claro: " + "; ".join(f"{x['tabla']}.{x['columna']}, {x['filas']} filas" for x in personales),
-                          "artefactos": [], "siguiente": "avisar a la persona responsable (reglas §9)"}
+                          "artefactos": [], "siguiente": "avisar a la persona responsable (reglas §4)"}
         return s
 
     # 5.4 El resto de tablas.
@@ -429,7 +429,7 @@ def principal(s):
 
 def ejecutar():
     """Lanza la corrección y, si algo falla, deja el JSON con estado ERROR antes de avisar."""
-    s = rc.bloque_comun(SKILL, VERSION, SCRIPT)
+    s = rc.bloque_comun(ETAPA, VERSION, SCRIPT)
     try:
         s = principal(s)
     except Exception as error:

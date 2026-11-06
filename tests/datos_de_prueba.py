@@ -184,7 +184,7 @@ def _proteccion(caso):
                  "resultado": "generalizada", "motivo": "el número identifica la vivienda; basta su tipo"}]
         tablas.append({"tabla": f"inside_airbnb/{f.name}", "fichero_salida": f.relative_to(caso).as_posix(),
                        "sha256_salida": huella(f), "filas_entrada": None, "filas_salida": None, "campos": campos})
-    datos = {"skill": None, "script": "entregar", "fecha_ejecucion": "2026-11-06T11:30:29", "estado": "OK",
+    datos = {"etapa": None, "script": "entregar", "fecha_ejecucion": "2026-11-06T11:30:29", "estado": "OK",
              "datos": "públicos y reales", "resultado": {"estado": "OK", "resumen": "prueba"}, "tablas": tablas,
              "riesgo_que_queda": ["Las coordenadas se quedan."]}
     ruta = caso / "config" / "fuentes" / "proteccion-datos.json"

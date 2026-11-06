@@ -27,7 +27,7 @@ import graficos as gr  # noqa: E402
 # 1. Configuración
 # ---------------------------------------------------------------------------
 
-SKILL = "analisis-exploratorio"
+ETAPA = "analisis-exploratorio"
 VERSION = "1.0"
 SCRIPT = "scripts/analisis_exploratorio.py"
 TABLAS = ["analisis_anuncios", "analisis_barrios"]
@@ -38,9 +38,9 @@ COMPROBACIONES = ["1 Tiempo", "2 Pareto y ABC", "3 Respaldo de cada cifra", "4 D
 # Umbrales de descripción, fijados antes de calcular (comprobaciones.md, cabecera).
 MEDIA_LEJOS = 0.25  # la media se aleja más de un 25 % de la mediana
 ORDENES = 1000  # el máximo es mil veces el mínimo
-MINIMO = 30  # reglas §7
+MINIMO = 30  # reglas §3
 PARAMETROS = [{"nombre": "numérica discreta", "valor": "entera y con como mucho min(20, 5 % de las filas) valores distintos", "origen": "por defecto"},
-              {"nombre": "filas mínimas para comparar una categoría", "valor": str(MINIMO), "origen": "reglas del caso §7"},
+              {"nombre": "filas mínimas para comparar una categoría", "valor": str(MINIMO), "origen": "reglas §3"},
               {"nombre": "alta cardinalidad", "valor": "más de 50 valores distintos", "origen": "por defecto"},
               {"nombre": "las más frecuentes en alta cardinalidad", "valor": "10", "origen": "por defecto"},
               {"nombre": "texto muy corto", "valor": "no aplica: las tablas no traen texto libre", "origen": "por defecto"},
@@ -184,7 +184,7 @@ def resumen_de_base(d, clave):
 
 
 def rentabilidad_por_dormitorios_y_barrio(d):
-    """Cruza habitaciones y barrio con el mínimo de 30 por celda; lo demás sale con su recuento (reglas §7)."""
+    """Cruza habitaciones y barrio con el mínimo de 30 por celda; lo demás sale con su recuento (reglas §3)."""
     t = d.assign(grupo_dormitorios=dormitorios_de(d["dormitorios"]))
     por_dorm = t.groupby("grupo_dormitorios")["rent_valoraciones_desc_pct"].agg(pisos="size", mediana="median", q25=lambda x: x.quantile(0.25)).reset_index()
     celdas = t.groupby(["barrio", "grupo_dormitorios"])["rent_valoraciones_desc_pct"].agg(pisos="size", mediana="median").reset_index()
@@ -271,7 +271,7 @@ def analizar_anuncios(a, s):
     s["vision_general"] = {"filas": len(a), "columnas": a.shape[1], "granularidad": "un anuncio de la foto de septiembre", "periodo": rc.FECHA_DATOS, "entidades_id": int(a["id"].nunique()), "tipos": pd.Series([x["tipo"] for x in s["tipificacion"]]).value_counts().to_dict()}
     s["senales"] = senales_de(bases)
     s["anomalia_concentrada"] = anomalia_del_tope(d)
-    s["codigos_sin_etiqueta"] = [{"columna": "tipo_licencia", "valores": sorted(str(x) for x in a["tipo_licencia"].dropna().unique()), "pregunta": "qué significan esas letras: el decreto no las define (reglas §3)"}]
+    s["codigos_sin_etiqueta"] = [{"columna": "tipo_licencia", "valores": sorted(str(x) for x in a["tipo_licencia"].dropna().unique()), "pregunta": "qué significan esas letras: el decreto no las define (reglas §1)"}]
     return d, c
 
 
@@ -308,7 +308,7 @@ def textos_anuncios(s):
     alertas.append({"texto": f"Categoría dominante: «{dominante['dominante']}» recoge el {n(dominante['dominante_pct'], 1)} % de la base de decisión, así que el tipo de inmueble apenas separa.", "origen": None})
     if s["senales"]:
         vistas = sorted({f"{x['columna']} ({x['senal']})" for x in s["senales"] if x["base"] == NOMBRE_BASE["decision"]})
-        alertas.append({"texto": f"Señales de la tabla de estadísticos en la base de decisión: {'; '.join(vistas)}. Se leen con las reglas §6: ninguna es una escala rota.", "origen": None})
+        alertas.append({"texto": f"Señales de la tabla de estadísticos en la base de decisión: {'; '.join(vistas)}. Se leen con las reglas §2: ninguna es una escala rota.", "origen": None})
     a = s["anomalia_concentrada"]
     hipotesis = []
     if a:
@@ -339,7 +339,7 @@ def comprobaciones_anuncios(s, graficos_hechos):
             {"comprobacion": COMPROBACIONES[12], "estado": "aplicada_con_resultado", "nota": f"{t.count('discreta')} discretas y {t.count('continua')} continuas"},
             {"comprobacion": COMPROBACIONES[13], "estado": "no_aplica", "nota": "no hay texto libre: salió antes de llegar al caso"},
             {"comprobacion": COMPROBACIONES[14], "estado": "aplicada_con_resultado", "nota": f"barrio tiene {s['bases']['decision']['categoricas']['barrio']['cardinalidad']} valores en la base de decisión"},
-            {"comprobacion": COMPROBACIONES[15], "estado": "aplicada_sin_nada_relevante", "nota": "sin observaciones de la persona: el agente no pregunta a mitad"},
+            {"comprobacion": COMPROBACIONES[15], "estado": "aplicada_sin_nada_relevante", "nota": "sin observaciones pendientes"},
             {"comprobacion": COMPROBACIONES[16], "estado": "aplicada_con_resultado" if s["senales"] else "aplicada_sin_nada_relevante", "nota": f"{len(s['senales'])} señales"}]
 
 
@@ -520,7 +520,7 @@ def informe_html(s, numericos, categoricos, destacados, parte_numerica, parte_ca
 
 def cabecera(tabla, ruta, df=None):
     """Crea el JSON de una tabla con el bloque común."""
-    s = rc.bloque_comun(SKILL, VERSION, SCRIPT)
+    s = rc.bloque_comun(ETAPA, VERSION, SCRIPT)
     s["tabla"] = tabla
     if df is not None:
         s["entradas"] = [rc.entrada(ruta, df)]

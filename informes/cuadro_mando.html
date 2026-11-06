@@ -375,7 +375,7 @@ function dibujarBarrios() {
     if (!s) return;
     if (s.pisos >= MIN) filas.push({b, s, f: D.barrios[b]}); else menos.push({b, s});
   });
-  // La tabla va por clase y por nombre: el grupo no tiene un orden cerrado (reglas §7)
+  // La tabla va por clase y por nombre: el grupo no tiene un orden cerrado (reglas §3)
   filas.sort((a, b) => ORDEN_CLASE[a.f.clase] - ORDEN_CLASE[b.f.clase] || a.b.localeCompare(b.b, "es"));
   const suma = filas.reduce((a, x) => a + x.s.pisos, 0), sumaMenos = menos.reduce((a, x) => a + x.s.pisos, 0);
   const cifraPlana = (id, etiqueta, valor, contexto, def, tip) => ({id, etiqueta, valor, texto: num(valor), contexto, def, tip});

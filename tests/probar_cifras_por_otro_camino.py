@@ -39,7 +39,7 @@ def filas_de(ruta):
 
 
 def banos(texto):
-    """Lee los baños del texto, igual que dicen las reglas §5."""
+    """Lee los baños del texto, igual que dicen las reglas §2."""
     t = texto.lower()
     if not t:
         return None
@@ -52,7 +52,7 @@ def banos(texto):
 
 
 def superficie(d, b):
-    """Aplica la superficie de valoraciones de las reglas §6."""
+    """Aplica la superficie de valoraciones de las reglas §2."""
     if d > 3 or b >= 3:
         return 140.0
     if d == 3:

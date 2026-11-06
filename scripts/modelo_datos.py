@@ -22,7 +22,7 @@ import reglas_caso as rc
 # 1. Configuración, copiada del diseño de modelo-datos.md
 # ---------------------------------------------------------------------------
 
-SKILL = "modelado-datos"
+ETAPA = "modelado-datos"
 VERSION = "1.0"
 SCRIPT = "scripts/modelo_datos.py"
 DISENO = rc.MODELO / "modelo-datos.md"
@@ -45,14 +45,14 @@ TABLAS = [
 ]
 
 RELACIONES = [
-    {"desde": "hechos_anuncios", "hacia": "dim_barrio", "clave_desde": ["neighbourhood_cleansed"], "clave_hacia": ["barrio"], "maestro": "dim_barrio", "cardinalidad": "N:1", "procedencia": "reglas §4 y diccionario de origen"},
-    {"desde": "dim_barrio", "hacia": "dim_oficial", "clave_desde": ["clave_oficial"], "clave_hacia": ["clave"], "maestro": "dim_oficial", "cardinalidad": "1:1", "procedencia": "reglas §6 y CP-004"},
-    {"desde": "dim_barrio", "hacia": "dim_oficial", "clave_desde": ["clave_distrito"], "clave_hacia": ["clave_distrito"], "maestro": "dim_oficial", "cardinalidad": "N:1", "procedencia": "reglas §4 y §6"},
-    {"desde": "hechos_calendario", "hacia": "hechos_anuncios", "clave_desde": ["listing_id"], "clave_hacia": ["id"], "maestro": "hechos_anuncios", "cardinalidad": "N:1", "procedencia": "reglas §5"},
-    {"desde": "hechos_resenas", "hacia": "hechos_anuncios", "clave_desde": ["listing_id"], "clave_hacia": ["id"], "maestro": "hechos_anuncios", "cardinalidad": "N:1", "procedencia": "reglas §5"},
-    {"desde": "hechos_anuncios", "hacia": "hechos_anuncios_junio", "clave_desde": ["id"], "clave_hacia": ["id"], "maestro": "hechos_anuncios_junio", "cardinalidad": "1:1", "procedencia": "reglas §3: dos anuncios son distintos si tienen distinto número"},
-    {"desde": "hechos_anuncios", "hacia": "hechos_anuncios_marzo", "clave_desde": ["id"], "clave_hacia": ["id"], "maestro": "hechos_anuncios_marzo", "cardinalidad": "1:1", "procedencia": "reglas §3"},
-    {"desde": "aux_licencias", "hacia": "dim_barrio", "clave_desde": ["barrio"], "clave_hacia": ["barrio"], "maestro": "dim_barrio", "cardinalidad": "N:1", "procedencia": "reglas §3: la licencia no se une a un anuncio, solo a su barrio"},
+    {"desde": "hechos_anuncios", "hacia": "dim_barrio", "clave_desde": ["neighbourhood_cleansed"], "clave_hacia": ["barrio"], "maestro": "dim_barrio", "cardinalidad": "N:1", "procedencia": "reglas §1 y diccionario de origen"},
+    {"desde": "dim_barrio", "hacia": "dim_oficial", "clave_desde": ["clave_oficial"], "clave_hacia": ["clave"], "maestro": "dim_oficial", "cardinalidad": "1:1", "procedencia": "reglas §2 y CP-004"},
+    {"desde": "dim_barrio", "hacia": "dim_oficial", "clave_desde": ["clave_distrito"], "clave_hacia": ["clave_distrito"], "maestro": "dim_oficial", "cardinalidad": "N:1", "procedencia": "reglas §1 y §6"},
+    {"desde": "hechos_calendario", "hacia": "hechos_anuncios", "clave_desde": ["listing_id"], "clave_hacia": ["id"], "maestro": "hechos_anuncios", "cardinalidad": "N:1", "procedencia": "reglas §2"},
+    {"desde": "hechos_resenas", "hacia": "hechos_anuncios", "clave_desde": ["listing_id"], "clave_hacia": ["id"], "maestro": "hechos_anuncios", "cardinalidad": "N:1", "procedencia": "reglas §2"},
+    {"desde": "hechos_anuncios", "hacia": "hechos_anuncios_junio", "clave_desde": ["id"], "clave_hacia": ["id"], "maestro": "hechos_anuncios_junio", "cardinalidad": "1:1", "procedencia": "reglas §1: dos anuncios son distintos si tienen distinto número"},
+    {"desde": "hechos_anuncios", "hacia": "hechos_anuncios_marzo", "clave_desde": ["id"], "clave_hacia": ["id"], "maestro": "hechos_anuncios_marzo", "cardinalidad": "1:1", "procedencia": "reglas §1"},
+    {"desde": "aux_licencias", "hacia": "dim_barrio", "clave_desde": ["barrio"], "clave_hacia": ["barrio"], "maestro": "dim_barrio", "cardinalidad": "N:1", "procedencia": "reglas §1: la licencia no se une a un anuncio, solo a su barrio"},
 ]
 
 PLAN_CRUCES = [
@@ -112,7 +112,7 @@ def recuentos_de_exclusiones(sep, cal, dec):
 
 def informe(s):
     """Genera el Markdown a partir del diccionario que se guarda en el JSON."""
-    r = ["# Modelado de datos · caso", "", s["resultado"].get("resumen", ""), "", "## Tablas", ""]
+    r = ["# Modelado de datos", "", s["resultado"].get("resumen", ""), "", "## Tablas", ""]
     r += [f"- `{t['tabla']}` ({t['tipo']}): {t['filas']} filas; {t['grano']}; clave {', '.join(t['clave_grano']) or 'ninguna'}, única {t['clave_unica']}." for t in s.get("tablas", [])]
     r += ["", "## Relaciones", ""] + [f"- {x['desde']} → {x['hacia']}: {x['cardinalidad']}, mismo tipo {x.get('mismo_tipo')}; {x['procedencia']}." for x in s.get("relaciones", [])]
     r += ["", "## Fechas", ""] + [f"- {k}: {v}." for k, v in s.get("fechas", {}).items()]
@@ -183,7 +183,7 @@ def principal(s):
 
 def ejecutar():
     """Lanza la comprobación y, si algo falla, deja el JSON con estado ERROR antes de avisar."""
-    s = rc.bloque_comun(SKILL, VERSION, SCRIPT)
+    s = rc.bloque_comun(ETAPA, VERSION, SCRIPT)
     try:
         s = principal(s)
     except Exception as error:

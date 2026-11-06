@@ -29,7 +29,7 @@ from analisis_exploratorio import dormitorios_de, n, nivel_ocupacion  # noqa: F4
 # 1. Configuración
 # ---------------------------------------------------------------------------
 
-SKILL = "indicadores-y-analisis"
+ETAPA = "indicadores-y-analisis"
 VERSION = "1.0"
 SCRIPT = "scripts/indicadores.py"
 PLANTEAMIENTOS = rc.CASO / "config" / "metodo" / "04_planteamientos.md"
@@ -42,10 +42,10 @@ TOPE = 255
 PERIODO = "foto del 17/09/2026"
 TOLERANCIA = 1e-6
 ORIGEN_DEL_TEXTO = "lista de comprobación del análisis, escrita antes de calcular"
-REGLA_DECISION = "base de decisión, reglas §7: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia"
-REGLA_COMPARACION = "base de comparación, reglas §7: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler"
+REGLA_DECISION = "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia"
+REGLA_COMPARACION = "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler"
 SUPERFICIE = "rent_valoraciones_desc_pct"
-PARAMETROS = [{"nombre": "mínimo de casos por grupo o celda", "valor": str(MINIMO), "origen": "reglas del caso §7"}, {"nombre": "mínimo en las variantes que lo fijan", "valor": str(MINIMO_VARIANTE), "origen": "reglas del caso §7"},
+PARAMETROS = [{"nombre": "mínimo de casos por grupo o celda", "valor": str(MINIMO), "origen": "reglas §3"}, {"nombre": "mínimo en las variantes que lo fijan", "valor": str(MINIMO_VARIANTE), "origen": "reglas §3"},
               {"nombre": "confianza del intervalo", "valor": str(CONFIANZA), "origen": "04_planteamientos.md"}, {"nombre": "remuestreos", "valor": str(cd.REMUESTREOS), "origen": "04_planteamientos.md"},
               {"nombre": "semilla", "valor": str(cd.SEMILLA), "origen": "calidad_datos.py"}, {"nombre": "rango para mover los pesos", "valor": "sin valor: no hay puntuación con pesos", "origen": "no aplica"},
               {"nombre": "periodo para medir hacia adelante", "valor": "sin valor: nada de esto predice", "origen": "no aplica"}]
@@ -231,7 +231,7 @@ def unidad_correcta(df):
 
 
 def lleva_aviso(cuartil_bajo, cuartil_base):
-    """Dice si un barrio lleva el aviso: su cuartil bajo no supera el cuartil bajo de toda la base (reglas §7)."""
+    """Dice si un barrio lleva el aviso: su cuartil bajo no supera el cuartil bajo de toda la base (reglas §3)."""
     return bool(cuartil_bajo <= cuartil_base)
 
 
@@ -271,7 +271,7 @@ def grupo_y_firmes(L, quitados, reglas):
 
 
 def avisos_del_barrio(pisos, cuartil_bajo, cuartil_base, sigue_sin_el_tope, pocos):
-    """Da los tres avisos de las reglas §7: depende del tope, pocos anuncios y cuartil bajo."""
+    """Da los tres avisos de las reglas §3: depende del tope, pocos anuncios y cuartil bajo."""
     return {"depende_del_tope": not sigue_sin_el_tope, "pocos_anuncios": pisos <= pocos, "cuartil_bajo": lleva_aviso(cuartil_bajo, cuartil_base)}
 
 
@@ -791,7 +791,7 @@ def responder_16(t, col, clave, reg, oficial):
     """Contesta las 16 preguntas en una base y deja texto, población y filas."""
     nombre = {"base_decision": "base de decisión", "base_comparacion": "base de comparación"}[clave]
     regla = REGLA_DECISION if clave == "base_decision" else REGLA_COMPARACION
-    medida_precio = "precio por noche" if clave == "base_decision" else "precio de vivienda de las reglas §7"
+    medida_precio = "precio por noche" if clave == "base_decision" else "precio de vivienda de las reglas §3"
     x = t.dropna(subset=[col])
     pisos = x if clave == "base_decision" else x.loc[x["tipo_alquiler"].eq("Entire home/apt")]
     r = {}
@@ -817,7 +817,7 @@ def responder_16(t, col, clave, reg, oficial):
     ta, fa = reg.tabla(f"{clave} precio por tipo de alquiler", x, "tipo_alquiler", col)
     ti, fi = reg.tabla(f"{clave} precio por tipo de inmueble", x, "tipo_inmueble", col)
     tipos = " · ".join(f"{a['grupo']}: {n(a['mediana'], 2)} € ({n(a['casos'])})" for a in ta) or "ningún tipo llega a 30"
-    anota("S06", f"Por tipo de alquiler: {tipos}." + (" La base solo tiene pisos." if clave == "base_decision" else " Las habitaciones van con el precio llevado a la vivienda por las reglas §7.") + f" Entre {n(len(ti))} tipos de inmueble con 30 o más, {extremos(ti)}.", {"por_tipo_de_alquiler": ta, "por_tipo_de_inmueble": ti, "sin_conclusion": fa + fi}, g["casos"])
+    anota("S06", f"Por tipo de alquiler: {tipos}." + (" La base solo tiene pisos." if clave == "base_decision" else " Las habitaciones van con el precio llevado a la vivienda por las reglas §3.") + f" Entre {n(len(ti))} tipos de inmueble con 30 o más, {extremos(ti)}.", {"por_tipo_de_alquiler": ta, "por_tipo_de_inmueble": ti, "sin_conclusion": fa + fi}, g["casos"])
 
     # 4.2 Ocupación
     o, cif_o = reg.resumen(f"{clave} ocupación", t["ocupacion_dias"], nombre)
@@ -1117,7 +1117,7 @@ El grupo tiene {n(len(q['grupo']))} barrios y {n(q['pisos_del_grupo'])} pisos. S
 |---|---|---|---|---|---|---|---|---|
 {filas}
 
-Avisos de las reglas §7:
+Avisos de las reglas §3:
 
 {avisos}
 
@@ -1316,14 +1316,14 @@ def principal(s):
         "Barrios baratos: tantos como barrios tiene el grupo, entre los comparados con 30 pisos o más y, aparte, en toda la ciudad.",
         "La pregunta 1 no agrupa los pisos sin habitación con los de uno, aunque la superficie sea la misma.",
         "Factores y tamaño de la base de comparación: solo sus pisos, como el reconocimiento, porque una habitación no se compara con una vivienda.",
-        "Precio de la base de comparación: el de vivienda de las reglas §7, y el publicado al lado en la pregunta S01.",
+        "Precio de la base de comparación: el de vivienda de las reglas §3, y el publicado al lado en la pregunta S01.",
         "Atractivo dentro del grupo: se parte en dos por la mediana de puntos del grupo, y se resta la mediana del barrio para mirarlo dentro de cada uno.",
         "Estacionalidad: los últimos 24 meses completos, la misma ventana del reconocimiento.",
         "Pisos de un año o más: primera reseña en la fecha de la foto menos un año o antes; es la única fecha de antigüedad del anuncio en los datos.",
         "Licencias con planta baja: las que nombran BAJA en su texto, sola o con otras plantas. La columna es texto libre y solo se le pregunta eso.",
         "Cifra de la recomendación: mediana conjunta de los pisos de 2 habitaciones o menos de los tres firmes, estudios incluidos.",
         "Barrios de m² más barato frente a la lista: los 9 de los comparados; sus pares se miden aunque compartan barrios con la lista, de modo que el intervalo es orientativo."]
-    s["pendientes_resueltos"] = [{"id": "P-01", "pregunta": "Cuándo un barrio depende del tope y cuándo tiene pocos anuncios.", "resuelto_por": "reglas §7, con las cinco pruebas y los tres avisos"}]
+    s["pendientes_resueltos"] = [{"id": "P-01", "pregunta": "Cuándo un barrio depende del tope y cuándo tiene pocos anuncios.", "resuelto_por": "reglas §3, con las cinco pruebas y los tres avisos"}]
     s["pendientes"] = [{**p, "id": f"P-{i:02d}"} for i, p in enumerate(t.get("pendientes", []), 2)]
     fallan = [k for k, v in s["validaciones"].items() if v is not True]
     control_mal = [k for k, v in s["controles"].items() if v["coincide"] is False]
@@ -1340,5 +1340,5 @@ def principal(s):
 
 
 if __name__ == "__main__":
-    salida = rc.bloque_comun(SKILL, VERSION, SCRIPT)
+    salida = rc.bloque_comun(ETAPA, VERSION, SCRIPT)
     principal(salida)

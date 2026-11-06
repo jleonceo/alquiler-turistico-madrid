@@ -127,7 +127,7 @@ def contenido(c):
         "consultas": consultas,
         "datos": ("Son datos públicos. Antes de llegar al análisis se suprimieron las columnas que identifican al anfitrión, los enlaces, las fotos, los textos y el número de licencia, del que queda su tipo. "
                   "Es una supresión sin códigos con clave, de modo que no hay seudonimización. Quedan el número del anuncio, con el que se llega a su página pública, las coordenadas, desplazadas hasta 150 m, y el recuento de anuncios por anfitrión. "
-                  "La persona responsable del proyecto lo decidió el 06/11/2026. Quien analizó nunca vio los originales. El apartado entero va en el informe final."),
+                  "Se decidió el 06/11/2026 y el análisis trabajó siempre sin esas columnas. El apartado entero va en el informe final."),
         "fichero": "Cada cifra sale de informes/indicadores.json; su ruta está en informes/informe_ejecutivo.json.",
         "fuentes": ci.ATRIBUCION + ["Plan RESIDE, BOCM 226 de 22/09/2025."],
     }

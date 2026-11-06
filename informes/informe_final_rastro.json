@@ -1,9 +1,9 @@
 {
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T21:41:18",
+ "fecha_ejecucion": "2026-11-06T22:35:31",
  "script": "scripts/informe_final.py",
  "indicadores": "informes/indicadores.json",
- "indicadores_fecha_ejecucion": "2026-11-06T20:06:56",
+ "indicadores_fecha_ejecucion": "2026-11-06T22:35:04",
  "lector": "Dirección de Inversiones",
  "paginas": [
   {
@@ -138,7 +138,7 @@
    "id": "p17",
    "titulo": "Datos personales",
    "tipo": "anexo",
-   "palabras": 145,
+   "palabras": 138,
    "alto_estimado": 377,
    "cifras_clave": 0
   }
@@ -1112,19 +1112,19 @@
   }
  ],
  "constantes": {
-  "255": "reglas §6, tope de la ocupación",
-  "25": "reglas §6, descuento",
-  "30": "reglas §7, mínimo por grupo",
-  "20": "reglas §7, mínimo de las variantes",
-  "12": "reglas §7, variantes",
-  "6": "reglas §7, más de 6 de 12",
+  "255": "reglas §2, tope de la ocupación",
+  "25": "reglas §2, descuento",
+  "30": "reglas §3, mínimo por grupo",
+  "20": "reglas §3, mínimo de las variantes",
+  "12": "reglas §3, variantes",
+  "6": "reglas §3, más de 6 de 12",
   "95": "planteamientos, intervalo",
   "2.000": "planteamientos, remuestreos",
   "63": "scripts, semilla",
-  "10": "reglas §7, anfitriones",
-  "60": "reglas §7, cotización",
-  "40": "reglas §7, pocos anuncios",
-  "150": "reglas §4, coordenadas",
+  "10": "reglas §3, anfitriones",
+  "60": "reglas §3, cotización",
+  "40": "reglas §3, pocos anuncios",
+  "150": "reglas §1, coordenadas",
   "1": "habitaciones",
   "2": "habitaciones",
   "3": "habitaciones y estancia",
@@ -1135,15 +1135,15 @@
   "2026": "año de las fotos",
   "35": "planteamientos, estudio",
   "45": "planteamientos, una habitación",
-  "50": "reglas §6, superficie",
-  "65": "reglas §6, superficie",
+  "50": "reglas §2, superficie",
+  "65": "reglas §2, superficie",
   "75": "planteamientos, dos habitaciones",
   "15": "páginas del informe",
-  "90": "reglas §6, superficie",
-  "110": "reglas §6, superficie",
-  "140": "reglas §6, superficie",
-  "1.000": "reglas §7, precio",
-  "8": "reglas §7, huéspedes",
-  "0,75": "reglas §6, factor del descuento"
+  "90": "reglas §2, superficie",
+  "110": "reglas §2, superficie",
+  "140": "reglas §2, superficie",
+  "1.000": "reglas §3, precio",
+  "8": "reglas §3, huéspedes",
+  "0,75": "reglas §2, factor del descuento"
  }
 }

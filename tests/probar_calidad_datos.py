@@ -132,7 +132,7 @@ def principal():
         caso("si el primero no cambia, no se cuenta cambio", not any(v["cambia_ganador"] for v in a["medicion"]["tipo"].values()), str(a["medicion"]["tipo"]))
         caso("Aeropuerto, pocos pisos: no cambia el grupo", a["medicion"]["cambia_grupo"] is False and a["medicion"]["pares_que_cambian"] == 0, str(a["medicion"]))
         a = asunto(d, "estancia_vacia")
-        caso("con decisión: la cita y no mide", a["decision"] and "§5" in a["decision"] and a["medicion"] is None, str(a))
+        caso("con decisión: la cita y no mide", a["decision"] and "§2" in a["decision"] and a["medicion"] is None, str(a))
         caso("cada fila lleva identificador C-nn", all(f["id"].startswith("C-") for f in d["tabla_de_decisiones"]))
         caso("toda fila sin decisión tiene medición o motivo",
              all(f["decision"] or f["medicion"] or f["no_medible"] for f in d["tabla_de_decisiones"]))
@@ -159,7 +159,7 @@ def principal():
         caso("si el diccionario paró, no empieza", json.loads(ruta.read_text(encoding="utf-8"))["resultado"]["estado"] == "PARADO")
         dicc.write_text(original, encoding="utf-8")
 
-        # Un dato personal en claro para el trabajo (reglas §9).
+        # Un dato personal en claro para el trabajo (reglas §4).
         lic = raiz / "data" / "raw" / "externos" / "licencias_vut_por_barrio.csv"
         lic.write_text(lic.read_text(encoding="utf-8") + "Distrito de Sur,Valle,ana.perez@correo.es,1.0\n", encoding="utf-8")
         lanzar(raiz, CALIDAD.name)

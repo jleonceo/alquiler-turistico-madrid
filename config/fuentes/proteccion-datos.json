@@ -1,5 +1,5 @@
 {
- "skill": null,
+ "etapa": null,
  "script": "scripts/descargar_datos.py",
  "fecha_ejecucion": "2026-11-06T11:30:29",
  "caso": "alquiler-turistico-madrid",

@@ -5,14 +5,14 @@ Versión en español: [README.md](README.md)
 A fictional company wants to buy flats in Madrid to let to tourists and needs to know where to start. This analysis answers
 that question with public data from Airbnb and Madrid City Council.
 
-**Result:** the best place to start is flats of up to 2 bedrooms in three Madrid neighbourhoods: Ventas (Ciudad Lineal
-district), Numancia and San Diego (both in Puente de Vallecas). On 17/09/2026 there were 256 such listings among the 2,940
-homes analysed. At the median, each flat would cost €161,973 at the official 2025 price and earn €21,675 a year. That is a
-gross yield of 12.1%, before costs and taxes.
+**Result:** the first place to look is flats of up to 2 bedrooms in three Madrid neighbourhoods: Ventas (in Ciudad Lineal
+district), Numancia and San Diego (both in Puente de Vallecas district). On 17/09/2026 there were 256 such listings among the
+2,940 flats analysed. At the median, each flat would cost €161,973 at the official 2025 price and bring in €21,675 a year in
+revenue. Calculated flat by flat, the median gross yield is 12.1%, before costs and taxes.
 
-This list says where to look, but not whether a specific flat can be used as a tourist rental. That depends on planning rules
-and has to be checked flat by flat with the City Council. Occupied days are also an Inside
-Airbnb estimate, capped at 255 a year. If the flats at that cap are removed, the three neighbourhoods drop off the list.
+This list says where to look, not whether a specific flat can be let to tourists. That depends on planning rules and has to
+be checked flat by flat with the City Council. The occupied days are also an estimate by Inside Airbnb, capped at 255 a year.
+If flats at that cap are excluded, the three neighbourhoods drop off the list.
 
 [![CI](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml/badge.svg)](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml)
 
@@ -22,46 +22,51 @@ pip install -r requirements.txt
 python ejecutar.py --completo
 ```
 
-It needs Python 3.13. The last command downloads the original 240 MB from Inside Airbnb, repeats the whole analysis in about five
-minutes, recalculates the figures on this page and runs the tests.
+It requires Python 3.13. The last command downloads the original 240 MB of data from Inside Airbnb, repeats the whole analysis,
+recalculates the figures on this page and runs the tests. The PDF of the executive report needs Microsoft Edge. Without it, the
+PDF already in the repository is kept.
 
 ## The three deliverables
 
-The deliverables are in Spanish.
+All three deliverables are in Spanish.
 
 - [Executive report](https://jleonceo.github.io/alquiler-turistico-madrid/informes/informe_ejecutivo.html): three pages for
-  management, also [as a PDF](informes/informe_ejecutivo.pdf).
+  management, also available [as a PDF](informes/informe_ejecutivo.pdf).
 - [Final report](https://jleonceo.github.io/alquiler-turistico-madrid/informes/informe_final.html): the full analysis, with its
   charts.
-- [Dashboard](https://jleonceo.github.io/alquiler-turistico-madrid/informes/cuadro_mando.html): for the team that values the flats
-  to compare neighbourhoods.
+- [Dashboard](https://jleonceo.github.io/alquiler-turistico-madrid/informes/cuadro_mando.html): for the team that appraises the
+  flats, to compare neighbourhoods.
 
 ![First screen of the dashboard, with the recommendation and its figures](docs/img/cuadro_de_mando.png)
+
+The four large figures in the image cover all the flats analysed. Those for the three neighbourhoods are in the table on the right.
 
 ## Why not all of Madrid
 
 Of the 23,109 Airbnb listings in the city, 14,150 are in the historic centre, where the City Council's RESIDE Plan does not
-allow tourist flats in residential buildings. So the analysis uses flats outside the centre.
+allow tourist lets in residential buildings. The analysis therefore uses flats outside the centre.
 
-The analysis uses listings from €20 to €1,000 a night. Those limits are a choice: there are almost no listings below €20 and
-only 164 above €1,000. That leaves 18,573 of the 18,785 listings with a price, enough for the analysis.
+It uses listings from €20 to €1,000 a night. These limits are a judgement call: there are almost no listings below €20 and only
+164 above €1,000. That leaves 18,573 of the 18,785 priced listings. The other filters, such as size, minimum stay and occupancy,
+then leave the 2,940 flats.
 
 ## How the neighbourhoods were chosen
 
-A flat's gross yield is its annual income divided by what it would cost to buy. Income comes from the nightly price and the
-occupied days estimated by Inside Airbnb. The purchase price comes from an assumed floor area and the official price per m² in
-the neighbourhood. If the flat were bought 25% below that price, the yield would rise to 16.2%.
+A flat's gross yield is its annual rental income divided by its purchase price. The income is the nightly price multiplied by the
+occupied days estimated by Inside Airbnb. The purchase price is calculated from an assumed floor area and the official price per
+m² in the neighbourhood. If the flat were bought 25% below that price, the yield would rise to 16.2%.
 
-The neighbourhoods were ranked by yield to see which ones fell in the top 25%. That ranking changes with the conditions of
-the calculation, such as the minimum stay or the month of the price, so it was repeated with 12 combinations. The 9 neighbourhoods that made the top
-25% in more than half of them stayed.
+The neighbourhoods were ranked by yield to see which fell in the top 25%. That ranking changes with the minimum stay and the month
+of the price, so the calculation was repeated 12 times with different values. The 9 neighbourhoods that were in the top 25% in more
+than half of the repetitions were kept.
 
-The next check was whether those 9 depended on one particular group of listings. The calculation was run five more times,
-for example without hosts who have 10 listings or more. Ventas, Numancia and San Diego stayed on the list all five times. They are recommended for that stability: none of them clearly yields more than the others on the list. Numancia beats the median
-of all flats analysed, while Ventas and San Diego may not differ from it.
+The next check was whether those 9 depended on one particular group of listings. The calculation was repeated in five more ways,
+for example excluding hosts who have 10 or more listings. The neighbourhoods of Ventas, Numancia and San Diego stayed on the list
+all five times. That is why they are recommended: none of them clearly yields more than the others on the list. Numancia's yield is
+above the median for all the flats analysed, but that cannot be said for certain of Ventas and San Diego.
 
-Casco Histórico de Vallecas and Opañel yield more than San Diego, but they drop off the list without hosts with 10 listings or
-more.
+The neighbourhoods of Casco Histórico de Vallecas and Opañel yield more than San Diego, but they drop off the list when hosts with
+10 or more listings are excluded.
 
 ![Map of Madrid with the selected neighbourhoods](docs/img/mapa_de_barrios.png)
 
@@ -80,14 +85,17 @@ Pisos de hasta 2 habitaciones en los barrios de Numancia, San Diego y Ventas: 25
   Rentabilidad bruta si la compra baja un 25 %: 16,2 %
   Rentabilidad de todos los pisos de esos barrios, según el mes del precio y el descuento: de 10,8 % a 15,4 %
 
-Estas cifras coinciden con las del análisis y con las de los dos README.
+Estas cifras coinciden con las del análisis y con las de esta página, en español y en inglés.
 ```
 
 ## How it is built
 
-Thirteen Python scripts do the work, from download to the three deliverables: quality, correction, joins, exploration, metrics
-and reports. The three deliverables take their figures from a single file, [indicadores.json](informes/indicadores.json).
-[A second script](scripts/rehacer_portada.py), which shares no code with the analysis, recalculates the figures on this page.
+Fourteen Python scripts do the work, from download to the three deliverables, covering data quality checks, cleaning, joins,
+exploration, metrics and reports. The three deliverables take their figures from a single file,
+[indicadores.json](informes/indicadores.json).
+
+[A second script](scripts/rehacer_portada.py) redoes the choice of neighbourhoods and the medians on this page from a local table,
+sharing no code with the analysis. The tests also recalculate the metrics by a separate route.
 
 The detail, in Spanish, is in [the method](docs/metodo.md), [the business rules](docs/reglas_de_negocio.md),
 [the data criteria](docs/criterios_de_datos.md) and [the data](docs/datos.md).
@@ -100,16 +108,19 @@ The detail, in Spanish, is in [the method](docs/metodo.md), [the business rules]
 | [Madrid City Council](https://datos.madrid.es/) | 2025 price and floor area, sales, licences, historic centre and points of interest | reuse with attribution | `data/raw/externos/` |
 | Colegio de Registradores de España | origin of the price and floor area published by the City Council | cited with the City Council | `data/raw/externos/` |
 
-Inside Airbnb's data is not included because  asks people not to republish
+Inside Airbnb's data is not included because [its policy](https://insideairbnb.com/data-policies/) asks people not to republish
 it. It is downloaded from their website when the analysis is repeated.
 
 ## Limits
 
-- The floor and access of each flat are unknown.
-- With listings a year old or more, San Diego falls to 8th place out of 26 by yield.
-- The real floor area is unknown, so it cannot be said which yields more: a studio, one bedroom or two.
+- The storey and access of each flat are unknown.
+- If only listings a year old or older are used, San Diego falls to 8th out of 26 neighbourhoods by yield.
+- Each flat's floor area is an assumption: 50 m² for up to 1 bedroom, 65 m² for 2 and more for 3 or more. So we cannot say which
+  yields more: a studio, a one-bedroom flat or a two-bedroom flat.
+- Only flats with estimated occupancy count, meaning those with reviews in the last year. Flats that are not letting are left out,
+  which may push the yield up.
 - It has not been measured whether another price range would change the neighbourhoods.
-- The yield excludes costs, taxes, community fees and commissions.
+- The yield excludes costs, taxes, service charges and commissions.
 - The purchase price is the one declared in 2025.
 - A rental listing does not mean the flat is for sale.
 - Repeating the full analysis depends on Inside Airbnb still offering these downloads.

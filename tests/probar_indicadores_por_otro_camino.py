@@ -25,7 +25,7 @@ RUTA_JSON = Path(sys.argv[1]) if len(sys.argv) > 1 else CASO / "informes" / "ind
 CONTROL = {"pisos": 2940, "ingreso": 71518518.15, "barrios": 36, "comparacion": 7249,
            "grupo": ["Canillejas", "Casco Histórico de Vallecas", "Numancia", "Opañel", "Puerta del Angel", "Quintana", "San Diego", "Ventas", "Vista Alegre"],
            "firmes": ["Numancia", "San Diego", "Ventas"], "con_aviso": ["Casco Histórico de Vallecas", "Opañel"]}
-ANFITRION, COTIZACION, POCOS = 10, 60, 40  # reglas §7, escritas aquí a propósito
+ANFITRION, COTIZACION, POCOS = 10, 60, 40  # reglas §3, escritas aquí a propósito
 TOL = 1e-4
 TOL_REMUESTREO = 0.5  # puntos: otro generador no da el mismo extremo
 FALLOS = []
@@ -83,13 +83,13 @@ def leer():
 
 
 def fija(f, cero=False):
-    """Filtros de la base que no cambian entre variantes (reglas §7), con CP-007 a CP-009. Con cero entran los pisos sin ocupación."""
+    """Filtros de la base que no cambian entre variantes (reglas §3), con CP-007 a CP-009. Con cero entran los pisos sin ocupación."""
     return (f["tipo_alquiler"] == "Entire home/apt" and f["lado_centro"] == "fuera" and (cero or f["ocupacion_dias"] > 0) and f["huespedes"] <= 8 and f["banos"] is not None and f["banos"] <= 5 and f["dormitorios"] is not None and f["dormitorios"] <= 5
             and f["camas"] is not None and f["camas"] <= 6 and not (f["excl_cero_banos"] or f["excl_no_vivienda"] or f["excl_tamano_incoherente"]))
 
 
 def rent(f, col, factor=0.75):
-    """Rentabilidad bruta de las reglas §6."""
+    """Rentabilidad bruta de las reglas §2."""
     return 100 * f[col] * f["ocupacion_dias"] / (f["superficie_valoraciones_m2"] * f["precio_m2_eur"] * factor)
 
 

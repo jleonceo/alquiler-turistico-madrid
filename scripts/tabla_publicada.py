@@ -1,7 +1,7 @@
 """Deja en data/publicado/, solo en local, la tabla con la que se rehacen las cifras de portada sin descargar nada.
 
 Lee data/processed/analisis_anuncios.parquet y escribe una fila por piso fuera del centro histórico que entra en
-alguna de las variantes de las reglas §7. No lleva número de anuncio, coordenadas, recuento de anuncios por anfitrión, precio
+alguna de las variantes de las reglas §3. No lleva número de anuncio, coordenadas, recuento de anuncios por anfitrión, precio
 ni ocupación: solo el barrio, las habitaciones, marcas de sí o no y cifras calculadas. Las filas van barajadas. Un barrio con
 menos de 20 pisos en la tabla sale como «otros», porque ninguna variante puede ordenarlo. El criterio está en docs/datos.md.
 

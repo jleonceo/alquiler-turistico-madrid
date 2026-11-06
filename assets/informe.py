@@ -47,7 +47,7 @@ from graficos import numero, ANCHO_FILA
 
 
 # Orden de las páginas (S2) y cuántas puede haber de cada clase; preguntas, límites y decisiones se pueden partir (S3;
-# las decisiones desde el 07/10, caso 04). El anexo, al final, desde el 07/10 (D6)
+# las decisiones). El anexo va al final (D6)
 ORDEN = {"resumen": 1, "pregunta": None, "limites": None, "decision": None, "anexo": None}
 # Como mucho 15 páginas sin contar el anexo 
 MAX_PAGINAS = 15

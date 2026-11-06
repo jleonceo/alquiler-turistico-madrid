@@ -76,16 +76,16 @@ class Cifras:
 # =====================================================================================================================
 
 # Constantes de las reglas y datos de la fuente que no están en indicadores.json como cifra: cada una con su origen.
-CONSTANTES = {"255": "reglas §6, tope de la ocupación", "25": "reglas §6, descuento", "30": "reglas §7, mínimo por grupo",
-              "20": "reglas §7, mínimo de las variantes", "12": "reglas §7, variantes", "6": "reglas §7, más de 6 de 12",
+CONSTANTES = {"255": "reglas §2, tope de la ocupación", "25": "reglas §2, descuento", "30": "reglas §3, mínimo por grupo",
+              "20": "reglas §3, mínimo de las variantes", "12": "reglas §3, variantes", "6": "reglas §3, más de 6 de 12",
               "95": "planteamientos, intervalo", "2.000": "planteamientos, remuestreos", "63": "scripts, semilla",
-              "10": "reglas §7, anfitriones", "60": "reglas §7, cotización", "40": "reglas §7, pocos anuncios",
-              "150": "reglas §4, coordenadas", "1": "habitaciones", "2": "habitaciones", "3": "habitaciones y estancia",
+              "10": "reglas §3, anfitriones", "60": "reglas §3, cotización", "40": "reglas §3, pocos anuncios",
+              "150": "reglas §1, coordenadas", "1": "habitaciones", "2": "habitaciones", "3": "habitaciones y estancia",
               "5": "las cinco pruebas", "4": "pruebas aguantadas", "9": "barrios del grupo", "2025": "año del precio oficial",
               "2026": "año de las fotos", "35": "planteamientos, estudio", "45": "planteamientos, una habitación",
-              "50": "reglas §6, superficie", "65": "reglas §6, superficie", "75": "planteamientos, dos habitaciones",
-              "15": "páginas del informe", "90": "reglas §6, superficie", "110": "reglas §6, superficie",
-              "140": "reglas §6, superficie", "1.000": "reglas §7, precio", "8": "reglas §7, huéspedes", "0,75": "reglas §6, factor del descuento"}
+              "50": "reglas §2, superficie", "65": "reglas §2, superficie", "75": "planteamientos, dos habitaciones",
+              "15": "páginas del informe", "90": "reglas §2, superficie", "110": "reglas §2, superficie",
+              "140": "reglas §2, superficie", "1.000": "reglas §3, precio", "8": "reglas §3, huéspedes", "0,75": "reglas §2, factor del descuento"}
 # Lo que parece cifra y no lo es: fechas, la licencia y los nombres de las normas.
 NO_CIFRAS = [r"\d{2}/\d{2}/\d{4}", r"CC BY 4\.0", r"BOCM \d+", r"APE \d+\.\d+"]
 

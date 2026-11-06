@@ -24,7 +24,7 @@ el número de cada grupo (G9). Paran con un ValueError que dice la regla cuando 
 Color con significado (04/10, auditoría de diseño): `destacar=` pone en naranja las barras de los grupos que nombra el
 título, y el resto va en azul. Naranja quiere decir siempre lo peor o la alerta, nunca la mejor opción (G3, cambiada el 07/10).
 
-Ningún texto pisa a otro (06/10, caso 04: 11 de 65 gráficos del exploratorio tenían textos montados). Si los nombres
+Ningún texto pisa a otro. Si los nombres
 del eje horizontal no caben, se deja uno de cada pocos, empezando por el primero; la cifra de un tramo apilado más
 bajo que la letra va al lado de su columna; y si aun así dos textos se pisan, la pieza para y dice qué pedir.
 

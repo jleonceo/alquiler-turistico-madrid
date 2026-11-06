@@ -40,9 +40,9 @@ SALIDA_JSON = FUENTES / "diccionario-datos-origen.json"
 SALIDA_MD = FUENTES / "diccionario-datos-origen.md"
 PROTECCION = FUENTES / "proteccion-datos.json"
 
-FECHA_DATOS = "2026-09-17"  # reglas §5: fecha de referencia, la de la foto principal
-VERSION_SKILL = "1.0"
-SKILL = "diccionario-datos"
+FECHA_DATOS = "2026-09-17"  # reglas §2: fecha de referencia, la de la foto principal
+VERSION_ETAPA = "1.0"
+ETAPA = "diccionario-datos"
 SCRIPT = "scripts/diccionario_datos.py"
 
 # 1.2 Parámetros. El tamaño del trozo se puede bajar en las pruebas.
@@ -64,19 +64,19 @@ PARAMETROS = [
     {"nombre": "segmento mínimo para nulos concentrados", "valor": SEGMENTO_MIN, "origen": "calidad-datos, por defecto"},
 ]
 
-# 1.3 Tablas que se perfilan, con lo que es una fila y su clave. La clave sale de reglas §5 o del reconocimiento.
+# 1.3 Tablas que se perfilan, con lo que es una fila y su clave. La clave sale de reglas §2 o del reconocimiento.
 FOTOS = ["2025-12-14", "2026-03-24", "2026-06-20", "2026-09-17"]
 TABLAS_CSV = [
     *[{"tabla": f"listings_{f}", "ruta": f"listings_{f}.csv.gz", "clave": ["id"], "dims": ["neighbourhood_group_cleansed", "room_type"],
-       "fila": "un anuncio en esa foto (reglas §5)"} for f in FOTOS],
+       "fila": "un anuncio en esa foto (reglas §2)"} for f in FOTOS],
     {"tabla": "calendar_2026-09-17", "ruta": "calendar_2026-09-17.csv.gz", "clave": ["listing_id", "date"], "dims": ["mes"],
-     "fila": "un anuncio y un día (reglas §5)"},
+     "fila": "un anuncio y un día (reglas §2)"},
     {"tabla": "reviews_fechas_2026-09-17", "ruta": "reviews_fechas_2026-09-17.csv.gz", "clave": ["listing_id", "date"], "dims": [],
-     "fila": "una reseña; anuncio y fecha pueden repetirse (reglas §5)"},
+     "fila": "una reseña; anuncio y fecha pueden repetirse (reglas §2)"},
     {"tabla": "licencias_vut_por_barrio", "ruta": "externos/licencias_vut_por_barrio.csv", "clave": [], "dims": ["distrito"],
      "fila": "una licencia, sin su número (proteccion-datos.md)"},
     {"tabla": "neighbourhoods", "ruta": "externos/neighbourhoods.csv", "clave": ["neighbourhood"], "dims": [],
-     "fila": "un barrio de Inside Airbnb (reglas §4)"},
+     "fila": "un barrio de Inside Airbnb (reglas §1)"},
 ]
 # Cada libro: las cabeceras de sus columnas de valor, en orden, tal como vienen en las filas 5 y 6.
 LIBROS = {
@@ -86,12 +86,12 @@ LIBROS = {
     "E3210626_precio_declarado_2025": "euros por metro cuadrado declarados en 2025 y su número índice",
 }
 GEOMETRIAS = {
-    "ape_00_01.json": "límite del centro histórico, ámbito APE 00.01 (reglas §4)",
-    "neighbourhoods.geojson": "polígonos de los barrios de Inside Airbnb (reglas §4)",
-    "edificios_monumentales.geojson": "puntos de interés: edificios monumentales (reglas §7)",
-    "mercados_comercios.geojson": "puntos de interés: mercados y comercios (reglas §7)",
-    "museos_salas.geojson": "puntos de interés: museos y salas (reglas §7)",
-    "parques_jardines.geojson": "puntos de interés: parques y jardines (reglas §7)",
+    "ape_00_01.json": "límite del centro histórico, ámbito APE 00.01 (reglas §1)",
+    "neighbourhoods.geojson": "polígonos de los barrios de Inside Airbnb (reglas §1)",
+    "edificios_monumentales.geojson": "puntos de interés: edificios monumentales (reglas §3)",
+    "mercados_comercios.geojson": "puntos de interés: mercados y comercios (reglas §3)",
+    "museos_salas.geojson": "puntos de interés: museos y salas (reglas §3)",
+    "parques_jardines.geojson": "puntos de interés: parques y jardines (reglas §3)",
 }
 # Marco amplio de Madrid: solo sirve para ver un punto lejísimos, no para decir si está en la ciudad.
 MADRID = {"lon": (-3.95, -3.45), "lat": (40.25, 40.65)}
@@ -104,11 +104,11 @@ DOCUMENTADAS_LICENCIAS = {"DISTRITO": "distrito", "DIRECCIÓN": None, "PLANTA": 
 # 1.5 Significado de cada columna. Procedencia: reglas, declarado, medido o sin_confirmar.
 # Clave: columna; valor: rol, significado, procedencia y, si procede, cero, dominio y duda.
 SC = "sin_confirmar"
-SIN_FILA_FOTO = ("el anuncio no estaba publicado en esa foto, o la captura no lo vio: cada fila es un anuncio en esa fecha", "reglas §5")
+SIN_FILA_FOTO = ("el anuncio no estaba publicado en esa foto, o la captura no lo vio: cada fila es un anuncio en esa fecha", "reglas §2")
 CERO_SIN_RESENAS = ("no tiene reseñas en ese periodo; number_of_reviews a cero coincide con first_review vacía", "medido")
-CERO_SIN_LIBRES = ("sin días libres en ese horizonte; no distingue reservado de bloqueado", "reglas §5")
+CERO_SIN_LIBRES = ("sin días libres en ese horizonte; no distingue reservado de bloqueado", "reglas §2")
 C = {
-    "id": {"rol": "identificador", "s": "número del anuncio; une fotos, calendario y reseñas", "p": "reglas §3"},
+    "id": {"rol": "identificador", "s": "número del anuncio; une fotos, calendario y reseñas", "p": "reglas §1"},
     "scrape_id": {"rol": "codigo", "s": "número de la captura de Inside Airbnb", "p": SC},
     "last_scraped": {"rol": "fecha", "s": "día en que se capturó el anuncio", "p": SC},
     "source": {"rol": "categorica", "s": "marca del origen de la captura; «previous scrape» lo trae de una captura anterior", "p": SC, "duda": True},
@@ -126,25 +126,25 @@ C = {
     "host_has_profile_pic": {"rol": "booleana", "s": "si el anfitrión tiene foto de perfil", "p": SC},
     "host_identity_verified": {"rol": "booleana", "s": "si el anfitrión tiene la identidad verificada", "p": SC},
     "neighbourhood": {"rol": "texto_libre", "s": "barrio escrito por el anfitrión", "p": SC},
-    "neighbourhood_cleansed": {"rol": "categorica", "s": "barrio de Inside Airbnb", "p": "reglas §4"},
-    "neighbourhood_group_cleansed": {"rol": "categorica", "s": "distrito de Inside Airbnb", "p": "reglas §4"},
-    "latitude": {"rol": "magnitud", "s": "latitud, desplazada hasta 150 m por la fuente", "p": "reglas §4", "dominio": (40.25, 40.65)},
-    "longitude": {"rol": "magnitud", "s": "longitud, desplazada hasta 150 m por la fuente", "p": "reglas §4", "dominio": (-3.95, -3.45)},
+    "neighbourhood_cleansed": {"rol": "categorica", "s": "barrio de Inside Airbnb", "p": "reglas §1"},
+    "neighbourhood_group_cleansed": {"rol": "categorica", "s": "distrito de Inside Airbnb", "p": "reglas §1"},
+    "latitude": {"rol": "magnitud", "s": "latitud, desplazada hasta 150 m por la fuente", "p": "reglas §1", "dominio": (40.25, 40.65)},
+    "longitude": {"rol": "magnitud", "s": "longitud, desplazada hasta 150 m por la fuente", "p": "reglas §1", "dominio": (-3.95, -3.45)},
     "property_type": {"rol": "categorica", "s": "tipo de inmueble", "p": "02_datos_necesarios.md §7"},
-    "room_type": {"rol": "categorica", "s": "tipo de alquiler: piso o habitación", "p": "reglas §3"},
-    "accommodates": {"rol": "magnitud", "s": "huéspedes que admite", "p": "reglas §7", "dominio": (1, None)},
-    "bathrooms": {"rol": "magnitud", "s": "baños en número; vacío en septiembre, por eso se leen del texto", "p": "reglas §5"},
-    "bathrooms_text": {"rol": "texto_libre", "s": "baños en texto; «medio baño» vale 0,5", "p": "reglas §5"},
-    "bedrooms": {"rol": "magnitud", "s": "habitaciones", "p": "reglas §6", "dominio": (0, None)},
-    "beds": {"rol": "magnitud", "s": "camas", "p": "reglas §7", "dominio": (0, None)},
+    "room_type": {"rol": "categorica", "s": "tipo de alquiler: piso o habitación", "p": "reglas §1"},
+    "accommodates": {"rol": "magnitud", "s": "huéspedes que admite", "p": "reglas §3", "dominio": (1, None)},
+    "bathrooms": {"rol": "magnitud", "s": "baños en número; vacío en septiembre, por eso se leen del texto", "p": "reglas §2"},
+    "bathrooms_text": {"rol": "texto_libre", "s": "baños en texto; «medio baño» vale 0,5", "p": "reglas §2"},
+    "bedrooms": {"rol": "magnitud", "s": "habitaciones", "p": "reglas §2", "dominio": (0, None)},
+    "beds": {"rol": "magnitud", "s": "camas", "p": "reglas §3", "dominio": (0, None)},
     "amenities": {"rol": "texto_libre", "s": "lista de equipamiento en JSON", "p": "proteccion-datos.md"},
-    "price": {"rol": "magnitud", "s": "precio por noche publicado, en euros y con símbolo $ como texto; desde 2026 es una cotización para unas fechas", "p": "reglas §6"},
+    "price": {"rol": "magnitud", "s": "precio por noche publicado, en euros y con símbolo $ como texto; desde 2026 es una cotización para unas fechas", "p": "reglas §2"},
     "price_quote_checkin_date": {"rol": "fecha", "s": "entrada de la cotización", "p": SC},
     "price_quote_checkout_date": {"rol": "fecha", "s": "salida de la cotización", "p": SC},
     "price_quote_total_price": {"rol": "magnitud", "s": "importe total de la cotización", "p": SC},
     "price_quote_price_per_night": {"rol": "magnitud", "s": "importe por noche de la cotización", "p": SC},
     "price_quote_raw": {"rol": "texto_libre", "s": "cotización completa en JSON", "p": SC},
-    "minimum_nights": {"rol": "magnitud", "s": "estancia mínima publicada, en noches", "p": "reglas §5", "dominio": (1, None)},
+    "minimum_nights": {"rol": "magnitud", "s": "estancia mínima publicada, en noches", "p": "reglas §2", "dominio": (1, None)},
     "maximum_nights": {"rol": "magnitud", "s": "estancia máxima publicada, en noches", "p": SC, "dominio": (1, None)},
     "minimum_minimum_nights": {"rol": "magnitud", "s": "la menor estancia mínima del calendario", "p": SC, "duda": True},
     "maximum_minimum_nights": {"rol": "magnitud", "s": "la mayor estancia mínima del calendario", "p": SC, "duda": True},
@@ -153,21 +153,21 @@ C = {
     "minimum_nights_avg_ntm": {"rol": "magnitud", "s": "estancia mínima media; el horizonte «ntm» no está documentado", "p": SC, "duda": True},
     "maximum_nights_avg_ntm": {"rol": "magnitud", "s": "estancia máxima media; el horizonte «ntm» no está documentado", "p": SC, "duda": True},
     "calendar_updated": {"rol": "texto_libre", "s": "última actualización del calendario", "p": SC},
-    "has_availability": {"rol": "booleana", "s": "marca de disponibilidad de la fuente", "p": "reglas §3"},
+    "has_availability": {"rol": "booleana", "s": "marca de disponibilidad de la fuente", "p": "reglas §1"},
     "availability_30": {"rol": "magnitud", "s": "días libres de los próximos 30", "p": SC, "cero": CERO_SIN_LIBRES, "dominio": (0, 30)},
     "availability_60": {"rol": "magnitud", "s": "días libres de los próximos 60", "p": SC, "cero": CERO_SIN_LIBRES, "dominio": (0, 60)},
     "availability_90": {"rol": "magnitud", "s": "días libres de los próximos 90", "p": SC, "cero": CERO_SIN_LIBRES, "dominio": (0, 90)},
-    "availability_365": {"rol": "magnitud", "s": "días libres de los próximos 365", "p": "reglas §7", "cero": CERO_SIN_LIBRES, "dominio": (0, 365)},
+    "availability_365": {"rol": "magnitud", "s": "días libres de los próximos 365", "p": "reglas §3", "cero": CERO_SIN_LIBRES, "dominio": (0, 365)},
     "calendar_last_scraped": {"rol": "fecha", "s": "día de captura del calendario", "p": SC},
-    "number_of_reviews": {"rol": "magnitud", "s": "reseñas del anuncio", "p": "reglas §5", "cero": CERO_SIN_RESENAS},
-    "number_of_reviews_ltm": {"rol": "magnitud", "s": "reseñas del último año", "p": "reglas §6", "cero": CERO_SIN_RESENAS},
+    "number_of_reviews": {"rol": "magnitud", "s": "reseñas del anuncio", "p": "reglas §2", "cero": CERO_SIN_RESENAS},
+    "number_of_reviews_ltm": {"rol": "magnitud", "s": "reseñas del último año", "p": "reglas §2", "cero": CERO_SIN_RESENAS},
     "number_of_reviews_l30d": {"rol": "magnitud", "s": "reseñas de los últimos 30 días", "p": SC, "cero": CERO_SIN_RESENAS},
     "availability_eoy": {"rol": "magnitud", "s": "días libres hasta fin de año", "p": SC, "cero": CERO_SIN_LIBRES, "duda": True},
     "number_of_reviews_ly": {"rol": "magnitud", "s": "reseñas del año anterior; el periodo no está documentado", "p": SC, "cero": CERO_SIN_RESENAS, "duda": True},
-    "estimated_occupancy_l365d": {"rol": "magnitud", "s": "ocupación: estimación de días al año de la fuente, con tope de 255", "p": "reglas §6",
-                                  "cero": ("no hay reseñas en el último año; no quiere decir que el piso esté vacío", "reglas §5"), "dominio": (0, 255)},
-    "estimated_revenue_l365d": {"rol": "magnitud", "s": "ingreso anual que publica la fuente: precio por noche × ocupación", "p": "reglas §6",
-                                "cero": ("ocupación a cero: es precio × ocupación", "reglas §6")},
+    "estimated_occupancy_l365d": {"rol": "magnitud", "s": "ocupación: estimación de días al año de la fuente, con tope de 255", "p": "reglas §2",
+                                  "cero": ("no hay reseñas en el último año; no quiere decir que el piso esté vacío", "reglas §2"), "dominio": (0, 255)},
+    "estimated_revenue_l365d": {"rol": "magnitud", "s": "ingreso anual que publica la fuente: precio por noche × ocupación", "p": "reglas §2",
+                                "cero": ("ocupación a cero: es precio × ocupación", "reglas §2")},
     "first_review": {"rol": "fecha", "s": "fecha de la primera reseña", "p": SC},
     "last_review": {"rol": "fecha", "s": "fecha de la última reseña", "p": SC},
     "review_scores_rating": {"rol": "magnitud", "s": "puntuación media de las reseñas", "p": SC, "dominio": (0, 5)},
@@ -183,24 +183,24 @@ C = {
     "calculated_host_listings_count_private_rooms": {"rol": "magnitud", "s": "de ellos, habitaciones privadas", "p": SC},
     "calculated_host_listings_count_shared_rooms": {"rol": "magnitud", "s": "de ellos, habitaciones compartidas", "p": SC},
     "reviews_per_month": {"rol": "magnitud", "s": "reseñas al mes", "p": SC},
-    "licencia_nacional": {"rol": "categorica", "s": "tipo del número de registro; solo su tipo, como descripción", "p": "reglas §3"},
-    "licencia_exencion": {"rol": "categorica", "s": "motivo de exención que declara el anuncio; una de sus lecturas es alquiler de temporada", "p": "reglas §7"},
+    "licencia_nacional": {"rol": "categorica", "s": "tipo del número de registro; solo su tipo, como descripción", "p": "reglas §1"},
+    "licencia_exencion": {"rol": "categorica", "s": "motivo de exención que declara el anuncio; una de sus lecturas es alquiler de temporada", "p": "reglas §3"},
     "licencia_vt": {"rol": "booleana", "s": "si el anuncio publica un número de otro registro; sin número", "p": "proteccion-datos.md"},
     "licencia_otro": {"rol": "booleana", "s": "si publica otro texto de licencia; sin número", "p": "proteccion-datos.md"},
     # Calendario
-    "listing_id": {"rol": "clave", "s": "número del anuncio", "p": "reglas §3"},
-    "date": {"rol": "fecha", "s": "día del calendario, o día de la reseña", "p": "reglas §5"},
-    "available": {"rol": "booleana", "s": "si el día está libre; no distingue reservado de bloqueado", "p": "reglas §5"},
+    "listing_id": {"rol": "clave", "s": "número del anuncio", "p": "reglas §1"},
+    "date": {"rol": "fecha", "s": "día del calendario, o día de la reseña", "p": "reglas §2"},
+    "available": {"rol": "booleana", "s": "si el día está libre; no distingue reservado de bloqueado", "p": "reglas §2"},
     # Licencias
     "distrito": {"rol": "categorica", "s": "distrito municipal del local", "p": "declarado"},
     "barrio": {"rol": "categorica", "s": "barrio, calculado con el punto antes de quitarlo", "p": "proteccion-datos.md"},
     "planta": {"rol": "categorica", "s": "planta del edificio de la actividad", "p": "declarado"},
     "viviendas": {"rol": "magnitud", "s": "viviendas de uso turístico de la licencia (Nº VUT)", "p": "declarado", "dominio": (1, None)},
     # Barrios
-    "neighbourhood_group": {"rol": "categorica", "s": "distrito de Inside Airbnb", "p": "reglas §4"},
+    "neighbourhood_group": {"rol": "categorica", "s": "distrito de Inside Airbnb", "p": "reglas §1"},
 }
 # En el calendario y en las reseñas, tres columnas significan otra cosa o tienen otro cero.
-C_CALENDARIO = {"minimum_nights": {"rol": "magnitud", "s": "estancia mínima que pide ese día", "p": "reglas §5", "dominio": (1, None)},
+C_CALENDARIO = {"minimum_nights": {"rol": "magnitud", "s": "estancia mínima que pide ese día", "p": "reglas §2", "dominio": (1, None)},
                 "maximum_nights": {"rol": "magnitud", "s": "estancia máxima que pide ese día", "p": SC, "dominio": (1, None)}}
 
 # Lecturas posibles de cada motivo de decisión de negocio, para los pendientes.
@@ -611,7 +611,7 @@ def tabla_libro(nombre):
 
 
 def filtros_de_negocio(tablas):
-    """Cuenta en la foto principal lo que quita cada filtro de reglas §7 que se mide en una sola tabla."""
+    """Cuenta en la foto principal lo que quita cada filtro de reglas §3 que se mide en una sola tabla."""
     sep = next((t for t in tablas if t["tabla"] == "listings_2026-09-17"), None)
     if sep is None:
         return []
@@ -619,15 +619,15 @@ def filtros_de_negocio(tablas):
                         usecols=["room_type", "price", "accommodates", "bedrooms", "beds", "bathrooms_text", "estimated_occupancy_l365d"])
     precio = pd.to_numeric(tabla["price"].astype("str").str.replace(r"[$,]", "", regex=True), errors="coerce")
     return [
-        {"regla": "Piso: quita las habitaciones (reglas §3 y §7)", "filas_afectadas": int(tabla["room_type"].ne("Entire home/apt").sum())},
-        {"regla": "Precio entre 20 y 1.000 €: fuera de rango o vacío (reglas §7)", "filas_afectadas": int((~precio.between(20, 1000)).sum())},
-        {"regla": "Hasta 8 huéspedes (reglas §7)", "filas_afectadas": int(tabla["accommodates"].gt(8).sum())},
-        {"regla": "Hasta 5 habitaciones (reglas §7)", "filas_afectadas": int(tabla["bedrooms"].gt(5).sum())},
-        {"regla": "Hasta 6 camas (reglas §7)", "filas_afectadas": int(tabla["beds"].gt(6).sum())},
-        {"regla": "Ocupación mayor que cero (reglas §7)", "filas_afectadas": int(tabla["estimated_occupancy_l365d"].eq(0).sum())},
-        {"regla": "Hasta 5 baños, leídos del texto (reglas §5 y §7): se mide en calidad-datos, que lee el texto", "filas_afectadas": None},
-        {"regla": "Fuera del centro histórico (reglas §4 y §7): pide cruzar con el límite, se mide en calidad-datos", "filas_afectadas": None},
-        {"regla": "Estancia de hasta 3 noches (reglas §5 y §7): pide cruzar con el calendario, se mide en calidad-datos", "filas_afectadas": None},
+        {"regla": "Piso: quita las habitaciones (reglas §1 y §7)", "filas_afectadas": int(tabla["room_type"].ne("Entire home/apt").sum())},
+        {"regla": "Precio entre 20 y 1.000 €: fuera de rango o vacío (reglas §3)", "filas_afectadas": int((~precio.between(20, 1000)).sum())},
+        {"regla": "Hasta 8 huéspedes (reglas §3)", "filas_afectadas": int(tabla["accommodates"].gt(8).sum())},
+        {"regla": "Hasta 5 habitaciones (reglas §3)", "filas_afectadas": int(tabla["bedrooms"].gt(5).sum())},
+        {"regla": "Hasta 6 camas (reglas §3)", "filas_afectadas": int(tabla["beds"].gt(6).sum())},
+        {"regla": "Ocupación mayor que cero (reglas §3)", "filas_afectadas": int(tabla["estimated_occupancy_l365d"].eq(0).sum())},
+        {"regla": "Hasta 5 baños, leídos del texto (reglas §2 y §7): se mide en calidad-datos, que lee el texto", "filas_afectadas": None},
+        {"regla": "Fuera del centro histórico (reglas §1 y §7): pide cruzar con el límite, se mide en calidad-datos", "filas_afectadas": None},
+        {"regla": "Estancia de hasta 3 noches (reglas §2 y §7): pide cruzar con el calendario, se mide en calidad-datos", "filas_afectadas": None},
     ]
 
 
@@ -713,7 +713,7 @@ def formato(v):
 
 def informe(s):
     """Genera el Markdown a partir del diccionario que se guarda en el JSON."""
-    r = [f"# Diccionario de datos del origen · caso", "",
+    r = [f"# Diccionario de datos del origen", "",
          f"Comprobado el {s['fecha_ejecucion'][:10]} sobre los ficheros de `data/raw/`, con Python {s['python']} y pandas {s['pandas']}.", "",
          s["resultado"]["resumen"], "", "## Cabecera", "",
          f"- Fuente: {len(s['entradas'])} ficheros, {sum(e['bytes'] for e in s['entradas'])} bytes.",
@@ -817,7 +817,7 @@ def guardar(salida):
 
 def principal():
     """Hace el diccionario de principio a fin."""
-    base = {"skill": SKILL, "version_skill": VERSION_SKILL, "script": SCRIPT, "fecha_datos": FECHA_DATOS,
+    base = {"etapa": ETAPA, "version_etapa": VERSION_ETAPA, "script": SCRIPT, "fecha_datos": FECHA_DATOS,
             "fecha_ejecucion": dt.datetime.now().isoformat(timespec="seconds"), "python": platform.python_version(),
             "pandas": pd.__version__, "parametros": PARAMETROS, "avisos": [], "entradas": [], "tablas": [], "geometrias": [],
             "pendientes": [], "diccionario_organizacion": DICCIONARIO_ORGANIZACION, "contradicciones": [],

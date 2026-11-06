@@ -26,7 +26,7 @@ import reglas_caso as rc
 # 1. Configuración
 # ---------------------------------------------------------------------------
 
-SKILL = "transformacion-datos"
+ETAPA = "transformacion-datos"
 VERSION = "06/10/2026 (SC-64)"
 SCRIPT = "scripts/transformacion_datos.py"
 RIESGOS = rc.CASO / "config" / "negocio" / "03_riesgos_de_calidad.md"
@@ -50,7 +50,7 @@ VARIABLES = [
     ("precio_m2_eur", "precio del barrio; el del distrito en San Andrés, Ambroz y Aeropuerto", ["m2_barrio", "m2_distrito"], "EUR/m²"),
     ("compra_*_eur", "superficie × precio_m2_eur, por 0,75 con descuento; con cada superficie", ["superficie_valoraciones_m2", "superficie_oficial_m2", "precio_m2_eur"], "EUR"),
     ("rent_*_pct", "100 × ingreso_anual_eur / compra_*_eur, con cada combinación", ["ingreso_anual_eur", "compra_*_eur"], "%"),
-    ("precio_vivienda_comparacion_eur", "reglas §7: lleva el precio de una habitación a la vivienda", ["price", "room_type", "bedrooms", "accommodates"], "EUR"),
+    ("precio_vivienda_comparacion_eur", "reglas §3: lleva el precio de una habitación a la vivienda", ["price", "room_type", "bedrooms", "accommodates"], "EUR"),
     ("competencia_anuncios", "anuncios del barrio en la foto", ["neighbourhood_cleansed"], "anuncios"),
     ("puntos_interes_500m", "puntos de interés a menos de 500 m, sin pesos", ["latitude", "longitude", "x", "y"], "puntos"),
     ("anuncios_anfitrion", "anuncios del anfitrión en la foto, según la fuente", ["calculated_host_listings_count"], "anuncios"),
@@ -86,7 +86,7 @@ def geografia(t, limite, puntos, dec):
 
 
 def oficial_del_barrio(b):
-    """Resuelve precio y superficie oficiales de cada barrio con su origen (reglas §6, CP-003)."""
+    """Resuelve precio y superficie oficiales de cada barrio con su origen (reglas §2, CP-003)."""
     d = b.copy()
     toma = d["toma_precio_de_distrito"]
     d["precio_m2_eur"] = d["m2_distrito"].where(toma, d["m2_barrio"])
@@ -97,7 +97,7 @@ def oficial_del_barrio(b):
 
 
 def precio_de_vivienda(t, tasa):
-    """Lleva el precio al de la vivienda (reglas §7). Una habitación sin habitaciones conocidas queda vacía: la regla no la cubre."""
+    """Lleva el precio al de la vivienda (reglas §3). Una habitación sin habitaciones conocidas queda vacía: la regla no la cubre."""
     p, d, h = t["precio"], t["bedrooms"], t["accommodates"]
     privada, compartida = t["room_type"].eq("Private room"), t["room_type"].eq("Shared room")
     condiciones = [t["room_type"].eq("Entire home/apt"), privada & d.eq(1), privada & d.gt(1), compartida & h.eq(1), compartida & h.gt(1)]
@@ -105,7 +105,7 @@ def precio_de_vivienda(t, tasa):
 
 
 def anadir_compra_y_rentabilidad(df, descuento):
-    """Calcula compra y rentabilidad con cada combinación de superficie y descuento (reglas §6)."""
+    """Calcula compra y rentabilidad con cada combinación de superficie y descuento (reglas §2)."""
     for sup, col in (("valoraciones", "superficie_valoraciones_m2"), ("oficial", "superficie_oficial_m2")):
         for clave, factor in (("desc", descuento), ("sin", 1.0)):
             df[f"compra_{sup}_{clave}_eur"] = df[col] * df["precio_m2_eur"] * factor
@@ -266,24 +266,24 @@ def fichas_de(s):
     g = s["control_grupo"]
     comun = dict(estaba="tablas corregidas e integradas.", deshacer=deshacer)
     return [
-        {**comun, "clave": "transformacion-anuncios", "titulo": "Tabla de análisis por anuncio", "tabla": "analisis_anuncios.parquet, todas", "problema": "las tres preguntas piden una fila por piso de septiembre.", "decision": "reglas §4 a §7 y reglas-transformacion.md §1.",
+        {**comun, "clave": "transformacion-anuncios", "titulo": "Tabla de análisis por anuncio", "tabla": "analisis_anuncios.parquet, todas", "problema": "las tres preguntas piden una fila por piso de septiembre.", "decision": "reglas §1 a §7 y reglas-transformacion.md §1.",
          "hecho": "lado, distancia, estancia, ingreso, superficies, compra, rentabilidad, licencia y marcas de exclusión.", "codigo": "df['ingreso_anual_eur'] = df['precio'] * df['ocupacion']\ndf[f'rent_{sup}_{clave}_pct'] = 100 * df['ingreso_anual_eur'] / df[f'compra_{sup}_{clave}_eur']",
          "comprobacion": f"{f['analisis_anuncios']} filas, tantas como anuncios; id único.", "quedo": f"{f['analisis_anuncios']} filas."},
-        {**comun, "clave": "transformacion-bases", "titulo": "Base de decisión y base de comparación", "tabla": "analisis_anuncios.parquet, `base_decision`, `base_comparacion`, `excl_*`, `comp_excl_*`", "problema": "cada uso tiene su población.", "decision": "reglas §7 y CP-001, CP-006 a CP-010. CP-007 a CP-009 valen solo para la base de decisión.",
+        {**comun, "clave": "transformacion-bases", "titulo": "Base de decisión y base de comparación", "tabla": "analisis_anuncios.parquet, `base_decision`, `base_comparacion`, `excl_*`, `comp_excl_*`", "problema": "cada uso tiene su población.", "decision": "reglas §3 y CP-001, CP-006 a CP-010. CP-007 a CP-009 valen solo para la base de decisión.",
          "hecho": "una marca por exclusión; ninguna fila sale de la tabla.", "codigo": "base_decision = ~marcas[de_decision].any(axis=1)", "comprobacion": f"base de decisión {s['bases']['decision']}; base de comparación {s['bases']['comparacion']}; 12 variantes repetidas: {g['comparacion_con_intervalo']['veredicto']}.",
          "quedo": f"grupo de {len(g['grupo'])} barrios y {len(g['firmes'])} firmes."},
-        {**comun, "clave": "transformacion-atractivo", "titulo": "Atractivo: puntos a menos de 500 m", "tabla": "analisis_anuncios.parquet, `puntos_interes_500m`", "problema": "reglas §7 deja la distancia y el peso al planteamiento.", "decision": "**Supuesto**: recuento simple a menos de 500 m, unos seis minutos andando, sin pesos, porque no hay base para fijarlos. No entra en la rentabilidad.",
+        {**comun, "clave": "transformacion-atractivo", "titulo": "Atractivo: puntos a menos de 500 m", "tabla": "analisis_anuncios.parquet, `puntos_interes_500m`", "problema": "reglas §3 deja la distancia y el peso al planteamiento.", "decision": "**Supuesto**: recuento simple a menos de 500 m, unos seis minutos andando, sin pesos, porque no hay base para fijarlos. No entra en la rentabilidad.",
          "hecho": "recuento con coordenadas en EPSG:25830.", "codigo": "i, j = shapely.STRtree(pts).query(anuncios, predicate='dwithin', distance=500)\ncerca = shapely.distance(anuncios[i], pts[j]) < 500", "comprobacion": f"mediana {s['atractivo']['mediana']}, máximo {s['atractivo']['maximo']}; {s['atractivo']['puntos']} puntos.", "quedo": "una columna entera, sin vacíos."},
-        {**comun, "clave": "transformacion-barrios", "titulo": "Tabla de análisis por barrio", "tabla": "analisis_barrios.parquet", "problema": "competencia, contexto oficial y licencias van por barrio.", "decision": "reglas §3, §6 y §7. La superficie oficial de un barrio marcado sin dato propio toma la de su distrito (**Supuesto**, igual que el reconocimiento).", "hecho": "recuentos y datos oficiales con su origen.",
+        {**comun, "clave": "transformacion-barrios", "titulo": "Tabla de análisis por barrio", "tabla": "analisis_barrios.parquet", "problema": "competencia, contexto oficial y licencias van por barrio.", "decision": "reglas §1, §6 y §7. La superficie oficial de un barrio marcado sin dato propio toma la de su distrito (**Supuesto**, igual que el reconocimiento).", "hecho": "recuentos y datos oficiales con su origen.",
          "codigo": "d['precio_m2_eur'] = d['m2_distrito'].where(toma, d['m2_barrio'])", "comprobacion": f"{f['analisis_barrios']} barrios; los anuncios suman la foto y las licencias suman su fuente.", "quedo": f"{f['analisis_barrios']} filas."},
-        {**comun, "clave": "transformacion-oferta", "titulo": "Evolución de la oferta", "tabla": "evolucion_oferta.parquet", "problema": "la pregunta 3 mira el rango entre fotos.", "decision": "reglas §7; una foto no se compara con otra sin decirlo.", "hecho": "anuncios y pisos por foto y barrio.", "codigo": "t.groupby('neighbourhood_cleansed').size()",
+        {**comun, "clave": "transformacion-oferta", "titulo": "Evolución de la oferta", "tabla": "evolucion_oferta.parquet", "problema": "la pregunta 3 mira el rango entre fotos.", "decision": "reglas §3; una foto no se compara con otra sin decirlo.", "hecho": "anuncios y pisos por foto y barrio.", "codigo": "t.groupby('neighbourhood_cleansed').size()",
          "comprobacion": f"{f['evolucion_oferta']} filas; cada foto suma sus anuncios.", "quedo": f"{f['evolucion_oferta']} filas."},
         {**comun, "clave": "transformacion-resenas", "titulo": "Estacionalidad de las reseñas", "tabla": "estacionalidad_resenas.parquet", "problema": "estacionalidad.", "decision": "datos necesarios §2. La reseña es un flujo; un mes sin reseñas no se rellena, porque no se sabe si no hubo actividad.", "hecho": "reseñas por mes.", "codigo": "res.groupby(mes).size()",
          "comprobacion": f"{s['resenas']['total']} reseñas antes y después; {s['resenas']['meses_sin_resenas']} meses sin reseñas dentro del rango.", "quedo": f"{f['estacionalidad_resenas']} meses."},
-        {**comun, "clave": "transformacion-disponibilidad", "titulo": "Disponibilidad futura", "tabla": "disponibilidad_futura.parquet", "problema": "días libres de los próximos 12 meses.", "decision": "El calendario no distingue reservado de bloqueado (reglas §5).", "hecho": "días y días libres por anuncio y mes, con marca de mes completo.", "codigo": "t.groupby(['listing_id', 'mes']).agg(...)",
+        {**comun, "clave": "transformacion-disponibilidad", "titulo": "Disponibilidad futura", "tabla": "disponibilidad_futura.parquet", "problema": "días libres de los próximos 12 meses.", "decision": "El calendario no distingue reservado de bloqueado (reglas §2).", "hecho": "días y días libres por anuncio y mes, con marca de mes completo.", "codigo": "t.groupby(['listing_id', 'mes']).agg(...)",
          "comprobacion": f"{s['disponibilidad']['dias']} días y {s['disponibilidad']['libres']} libres antes y después.", "quedo": f"{f['disponibilidad_futura']} filas."},
-        {**comun, "clave": "transformacion-cinco-pruebas", "titulo": "Columnas para las cinco pruebas del grupo", "tabla": "analisis_anuncios.parquet, `anuncios_anfitrion`, `dias_cotizacion`, `dias_cotizacion_mar`, `dias_cotizacion_jun`", "problema": "reglas §7: el grupo firme se decide con cinco pruebas, y dos de ellas piden datos que la tabla no traía.",
-         "decision": "reglas §7. Anuncios del anfitrión: `calculated_host_listings_count`, el recuento de la foto. Cotización: cada foto con su fecha, porque cada variante usa el precio de una foto. Ninguna fila sale de la base.", "hecho": "se añaden cuatro columnas; una cotización que falta queda vacía.",
+        {**comun, "clave": "transformacion-cinco-pruebas", "titulo": "Columnas para las cinco pruebas del grupo", "tabla": "analisis_anuncios.parquet, `anuncios_anfitrion`, `dias_cotizacion`, `dias_cotizacion_mar`, `dias_cotizacion_jun`", "problema": "reglas §3: el grupo firme se decide con cinco pruebas, y dos de ellas piden datos que la tabla no traía.",
+         "decision": "reglas §3. Anuncios del anfitrión: `calculated_host_listings_count`, el recuento de la foto. Cotización: cada foto con su fecha, porque cada variante usa el precio de una foto. Ninguna fila sale de la base.", "hecho": "se añaden cuatro columnas; una cotización que falta queda vacía.",
          "codigo": "df['anuncios_anfitrion'] = df['calculated_host_listings_count']\ndf['dias_cotizacion'] = (pd.to_datetime(df['price_quote_checkin_date']) - foto).dt.days", "comprobacion": f"{s['cotizacion']['con_fecha']} anuncios con cotización de septiembre y {s['cotizacion']['sin_fecha_con_precio']} con precio sin fecha; {s['cotizacion']['lejanas']} a más de {s['cotizacion']['umbral_dias']} días; {s['cotizacion']['anfitriones_grandes']} anuncios de anfitriones con {s['cotizacion']['umbral_anuncios']} o más.",
          "quedo": f"{f['analisis_anuncios']} filas y cuatro columnas más; {len(g['firmes'])} firmes, {len(g['con_aviso'])} con aviso y {len(g['segunda_linea'])} en segunda línea.", "quien": "Juan Luis León"},
     ]
@@ -505,7 +505,7 @@ def principal(s, con_riesgos=True):
 
 def ejecutar():
     """Lanza la transformación y, si algo falla, deja el JSON con estado ERROR antes de avisar."""
-    s = rc.bloque_comun(SKILL, VERSION, SCRIPT)
+    s = rc.bloque_comun(ETAPA, VERSION, SCRIPT)
     try:
         s = principal(s, con_riesgos="--sin-riesgos" not in sys.argv[1:])
     except Exception as error:

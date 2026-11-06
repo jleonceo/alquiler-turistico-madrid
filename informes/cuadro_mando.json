@@ -1,13 +1,13 @@
 {
  "script": "scripts/cuadro_mando.py",
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T21:48:34",
+ "fecha_ejecucion": "2026-11-06T22:35:33",
  "python": "3.13.18",
  "pandas": "3.1.0",
  "entradas": [
   {
    "ruta": "informes/indicadores.json",
-   "sha256": "b8d28dac0e022e132450fab702314dd3e99258e2ecb1662465609d83eda56cfe"
+   "sha256": "0b051d26d70569149d3473a62b184762f5877dfb6597454ebae656d6db4e9c10"
   },
   {
    "ruta": "data/processed/analisis_anuncios.parquet",
@@ -25,7 +25,7 @@
  "salida": {
   "ruta": "informes/cuadro_mando.html",
   "bytes": 280526,
-  "sha256": "c275fb84df229b4d0e3cf265e28d28593f25e4972389f4722b161e3857deb753"
+  "sha256": "54dc96121ff189f3a7e54787ba21a8517397a3f250f6766f42acefa7200fb3c2"
  },
  "filtros": {
   "distritos": 21,

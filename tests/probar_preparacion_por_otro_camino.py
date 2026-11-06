@@ -50,7 +50,7 @@ def plano(texto):
 
 
 def banos(texto):
-    """Lee los baños del texto (reglas §5)."""
+    """Lee los baños del texto (reglas §2)."""
     t = texto.lower()
     if not t:
         return None
@@ -63,7 +63,7 @@ def banos(texto):
 
 
 def superficie(d, b):
-    """Aplica la superficie de valoraciones (reglas §6)."""
+    """Aplica la superficie de valoraciones (reglas §2)."""
     if d > 3 or b >= 3:
         return 140.0
     if d == 3:

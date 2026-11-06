@@ -92,6 +92,8 @@ La Dirección de Inversiones puede concentrar la búsqueda en la lista. No permi
 - `informes/analisis-exploratorio__analisis_anuncios.json` y `informes/analisis-exploratorio__analisis_barrios.json`, para las hipótesis y alertas.
 - `config/metodo/06_borrador_de_hallazgos.md`.
 
+`indicadores.md`, los dos JSON del análisis exploratorio y el borrador de hallazgos no están en el repositorio: se generan al ejecutar `python ejecutar.py --completo`.
+
 ## Datos personales
 
 Son datos públicos, protegidos antes de llegar al caso con una supresión de columnas, sin códigos con clave. Salieron las columnas que identifican al anfitrión, los enlaces, las fotos, los textos, el nombre de quien reseña y el número de licencia, del que queda su tipo. Quedan el número del anuncio, las coordenadas, desplazadas hasta 150 m, y el recuento de anuncios por anfitrión. Los resultados se dan por barrio y tipo de piso, y ninguno decide sobre una persona.
