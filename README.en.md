@@ -113,8 +113,6 @@ it. It is downloaded from their website when the analysis is repeated.
 - The purchase price is the one declared in 2025.
 - A rental listing does not mean the flat is for sale.
 - Repeating the full analysis depends on Inside Airbnb still offering these downloads.
-- The tests have only passed on Windows.
-- The automated GitHub tests have not run yet.
 
 ## Related repositories
 

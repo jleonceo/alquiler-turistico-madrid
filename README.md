@@ -111,8 +111,6 @@ publicarlos. Se descargan de su web al repetir el análisis.
 - El precio de compra es el declarado en 2025.
 - Un anuncio de alquiler no significa que ese piso esté en venta.
 - Repetir el análisis completo depende de que Inside Airbnb siga ofreciendo estas descargas.
-- Las pruebas solo han pasado en Windows.
-- Las pruebas automáticas de GitHub no se han ejecutado todavía.
 
 ## Repositorios relacionados
 

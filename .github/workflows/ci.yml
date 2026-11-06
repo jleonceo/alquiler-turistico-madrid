@@ -1,8 +1,7 @@
 name: ci
 
 # Es la única vigilancia que no depende de que el portátil esté encendido. Ejecuta el escáner sobre lo que git publica,
-# pasa las pruebas. Se comprobó en local antes de escribirlo, solo en Windows; su primera
-# ejecución será el primer push.
+# pasa las pruebas.
 #
 # No descarga los datos de Inside Airbnb: la fuente pide descargarlos una vez y no en cada ejecución. Los bancos que abren
 # datos reales se saltan aquí y run_tests.py los nombra. El recorrido en navegador necesita Edge y también se salta.
