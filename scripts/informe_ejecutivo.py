@@ -35,7 +35,7 @@ EDGE += [Path(os.environ[v]) / "Microsoft/Edge/Application/msedge.exe" for v in 
 ESPERA_PDF = 60  # segundos: Edge puede devolver el control antes de terminar de escribir el PDF 
 TITULO = "Buscar pisos de hasta 2 habitaciones en los barrios de Ventas, Numancia y San Diego"
 
-# Hoja de impresión del patrón 07, §6: A4, 20 mm, Segoe UI a 11 pt, sin color ni recuadros.
+# Hoja de impresión del patrón 07, §6: A4, 20 mm, Segoe UI a 11 pt, sin color ni recuadros. En pantalla, una hoja centrada.
 ESTILO = """@page { size: A4; margin: 20mm; }
 html, body { margin: 0; background: #ffffff; color: #0b0b0b; }
 body { font-family: "Segoe UI", system-ui, sans-serif; font-size: 11pt; line-height: 1.4; }
@@ -53,6 +53,15 @@ th.num, td.num { text-align: right; }
 .anexo { break-before: page; }
 .anexo, .anexo ul, .anexo ol { font-size: 10pt; line-height: 1.3; }
 .anexo h3 { font-size: 11pt; margin: 6pt 0 2pt; }
+@media screen {
+  html { background: #eef0f2; }
+  body { box-sizing: border-box; max-width: 794px; margin: 24px auto; padding: 56px 64px; background: #ffffff; }
+  .anexo { margin-top: 32pt; padding-top: 16pt; border-top: 1px solid #c8ccd0; }
+}
+@media screen and (max-width: 820px) {
+  body { margin: 0; padding: 24px 16px; }
+  table { display: block; overflow-x: auto; }
+}
 """
 
 
@@ -169,7 +178,7 @@ def montar(t, c, emision):
              "<h3>Consultas</h3>" + lista([f"{q} {r}" for q, r in x["consultas"]]) +
              f"<h3>Datos personales</h3><p>{x['datos']}</p><h3>Origen de las cifras</h3><p>{x['fichero']}</p>"
              "<h3>Fuentes externas</h3>" + lista(x["fuentes"], "ol") + "</section>")
-    documento = (f'<!doctype html>\n<html lang="es">\n<head>\n<meta charset="utf-8">\n<title>Informe ejecutivo</title>\n<style>\n{ESTILO}</style>\n</head>\n<body>\n'
+    documento = (f'<!doctype html>\n<html lang="es">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>Informe ejecutivo</title>\n<style>\n{ESTILO}</style>\n</head>\n<body>\n'
                  f"<h1>{TITULO}</h1><p>{meta}</p>{resumen}<h2>Conclusiones y recomendaciones</h2>{encontrado}{limites}{recomendaciones}{anexo}\n</body>\n</html>\n")
     apartados = {"titulo_y_resumen": TITULO + " " + meta + " " + resumen, "encontrado": encontrado, "limites": limites, "recomendaciones": recomendaciones, "anexo": anexo}
     return documento, apartados

@@ -1,6 +1,6 @@
 {
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T22:35:26",
+ "fecha_ejecucion": "2026-11-06T22:50:54",
  "script": "scripts/informe_ejecutivo.py",
  "indicadores": "informes/indicadores.json",
  "indicadores_fecha_ejecucion": "2026-11-06T22:35:04",
