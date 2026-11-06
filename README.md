@@ -16,6 +16,10 @@ con un máximo de 255 días al año.
 
 Si se quitan los pisos que llegan a ese máximo, los tres barrios salen de la lista.
 
+**El precio de compra es el oficial de 2025, y hoy el mercado pide más.** Con los precios que piden Fotocasa e Idealista,
+la compra en mediana sube a 171.600 € y 182.000 €, y la rentabilidad bruta baja al 10,9 % y al 10,6 %. Son precios de anuncio,
+así que la compra real quedaría algo por debajo.
+
 [![CI](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml/badge.svg)](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml)
 
 ```bash
@@ -57,7 +61,8 @@ La rentabilidad bruta de un piso es su ingreso anual dividido entre lo que costa
 noche multiplicado por los días ocupados que estima Inside Airbnb. El precio de compra sale de una superficie supuesta y del
 precio oficial del m² del barrio.
 
-Si se comprara un 25 % por debajo de ese precio, la rentabilidad subiría al 16,2 %.
+Si se comprara un 25 % por debajo de ese precio, la rentabilidad subiría al 16,2 %. Ese descuento es un supuesto sin datos detrás:
+frente a los precios que se piden hoy, sería una rebaja de entre el 29 % y el 33 %.
 
 Los barrios se ordenaron por rentabilidad y se miró cuáles quedaban en el 25 % más rentable. Ese orden cambia según la
 estancia mínima o el mes del precio. Por eso el cálculo se repitió 12 veces, con distintos valores. Se quedaron los 9 barrios
@@ -85,11 +90,23 @@ Pisos de hasta 2 habitaciones en los barrios de Numancia, San Diego y Ventas: 25
   Precio de compra, en mediana: 161.973 €
   Ingreso al año, en mediana: 21.675 €
   Rentabilidad bruta: 12,1 %
-  Rentabilidad bruta si la compra baja un 25 %: 16,2 %
+  Rentabilidad bruta si la compra baja un 25 %, un supuesto: 16,2 %
+  Con los precios que pide hoy Fotocasa: compra de 171.600 € y rentabilidad bruta de 10,9 %
+  Con los precios que pide hoy Idealista: compra de 182.000 € y rentabilidad bruta de 10,6 %
   Rentabilidad de todos los pisos de esos barrios, según el mes del precio y el descuento: de 10,8 % a 15,4 %
 
 Estas cifras coinciden con las del análisis y con las de esta página, en español y en inglés.
 ```
+
+## El precio de compra de hoy
+
+| Barrio | Oficial, escrituras de 2025 | Fotocasa | Idealista |
+|---|---|---|---|
+| Ventas | 4.133 €/m² | 4.825 €/m² | 4.816 €/m² |
+| Numancia | 3.239 €/m² | 3.432 €/m² | 3.640 €/m² |
+| San Diego | 3.078 €/m² | 3.388 €/m² | 3.489 €/m² |
+
+Los precios de los portales se consultaron el 06/11/2026 y solo se comparan en estos tres barrios.
 
 ## Cómo está hecho
 
@@ -109,6 +126,7 @@ El detalle está en [el método](docs/metodo.md), [las reglas de negocio](docs/r
 | [Inside Airbnb](https://insideairbnb.com/get-the-data/), Madrid | anuncios, calendario, reseñas y límites de barrio | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | se descarga aparte |
 | [Ayuntamiento de Madrid](https://datos.madrid.es/) | precio y superficie de 2025, ventas, licencias, centro histórico y puntos de interés | reutilización con cita | `data/raw/externos/` |
 | Colegio de Registradores de España | origen del precio y la superficie que publica el Ayuntamiento | se cita junto al Ayuntamiento | `data/raw/externos/` |
+| [Fotocasa](https://www.fotocasa.es/fotocasa-life/sector/evolucion-del-precio-de-la-vivienda-en-madrid/) e [Idealista](https://www.idealista.com/maps/madrid/) | precio del m² que se pide hoy en los tres barrios, solo para comparar | se cita la fuente | `config/fuentes/precios_de_mercado.json` |
 
 Los datos de Inside Airbnb no están aquí porque [su política](https://insideairbnb.com/data-policies/) pide no volver a
 publicarlos. Se descargan de su web al repetir el análisis.
@@ -123,7 +141,7 @@ publicarlos. Se descargan de su web al repetir el análisis.
   puede subir la rentabilidad.
 - No se ha medido si otro rango de precio cambiaría los barrios.
 - La rentabilidad no incluye gastos, impuestos, comunidad ni comisiones.
-- El precio de compra es el declarado en 2025.
+- Los barrios se eligieron con el precio declarado en 2025. No se ha medido si cambiarían con los precios de hoy.
 - Un anuncio de alquiler no significa que ese piso esté en venta.
 - Repetir el análisis completo depende de que Inside Airbnb siga ofreciendo estas descargas.
 

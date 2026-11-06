@@ -80,6 +80,7 @@ def contenido(c):
     base = c.num(f"{Q2}.mediana_de_toda_la_base", 1)
     rango = f"{Q3}.rango_de_rentabilidad_del_grupo_firme"
     sup = "preguntas[0].sensibilidad_superficie"
+    fot, ide = "recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa]", "recomendacion.precio_de_mercado.fuentes[fuente=Idealista]"
     dorm = lambda g, campo: f"preguntas[0].dormitorios.tabla[grupo={g}].{campo}"
     acciones = ci.acciones(c)
 
@@ -90,7 +91,7 @@ def contenido(c):
 
     # Resumen: seis viñetas, la primera en dinero, cada una con su cifra en negrita.
     resumen = [
-        f"Un piso firme de hasta 2 habitaciones cuesta <b>{c.eur(REC + '.compra_sin_descuento_eur')}</b> sin descuento, ingresa {c.eur(REC + '.ingreso_anual_eur')} al año y rinde {c.pct(REC + '.rentabilidad_sin_descuento_pct')} bruto, en mediana y sin gastos. Con descuento, {c.pct(REC + '.rentabilidad_con_descuento_pct')}. Rango del grupo firme: {c.pct(rango + '.minimo')} a {c.pct(rango + '.maximo')}.",
+        f"Un piso firme de hasta 2 habitaciones cuesta <b>{c.eur(REC + '.compra_sin_descuento_eur')}</b> sin descuento, ingresa {c.eur(REC + '.ingreso_anual_eur')} al año y rinde {c.pct(REC + '.rentabilidad_sin_descuento_pct')} bruto, en mediana y sin gastos. Con descuento supuesto, {c.pct(REC + '.rentabilidad_con_descuento_pct')}; a precios pedidos hoy, {c.pct(ide + '.rentabilidad_mediana_pct')} a {c.pct(fot + '.rentabilidad_mediana_pct')}.",
         f"Firme es estable, no mejor: aguanta las <b>5</b> pruebas, que repiten la lista quitando algo. Numancia supera la mediana de la base; Ventas y San Diego no se distinguen de ella.",
         f"Casco Histórico de Vallecas y Opañel rinden más que San Diego, pero dependen de operadores grandes, <b>{c.pct(Q2 + '.operadores_grandes.con_aviso_pct', 0)}</b> de sus anuncios.",
         f"Los firmes dependen del tope, y con anuncios de un año o más San Diego cae a la <b>{c.num(ci.puesto('San Diego'))}.ª</b> de {c.num(UN_ANO + '.barrios_comparados')}.",
@@ -100,7 +101,7 @@ def contenido(c):
 
     # Lo encontrado: una evidencia por viñeta, en el mismo orden, con su base y sin repetir la frase.
     encontrado = [
-        f"<b>Dinero:</b> son {c.num(REC + '.pisos')} anuncios en Airbnb, no pisos en venta. La inversión total no consta. Con el 25 % de descuento, la compra baja a {c.eur(REC + '.compra_con_descuento_eur')}. El rango son seis combinaciones de foto y descuento con todos los pisos firmes. Su mediana conjunta, {c.pct(Q3 + '.rentabilidad_del_grupo_firme.mediana')} con descuento, no es la media de sus barrios.",
+        f"<b>Dinero:</b> son {c.num(REC + '.pisos')} anuncios en Airbnb, no pisos en venta. La inversión total no consta. Con el 25 % de descuento, la compra baja a {c.eur(REC + '.compra_con_descuento_eur')}. El rango, de {c.pct(rango + '.minimo')} a {c.pct(rango + '.maximo')}, son seis combinaciones de foto y descuento. Su mediana conjunta, {c.pct(Q3 + '.rentabilidad_del_grupo_firme.mediana')} con descuento, no es la media de sus barrios.",
         f"<b>Ventas, Numancia y San Diego:</b> la base de decisión son {c.num('preguntas[0].poblacion.filas')} anuncios de pisos fuera del centro histórico. Una variante repite el cálculo con otra estancia, otro mínimo de anuncios u otra foto de precio. El grupo son {c.cuantos(Q2 + '.grupo')} barrios en el mejor cuarto en más de 6 de 12. Una prueba repite esas variantes quitando algo. No se distingue significa que la diferencia puede ser cero con un intervalo de confianza del 95 %.",
         "<b>Dos con aviso:</b> operadores grandes son los anfitriones de 10 anuncios o más. Puerta del Ángel está en el grupo y no aguanta ninguna prueba.",
         f"<b>Riesgo:</b> depender del tope es salir del grupo sin los pisos que llegan a 255 días; Opañel, con el {c.pct(ficha('Opañel', 'parte_en_el_tope_pct'), 0)}, no depende. En uno de cada cuatro anuncios la rentabilidad no llega a {c.pct(Q2 + '.cuartil_bajo_de_toda_la_base', 2)}, y los firmes quedan por encima. La ocupación cuenta reseñas de 12 meses y un anuncio nuevo sale bajo: con los de un año o más, Numancia queda {c.num(ci.puesto('Numancia'))}.ª, Ventas {c.num(ci.puesto('Ventas'))}.ª y San Diego {c.num(ci.puesto('San Diego'))}.ª de {c.num(UN_ANO + '.barrios_comparados')}. San Diego se sostiene menos.",
@@ -112,7 +113,8 @@ def contenido(c):
     limites = [
         "La ocupación es una estimación con tope de 255 días, y en la parte alta no ordena.",
         "Contar además los pisos sin ocupación ni precio dejaría solo a Ventas como firme.",
-        "La superficie y el descuento del 25 % son supuestos, y el precio de compra es el declarado en 2025. La rentabilidad bruta no es beneficio.",
+        "Superficie y descuento son supuestos. La rentabilidad bruta no es beneficio.",
+        f"La compra es la declarada en 2025. A lo que piden hoy Fotocasa e Idealista sube a {c.eur(fot + '.compra_mediana_eur')} y {c.eur(ide + '.compra_mediana_eur')}; no se midió si cambian los barrios.",
         "El ingreso de los anuncios mezcla todas las plantas.",
         "Una diferencia entre barrios es una asociación: no dice por qué ocurre. Este informe no es asesoramiento jurídico.",
     ]

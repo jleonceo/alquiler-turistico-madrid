@@ -263,7 +263,7 @@ def paginas_cierre(inf, c):
         ["Dónde buscar", "La ocupación es una estimación con tope de 255 días, y en la parte alta no ordena."],
         ["Dónde buscar", "Contar además los pisos sin ocupación ni precio dejaría solo a Ventas como firme."],
         ["Qué tipo buscar", "La superficie es un supuesto de valoraciones, y el dato oficial es igual para todos los pisos del barrio."],
-        ["Cuánto rinde", "El precio de compra es el declarado en 2025, y el descuento del 25 % es un supuesto sin apoyo en los datos. La inversión total no consta."],
+        ["Cuánto rinde", f"El precio de compra es el declarado en 2025, y el descuento del 25 % es un supuesto sin apoyo en los datos. La inversión total no consta. Con los precios que piden hoy Fotocasa e Idealista, la compra sube a {c.eur('recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].compra_mediana_eur')} y {c.eur('recomendacion.precio_de_mercado.fuentes[fuente=Idealista].compra_mediana_eur')}, y la rentabilidad sin descuento baja a {c.pct('recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].rentabilidad_mediana_pct')} y {c.pct('recomendacion.precio_de_mercado.fuentes[fuente=Idealista].rentabilidad_mediana_pct')}. No se ha medido si cambiarían los barrios."],
         ["Casco Histórico de Vallecas", "Airbnb junta en él lo que el Ayuntamiento separa, y su precio oficial puede no representar todo el barrio."],
         ["Por qué ocurre", "Son asociaciones sobre una foto: no dicen por qué un barrio rinde más. El calendario no distingue reservado de bloqueado."],
     ], fuente="reglas de negocio y datos de la descarga del 17/09/2026")

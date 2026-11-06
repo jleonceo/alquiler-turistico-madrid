@@ -35,6 +35,7 @@ SCRIPT = "scripts/indicadores.py"
 PLANTEAMIENTOS = rc.CASO / "config" / "metodo" / "04_planteamientos.md"
 BORRADOR = rc.CASO / "config" / "metodo" / "06_borrador_de_hallazgos.md"
 DATOS_NECESARIOS = rc.CASO / "config" / "fuentes" / "02_datos_necesarios.md"
+PRECIOS_MERCADO = rc.CASO / "config" / "fuentes" / "precios_de_mercado.json"
 MINIMO = cd.MIN_GRUPO
 MINIMO_VARIANTE = min(cd.MIN_VARIANTE)
 CONFIANZA = 0.95
@@ -370,6 +371,25 @@ def cifras_de_la_recomendacion(t):
     """Da las cifras de los pisos que se recomiendan: recuento y, en mediana, rentabilidad, compra e ingreso, con y sin descuento."""
     campos = {"rentabilidad_sin_descuento_pct": "rent_valoraciones_sin_pct", "rentabilidad_con_descuento_pct": "rent_valoraciones_desc_pct", "compra_sin_descuento_eur": "compra_valoraciones_sin_eur", "compra_con_descuento_eur": "compra_valoraciones_desc_eur", "ingreso_anual_eur": "ingreso_anual_eur"}
     return {"pisos": len(t), **{k: float(t[c].median()) if len(t) else None for k, c in campos.items()}}
+
+
+def precio_de_mercado(t):
+    """Repite la compra y la rentabilidad de los pisos recomendados con los precios del m² que piden hoy los portales."""
+    if not PRECIOS_MERCADO.exists():
+        return {"consulta": None, "fuentes": []}
+    cfg = json.loads(PRECIOS_MERCADO.read_text(encoding="utf-8"))
+    fuentes = []
+    for f in cfg["fuentes"]:
+        if not len(t) or not set(t["barrio"]) <= set(f["barrios"]):
+            continue
+        compra = t["compra_valoraciones_sin_eur"] * t["barrio"].map(f["barrios"]) / t["precio_m2_eur"]
+        rent = 100 * t["ingreso_anual_eur"] / compra
+        barrios = [{"barrio": b, "precio_m2_oficial_eur": float(t.loc[x.index[0], "precio_m2_eur"]), "precio_m2_mercado_eur": float(f["barrios"][b]),
+                    "subida_pct": 100 * (f["barrios"][b] / float(t.loc[x.index[0], "precio_m2_eur"]) - 1), "compra_mediana_eur": float(compra[x.index].median()), "rentabilidad_mediana_pct": float(rent[x.index].median())}
+                   for b, x in t.groupby("barrio")]
+        fuentes.append({"fuente": f["fuente"], "compra_mediana_eur": float(compra.median()), "rentabilidad_mediana_pct": float(rent.median()),
+                        "rebaja_que_supone_el_descuento_pct": 100 * (1 - float(t["compra_valoraciones_desc_eur"].median()) / float(compra.median())), "barrios": barrios})
+    return {"consulta": cfg["consulta"], "fuentes": fuentes}
 
 
 def parte_de_operadores_grandes(t, barrios, anuncios):
@@ -999,7 +1019,7 @@ def calcular(entrada, planteamiento, dec):
 
     # La cifra de la recomendación: los pisos de hasta 2 dormitorios de los barrios firmes, rehecha sin pandas.
     recomendados = d.loc[d["barrio"].isin(p2["firmes"]) & d["dormitorios"].le(2)]
-    recomendacion = {"dormitorios_hasta": 2, **cifras_de_la_recomendacion(recomendados)}
+    recomendacion = {"dormitorios_hasta": 2, **cifras_de_la_recomendacion(recomendados), "precio_de_mercado": precio_de_mercado(recomendados)}
     for clave, columna in (("rentabilidad_sin_descuento_pct", "rent_valoraciones_sin_pct"), ("rentabilidad_con_descuento_pct", "rent_valoraciones_desc_pct"), ("compra_sin_descuento_eur", "compra_valoraciones_sin_eur"), ("compra_con_descuento_eur", "compra_valoraciones_desc_eur"), ("ingreso_anual_eur", "ingreso_anual_eur")):
         p3["cifras"].append(reg.cifra(f"recomendación: {clave}", recomendacion[clave], mediana(recomendados[columna].tolist()) if len(recomendados) else None, len(recomendados), "pisos de hasta 2 habitaciones del grupo firme"))
     r = {"preguntas": [p1, p2, p3], "recomendacion": recomendacion, "las_16": las_16(d, c, extra, oficial, reg), "evolucion_oferta": evolucion_de_la_oferta(oferta, p2, reg), "estacionalidad": estacionalidad(res, reg), "disponibilidad": disponibilidad_futura(dispo, a, p2, reg),

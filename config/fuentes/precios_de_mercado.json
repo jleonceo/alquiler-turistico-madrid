@@ -1,0 +1,17 @@
+{
+  "descripcion": "Precio del m² en venta de los tres barrios recomendados, para comparar con el precio oficial de 2025. Son precios pedidos en portales. No entran en la selección de barrios.",
+  "consulta": "2026-11-06",
+  "oficial_2025": {"Ventas": 4133.07, "Numancia": 3239.46, "San Diego": 3078.32},
+  "fuentes": [
+    {
+      "fuente": "Fotocasa",
+      "url": "https://www.fotocasa.es/fotocasa-life/sector/evolucion-del-precio-de-la-vivienda-en-madrid/",
+      "barrios": {"Ventas": 4825, "Numancia": 3432, "San Diego": 3388}
+    },
+    {
+      "fuente": "Idealista",
+      "url": "https://www.idealista.com/maps/madrid/",
+      "barrios": {"Ventas": 4816, "Numancia": 3640, "San Diego": 3489}
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 {
  "script": "scripts/cuadro_mando.py",
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T22:35:33",
+ "fecha_ejecucion": "2026-11-06T23:05:47",
  "python": "3.13.18",
  "pandas": "3.1.0",
  "entradas": [
   {
    "ruta": "informes/indicadores.json",
-   "sha256": "0b051d26d70569149d3473a62b184762f5877dfb6597454ebae656d6db4e9c10"
+   "sha256": "c52461badd0424610a5c65ab95ecd29f51e63f0a8824e9a7716dbdb4349ec25b"
   },
   {
    "ruta": "data/processed/analisis_anuncios.parquet",
@@ -24,8 +24,8 @@
  ],
  "salida": {
   "ruta": "informes/cuadro_mando.html",
-  "bytes": 280526,
-  "sha256": "54dc96121ff189f3a7e54787ba21a8517397a3f250f6766f42acefa7200fb3c2"
+  "bytes": 280830,
+  "sha256": "6bfb36cef6cc7e067b8556268fdceb611be8a47631c7802620c9d30488694841"
  },
  "filtros": {
   "distritos": 21,
@@ -100,7 +100,7 @@
     "14,5 %"
    ]
   ],
-  "nota_recomendacion": "Rentabilidad bruta, en mediana y sin gastos, en los anuncios en Airbnb de los firmes; el rango es de todos sus pisos, según la foto y el descuento. Valoraciones empieza por bajos y primeras plantas con acceso independiente. Fuera del centro histórico, en el nivel B de la zona 1, el hospedaje cabe en planta baja, inferior a la baja y primera, y siempre con acceso independiente. El ingreso de un bajo no se conoce, porque el de los anuncios mezcla todas las plantas. Qué norma rige en cada barrio no se puede saber aquí: se pregunta en el Ayuntamiento. Elegir por m² barato no se distingue de la lista. Entre barrios, la rentabilidad se asocia más con la ocupación (0,78), la cifra más débil del caso, que con el m² (−0,60).",
+  "nota_recomendacion": "Con los precios que piden hoy Fotocasa e Idealista, la compra sube a 171.600 € y 182.000 €, y la rentabilidad sin descuento baja a 10,9 % y 10,6 %. Rentabilidad bruta, en mediana y sin gastos, en los anuncios en Airbnb de los firmes; el rango es de todos sus pisos, según la foto y el descuento. Valoraciones empieza por bajos y primeras plantas con acceso independiente. Fuera del centro histórico, en el nivel B de la zona 1, el hospedaje cabe en planta baja, inferior a la baja y primera, y siempre con acceso independiente. El ingreso de un bajo no se conoce, porque el de los anuncios mezcla todas las plantas. Qué norma rige en cada barrio no se puede saber aquí: se pregunta en el Ayuntamiento. Elegir por m² barato no se distingue de la lista. Entre barrios, la rentabilidad se asocia más con la ocupación (0,78), la cifra más débil del caso, que con el m² (−0,60).",
   "texto_mapa": "Numancia supera la mediana de la base; Ventas y San Diego no se distinguen de ella. San Diego queda por debajo de Casco Histórico de Vallecas y de Opañel, que van detrás porque dependen de operadores grandes, el 65 % de sus anuncios. <button class=\"def\" type=\"button\" data-def=\"distingue\">Qué significa</button>",
   "tabla_mapa": [
    [

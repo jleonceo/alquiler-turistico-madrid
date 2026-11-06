@@ -3,7 +3,7 @@
  "version_etapa": "1.0",
  "script": "scripts/indicadores.py",
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T22:35:04",
+ "fecha_ejecucion": "2026-11-06T23:05:20",
  "python": "3.13.18",
  "pandas": "3.1.0",
  "entradas": [
@@ -5696,7 +5696,76 @@
   "rentabilidad_con_descuento_pct": 16.153918,
   "compra_sin_descuento_eur": 161973.0,
   "compra_con_descuento_eur": 121479.75,
-  "ingreso_anual_eur": 21674.79
+  "ingreso_anual_eur": 21674.79,
+  "precio_de_mercado": {
+   "consulta": "2026-11-06",
+   "fuentes": [
+    {
+     "fuente": "Fotocasa",
+     "compra_mediana_eur": 171600.0,
+     "rentabilidad_mediana_pct": 10.869148,
+     "rebaja_que_supone_el_descuento_pct": 29.207605,
+     "barrios": [
+      {
+       "barrio": "Numancia",
+       "precio_m2_oficial_eur": 3239.46,
+       "precio_m2_mercado_eur": 3432.0,
+       "subida_pct": 5.943583,
+       "compra_mediana_eur": 171600.0,
+       "rentabilidad_mediana_pct": 12.512115
+      },
+      {
+       "barrio": "San Diego",
+       "precio_m2_oficial_eur": 3078.32,
+       "precio_m2_mercado_eur": 3388.0,
+       "subida_pct": 10.060033,
+       "compra_mediana_eur": 169400.0,
+       "rentabilidad_mediana_pct": 9.935065
+      },
+      {
+       "barrio": "Ventas",
+       "precio_m2_oficial_eur": 4133.07,
+       "precio_m2_mercado_eur": 4825.0,
+       "subida_pct": 16.741309,
+       "compra_mediana_eur": 241250.0,
+       "rentabilidad_mediana_pct": 11.098446
+      }
+     ]
+    },
+    {
+     "fuente": "Idealista",
+     "compra_mediana_eur": 182000.0,
+     "rentabilidad_mediana_pct": 10.58607,
+     "rebaja_que_supone_el_descuento_pct": 33.252885,
+     "barrios": [
+      {
+       "barrio": "Numancia",
+       "precio_m2_oficial_eur": 3239.46,
+       "precio_m2_mercado_eur": 3640.0,
+       "subida_pct": 12.364406,
+       "compra_mediana_eur": 182000.0,
+       "rentabilidad_mediana_pct": 11.797137
+      },
+      {
+       "barrio": "San Diego",
+       "precio_m2_oficial_eur": 3078.32,
+       "precio_m2_mercado_eur": 3489.0,
+       "subida_pct": 13.341043,
+       "compra_mediana_eur": 174450.0,
+       "rentabilidad_mediana_pct": 9.647463
+      },
+      {
+       "barrio": "Ventas",
+       "precio_m2_oficial_eur": 4133.07,
+       "precio_m2_mercado_eur": 4816.0,
+       "subida_pct": 16.523553,
+       "compra_mediana_eur": 240800.0,
+       "rentabilidad_mediana_pct": 11.119186
+      }
+     ]
+    }
+   ]
+  }
  },
  "las_16": [
   {

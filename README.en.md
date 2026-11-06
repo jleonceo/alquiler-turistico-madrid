@@ -15,6 +15,10 @@ be checked flat by flat with the City Council. The occupied days are also an est
 
 If flats at that cap are excluded, the three neighbourhoods drop off the list.
 
+**The purchase price is the official 2025 one, and the market is asking more today.** At the prices on Fotocasa and Idealista,
+the median purchase price rises to €171,600 and €182,000, and the gross yield falls to 10.9% and 10.6%. These are asking prices,
+so the actual purchase price would be somewhat lower.
+
 [![CI](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml/badge.svg)](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml)
 
 ```bash
@@ -58,7 +62,8 @@ A flat's gross yield is its annual rental income divided by its purchase price. 
 occupied days estimated by Inside Airbnb. The purchase price is calculated from an assumed floor area and the official price per
 m² in the neighbourhood.
 
-If the flat were bought 25% below that price, the yield would rise to 16.2%.
+If the flat were bought 25% below that price, the yield would rise to 16.2%. That discount is an assumption with no data behind it:
+against today's asking prices, it would be a reduction of between 29% and 33%.
 
 The neighbourhoods were ranked by yield to see which fell in the top 25%. That ranking changes with the minimum stay and the month
 of the price, so the calculation was repeated 12 times with different values. The 9 neighbourhoods that were in the top 25% in more
@@ -86,11 +91,23 @@ Pisos de hasta 2 habitaciones en los barrios de Numancia, San Diego y Ventas: 25
   Precio de compra, en mediana: 161.973 €
   Ingreso al año, en mediana: 21.675 €
   Rentabilidad bruta: 12,1 %
-  Rentabilidad bruta si la compra baja un 25 %: 16,2 %
+  Rentabilidad bruta si la compra baja un 25 %, un supuesto: 16,2 %
+  Con los precios que pide hoy Fotocasa: compra de 171.600 € y rentabilidad bruta de 10,9 %
+  Con los precios que pide hoy Idealista: compra de 182.000 € y rentabilidad bruta de 10,6 %
   Rentabilidad de todos los pisos de esos barrios, según el mes del precio y el descuento: de 10,8 % a 15,4 %
 
 Estas cifras coinciden con las del análisis y con las de esta página, en español y en inglés.
 ```
+
+## Today's purchase price
+
+| Neighbourhood | Official, 2025 deeds | Fotocasa | Idealista |
+|---|---|---|---|
+| Ventas | €4,133/m² | €4,825/m² | €4,816/m² |
+| Numancia | €3,239/m² | €3,432/m² | €3,640/m² |
+| San Diego | €3,078/m² | €3,388/m² | €3,489/m² |
+
+The portal prices were checked on 06/11/2026 and are compared only for these three neighbourhoods.
 
 ## How it is built
 
@@ -110,6 +127,7 @@ The detail, in Spanish, is in [the method](docs/metodo.md), [the business rules]
 | [Inside Airbnb](https://insideairbnb.com/get-the-data/), Madrid | listings, calendar, reviews and neighbourhood boundaries | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | downloaded separately |
 | [Madrid City Council](https://datos.madrid.es/) | 2025 price and floor area, sales, licences, historic centre and points of interest | reuse with attribution | `data/raw/externos/` |
 | Colegio de Registradores de España | origin of the price and floor area published by the City Council | cited with the City Council | `data/raw/externos/` |
+| [Fotocasa](https://www.fotocasa.es/fotocasa-life/sector/evolucion-del-precio-de-la-vivienda-en-madrid/) and [Idealista](https://www.idealista.com/maps/madrid/) | today's asking price per m² in the three neighbourhoods, for comparison only | source cited | `config/fuentes/precios_de_mercado.json` |
 
 Inside Airbnb's data is not included because [its policy](https://insideairbnb.com/data-policies/) asks people not to republish
 it. It is downloaded from their website when the analysis is repeated.
@@ -124,7 +142,7 @@ it. It is downloaded from their website when the analysis is repeated.
   which may push the yield up.
 - It has not been measured whether another price range would change the neighbourhoods.
 - The yield excludes costs, taxes, service charges and commissions.
-- The purchase price is the one declared in 2025.
+- The neighbourhoods were chosen using the price declared in 2025. It has not been measured whether today's prices would change them.
 - A rental listing does not mean the flat is for sale.
 - Repeating the full analysis depends on Inside Airbnb still offering these downloads.
 

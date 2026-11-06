@@ -18,6 +18,7 @@ from pathlib import Path
 
 CASO = Path(__file__).resolve().parents[1]
 TABLA = CASO / "data" / "publicado" / "pisos_fuera_del_centro.csv.gz"
+PRECIOS_MERCADO = CASO / "config" / "fuentes" / "precios_de_mercado.json"
 INDICADORES = CASO / "informes" / "indicadores.json"
 ESTANCIAS = (3, 6)
 MINIMOS = (30, 20)
@@ -100,7 +101,14 @@ def calcular(filas):
     for foto in FOTOS:
         v = [x[f"rent_{foto}_pct"] for x in filas if x["barrio"] in firmes and x["estancia_hasta_3"] and x[f"rent_{foto}_pct"]]
         rango += [statistics.median(v), statistics.median(v) * DESCUENTO]
-    return {"pisos_base": len(base), "barrios_grupo": len(grupo), "grupo": grupo, "firmes": firmes, "con_aviso": con_aviso, "pisos_recomendados": len(recomendados),
+    cfg = json.loads(PRECIOS_MERCADO.read_text(encoding="utf-8"))
+    mercado = {}
+    if {x["barrio"] for x in recomendados} <= set(cfg["oficial_2025"]):
+        for f in cfg["fuentes"]:
+            compra = [x["compra_sin_descuento_eur"] * f["barrios"][x["barrio"]] / cfg["oficial_2025"][x["barrio"]] for x in recomendados]
+            rent = [100 * x["ingreso_sep_eur"] / c for x, c in zip(recomendados, compra)]
+            mercado[f["fuente"]] = {"compra": statistics.median(compra), "rent": statistics.median(rent)}
+    return {"mercado": mercado, "pisos_base": len(base), "barrios_grupo": len(grupo), "grupo": grupo, "firmes": firmes, "con_aviso": con_aviso, "pisos_recomendados": len(recomendados),
             "rent_con_descuento": statistics.median(x["rent_sep_pct"] for x in recomendados), "rent_sin_descuento": statistics.median(x["rent_sep_pct"] * DESCUENTO for x in recomendados),
             "compra_sin_descuento": statistics.median(x["compra_sin_descuento_eur"] for x in recomendados), "ingreso_anual": statistics.median(x["ingreso_sep_eur"] for x in recomendados),
             "rango_minimo": min(rango), "rango_maximo": max(rango)}
@@ -132,7 +140,9 @@ def imprimir(r):
     print(f"  Precio de compra, en mediana: {es(r['compra_sin_descuento'])} €")
     print(f"  Ingreso al año, en mediana: {es(r['ingreso_anual'])} €")
     print(f"  Rentabilidad bruta: {es(r['rent_sin_descuento'], 1)} %")
-    print(f"  Rentabilidad bruta si la compra baja un 25 %: {es(r['rent_con_descuento'], 1)} %")
+    print(f"  Rentabilidad bruta si la compra baja un 25 %, un supuesto: {es(r['rent_con_descuento'], 1)} %")
+    for fuente, m in r["mercado"].items():
+        print(f"  Con los precios que pide hoy {fuente}: compra de {es(m['compra'])} € y rentabilidad bruta de {es(m['rent'], 1)} %")
     print(f"  Rentabilidad de todos los pisos de esos barrios, según el mes del precio y el descuento: de {es(r['rango_minimo'], 1)} % a {es(r['rango_maximo'], 1)} %")
     print()
 
@@ -144,6 +154,9 @@ def contra_indicadores(r, j):
              ("rentabilidad con descuento", r["rent_con_descuento"], rec["rentabilidad_con_descuento_pct"], TOLERANCIA), ("rentabilidad sin descuento", r["rent_sin_descuento"], rec["rentabilidad_sin_descuento_pct"], TOLERANCIA),
              ("compra sin descuento", r["compra_sin_descuento"], rec["compra_sin_descuento_eur"], 1), ("ingreso anual", r["ingreso_anual"], rec["ingreso_anual_eur"], 1),
              ("rango mínimo", r["rango_minimo"], rango["minimo"], TOLERANCIA), ("rango máximo", r["rango_maximo"], rango["maximo"], TOLERANCIA)]
+    for f in rec["precio_de_mercado"]["fuentes"]:
+        m = r["mercado"].get(f["fuente"], {"compra": 0, "rent": 0})
+        pares += [(f"compra con {f['fuente']}", m["compra"], f["compra_mediana_eur"], 1), (f"rentabilidad con {f['fuente']}", m["rent"], f["rentabilidad_mediana_pct"], TOLERANCIA)]
     fallos = [f"{n}: {a} frente a {b}" for n, a, b, tol in pares if abs(a - b) > tol]
     for nombre, clave in (("grupo", "grupo"), ("firmes", "firmes"), ("con aviso", "con_aviso")):
         if sorted(p2[clave]) != r[clave]:
@@ -155,6 +168,9 @@ def contra_readme(r):
     """Comprueba que las dos versiones de la portada llevan las cifras rehechas, cada uno con su formato."""
     cifras = {"README.md": [es(r["pisos_base"]), es(r["pisos_recomendados"]), es(r["rent_sin_descuento"], 1) + " %", es(r["rent_con_descuento"], 1) + " %", es(r["compra_sin_descuento"]) + " €", es(r["ingreso_anual"]) + " €"],
               "README.en.md": [en(r["pisos_base"]), en(r["pisos_recomendados"]), en(r["rent_sin_descuento"], 1) + "%", en(r["rent_con_descuento"], 1) + "%", "€" + en(r["compra_sin_descuento"]), "€" + en(r["ingreso_anual"])]}
+    for m in r["mercado"].values():
+        cifras["README.md"] += [es(m["compra"]) + " €", es(m["rent"], 1) + " %"]
+        cifras["README.en.md"] += ["€" + en(m["compra"]), en(m["rent"], 1) + "%"]
     fallos = []
     for nombre, lista in cifras.items():
         texto = (CASO / nombre).read_text(encoding="utf-8")

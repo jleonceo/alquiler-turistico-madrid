@@ -1,9 +1,9 @@
 {
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T22:35:31",
+ "fecha_ejecucion": "2026-11-06T23:05:45",
  "script": "scripts/informe_final.py",
  "indicadores": "informes/indicadores.json",
- "indicadores_fecha_ejecucion": "2026-11-06T22:35:04",
+ "indicadores_fecha_ejecucion": "2026-11-06T23:05:20",
  "lector": "Dirección de Inversiones",
  "paginas": [
   {
@@ -99,7 +99,7 @@
    "titulo": "Lo que puede cambiar estas conclusiones",
    "tipo": "limites",
    "palabras": 0,
-   "alto_estimado": 505,
+   "alto_estimado": 640,
    "cifras_clave": 0
   },
   {
@@ -271,10 +271,22 @@
    ]
   },
   {
+   "cifra": "10,6",
+   "claves": [
+    "recomendacion.precio_de_mercado.fuentes[fuente=Idealista].rentabilidad_mediana_pct"
+   ]
+  },
+  {
    "cifra": "10,8",
    "claves": [
     "preguntas[1].fichas_del_grupo[barrio=San Diego].ic_bajo",
     "preguntas[2].rango_de_rentabilidad_del_grupo_firme.minimo"
+   ]
+  },
+  {
+   "cifra": "10,9",
+   "claves": [
+    "recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].rentabilidad_mediana_pct"
    ]
   },
   {
@@ -519,6 +531,12 @@
    ]
   },
   {
+   "cifra": "171.600",
+   "claves": [
+    "recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].compra_mediana_eur"
+   ]
+  },
+  {
    "cifra": "18,1",
    "claves": [
     "preguntas[1].fichas_del_grupo[barrio=Quintana].ic_alto"
@@ -546,6 +564,12 @@
    "cifra": "18,9",
    "claves": [
     "preguntas[2].fichas_del_grupo[barrio=Ventas].pisos_fuera_sin_ocupacion_pct"
+   ]
+  },
+  {
+   "cifra": "182.000",
+   "claves": [
+    "recomendacion.precio_de_mercado.fuentes[fuente=Idealista].compra_mediana_eur"
    ]
   },
   {

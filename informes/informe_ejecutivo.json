@@ -1,9 +1,9 @@
 {
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T22:50:54",
+ "fecha_ejecucion": "2026-11-06T23:05:40",
  "script": "scripts/informe_ejecutivo.py",
  "indicadores": "informes/indicadores.json",
- "indicadores_fecha_ejecucion": "2026-11-06T22:35:04",
+ "indicadores_fecha_ejecucion": "2026-11-06T23:05:20",
  "lector": "equipo directivo",
  "se_pide": [
   "Comprobar planta y norma en el Ayuntamiento",
@@ -63,9 +63,9 @@
   }
  ],
  "palabras_por_apartado": {
-  "titulo_y_resumen": 299,
-  "encontrado": 398,
-  "limites": 85,
+  "titulo_y_resumen": 300,
+  "encontrado": 399,
+  "limites": 99,
   "recomendaciones": 171,
   "anexo": 397
  },
@@ -121,9 +121,21 @@
    ]
   },
   {
+   "cifra": "10,6",
+   "claves": [
+    "recomendacion.precio_de_mercado.fuentes[fuente=Idealista].rentabilidad_mediana_pct"
+   ]
+  },
+  {
    "cifra": "10,8",
    "claves": [
     "preguntas[2].rango_de_rentabilidad_del_grupo_firme.minimo"
+   ]
+  },
+  {
+   "cifra": "10,9",
+   "claves": [
+    "recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].rentabilidad_mediana_pct"
    ]
   },
   {
@@ -223,6 +235,12 @@
    ]
   },
   {
+   "cifra": "171.600",
+   "claves": [
+    "recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].compra_mediana_eur"
+   ]
+  },
+  {
    "cifra": "18,7",
    "claves": [
     "preguntas[1].fichas_del_grupo[barrio=Opañel].rentabilidad_mediana_pct"
@@ -232,6 +250,12 @@
    "cifra": "18,9",
    "claves": [
     "preguntas[2].fichas_del_grupo[barrio=Ventas].pisos_fuera_sin_ocupacion_pct"
+   ]
+  },
+  {
+   "cifra": "182.000",
+   "claves": [
+    "recomendacion.precio_de_mercado.fuentes[fuente=Idealista].compra_mediana_eur"
    ]
   },
   {

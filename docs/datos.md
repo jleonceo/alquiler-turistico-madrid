@@ -54,6 +54,8 @@ persona, y ningún resultado decide sobre nadie. Es un criterio técnico y no su
 
 ## Fuentes y atribución
 
+- Fotocasa e Idealista: precio del m² en venta de Ventas, Numancia y San Diego, consultado el 06/11/2026, en
+  `config/fuentes/precios_de_mercado.json`.
 - Inside Airbnb: datos de Madrid, descargas del 14/12/2025, 24/03/2026, 20/06/2026 y 17/09/2026, con licencia
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Descarga](https://insideairbnb.com/get-the-data/).
 - Ayuntamiento de Madrid: «Origen de los datos: Ayuntamiento de Madrid». Portal de [datos abiertos](https://datos.madrid.es/),
