@@ -31,10 +31,10 @@ SEGUIR = "la cadena sigue y el responsable lo ve en el informe"
 ANUNCIO_COLS = ["id", "neighbourhood_cleansed", "neighbourhood_group_cleansed", "room_type", "property_type", "price", "estimated_occupancy_l365d", "minimum_nights", "availability_365"]
 
 TABLAS = [
-    {"tabla": "hechos_anuncios", "clave_corregida": "sep", "grano": "un anuncio en la foto del 17/09/2026", "clave_grano": ["id"], "tipo": "hechos", "columnas": ANUNCIO_COLS},
-    {"tabla": "hechos_anuncios_junio", "clave_corregida": "jun", "grano": "un anuncio en la foto del 20/06/2026", "clave_grano": ["id"], "tipo": "hechos", "columnas": ["id", "price", "neighbourhood_cleansed"]},
-    {"tabla": "hechos_anuncios_marzo", "clave_corregida": "mar", "grano": "un anuncio en la foto del 24/03/2026", "clave_grano": ["id"], "tipo": "hechos", "columnas": ["id", "price", "neighbourhood_cleansed"]},
-    {"tabla": "hechos_anuncios_diciembre", "clave_corregida": "dic", "grano": "un anuncio en la foto del 14/12/2025, sin precio", "clave_grano": ["id"], "tipo": "hechos", "columnas": ["id", "neighbourhood_cleansed"]},
+    {"tabla": "hechos_anuncios", "clave_corregida": "sep", "grano": "un anuncio en la descarga del 17/09/2026", "clave_grano": ["id"], "tipo": "hechos", "columnas": ANUNCIO_COLS},
+    {"tabla": "hechos_anuncios_junio", "clave_corregida": "jun", "grano": "un anuncio en la descarga del 20/06/2026", "clave_grano": ["id"], "tipo": "hechos", "columnas": ["id", "price", "neighbourhood_cleansed"]},
+    {"tabla": "hechos_anuncios_marzo", "clave_corregida": "mar", "grano": "un anuncio en la descarga del 24/03/2026", "clave_grano": ["id"], "tipo": "hechos", "columnas": ["id", "price", "neighbourhood_cleansed"]},
+    {"tabla": "hechos_anuncios_diciembre", "clave_corregida": "dic", "grano": "un anuncio en la descarga del 14/12/2025, sin precio", "clave_grano": ["id"], "tipo": "hechos", "columnas": ["id", "neighbourhood_cleansed"]},
     {"tabla": "hechos_calendario", "clave_corregida": "calendario", "grano": "un anuncio y un día", "clave_grano": ["listing_id", "date"], "tipo": "hechos", "columnas": ["listing_id", "date", "available", "minimum_nights"]},
     {"tabla": "hechos_resenas", "clave_corregida": "resenas", "grano": "una reseña; anuncio y fecha se repiten y nada la identifica salvo su posición", "clave_grano": [], "tipo": "hechos", "columnas": ["listing_id", "date"]},
     {"tabla": "dim_barrio", "clave_corregida": "barrios", "grano": "un barrio de Inside Airbnb", "clave_grano": ["barrio"], "tipo": "dimension", "columnas": ["barrio", "distrito", "clave_oficial", "clave_distrito", "toma_precio_de_distrito"]},
@@ -73,7 +73,7 @@ PLAN_CRUCES = [
 # ---------------------------------------------------------------------------
 
 def leer_aprobacion():
-    """Lee solo la línea de aprobación de la persona responsable; sin ella, no hay aprobación."""
+    """Lee solo la línea de aprobación de quien dirige el proyecto; sin ella, no hay aprobación."""
     texto = DISENO.read_text(encoding="utf-8") if DISENO.exists() else ""
     m = re.search(r"^Aprobado: sí · (.+) · (\d{4}-\d{2}-\d{2})\s*$", texto, flags=re.M)
     return {"aprobado": bool(m), "fecha": m.group(2) if m else None, "quien": m.group(1) if m else None}

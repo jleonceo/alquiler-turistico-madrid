@@ -45,8 +45,8 @@ TOLERANCIA = 1e-6
 ORIGEN_DEL_TEXTO = "lista de comprobación del análisis, escrita antes de calcular"
 REGLA_DECISION = "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia"
 REGLA_COMPARACION = "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler"
-SUPERFICIE = "rent_valoraciones_desc_pct"
-PARAMETROS = [{"nombre": "mínimo de casos por grupo o celda", "valor": str(MINIMO), "origen": "reglas §3"}, {"nombre": "mínimo en las variantes que lo fijan", "valor": str(MINIMO_VARIANTE), "origen": "reglas §3"},
+SUPERFICIE = "rent_valoraciones_pct"
+PARAMETROS = [{"nombre": "mínimo de casos por grupo o celda", "valor": str(MINIMO), "origen": "reglas §3"}, {"nombre": "mínimo en las repeticiones que lo fijan", "valor": str(MINIMO_VARIANTE), "origen": "reglas §3"},
               {"nombre": "confianza del intervalo", "valor": str(CONFIANZA), "origen": "04_planteamientos.md"}, {"nombre": "remuestreos", "valor": str(cd.REMUESTREOS), "origen": "04_planteamientos.md"},
               {"nombre": "semilla", "valor": str(cd.SEMILLA), "origen": "calidad_datos.py"}, {"nombre": "rango para mover los pesos", "valor": "sin valor: no hay puntuación con pesos", "origen": "no aplica"},
               {"nombre": "periodo para medir hacia adelante", "valor": "sin valor: nada de esto predice", "origen": "no aplica"}]
@@ -66,7 +66,7 @@ CIRCULARES = {"number_of_reviews", "dias_libres_365"}  # la ocupación se calcul
 NOMBRE_RASGO = {"huespedes": "los huéspedes", "dormitorios": "las habitaciones", "camas": "las camas", "banos": "los baños", "equipamientos": "los equipamientos", "review_scores_rating": "la valoración", "review_scores_location": "la valoración de la ubicación", "calculated_host_listings_count": "los anuncios del anfitrión", "estancia_noches": "la estancia mínima"}
 NOMBRE_PRUEBA = {"sin_temporada": "temporada", "sin_anfitriones_grandes": "anfitriones", "sin_cotizaciones_lejanas": "cotización", "solo_1_y_2_dormitorios": "habitaciones", "sin_ocupacion_como_cero": "sin ocupación"}
 MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
-ETIQUETA = {"toda_la_foto": "Toda la foto", "base_de_decision": "Base de decisión", "grupo_firme": "Grupo firme", "base_decision": "Base de decisión", "base_comparacion": "Base de comparación"}
+ETIQUETA = {"toda_la_foto": "Toda la foto", "base_de_decision": "Base de decisión", "grupo_firme": "Tres barrios recomendados", "base_decision": "Base de decisión", "base_comparacion": "Base de comparación"}
 SI_NO = ["aire", "ascensor", "lavadora", "parking", "superanfitrion", "lleva_registro"]
 CLAVES_ESCRITAS = ["unidad", "minimo", "empates", "referencia", "azar_en_grupos", "pesos", "hacia_adelante", "cobertura", "periodos", "planteamiento_completo", "cifras_con_poblacion", "segunda_via", "minimo_respetado",
                    "con_referencia", "comprobaciones_calculadas", "reproducible", "sin_resultados_escritos", "raw_intacto"]
@@ -266,18 +266,18 @@ def vista(a):
 
 
 def grupo_y_firmes(L, quitados, reglas):
-    """Aplica la regla §7: el grupo en más de 6 de las 12 variantes y, de él, los que aguantan las cinco pruebas."""
+    """Aplica la regla §7: el grupo en más de 6 de las 12 repeticiones y, de él, los que aguantan las cinco pruebas."""
     pruebas = rc.pruebas_del_grupo(L, quitados, reglas)
     return pruebas["grupo"], pruebas["firmes"], cd.grupo_de(L, excluir=quitados)[1]
 
 
 def avisos_del_barrio(pisos, cuartil_bajo, cuartil_base, sigue_sin_el_tope, pocos):
-    """Da los tres avisos de las reglas §3: depende del tope, pocos anuncios y cuartil bajo."""
+    """Da los tres avisos de las reglas §3: depende del máximo, pocos anuncios y cuartil bajo."""
     return {"depende_del_tope": not sigue_sin_el_tope, "pocos_anuncios": pisos <= pocos, "cuartil_bajo": lleva_aviso(cuartil_bajo, cuartil_base)}
 
 
 def variantes_a_mano(L, quitados, reglas, prueba):
-    """Rehace sin pandas las 12 variantes de una prueba, recorriendo los pisos uno a uno."""
+    """Rehace sin pandas las 12 repeticiones de una prueba, recorriendo los pisos uno a uno."""
     filas = list(zip(L["barrio"].tolist(), L["piso"].tolist(), L["dentro"].tolist(), L["ocupacion"].tolist(), L["accommodates"].tolist(), L["banos"].tolist(), L["bedrooms"].tolist(), L["beds"].tolist(), L["estancia"].tolist(), L["precio"].tolist(), L["p_mar"].tolist(), L["p_jun"].tolist(), L["sup_regla"].tolist(), L["m2"].tolist(),
                      L["temporada"].tolist(), L["anuncios_anfitrion"].tolist(), L["dias_cotizacion"].tolist(), L["dias_cotizacion_mar"].tolist(), L["dias_cotizacion_jun"].tolist(), quitados.tolist()))
     veces = Counter()
@@ -290,7 +290,7 @@ def variantes_a_mano(L, quitados, reglas, prueba):
                 continue
             if (prueba == "sin_temporada" and f[14]) or (prueba == "sin_anfitriones_grandes" and f[15] >= reglas["anfitrion_anuncios"]) or (prueba == "solo_1_y_2_dormitorios" and dor not in reglas["dormitorios"]) or (prueba == "sin_cotizaciones_lejanas" and f[i_dias] > reglas["cotizacion_dias"]):
                 continue
-            por_barrio[f[0]].append(100 * pre * ocu / (f[12] * f[13] * cd.DESCUENTO))
+            por_barrio[f[0]].append(100 * pre * ocu / (f[12] * f[13]))
         for minimo in cd.MIN_VARIANTE:
             medianas = {b: mediana(v) for b, v in por_barrio.items() if len(v) >= minimo}
             if medianas:
@@ -319,14 +319,14 @@ def tipos_que_se_dan(t, grupo, medida):
     return {"medianas": {str(k): float(g.loc[k, "median"]) for k in orden}, "se_dan": [str(orden[0])] + sorted(str(x) for x in empatados)}
 
 
-def sensibilidad_superficie(d, rangos, cd_descuento=cd.DESCUENTO):
+def sensibilidad_superficie(d, rangos):
     """Repite la pregunta 1 en cada combinación de los extremos de superficie y dice si cambian los tipos que se dan."""
     nombres = sorted(rangos)
     regla = {g: float(cd.superficie_regla(pd.DataFrame({"bedrooms": [float(g)], "banos": [1.0]})).iloc[0]) for g in nombres}
 
     def medir(superficie):
         """Calcula la rentabilidad con una superficie y mira qué tipos se dan."""
-        t = d.assign(rent_s=100 * d["ingreso_anual_eur"] / (superficie * d["precio_m2_eur"] * cd_descuento))
+        t = d.assign(rent_s=100 * d["ingreso_anual_eur"] / (superficie * d["precio_m2_eur"]))
         salida = tipos_que_se_dan(t, "grupo_dormitorios", "rent_s")
         if "tipo_inmueble" in t:
             salida["tipo_de_inmueble_se_dan"] = tipos_que_se_dan(t, "tipo_inmueble", "rent_s")["se_dan"]
@@ -368,8 +368,8 @@ def puestos_con_un_ano(t, medida, fecha, minimo=MINIMO):
 
 
 def cifras_de_la_recomendacion(t):
-    """Da las cifras de los pisos que se recomiendan: recuento y, en mediana, rentabilidad, compra e ingreso, con y sin descuento."""
-    campos = {"rentabilidad_sin_descuento_pct": "rent_valoraciones_sin_pct", "rentabilidad_con_descuento_pct": "rent_valoraciones_desc_pct", "compra_sin_descuento_eur": "compra_valoraciones_sin_eur", "compra_con_descuento_eur": "compra_valoraciones_desc_eur", "ingreso_anual_eur": "ingreso_anual_eur"}
+    """Da las cifras de los pisos que se recomiendan: recuento y, en mediana, rentabilidad, compra e ingreso."""
+    campos = {"rentabilidad_pct": "rent_valoraciones_pct", "compra_eur": "compra_valoraciones_eur", "ingreso_anual_eur": "ingreso_anual_eur"}
     return {"pisos": len(t), **{k: float(t[c].median()) if len(t) else None for k, c in campos.items()}}
 
 
@@ -382,13 +382,13 @@ def precio_de_mercado(t):
     for f in cfg["fuentes"]:
         if not len(t) or not set(t["barrio"]) <= set(f["barrios"]):
             continue
-        compra = t["compra_valoraciones_sin_eur"] * t["barrio"].map(f["barrios"]) / t["precio_m2_eur"]
+        compra = t["compra_valoraciones_eur"] * t["barrio"].map(f["barrios"]) / t["precio_m2_eur"]
         rent = 100 * t["ingreso_anual_eur"] / compra
         barrios = [{"barrio": b, "precio_m2_oficial_eur": float(t.loc[x.index[0], "precio_m2_eur"]), "precio_m2_mercado_eur": float(f["barrios"][b]),
                     "subida_pct": 100 * (f["barrios"][b] / float(t.loc[x.index[0], "precio_m2_eur"]) - 1), "compra_mediana_eur": float(compra[x.index].median()), "rentabilidad_mediana_pct": float(rent[x.index].median())}
                    for b, x in t.groupby("barrio")]
         fuentes.append({"fuente": f["fuente"], "compra_mediana_eur": float(compra.median()), "rentabilidad_mediana_pct": float(rent.median()),
-                        "rebaja_que_supone_el_descuento_pct": 100 * (1 - float(t["compra_valoraciones_desc_eur"].median()) / float(compra.median())), "barrios": barrios})
+                        "barrios": barrios})
     return {"consulta": cfg["consulta"], "fuentes": fuentes}
 
 
@@ -408,18 +408,17 @@ def rentabilidad_de_barrios(d, barrios, nombre):
 
 
 def rango_de_rentabilidad(t):
-    """Da la mediana conjunta de unos pisos en cada combinación de foto y descuento, y la peor y la mejor (planteamiento, pregunta 3)."""
+    """Da la mediana conjunta de unos pisos con cada fecha del precio, y la peor y la mejor (planteamiento, pregunta 3)."""
     combinaciones = []
     for foto, col in (("marzo", "p_mar"), ("junio", "p_jun"), ("septiembre", "precio")):
         x = t.loc[t[col].between(20, 1000)]
-        for con_descuento, factor in ((True, cd.DESCUENTO), (False, 1.0)):
-            r = cd.rentabilidad(x, col, factor)
-            combinaciones.append({"foto": foto, "descuento": con_descuento, "pisos": len(x), "mediana": float(r.median()) if len(x) else None})
+        r = cd.rentabilidad(x, col)
+        combinaciones.append({"foto": foto, "pisos": len(x), "mediana": float(r.median()) if len(x) else None})
     validas = [c for c in combinaciones if c["mediana"] is not None]
     if not validas:
         return {"minimo": None, "maximo": None, "peor": None, "mejor": None, "combinaciones": combinaciones}
     peor, mejor = min(validas, key=lambda c: c["mediana"]), max(validas, key=lambda c: c["mediana"])
-    return {"minimo": peor["mediana"], "maximo": mejor["mediana"], "peor": {k: peor[k] for k in ("foto", "descuento")}, "mejor": {k: mejor[k] for k in ("foto", "descuento")}, "combinaciones": combinaciones}
+    return {"minimo": peor["mediana"], "maximo": mejor["mediana"], "peor": peor["foto"], "mejor": mejor["foto"], "combinaciones": combinaciones}
 
 
 def comparar_medianas_con_total(df, grupo, medida, referencia, minimo=MINIMO):
@@ -444,14 +443,13 @@ def pares_de(df, grupo, medida, nombres):
 # ---------------------------------------------------------------------------
 
 def tabla_de_tipos(d, grupo, reg, nombre, base_mediana):
-    """Compara tipos de piso: rentabilidad con intervalo, la misma sin descuento, euros al año y contraste con la superficie oficial."""
+    """Compara tipos de piso: rentabilidad con intervalo, euros al año y contraste con la superficie oficial."""
     filas, fuera = reg.tabla(f"P1 {nombre}: rentabilidad", d, grupo, SUPERFICIE)
     euros, _ = reg.tabla(f"P1 {nombre}: euros", d, grupo, "ingreso_anual_eur")
-    sin, _ = reg.tabla(f"P1 {nombre}: sin descuento", d, grupo, "rent_valoraciones_sin_pct")
-    oficial, _ = reg.tabla(f"P1 {nombre}: superficie oficial", d, grupo, "rent_oficial_desc_pct")
+    oficial, _ = reg.tabla(f"P1 {nombre}: superficie oficial", d, grupo, "rent_oficial_pct")
     intervalos, azar_total = comparar_medianas_con_total(d, grupo, SUPERFICIE, base_mediana)
-    e, s, o = ({f["grupo"]: f for f in x} for x in (euros, sin, oficial))
-    salida = [{"grupo": f["grupo"], "pisos": f["casos"], "rentabilidad_mediana_pct": f["mediana"], "cuartil_bajo_pct": f["q25"], **intervalos[f["grupo"]], "sin_descuento_pct": s[f["grupo"]]["mediana"], "euros_al_ano": e[f["grupo"]]["mediana"], "superficie_oficial_pct": o[f["grupo"]]["mediana"]} for f in filas]
+    e, o = ({f["grupo"]: f for f in x} for x in (euros, oficial))
+    salida = [{"grupo": f["grupo"], "pisos": f["casos"], "rentabilidad_mediana_pct": f["mediana"], "cuartil_bajo_pct": f["q25"], **intervalos[f["grupo"]], "euros_al_ano": e[f["grupo"]]["mediana"], "superficie_oficial_pct": o[f["grupo"]]["mediana"]} for f in filas]
     nombres = [f["grupo"] for f in salida]
     pares = pares_de(d, grupo, SUPERFICIE, nombres)
     pares_euros = pares_de(d, grupo, "ingreso_anual_eur", nombres)
@@ -483,7 +481,7 @@ def pregunta_1(d, reg, planteamiento, rangos):
             "por_segmentos": {"distritos_comparables_1_y_2": simpson["distritos_comparables_1_y_2"], "distritos_donde_1_supera_a_2": simpson["distritos_donde_1_supera_a_2"]},
             "comprobaciones": {"unidad": unidad_correcta(d), "minimo": all(f["pisos"] >= MINIMO for f in dorm["tabla"] + inm["tabla"]), "empates": None, "referencia": len(d) == resumen["casos"], "azar_en_grupos": dorm["pares_que_saldrian_por_azar"] is not None, "pesos": None, "hacia_adelante": None, "cobertura": con_minimo + sum(x["casos"] for x in dorm["sin_conclusion"]) == len(d), "periodos": None},
             "cobertura": {"pisos_en_grupos_de_30_o_mas": con_minimo, "pct": 100 * con_minimo / len(d) if len(d) else None}, "sin_conclusion": dorm["sin_conclusion"] + inm["sin_conclusion"],
-            "limites": ["empates: no hay tramos ni puestos que repartir, se comparan medianas con intervalo.", "pesos: no hay puntuación con pesos.", "hacia_adelante: la pregunta describe una foto y no predice.", "periodos: la pregunta usa una sola foto; las demás van en la pregunta 3.",
+            "limites": ["empates: no hay tramos ni puestos que repartir, se comparan medianas con intervalo.", "pesos: no hay puntuación con pesos.", "hacia_adelante: la pregunta describe una descarga y no predice.", "periodos: la pregunta usa una sola foto; las demás van en la pregunta 3.",
                         f"La ventaja de una habitación sobre dos no se repite en todos los distritos: de {n(simpson['distritos_comparables_1_y_2'])} comparables, gana en {n(simpson['distritos_donde_1_supera_a_2'])}.",
                         "La superficie de valoraciones es un supuesto, y la oficial no sirve para comparar tipos porque es igual para todos los pisos del barrio: va solo como contraste.", "La rentabilidad bruta no incluye gastos, impuestos ni comisiones y no implica beneficio."]}
 
@@ -491,7 +489,7 @@ def pregunta_1(d, reg, planteamiento, rangos):
 def fila_de_barrio(b, f, veces, tope, intervalos, pruebas):
     """Monta la fila de un barrio con todo lo que pide la pregunta 2."""
     t = tope.loc[b] if b in tope.index else None
-    clase = pruebas["barrios"][b]["clase"] if b in pruebas["barrios"] else "fuera del grupo"
+    clase = pruebas["barrios"][b]["clase"] if b in pruebas["barrios"] else "fuera de la lista"
     return {"barrio": b, "clase": clase, "pisos": f["casos"], "rentabilidad_mediana_pct": f["mediana"], "cuartil_bajo_pct": f["q25"], "ic_bajo": intervalos[b]["ic_bajo"], "ic_alto": intervalos[b]["ic_alto"], "frente_a_la_base": intervalos[b]["frente_al_total"], "variantes_en_el_mejor_cuarto": int(veces.get(b, 0)),
             "pisos_en_el_tope": None if t is None else int(t["si"]), "parte_en_el_tope_pct": None if t is None else float(t["pct"]), "tope_frente_a_la_base": None if t is None else str(t["frente_al_total"])}
 
@@ -501,16 +499,16 @@ def texto_de_avisos(f, cuartil_base):
     a = f["avisos_del_barrio"]
     salida = []
     if a["depende_del_tope"]:
-        salida.append(f"depende del tope: sale del grupo sin los pisos en {TOPE} días")
+        salida.append(f"depende del máximo de días: sale de la lista sin los pisos en {TOPE} días")
     if a["pocos_anuncios"]:
         salida.append(f"pocos anuncios: {n(f['pisos'])} pisos")
     if a["cuartil_bajo"]:
-        salida.append(f"cuartil bajo: {n(f['cuartil_bajo_pct'], 1)} %, que no supera el cuartil bajo de toda la base, {n(cuartil_base, 2)} %")
+        salida.append(f"uno de cada cuatro rinde menos de {n(f['cuartil_bajo_pct'], 1)} %, que no supera el corte de todos los pisos, {n(cuartil_base, 2)} %")
     return salida
 
 
 def pregunta_2(a, d, L, quitados, reg, planteamiento, controles, reglas, extra):
-    """En qué barrios: firmes, con aviso y segunda línea, cada barrio con sus pruebas, su recuento, su cuartil bajo y sus avisos."""
+    """En qué barrios: firmes, los que siguen en la lista 4 veces y los demás, cada barrio con sus pruebas, su recuento, su cuartil bajo y sus avisos."""
     pobl = "base de decisión"
     resumen, cifras = reg.resumen("rentabilidad de toda la base, pregunta 2", d[SUPERFICIE], pobl)
     mediana_base, cuartil_base = resumen["mediana"], resumen["q25"]
@@ -534,7 +532,7 @@ def pregunta_2(a, d, L, quitados, reg, planteamiento, controles, reglas, extra):
     por_nombre = {f["barrio"]: f for f in tabla}
     para_grupo = [por_nombre[b] for b in grupo if b in por_nombre]
 
-    # Los tres avisos. El del tope repite las 12 variantes sin los pisos en 255 días de toda la base; al lado se deja lo que da quitando solo los del barrio.
+    # Los tres avisos. El del máximo repite las 12 repeticiones sin los pisos en 255 días de toda la base; al lado se deja lo que da quitando solo los del barrio.
     en_tope = L["ocupacion"].eq(TOPE)
     grupo_sin_tope = cd.grupo_de(L, excluir=quitados | en_tope)[0]
     for f in para_grupo:
@@ -555,7 +553,7 @@ def pregunta_2(a, d, L, quitados, reg, planteamiento, controles, reglas, extra):
     anuncios = reglas["anfitrion_anuncios"]
     de_operadores = parte_de_operadores_grandes(d, con_aviso, anuncios)
     pisos_con_aviso = [x for x in zip(d["barrio"].tolist(), d["anuncios_anfitrion"].tolist()) if x[0] in set(con_aviso)]
-    cifras.append(reg.cifra("parte de operadores grandes en los barrios con aviso", de_operadores, 100 * sum(1 for x in pisos_con_aviso if x[1] >= anuncios) / len(pisos_con_aviso) if pisos_con_aviso else None, len(pisos_con_aviso), "pisos de los barrios con aviso"))
+    cifras.append(reg.cifra("parte de operadores grandes en los barrios que siguen en la lista 4 veces", de_operadores, 100 * sum(1 for x in pisos_con_aviso if x[1] >= anuncios) / len(pisos_con_aviso) if pisos_con_aviso else None, len(pisos_con_aviso), "pisos de los barrios que siguen en la lista 4 veces"))
     operadores = {"anuncios_desde": anuncios, "con_aviso_pct": de_operadores, "por_barrio": {b: parte_de_operadores_grandes(d, [b], anuncios) for b in firmes + con_aviso + segunda}}
 
     # Qué ordena la lista: entre barrios, con qué se asocia la rentabilidad, y cuánto rinden los barrios de m² más barato frente a la lista.
@@ -573,12 +571,12 @@ def pregunta_2(a, d, L, quitados, reg, planteamiento, controles, reglas, extra):
         que_ordena["pares"] = [diferencia_de_medianas(valores_de[k], valores_de["m2_baratos"], k, "m2_baratos") for k in ("firmes", "grupo")]
 
     un_barrio_20 = sorted({f["grupo"] for f in filas_20} - {f["grupo"] for f in filas})
-    cifras += [reg.cifra("pisos del grupo", pisos_grupo, sum(1 for b in d["barrio"].tolist() if b in set(grupo)), len(d), pobl), reg.cifra("pisos del grupo firme", pisos_firmes, sum(1 for b in d["barrio"].tolist() if b in set(firmes)), len(d), pobl)]
+    cifras += [reg.cifra("pisos del grupo", pisos_grupo, sum(1 for b in d["barrio"].tolist() if b in set(grupo)), len(d), pobl), reg.cifra("pisos del grupo recomendado", pisos_firmes, sum(1 for b in d["barrio"].tolist() if b in set(firmes)), len(d), pobl)]
     comprobar_control = {"grupo": {"esperado": controles.get("grupo_esperado"), "obtenido": grupo, "coincide": None if controles.get("grupo_esperado") is None else sorted(controles["grupo_esperado"]) == grupo},
                          "firmes": {"esperado": controles.get("firmes_esperados"), "obtenido": firmes, "coincide": None if controles.get("firmes_esperados") is None else sorted(controles["firmes_esperados"]) == firmes},
                          "con_aviso": {"esperado": controles.get("con_aviso_esperados"), "obtenido": con_aviso, "coincide": None if controles.get("con_aviso_esperados") is None else sorted(controles["con_aviso_esperados"]) == con_aviso}}
     casos_base = sum(f["casos"] for f in filas)
-    return {"id": "P2", "pregunta": "¿En qué barrios conviene buscarlo, fuera del centro histórico?", "decision": planteamiento["P2"], "planteamiento": "metodo/04_planteamientos.md §Pregunta 2", "funcion": "comparar_con_total", "funcion_adaptada": "en la parte de pisos en el tope se usa tal cual; en la rentabilidad, adaptada a la mediana con remuestreo",
+    return {"id": "P2", "pregunta": "¿En qué barrios conviene buscarlo, fuera del centro histórico?", "decision": planteamiento["P2"], "planteamiento": "metodo/04_planteamientos.md §Pregunta 2", "funcion": "comparar_con_total", "funcion_adaptada": "en la parte de pisos en el máximo se usa tal cual; en la rentabilidad, adaptada a la mediana con remuestreo",
             "poblacion": {"regla": REGLA_DECISION, "periodo": PERIODO, "filas": len(d), "unidad": "anuncio", "entidades": int(d["id"].nunique())}, "cifras": cifras, "referencia": {"que_es": "mediana de los barrios con 30 anuncios o más", "valor": ref, "filas": casos_base, "barrios": len(medianas)}, "mediana_de_toda_la_base": mediana_base,
             "grupo": grupo, "firmes": firmes, "con_aviso": con_aviso, "segunda_linea": segunda, "clases": {b: x["clase"] for b, x in pruebas["barrios"].items()}, "pruebas": {k: v for k, v in pruebas.items() if k != "grupo"}, "pisos_del_grupo": pisos_grupo, "pisos_del_grupo_firme": pisos_firmes, "fichas_del_grupo": para_grupo,
             "grupo_sin_los_pisos_en_el_tope": grupo_sin_tope, "referencia_baratos": baratos, "cuartil_bajo_de_toda_la_base": cuartil_base, "aviso_del_cuartil": aviso_del_cuartil, "con_un_ano_o_mas": con_un_ano, "operadores_grandes": operadores, "que_ordena_la_lista": que_ordena,
@@ -586,7 +584,7 @@ def pregunta_2(a, d, L, quitados, reg, planteamiento, controles, reglas, extra):
             "tope_por_encima_de_la_base": sum(1 for f in tabla if f["tope_frente_a_la_base"] == "por encima"), "barrios_con_20_a_29_pisos": un_barrio_20, "controles": comprobar_control,
             "comprobaciones": {"unidad": unidad_correcta(d) and set(d["id"]) == set(L.loc[cd.mascara_fija(L, quitados) & L["estancia"].le(3) & L["precio"].between(20, 1000), "id"]), "minimo": all(f["pisos"] >= MINIMO for f in tabla), "empates": empates_bien(medianas, marcas) if len(medianas) else None, "referencia": ref is not None, "azar_en_grupos": azar is not None and azar_tope is not None, "pesos": None, "hacia_adelante": None, "cobertura": casos_base + sum(x["casos"] for x in fuera) == len(d), "periodos": all(L[c].notna().any() for c in ("p_mar", "p_jun", "precio")) or None},
             "cobertura": {"pisos_en_barrios_comparados": casos_base, "pct": 100 * casos_base / len(d) if len(d) else None, "barrios_comparados": len(tabla), "barrios_con_pisos": int(d["barrio"].nunique())}, "sin_conclusion": fuera,
-            "limites": ["pesos: el grupo cuenta variantes y no suma componentes con pesos.", "hacia_adelante: la pregunta no predice; las variantes de marzo y junio miden cuánto depende del momento, con la ocupación de septiembre.",
+            "limites": ["pesos: el grupo cuenta variantes y no suma componentes con pesos.", "hacia_adelante: la pregunta no predice; las repeticiones de marzo y junio miden cuánto depende del momento, con la ocupación de septiembre.",
                         "Un barrio que no llega a 30 pisos en ninguna variante solo se mide en las seis de mínimo 20 y no puede llegar a siete.", "El resultado no dice si un piso concreto cumple la norma.", "Competencia cuenta solo anuncios de Airbnb, y un anuncio no es un inmueble."]}
 
 
@@ -598,7 +596,7 @@ def parte_sin_ocupacion(L, quitados):
 
 
 def medianas_por_foto(L, quitados):
-    """Da la mediana de rentabilidad por barrio en cada foto; una foto sin el mínimo de sus variantes no da cifra."""
+    """Da la mediana de rentabilidad por barrio en cada descarga; una descarga sin el mínimo de sus repeticiones no da cifra."""
     fija = cd.mascara_fija(L, quitados) & L["estancia"].le(3)
     salida = {}
     for foto, col in (("marzo", "p_mar"), ("junio", "p_jun"), ("septiembre", "precio")):
@@ -616,7 +614,7 @@ def rango_entre_fotos(valores):
 
 
 def pregunta_3(a, d, L, quitados, reg, planteamiento, q2):
-    """Con qué riesgo: recuento, cuartil bajo, rango entre fotos, barrios distinguibles del primero y rango del grupo firme."""
+    """Con qué riesgo: recuento, cuartil bajo, rango entre fechas de precio, barrios distinguibles del primero y rango del grupo recomendado."""
     pobl = "base de decisión"
     resumen, cifras = reg.resumen("rentabilidad de toda la base, pregunta 3", d[SUPERFICIE], pobl)
     fotos = medianas_por_foto(L, quitados)
@@ -660,14 +658,14 @@ def pregunta_3(a, d, L, quitados, reg, planteamiento, q2):
     rango = rango_de_rentabilidad(firmes_L)
     con_aviso_L = L.loc[cd.mascara_fija(L, quitados) & L["estancia"].le(3) & L["barrio"].isin(q2["firmes"] + q2["con_aviso"])]
     rango_con_aviso = rango_de_rentabilidad(con_aviso_L)
-    cifras.append(reg.cifra("rango del grupo firme: mínimo", rango["minimo"], rango_a_mano(firmes_L)[0], len(firmes_L), "pisos del grupo firme con precio en cada foto"))
-    cifras.append(reg.cifra("rango del grupo firme: máximo", rango["maximo"], rango_a_mano(firmes_L)[1], len(firmes_L), "pisos del grupo firme con precio en cada foto"))
-    cifras.append(reg.cifra("rango de firmes y con aviso: mínimo", rango_con_aviso["minimo"], rango_a_mano(con_aviso_L)[0], len(con_aviso_L), "pisos de firmes y con aviso con precio en cada foto"))
-    cifras.append(reg.cifra("rango de firmes y con aviso: máximo", rango_con_aviso["maximo"], rango_a_mano(con_aviso_L)[1], len(con_aviso_L), "pisos de firmes y con aviso con precio en cada foto"))
+    cifras.append(reg.cifra("rango del grupo recomendado: mínimo", rango["minimo"], rango_a_mano(firmes_L)[0], len(firmes_L), "pisos del grupo recomendado con precio en cada foto"))
+    cifras.append(reg.cifra("rango del grupo recomendado: máximo", rango["maximo"], rango_a_mano(firmes_L)[1], len(firmes_L), "pisos del grupo recomendado con precio en cada foto"))
+    cifras.append(reg.cifra("rango de recomendados y los que siguen en la lista 4 veces: mínimo", rango_con_aviso["minimo"], rango_a_mano(con_aviso_L)[0], len(con_aviso_L), "pisos de recomendados y los que siguen en la lista 4 veces con precio en cada foto"))
+    cifras.append(reg.cifra("rango de recomendados y los que siguen en la lista 4 veces: máximo", rango_con_aviso["maximo"], rango_a_mano(con_aviso_L)[1], len(con_aviso_L), "pisos de recomendados y los que siguen en la lista 4 veces con precio en cada foto"))
     por_barrio = {b: rango_de_rentabilidad(L.loc[cd.mascara_fija(L, quitados) & L["estancia"].le(3) & L["barrio"].eq(b)]) for b in q2["firmes"] + q2["con_aviso"]}
     grupo_presente = [b for b in q2["grupo"] if b in valores]
     pares_grupo = [diferencia_de_medianas(valores[x], valores[y], x, y) for x, y in combinations(grupo_presente, 2)]
-    medios_firmes, cif_f = reg.resumen("rentabilidad del grupo firme", firmes_d[SUPERFICIE], "pisos del grupo firme")
+    medios_firmes, cif_f = reg.resumen("rentabilidad del grupo recomendado", firmes_d[SUPERFICIE], "pisos del grupo recomendado")
     cifras += cif_f
     sin_oc = int((fuera_centro["ocupacion_dias"].eq(0)).sum())
     cifras.append(reg.cifra("pisos fuera del centro sin ocupación", sin_oc, sum(1 for x in fuera_centro["ocupacion_dias"].tolist() if x == 0), len(fuera_centro), "pisos fuera del centro"))
@@ -679,8 +677,8 @@ def pregunta_3(a, d, L, quitados, reg, planteamiento, q2):
             "pisos_fuera_sin_ocupacion": {"pisos": sin_oc, "de": len(fuera_centro), "pct": 100 * sin_oc / len(fuera_centro) if len(fuera_centro) else None},
             "comprobaciones": {"unidad": unidad_correcta(d), "minimo": all(f["pisos"] >= MINIMO for f in tabla), "empates": None, "referencia": resumen["casos"] == len(d), "azar_en_grupos": (len(medidas) > 0) or None, "pesos": None, "hacia_adelante": None, "cobertura": all(f["rango_entre_fotos_puntos"] is not None for f in fichas), "periodos": all(fotos[x]["pisos_base"] > 0 for x in nombres_fotos) or None},
             "cobertura": {"barrios_con_rango_completo": sum(1 for f in tabla if all(v is not None for v in f["medianas_por_foto"].values())), "barrios_comparados": len(tabla)}, "sin_conclusion": q2["sin_conclusion"],
-            "limites": ["empates: no hay tramos que repartir.", "pesos: el riesgo se da con sus medidas sueltas, sin puntuación.", "hacia_adelante: el rango entre fotos describe tres fechas y no predice otras.", "azar_en_grupos: con un solo barrio no hay comparación.",
-                        "Marzo y junio solo cubren los anuncios que siguen en septiembre con el mismo número, y cada foto mantiene la ocupación de septiembre.", "Una foto con menos de 20 pisos en un barrio no da cifra, y el rango de ese barrio sale de las que quedan.", "La ocupación es una estimación y el calendario no distingue reservado de bloqueado."]}
+            "limites": ["empates: no hay tramos que repartir.", "pesos: el riesgo se da con sus medidas sueltas, sin puntuación.", "hacia_adelante: el rango entre fechas de precio describe tres fechas y no predice otras.", "azar_en_grupos: con un solo barrio no hay comparación.",
+                        "Marzo y junio solo cubren los anuncios que siguen en septiembre con el mismo número, y cada descarga mantiene la ocupación de septiembre.", "Una foto con menos de 20 pisos en un barrio no da cifra, y el rango de ese barrio sale de las que quedan.", "La ocupación es una estimación y el calendario no distingue reservado de bloqueado."]}
 
 
 def rango_a_mano(t):
@@ -689,10 +687,9 @@ def rango_a_mano(t):
     columnas = [t[c].tolist() for c in ("p_mar", "p_jun", "precio")]
     ocu, sup, m2 = t["ocupacion"].tolist(), t["sup_regla"].tolist(), t["m2"].tolist()
     for precios in columnas:
-        for factor in (cd.DESCUENTO, 1.0):
-            v = [100 * p * o / (s * m * factor) for p, o, s, m in zip(precios, ocu, sup, m2) if p == p and 20 <= p <= 1000]
-            if v:
-                medianas.append(mediana(v))
+        v = [100 * p * o / (s * m) for p, o, s, m in zip(precios, ocu, sup, m2) if p == p and 20 <= p <= 1000]
+        if v:
+            medianas.append(mediana(v))
     return (min(medianas), max(medianas)) if medianas else (None, None)
 
 
@@ -794,7 +791,7 @@ def oficial_por_distrito(o, t, reg, clave):
     d = o.loc[o["nivel"].eq("distrito")].copy()
     d["clave_nombre"] = d["nombre"].map(cd.sin_guiones)
     d["inmueble_oficial_eur"] = d["m2_total"] * d["sup_total"]
-    g = t.assign(clave_nombre=t["distrito"].map(cd.sin_guiones)).groupby("clave_nombre").agg(casos=("id", "size"), compra_valoraciones_sin=("compra_valoraciones_sin_eur", "median"), compra_oficial_sin=("compra_oficial_sin_eur", "median"), ocupacion=("ocupacion_dias", "median"))
+    g = t.assign(clave_nombre=t["distrito"].map(cd.sin_guiones)).groupby("clave_nombre").agg(casos=("id", "size"), compra_valoraciones=("compra_valoraciones_eur", "median"), compra_oficial=("compra_oficial_eur", "median"), ocupacion=("ocupacion_dias", "median"))
     d = d.merge(g, on="clave_nombre", how="left", validate="one_to_one")
     d["casos"] = d["casos"].fillna(0).astype("int64")
     d["puesto_m2"] = d["m2_total"].rank(method="min", ascending=False).astype("int64")
@@ -856,9 +853,9 @@ def responder_16(t, col, clave, reg, oficial):
     total_n = {k: 100 * float(niveles["nivel"].eq(k).mean()) if len(t) else None for k in ("1-85", "86-170", "171-254", "255")}
     txt = f"Parte de anuncios en cada nivel, en toda la base: 1-85 días, {n(total_n['1-85'], 1)} %; 86-170, {n(total_n['86-170'], 1)} %; 171-254, {n(total_n['171-254'], 1)} %; tope de 255, {n(total_n['255'], 1)} %."
     if filas_n:
-        txt += f" El tope va del {n(filas_n[0]['255'], 1)} % de {filas_n[0]['distrito']} al {n(filas_n[-1]['255'], 1)} % de {filas_n[-1]['distrito']}."
+        txt += f" El máximo va del {n(filas_n[0]['255'], 1)} % de {filas_n[0]['distrito']} al {n(filas_n[-1]['255'], 1)} % de {filas_n[-1]['distrito']}."
     anota("S08", txt, {"toda_la_base": total_n, "por_distrito": filas_n, "niveles": "1-85, 86-170, 171-254 y 255 días, de 04_planteamientos.md"})
-    anota("S09", f"Por distrito, {extremos(od, 1, ' días')}. Por barrio, {extremos(ob, 1, ' días')}. En la parte alta el orden no dice nada, por el tope.", {"distritos": ranking(od), "barrios": ranking(ob)})
+    anota("S09", f"Por distrito, {extremos(od, 1, ' días')}. Por barrio, {extremos(ob, 1, ' días')}. En la parte alta el orden no dice nada, por el máximo.", {"distritos": ranking(od), "barrios": ranking(ob)})
     fo = factores(pisos, "ocupacion_dias", reg, f"{clave} ocupación")
     anota("S10", f"Son asociaciones, sobre {n(len(pisos))} pisos. Sin contar las reseñas y los días libres, que son circulares, la ocupación {leer_factor(fo)}.", fo, len(pisos), f"pisos de la {nombre}")
     tamo = tramos_de_tamano(pisos, "ocupacion_dias", reg, f"{clave} ocupación")
@@ -870,7 +867,7 @@ def responder_16(t, col, clave, reg, oficial):
     # 4.3 Precio de compra
     d = oficial_por_distrito(oficial, t, reg, clave).sort_values(["puesto_m2", "nombre"])
     fila = lambda z: {"distrito": z["nombre"], "m2_eur": float(z["m2_total"]), "superficie_oficial_m2": float(z["sup_total"]), "inmueble_oficial_eur": float(z["inmueble_oficial_eur"]), "puesto_m2": int(z["puesto_m2"]), "puesto_inmueble": int(z["puesto_inmueble"]), "anuncios_de_la_base": int(z["casos"]),
-                      "compra_mediana_valoraciones_sin_descuento_eur": None if pd.isna(z["compra_valoraciones_sin"]) else float(z["compra_valoraciones_sin"]), "compra_mediana_oficial_sin_descuento_eur": None if pd.isna(z["compra_oficial_sin"]) else float(z["compra_oficial_sin"])}
+                      "compra_mediana_valoraciones_eur": None if pd.isna(z["compra_valoraciones"]) else float(z["compra_valoraciones"]), "compra_mediana_oficial_eur": None if pd.isna(z["compra_oficial"]) else float(z["compra_oficial"])}
     filas_d = [fila(z) for _, z in d.iterrows()]
     if filas_d:
         anota("S13", f"El m² oficial de 2025 va de {n(filas_d[0]['m2_eur'])} € en {filas_d[0]['distrito']} a {n(filas_d[-1]['m2_eur'])} € en {filas_d[-1]['distrito']}, en {n(len(filas_d))} distritos. El dato es de la ciudad y es el mismo en las dos bases; cambia cuántos anuncios aporta cada distrito.", {"distritos": filas_d}, len(filas_d), "distritos del libro oficial de 2025")
@@ -901,7 +898,7 @@ def las_16(d, c, extra, oficial, reg):
 # ---------------------------------------------------------------------------
 
 def evolucion_de_la_oferta(e, q2, reg):
-    """Describe la oferta en cada foto, sin buscar causa: un anuncio es un nivel y no se suma entre fotos."""
+    """Describe la oferta en cada descarga, sin buscar causa: un anuncio es un nivel y no se suma entre descargas."""
     g = e.groupby("foto").agg(anuncios=("anuncios", "sum"), pisos_completos=("pisos_completos", "sum")).reset_index().sort_values("foto")
     a_mano = defaultdict(int)
     for f, x in zip(e["foto"].tolist(), e["anuncios"].tolist()):
@@ -914,8 +911,8 @@ def evolucion_de_la_oferta(e, q2, reg):
     junio = None
     if DATOS_NECESARIOS.exists():
         m = re.search(r"junio de 2025,\s*([\d.]+)\s*anuncios", DATOS_NECESARIOS.read_text(encoding="utf-8"))
-        junio = {"anuncios": int(m.group(1).replace(".", "")), "origen": "02_datos_necesarios.md: recuento anotado cuando esa foto se podía consultar, que ya no se puede descargar"} if m else None
-    return {"poblacion": "todos los anuncios de cada foto de Madrid", "fotos": fotos, "junio_2025": junio, "grupo_por_foto": [{"barrio": b, **{c.strftime("%Y-%m-%d"): int(v) for c, v in f.items()}} for b, f in grupo.iterrows()], "limites": "Una foto no se compara con otra sin decirlo: es la misma ciudad en otra fecha, y un cambio entre fotos no dice por qué ocurre."}
+        junio = {"anuncios": int(m.group(1).replace(".", "")), "origen": "02_datos_necesarios.md: recuento anotado cuando esa descarga se podía consultar, que ya no se puede descargar"} if m else None
+    return {"poblacion": "todos los anuncios de cada descarga de Madrid", "fotos": fotos, "junio_2025": junio, "grupo_por_foto": [{"barrio": b, **{c.strftime("%Y-%m-%d"): int(v) for c, v in f.items()}} for b, f in grupo.iterrows()], "limites": "Una foto no se compara con otra sin decirlo: es la misma ciudad en otra fecha, y un cambio entre descargas no dice por qué ocurre."}
 
 
 def estacionalidad(r, reg):
@@ -932,7 +929,7 @@ def estacionalidad(r, reg):
     maxima = max([abs(indice[m] - medias[m] / global_) for m in medias], default=0.0)
     reg.vias.append({"tabla": "índice de reseñas por mes", "celdas": len(medias), "diferencia_maxima": float(maxima), "coinciden": bool(maxima < TOLERANCIA)})
     anual = completos.assign(ano=completos["mes"].dt.year).groupby("ano").agg(resenas=("resenas", "sum"), meses=("resenas", "size"))
-    return {"poblacion": "reseñas de los anuncios de la foto de septiembre", "ventana": None if ventana.empty else [ventana["mes"].min().strftime("%Y-%m"), ventana["mes"].max().strftime("%Y-%m")], "resenas_de_la_ventana": int(ventana["resenas"].sum()), "meses": len(ventana), "indice_por_mes": [{"mes": int(k), "indice": float(v)} for k, v in indice.items()],
+    return {"poblacion": "reseñas de los anuncios de la descarga de septiembre", "ventana": None if ventana.empty else [ventana["mes"].min().strftime("%Y-%m"), ventana["mes"].max().strftime("%Y-%m")], "resenas_de_la_ventana": int(ventana["resenas"].sum()), "meses": len(ventana), "indice_por_mes": [{"mes": int(k), "indice": float(v)} for k, v in indice.items()],
             "mes_mas_alto": None if indice.empty else int(indice.idxmax()), "indice_mas_alto": None if indice.empty else float(indice.max()), "mes_mas_bajo": None if indice.empty else int(indice.idxmin()), "indice_mas_bajo": None if indice.empty else float(indice.min()), "por_ano_completo": [{"ano": int(k), "resenas": int(f["resenas"])} for k, f in anual.iterrows() if f["meses"] == 12],
             "mes_incompleto_fuera": r.loc[r["mes_incompleto"], "mes"].dt.strftime("%Y-%m").tolist(), "limites": "Una reseña es una estancia con opinión, no todas dejan reseña, y su fecha no es la de la estancia. Solo llegan las reseñas de anuncios que siguen publicados."}
 
@@ -1017,11 +1014,11 @@ def calcular(entrada, planteamiento, dec):
     p2 = pregunta_2(a, d, L, quitados, reg, planteamiento, dec["controles"], dec["pruebas_del_grupo"], extra)
     p3 = pregunta_3(a, d, L, quitados, reg, planteamiento, p2)
 
-    # La cifra de la recomendación: los pisos de hasta 2 dormitorios de los barrios firmes, rehecha sin pandas.
+    # La cifra de la recomendación: los pisos de hasta 2 dormitorios de los barrios recomendados, rehecha sin pandas.
     recomendados = d.loc[d["barrio"].isin(p2["firmes"]) & d["dormitorios"].le(2)]
     recomendacion = {"dormitorios_hasta": 2, **cifras_de_la_recomendacion(recomendados), "precio_de_mercado": precio_de_mercado(recomendados)}
-    for clave, columna in (("rentabilidad_sin_descuento_pct", "rent_valoraciones_sin_pct"), ("rentabilidad_con_descuento_pct", "rent_valoraciones_desc_pct"), ("compra_sin_descuento_eur", "compra_valoraciones_sin_eur"), ("compra_con_descuento_eur", "compra_valoraciones_desc_eur"), ("ingreso_anual_eur", "ingreso_anual_eur")):
-        p3["cifras"].append(reg.cifra(f"recomendación: {clave}", recomendacion[clave], mediana(recomendados[columna].tolist()) if len(recomendados) else None, len(recomendados), "pisos de hasta 2 habitaciones del grupo firme"))
+    for clave, columna in (("rentabilidad_pct", "rent_valoraciones_pct"), ("compra_eur", "compra_valoraciones_eur"), ("ingreso_anual_eur", "ingreso_anual_eur")):
+        p3["cifras"].append(reg.cifra(f"recomendación: {clave}", recomendacion[clave], mediana(recomendados[columna].tolist()) if len(recomendados) else None, len(recomendados), "pisos de hasta 2 habitaciones del grupo recomendado"))
     r = {"preguntas": [p1, p2, p3], "recomendacion": recomendacion, "las_16": las_16(d, c, extra, oficial, reg), "evolucion_oferta": evolucion_de_la_oferta(oferta, p2, reg), "estacionalidad": estacionalidad(res, reg), "disponibilidad": disponibilidad_futura(dispo, a, p2, reg),
          "atractivo_y_competencia": atractivo_y_competencia(a, d, p2, reg), "licencias_y_registro": licencias_y_registro(a, b, p2, reg, lic), "controles": p2["controles"]}
     ingreso = math.fsum(d["ingreso_anual_eur"].tolist())
@@ -1085,19 +1082,19 @@ def texto_sensibilidad(s):
 def texto_p1(q):
     """Escribe la sección de la pregunta 1."""
     d, i = q["dormitorios"], q["tipo_de_inmueble"]
-    filas = "\n".join(f"| {f['grupo']} | {n(f['pisos'])} | {n(f['rentabilidad_mediana_pct'], 1)} % | {n(f['ic_bajo'], 1)} a {n(f['ic_alto'], 1)} | {n(f['sin_descuento_pct'], 1)} % | {n(f['euros_al_ano'])} € | {f['frente_al_total']} |" for f in d["tabla"])
-    filas_i = "\n".join(f"| {f['grupo']} | {n(f['pisos'])} | {n(f['rentabilidad_mediana_pct'], 1)} % | {n(f['ic_bajo'], 1)} a {n(f['ic_alto'], 1)} | {n(f['sin_descuento_pct'], 1)} % | {n(f['euros_al_ano'])} € | {f['frente_al_total']} |" for f in i["tabla"])
+    filas = "\n".join(f"| {f['grupo']} | {n(f['pisos'])} | {n(f['rentabilidad_mediana_pct'], 1)} % | {n(f['ic_bajo'], 1)} a {n(f['ic_alto'], 1)} | {n(f['euros_al_ano'])} € | {f['frente_al_total']} |" for f in d["tabla"])
+    filas_i = "\n".join(f"| {f['grupo']} | {n(f['pisos'])} | {n(f['rentabilidad_mediana_pct'], 1)} % | {n(f['ic_bajo'], 1)} a {n(f['ic_alto'], 1)} | {n(f['euros_al_ano'])} € | {f['frente_al_total']} |" for f in i["tabla"])
     return f"""## Pregunta 1 · Qué tipo de piso rinde más
 
-Con la superficie de valoraciones y el descuento, se dan los pisos de {lista_y(d['se_dan'])} habitaciones, porque no se distinguen entre sí. La referencia es la mediana de toda la base, {n(q['referencia']['valor'], 1)} %, con {n(q['referencia']['filas'])} pisos. En euros al año encabezan los de {d['primero_en_euros']} habitaciones, que no se distinguen de los de {lista_y(d['no_se_distinguen_del_primero_en_euros'])}.
+Con la superficie de valoraciones se dan los pisos de {lista_y(d['se_dan'])} habitaciones, porque no se distinguen entre sí. La referencia es la mediana de toda la base, {n(q['referencia']['valor'], 1)} %, con {n(q['referencia']['filas'])} pisos. En euros al año encabezan los de {d['primero_en_euros']} habitaciones, que no se distinguen de los de {lista_y(d['no_se_distinguen_del_primero_en_euros'])}.
 
-| Habitaciones | Pisos | Rentabilidad bruta | Intervalo del 95 % | Sin descuento | Euros al año | Frente a la base |
+| Habitaciones | Pisos | Rentabilidad bruta | Intervalo del 95 % | Euros al año | Frente a la base |
 |---|---|---|---|---|---|---|
 {filas}
 
 Por tipo de inmueble, se dan {lista_y(i['se_dan'])}.
 
-| Tipo de inmueble | Pisos | Rentabilidad bruta | Intervalo del 95 % | Sin descuento | Euros al año | Frente a la base |
+| Tipo de inmueble | Pisos | Rentabilidad bruta | Intervalo del 95 % | Euros al año | Frente a la base |
 |---|---|---|---|---|---|---|
 {filas_i}
 
@@ -1112,28 +1109,28 @@ def texto_que_ordena(q):
     if x["rentabilidad_con_ocupacion"] is None or x["m2_baratos"]["mediana_pct"] is None or x["firmes"]["mediana_pct"] is None:
         return "Con estos datos no se puede decir qué ordena la lista."
     return (f"Entre {n(x['barrios'])} barrios, la rentabilidad se asocia con la ocupación ({n(x['rentabilidad_con_ocupacion'], 2)} en correlación por rangos) y con el m² ({n(x['rentabilidad_con_m2'], 2)}). "
-            f"La mediana conjunta con descuento es de {n(x['m2_baratos']['mediana_pct'], 1)} % en los barrios de m² más barato, {n(x['firmes']['mediana_pct'], 1)} % en los firmes y {n(x['grupo']['mediana_pct'], 1)} % en el grupo.")
+            f"La mediana conjunta es de {n(x['m2_baratos']['mediana_pct'], 1)} % en los barrios de m² más barato, {n(x['firmes']['mediana_pct'], 1)} % en los recomendados y {n(x['grupo']['mediana_pct'], 1)} % en el grupo.")
 
 
 def texto_con_un_ano(q):
-    """Dice el puesto de cada firme con los pisos de un año o más."""
+    """Dice el puesto de cada barrio recomendado con los pisos de un año o más."""
     u = q["con_un_ano_o_mas"]
     puestos = {x["barrio"]: x for x in u["barrios"]}
     partes = [f"{b}, {n(puestos[b]['puesto'])}.º con {n(puestos[b]['mediana_pct'], 1)} %" for b in q["firmes"] if b in puestos]
-    return f"Con los pisos de un año o más ({n(u['pisos'])}, primera reseña hasta el {u['corte']}), entre {n(u['barrios_comparados'])} barrios con 30 pisos o más: {'; '.join(partes) or 'ningún firme llega al mínimo'}."
+    return f"Con los pisos de un año o más ({n(u['pisos'])}, primera reseña hasta el {u['corte']}), entre {n(u['barrios_comparados'])} barrios con 30 pisos o más: {'; '.join(partes) or 'ningún barrio recomendado llega al mínimo'}."
 
 
 def texto_p2(q):
     """Escribe la sección de la pregunta 2."""
-    orden = {"firme": 0, "con aviso": 1, "segunda línea": 2}
+    orden = {"5 de 5 veces": 0, "4 de 5 veces": 1, "menos de 4 veces": 2}
     filas = "\n".join(f"| {f['barrio']} | {f['clase']} | {n(len(f['pruebas_que_aguanta']))} | {', '.join(NOMBRE_PRUEBA[x] for x in f['pruebas_que_no_aguanta']) or 'ninguna'} | {n(f['pisos'])} | {n(f['rentabilidad_mediana_pct'], 1)} % | {n(f['cuartil_bajo_pct'], 1)} % | {n(f['parte_en_el_tope_pct'], 1)} % | {n(f['variantes_en_el_mejor_cuarto'])} |" for f in sorted(q["fichas_del_grupo"], key=lambda x: (orden[x["clase"]], x["barrio"])))
     avisos = "\n".join(f"- {f['barrio']}: {'; '.join(f['avisos_en_texto'])}." for f in q["fichas_del_grupo"] if f["avisos_en_texto"]) or "Ningún barrio del grupo lleva aviso."
     b, c = q["referencia_baratos"]["comparados"], q["referencia_baratos"]["toda_la_ciudad"]
     return f"""## Pregunta 2 · En qué barrios
 
-El grupo tiene {n(len(q['grupo']))} barrios y {n(q['pisos_del_grupo'])} pisos. Son firmes, porque aguantan las cinco pruebas, {lista_y(q['firmes'])}, con {n(q['pisos_del_grupo_firme'])} pisos. Van con aviso, porque aguantan cuatro, {lista_y(q['con_aviso'])}. Van en segunda línea {lista_y(q['segunda_linea'])}. La referencia es la mediana de {n(q['referencia']['barrios'])} barrios con 30 pisos o más, {n(q['referencia']['valor'], 1)} %, y la mediana de toda la base es {n(q['mediana_de_toda_la_base'], 1)} %.
+La lista tiene {n(len(q['grupo']))} barrios y {n(q['pisos_del_grupo'])} pisos. Siguen en ella las 5 veces {lista_y(q['firmes'])}, con {n(q['pisos_del_grupo_firme'])} pisos. Siguen 4 veces {lista_y(q['con_aviso'])}. Los demás barrios de la lista son {lista_y(q['segunda_linea'])}. La referencia es la mediana de {n(q['referencia']['barrios'])} barrios con 30 pisos o más, {n(q['referencia']['valor'], 1)} %, y la mediana de toda la base es {n(q['mediana_de_toda_la_base'], 1)} %.
 
-| Barrio | Clase | Pruebas que aguanta | Las que no | Pisos | Rentabilidad bruta | Cuartil bajo | Parte en el tope | Variantes de 12 |
+| Barrio | Clase | Pruebas que aguanta | Las que no | Pisos | Rentabilidad bruta | Cuartil bajo | Parte en el máximo | Variantes de 12 |
 |---|---|---|---|---|---|---|---|---|
 {filas}
 
@@ -1147,7 +1144,7 @@ Frente a una lista hecha solo por precio, entre los {n(b['barrios_entre_los_que_
 
 {texto_con_un_ano(q)}
 
-Frente a la mediana de toda la base, {n(q['barrios_por_encima_de_la_base'])} barrios quedan por encima y {n(q['barrios_por_debajo_de_la_base'])} por debajo; por azar saldrían distintos unos {n(q['azar_barrios_frente_a_la_base'], 1)}. Con más parte de pisos en el tope que la base hay {n(q['tope_por_encima_de_la_base'])} barrios, y por azar saldrían unos {n(q['azar_tope_frente_a_la_base'], 1)}.
+Frente a la mediana de toda la base, {n(q['barrios_por_encima_de_la_base'])} barrios quedan por encima y {n(q['barrios_por_debajo_de_la_base'])} por debajo; por azar saldrían distintos unos {n(q['azar_barrios_frente_a_la_base'], 1)}. Con más parte de pisos en el máximo que la base hay {n(q['tope_por_encima_de_la_base'])} barrios, y por azar saldrían unos {n(q['azar_tope_frente_a_la_base'], 1)}.
 
 Comprobaciones: {texto_comprobaciones(q)}."""
 
@@ -1159,15 +1156,15 @@ def texto_p3(q):
 
     def rango_en_texto(r):
         """Escribe un rango de rentabilidad con su peor y su mejor combinación."""
-        return f"va de {n(r['minimo'], 1)} % a {n(r['maximo'], 1)} %: la peor combinación es {r['peor']['foto']} {'con' if r['peor']['descuento'] else 'sin'} descuento y la mejor, {r['mejor']['foto']} {'con' if r['mejor']['descuento'] else 'sin'} descuento" if r["minimo"] is not None else "no se puede dar"
+        return f"va de {n(r['minimo'], 1)} % a {n(r['maximo'], 1)} %: la fecha del precio más baja es {r['peor']} y la más alta, {r['mejor']}" if r["minimo"] is not None else "no se puede dar"
 
     rango, rango_aviso = rango_en_texto(q["rango_de_rentabilidad_del_grupo_firme"]), rango_en_texto(q["rango_de_rentabilidad_de_firmes_y_con_aviso"])
     b = q["referencia"]
     return f"""## Pregunta 3 · Con qué riesgo
 
-{n(len(q['no_se_distinguen_del_primero']))} de los {n(q['comparaciones_con_el_primero'])} barrios comparados con el primero, {q['primero']}, no se distinguen de él con el intervalo de la diferencia; entre las que sí, por azar saldrían unas {n(q['saldrian_por_azar'], 1)}. Si se cuentan los intervalos que se tocan, como hizo el reconocimiento, son {n(q['barrios_cuyo_intervalo_toca_el_del_primero'])}. La rentabilidad bruta del grupo firme {rango}. La de firmes más con aviso {rango_aviso}. Toda la base tiene un cuartil bajo de {n(b['cuartil_bajo_pct'], 1)} % y un rango entre fotos de {n(b['rango_entre_fotos_puntos'], 1)} puntos.
+{n(len(q['no_se_distinguen_del_primero']))} de los {n(q['comparaciones_con_el_primero'])} barrios comparados con el primero, {q['primero']}, no se distinguen de él con el intervalo de la diferencia; entre las que sí, por azar saldrían unas {n(q['saldrian_por_azar'], 1)}. Si se cuentan los intervalos que se tocan, como hizo el reconocimiento, son {n(q['barrios_cuyo_intervalo_toca_el_del_primero'])}. La rentabilidad bruta del grupo recomendado {rango}. La de recomendados más los que siguen en la lista 4 veces {rango_aviso}. Toda la base tiene un cuartil bajo de {n(b['cuartil_bajo_pct'], 1)} % y un rango entre fechas de precio de {n(b['rango_entre_fotos_puntos'], 1)} puntos.
 
-| Barrio | Clase | Pisos | Cuartil bajo | Rango entre fotos, puntos | Se distingue del primero | Depende del tope | Pocos anuncios | Cuartil bajo sin superar la base | Pisos sin ocupación |
+| Barrio | Clase | Pisos | Cuartil bajo | Rango entre descargas, puntos | Se distingue del primero | Depende del máximo | Pocos anuncios | Cuartil bajo sin superar la base | Pisos sin ocupación |
 |---|---|---|---|---|---|---|---|---|---|
 {filas}
 
@@ -1188,9 +1185,9 @@ def informe(s):
         for q in s["las_16"]:
             r += [f"### {q['id']} · {q['texto']}", "", f"- Base de decisión: {q['base_decision']['respuesta']}", f"- Base de comparación: {q['base_comparacion']['respuesta']}", ""]
         e = s["evolucion_oferta"]
-        r += ["## Lo descriptivo", "", "### Oferta entre fotos", ""] + [f"- {f['foto']}: {n(f['anuncios'])} anuncios y {n(f['pisos_completos'])} pisos." for f in e["fotos"]]
+        r += ["## Lo descriptivo", "", "### Oferta entre descargas", ""] + [f"- {f['foto']}: {n(f['anuncios'])} anuncios y {n(f['pisos_completos'])} pisos." for f in e["fotos"]]
         if e["junio_2025"]:
-            r += [f"- Junio de 2025: {n(e['junio_2025']['anuncios'])} anuncios, recuento anotado de una foto que ya no se puede descargar."]
+            r += [f"- Junio de 2025: {n(e['junio_2025']['anuncios'])} anuncios, recuento anotado de una descarga que ya no se puede descargar."]
         z = s["estacionalidad"]
         r += ["", e["limites"], "", "### Estacionalidad por reseñas", "", f"En {n(z['meses'])} meses completos, el índice va de {n(z['indice_mas_bajo'], 2)} en {MESES[z['mes_mas_bajo'] - 1]} a {n(z['indice_mas_alto'], 2)} en {MESES[z['mes_mas_alto'] - 1]}, con {n(z['resenas_de_la_ventana'])} reseñas. {z['limites']}", "", "### Disponibilidad futura", ""]
         for k, v in s["disponibilidad"]["series"].items():
@@ -1226,29 +1223,29 @@ def borrador(s, exploratorios):
     h = [f"Pregunta 1: se dan los pisos de {lista_y(d['se_dan'])} habitaciones, que no se distinguen entre sí; la referencia es {n(p1['referencia']['valor'], 1)} %. Base de decisión, {n(p1['poblacion']['filas'])} pisos. Dos vías. {j}, `preguntas[0].dormitorios`.",
          f"Pregunta 1: en euros al año encabezan los de {d['primero_en_euros']} habitaciones. Base de decisión. Dos vías. {j}, `preguntas[0].dormitorios`.", f"Pregunta 1: por tipo de inmueble se dan {lista_y(i['se_dan'])}. Base de decisión. Dos vías. {j}, `preguntas[0].tipo_de_inmueble`.",
          f"Pregunta 1: {texto_sensibilidad(p1['sensibilidad_superficie'])} Base de decisión. Medianas por dos vías. {j}, `preguntas[0].sensibilidad_superficie`.",
-         f"Pregunta 2: grupo de {n(len(p2['grupo']))} barrios y {n(p2['pisos_del_grupo'])} pisos; firmes, con las cinco pruebas: {lista_y(p2['firmes'])}; con aviso, con cuatro: {lista_y(p2['con_aviso'])}; segunda línea: {lista_y(p2['segunda_linea'])}. Base de decisión. Dos vías. {j}, `preguntas[1].pruebas`.",
+         f"Pregunta 2: grupo de {n(len(p2['grupo']))} barrios y {n(p2['pisos_del_grupo'])} pisos; recomendados, con las cinco pruebas: {lista_y(p2['firmes'])}; que siguen en la lista 4 veces, con cuatro: {lista_y(p2['con_aviso'])}; resto del grupo: {lista_y(p2['segunda_linea'])}. Base de decisión. Dos vías. {j}, `preguntas[1].pruebas`.",
          f"Pregunta 2: frente a los {n(p2['referencia_baratos']['comparados']['de'])} barrios de m² más barato, coinciden {n(p2['referencia_baratos']['comparados']['cuantos'])} entre los comparados y {n(p2['referencia_baratos']['toda_la_ciudad']['cuantos'])} en toda la ciudad. Dos vías. {j}, `preguntas[1].referencia_baratos`.",
          f"Pregunta 3: {n(len(p3['no_se_distinguen_del_primero']))} de {n(p3['comparaciones_con_el_primero'])} barrios no se distinguen del primero, {p3['primero']}. Base de decisión. Una vía para el remuestreo en el script y otra en `tests/probar_indicadores_por_otro_camino.py`. {j}, `preguntas[2]`."]
     if r["minimo"] is not None:
-        h.append(f"Pregunta 3: la rentabilidad bruta del grupo firme va de {n(r['minimo'], 1)} % a {n(r['maximo'], 1)} %. Pisos del grupo firme con precio en cada foto. Dos vías. {j}, `preguntas[2].rango_de_rentabilidad_del_grupo_firme`.")
+        h.append(f"Pregunta 3: la rentabilidad bruta del grupo recomendado va de {n(r['minimo'], 1)} % a {n(r['maximo'], 1)} %. Pisos del grupo recomendado con precio en cada descarga. Dos vías. {j}, `preguntas[2].rango_de_rentabilidad_del_grupo_firme`.")
     if r2["minimo"] is not None:
-        h.append(f"Pregunta 3: la de firmes más con aviso va de {n(r2['minimo'], 1)} % a {n(r2['maximo'], 1)} %. Pisos de esos barrios con precio en cada foto. Dos vías. {j}, `preguntas[2].rango_de_rentabilidad_de_firmes_y_con_aviso`.")
+        h.append(f"Pregunta 3: la de recomendados más los que siguen en la lista 4 veces va de {n(r2['minimo'], 1)} % a {n(r2['maximo'], 1)} %. Pisos de esos barrios con precio en cada descarga. Dos vías. {j}, `preguntas[2].rango_de_rentabilidad_de_firmes_y_con_aviso`.")
     rec = s["recomendacion"]
     if rec["pisos"]:
-        h.append(f"Recomendación: pisos de hasta 2 habitaciones del grupo firme, {n(rec['pisos'])} anuncios en Airbnb: {n(rec['rentabilidad_sin_descuento_pct'], 1)} % sin descuento y {n(rec['rentabilidad_con_descuento_pct'], 1)} % con él; {n(rec['compra_sin_descuento_eur'])} € de compra sin descuento, {n(rec['compra_con_descuento_eur'])} € con él y {n(rec['ingreso_anual_eur'])} € de ingreso anual, en mediana y sin gastos. Dos vías. {j}, `recomendacion`.")
+        h.append(f"Recomendación: pisos de hasta 2 habitaciones del grupo recomendado, {n(rec['pisos'])} anuncios en Airbnb: {n(rec['rentabilidad_pct'], 1)} % de rentabilidad, {n(rec['compra_eur'])} € de compra y {n(rec['ingreso_anual_eur'])} € de ingreso anual, en mediana y sin gastos. Dos vías. {j}, `recomendacion`.")
     h.append(f"Pregunta 2: {texto_que_ordena(p2)} Dos vías. {j}, `preguntas[1].que_ordena_la_lista`.")
     h.append(f"Pregunta 2: {texto_con_un_ano(p2)} {j}, `preguntas[1].con_un_ano_o_mas`.")
     pb = s["licencias_y_registro"]["planta_baja"]
-    h.append(f"Licencias: {n(pb['licencias'])} de {n(pb['de'])} incluyen planta baja, y {n(pb['firmes']['licencias'])} de {n(pb['firmes']['de'])} en los barrios firmes. Dos vías. {j}, `licencias_y_registro.planta_baja`.")
+    h.append(f"Licencias: {n(pb['licencias'])} de {n(pb['de'])} incluyen planta baja, y {n(pb['firmes']['licencias'])} de {n(pb['firmes']['de'])} en los barrios recomendados. Dos vías. {j}, `licencias_y_registro.planta_baja`.")
     h += [f"{q['id']}, base de decisión: {q['base_decision']['respuesta']} Dos vías. {j}, `las_16`." for q in s["las_16"]]
     h += [f"{q['id']}, base de comparación, para comparar: {q['base_comparacion']['respuesta']} Dos vías. {j}, `las_16`." for q in s["las_16"]]
     e, z = s["evolucion_oferta"], s["estacionalidad"]
-    h += [f"Oferta: {n(f['anuncios'])} anuncios el {f['foto']}. Todos los anuncios de esa foto. Dos vías. {j}, `evolucion_oferta`." for f in e["fotos"]]
+    h += [f"Oferta: {n(f['anuncios'])} anuncios el {f['foto']}. Todos los anuncios de esa descarga. Dos vías. {j}, `evolucion_oferta`." for f in e["fotos"]]
     if z["indice_mas_alto"] is not None:
         h.append(f"Reseñas: en {n(z['meses'])} meses completos, el índice va de {n(z['indice_mas_bajo'], 2)} en {MESES[z['mes_mas_bajo'] - 1]} a {n(z['indice_mas_alto'], 2)} en {MESES[z['mes_mas_alto'] - 1]}. Reseñas de los anuncios de septiembre. Dos vías. {j}, `estacionalidad`.")
     h.append(f"Atractivo y competencia: {s['atractivo_y_competencia']['lectura']}. Pisos del grupo. {j}, `atractivo_y_competencia`.")
     lic = s["licencias_y_registro"]["totales"]
-    h.append(f"Licencias: {n(lic['licencias'])} licencias y {n(lic['viviendas_con_licencia'])} viviendas, frente a {n(lic['anuncios'])} anuncios de la foto. Dos vías. {j}, `licencias_y_registro`.")
+    h.append(f"Licencias: {n(lic['licencias'])} licencias y {n(lic['viviendas_con_licencia'])} viviendas, frente a {n(lic['anuncios'])} anuncios de la descarga. Dos vías. {j}, `licencias_y_registro`.")
     for tabla, e in exploratorios.items():
         h += [f"{x['id']} de {tabla}: {x['texto']} Una vía: se cruza antes de entrar. `informes/analisis-exploratorio__{tabla}.json`." for x in e["hallazgos"]]
     a = [f"{f['barrio']} ({f['clase']}): {'; '.join(f['avisos_en_texto'])}. Base de decisión. {j}, `preguntas[1].fichas_del_grupo`." for f in p2["fichas_del_grupo"] if f["avisos_en_texto"]]
@@ -1326,12 +1323,12 @@ def principal(s):
     s["validaciones"] = validaciones(r1, repetido, cd.huellas_de_raw() == antes, codigo, faltas)
     s["decisiones_propias"] = [
         "Texto de las 16 preguntas: la lista de comprobación del análisis.",
-        "El rango del grupo firme es la mediana conjunta de sus pisos en cada una de las seis combinaciones; también se da barrio a barrio.",
-        "Rango entre fotos: mediana del barrio con estancia de hasta 3 noches, y una foto con menos de 20 pisos no da cifra, el mínimo de las variantes.",
-        "«Depende del tope»: el barrio sale del grupo al repetir las 12 variantes sin los pisos en 255 días de toda la base, porque así se mide cada prueba. Al lado va lo que da quitando solo los del barrio.",
-        "Anuncios del anfitrión: `calculated_host_listings_count`, el recuento de la foto.",
-        "Cotización a más de 60 días: cada variante mira la foto de la que toma el precio. Una cotización vacía no se cuenta como lejana.",
-        "Pisos sin ocupación como cero: se les aplican los demás filtros de cada variante, también el del precio.",
+        "El rango del grupo recomendado es la mediana conjunta de sus pisos en cada una de las seis combinaciones; también se da barrio a barrio.",
+        "Rango entre fotos: mediana del barrio con estancia de hasta 3 noches, y una descarga con menos de 20 pisos no da cifra, el mínimo de las repeticiones.",
+        "«Depende del máximo»: el barrio sale del grupo al repetir las 12 repeticiones sin los pisos en 255 días de toda la base, porque así se mide cada prueba. Al lado va lo que da quitando solo los del barrio.",
+        "Anuncios del anfitrión: `calculated_host_listings_count`, el recuento de la descarga.",
+        "Cotización a más de 60 días: cada repetición mira la descarga de la que toma el precio. Una cotización vacía no se cuenta como lejana.",
+        "Pisos sin ocupación como cero: se les aplican los demás filtros de cada repetición, también el del precio.",
         "Sensibilidad de superficie: las ocho combinaciones de los extremos, el estudio es el piso sin habitación, y los pisos que la regla lleva a otra superficie por sus baños no se mueven.",
         "Barrios baratos: tantos como barrios tiene el grupo, entre los comparados con 30 pisos o más y, aparte, en toda la ciudad.",
         "La pregunta 1 no agrupa los pisos sin habitación con los de uno, aunque la superficie sea la misma.",
@@ -1339,11 +1336,11 @@ def principal(s):
         "Precio de la base de comparación: el de vivienda de las reglas §3, y el publicado al lado en la pregunta S01.",
         "Atractivo dentro del grupo: se parte en dos por la mediana de puntos del grupo, y se resta la mediana del barrio para mirarlo dentro de cada uno.",
         "Estacionalidad: los últimos 24 meses completos, la misma ventana del reconocimiento.",
-        "Pisos de un año o más: primera reseña en la fecha de la foto menos un año o antes; es la única fecha de antigüedad del anuncio en los datos.",
+        "Pisos de un año o más: primera reseña en la fecha de la descarga menos un año o antes; es la única fecha de antigüedad del anuncio en los datos.",
         "Licencias con planta baja: las que nombran BAJA en su texto, sola o con otras plantas. La columna es texto libre y solo se le pregunta eso.",
-        "Cifra de la recomendación: mediana conjunta de los pisos de 2 habitaciones o menos de los tres firmes, estudios incluidos.",
+        "Cifra de la recomendación: mediana conjunta de los pisos de 2 habitaciones o menos de los tres recomendados, estudios incluidos.",
         "Barrios de m² más barato frente a la lista: los 9 de los comparados; sus pares se miden aunque compartan barrios con la lista, de modo que el intervalo es orientativo."]
-    s["pendientes_resueltos"] = [{"id": "P-01", "pregunta": "Cuándo un barrio depende del tope y cuándo tiene pocos anuncios.", "resuelto_por": "reglas §3, con las cinco pruebas y los tres avisos"}]
+    s["pendientes_resueltos"] = [{"id": "P-01", "pregunta": "Cuándo un barrio depende del máximo y cuándo tiene pocos anuncios.", "resuelto_por": "reglas §3, con las cinco pruebas y los tres avisos"}]
     s["pendientes"] = [{**p, "id": f"P-{i:02d}"} for i, p in enumerate(t.get("pendientes", []), 2)]
     fallan = [k for k, v in s["validaciones"].items() if v is not True]
     control_mal = [k for k, v in s["controles"].items() if v["coincide"] is False]
@@ -1351,7 +1348,7 @@ def principal(s):
         s["controles"]["que_pasa"] = f"No salió lo esperado en: {', '.join(control_mal)}. No se ajusta nada: el resultado es el calculado."
     estado = "ERROR" if fallan else "AVISO" if control_mal or s["pendientes"] else "OK"
     p1, p2, p3 = s["preguntas"]
-    resumen = f"Validaciones que fallan: {', '.join(fallan)}." if fallan else f"Tres preguntas y 16 comprobaciones contestadas sobre {n(p1['poblacion']['filas'])} pisos: {n(len(p2['grupo']))} barrios en el grupo, {n(len(p2['firmes']))} firmes y {n(len(p2['con_aviso']))} con aviso."
+    resumen = f"Validaciones que fallan: {', '.join(fallan)}." if fallan else f"Tres preguntas y 16 comprobaciones contestadas sobre {n(p1['poblacion']['filas'])} pisos: {n(len(p2['grupo']))} barrios en la lista, {n(len(p2['firmes']))} que siguen en ella las 5 veces y {n(len(p2['con_aviso']))} que siguen 4 veces."
     s["resultado"] = {"estado": estado, "riesgo": "medio" if estado != "ERROR" else "alto", "resumen": resumen, "artefactos": ["informes/indicadores.json", "informes/indicadores.md", "config/metodo/06_borrador_de_hallazgos.md"], "siguiente": "interpretacion-resultados" if not fallan else "arreglar el fallo"}
     rc.guardar(s, "indicadores", informe)
     BORRADOR.parent.mkdir(parents=True, exist_ok=True)

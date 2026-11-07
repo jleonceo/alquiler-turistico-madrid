@@ -64,8 +64,7 @@ REMUESTREOS = 2000
 MIN_GRUPO = 30
 MIN_VARIANTE = (30, 20)
 ESTANCIAS = (3, 6)
-MAYORIA = 7  # más de 6 de las 12 variantes
-DESCUENTO = 0.75
+MAYORIA = 7  # más de 6 de las 12 repeticiones
 
 # 1.4 Tablas.
 FOTOS = {"dic": "2025-12-14", "mar": "2026-03-24", "jun": "2026-06-20", "sep": "2026-09-17"}
@@ -497,15 +496,15 @@ def mascara_fija(L, excluir=None, camas_vacias=False, cero=False):
     return m & ~excluir if excluir is not None else m
 
 
-def rentabilidad(t, col_precio="precio", desc=DESCUENTO):
+def rentabilidad(t, col_precio="precio"):
     """Calcula la rentabilidad bruta de las reglas §2, en porcentaje."""
-    return 100 * t[col_precio] * t["ocupacion"] / (t["sup_regla"] * t["m2"] * desc)
+    return 100 * t[col_precio] * t["ocupacion"] / (t["sup_regla"] * t["m2"])
 
 
 def grupo_de(L, excluir=None, camas_vacias=False, por_foto=None, cero=False):
-    """Calcula las doce variantes de las reglas §3 y devuelve los barrios en la mayoría.
+    """Calcula las doce repeticiones de las reglas §3 y devuelve los barrios en la mayoría.
 
-    por_foto quita pisos solo en las variantes que usan el precio de esa columna; cero cuenta los pisos sin ocupación.
+    por_foto quita pisos solo en las repeticiones que usan el precio de esa columna; cero cuenta los pisos sin ocupación.
     """
     fija = mascara_fija(L, excluir, camas_vacias, cero)
     veces = Counter()
@@ -542,7 +541,7 @@ def pares_distintos(t, columna, minimo=MIN_GRUPO):
 
 
 def medir(L, excluir=None, camas_vacias=False):
-    """Mide una versión de la base: pisos, grupo, grupo firme, tipo de piso y pares que se distinguen."""
+    """Mide una versión de la base: pisos, grupo, grupo recomendado, tipo de piso y pares que se distinguen."""
     fija = mascara_fija(L, excluir, camas_vacias)
     bd = L.loc[fija & L["estancia"].le(3) & L["precio"].between(20, 1000)].copy()
     bd["r"] = rentabilidad(bd)
@@ -565,7 +564,7 @@ def medir(L, excluir=None, camas_vacias=False):
 
 
 def comparar(base, otra):
-    """Dice qué cambia frente a la base: el grupo, los firmes, el tipo y qué pares se distinguen, nunca el orden."""
+    """Dice qué cambia frente a la base: el grupo, los recomendados, el tipo y qué pares se distinguen, nunca el orden."""
     pares_b = {tuple(x) for x in base["pares_que_se_distinguen"]}
     pares_o = {tuple(x) for x in otra["pares_que_se_distinguen"]}
     cambian = sorted(pares_b ^ pares_o)
@@ -607,15 +606,15 @@ def veredicto_de(m):
         for x in m["pares_entran_salen"]:
             if x["entra"]:
                 lectura = {True: "se distinguen", False: "no se distinguen", None: "no se comparan, porque uno no llega a 30 pisos"}
-                trozos.append(f"{x['entra']} y {x['sale']}: en la base {lectura[x['se_distinguen_en_la_base']]}; en la variante {lectura[x['se_distinguen_en_la_variante']]}")
+                trozos.append(f"{x['entra']} y {x['sale']}: en la base {lectura[x['se_distinguen_en_la_base']]}; en la repetición {lectura[x['se_distinguen_en_la_variante']]}")
     if m["cambia_firmes"]:
-        trozos.append(f"cambian los firmes: entran {', '.join(m['firmes_entran']) or 'ninguno'} y salen {', '.join(m['firmes_salen']) or 'ninguno'}")
+        trozos.append(f"cambian los recomendados: entran {', '.join(m['firmes_entran']) or 'ninguno'} y salen {', '.join(m['firmes_salen']) or 'ninguno'}")
     if m["cambia_tipo"]:
         trozos.append("cambia el tipo que rinde más: " + "; ".join(f"{k}, de {v['ganador_antes']} a {v['ganador']}" for k, v in m["tipo"].items() if v["cambia_de_verdad"]))
     elif m["cambia_primer_tipo"]:
         trozos.append("el tipo no cambia con intervalo: " + "; ".join(f"{k}, primero {v['ganador']} en vez de {v['ganador_antes']}, sin distinguirse de él" for k, v in m["tipo"].items() if v["cambia_ganador"]))
     if not (m["cambia_grupo"] or m["cambia_firmes"] or m["cambia_tipo"]):
-        trozos.insert(0, "no cambia el grupo ni los firmes ni el tipo")
+        trozos.insert(0, "no cambia el grupo ni los recomendados ni el tipo")
     trozos.append(f"pares de barrios que cambian al distinguirse: {m['pares_que_cambian']}, de ellos con algún barrio del grupo: {m['pares_del_grupo_que_cambian']}")
     if m["cambian_pares_de_tipo"]:
         trozos.append(f"pares de tipos que cambian: {sum(len(v['pares_que_cambian']) for v in m['tipo'].values())}")
@@ -631,13 +630,13 @@ def reglas_documentadas(L, fotos, b, cal):
     publicada = L["minimum_nights"].notna()
     formula = (L["number_of_reviews_ltm"] * 2 * L["minimum_nights"].clip(lower=3)).clip(upper=255)
     salida = [
-        {"regla": "reglas §2: ocupación = reseñas del último año × 2 × el mayor entre 3 y la estancia, con tope de 255", "filas": int(publicada.sum()),
+        {"regla": "reglas §2: ocupación = reseñas del último año × 2 × el mayor entre 3 y la estancia, con máximo de 255", "filas": int(publicada.sum()),
          "filas_que_incumplen": int((formula[publicada] != L.loc[publicada, "ocupacion"]).sum())},
         {"regla": "reglas §2: ingreso anual = precio × ocupación", "filas": int(L["estimated_revenue_l365d"].notna().sum()),
          "filas_que_incumplen": int(((L["precio"] * L["ocupacion"] - L["estimated_revenue_l365d"]).abs() > 1).sum())},
         {"regla": "reglas §1: 128 barrios y 21 distritos", "filas": len(b),
          "filas_que_incumplen": int(abs(b["neighbourhood"].nunique() - 128) + abs(b["neighbourhood_group"].nunique() - 21))},
-        {"regla": "reglas §2: ocupación con tope de 255", "filas": len(L), "filas_que_incumplen": int(L["ocupacion"].gt(255).sum())},
+        {"regla": "reglas §2: ocupación con máximo de 255", "filas": len(L), "filas_que_incumplen": int(L["ocupacion"].gt(255).sum())},
     ]
     pisos = mascara_fija(L) & L["precio"].between(20, 1000) & publicada & L["est_min"].notna()
     t = L.loc[pisos]
@@ -801,7 +800,7 @@ def asuntos_de(L, fotos, b, oficial, licencias, puntos, resenas_rep, base_m, dic
                opciones=["usa el precio del barrio con su mismo nombre", "usa el precio de su distrito, como San Andrés y Ambroz"],
                medicion=m2_cambiado(casco), bloque="3.11",
                nota=f"Nuevo. Airbnb tiene 2 barrios en Villa de Vallecas y el libro 3: Ensanche de Vallecas no tiene pareja. Que su suelo caiga dentro del barrio de Airbnb es una deducción sin confirmar. Precio del barrio, {m2_b:.2f} €/m²; del distrito, {m2_d:.2f} €/m².")
-    anadir("camas_vacias", sep, "beds", int(camas_vacias.sum()), camas_vacias, opciones=["un vacío no pasa el tope de 6 camas", "un vacío pasa el tope"],
+    anadir("camas_vacias", sep, "beds", int(camas_vacias.sum()), camas_vacias, opciones=["un vacío no pasa el máximo de 6 camas", "un vacío pasa el tope"],
            medicion=medidor(L, camas_vacias=True), bloque="3.4", nota=f"El filtro quita {int((camas_vacias & fuera & L['ocupacion'].gt(0) & L['precio'].between(20, 1000)).sum())} pisos con ocupación por estar vacío.")
     anadir("banos_cero", sep, "bathrooms_text", int(cero_banos.sum()), cero_banos, opciones=["se quedan", "salen de la base"], medicion=medidor(L, excluir=cero_banos), bloque="3.8",
            nota="Las reglas dicen cómo leer el texto y no qué significa un cero.")
@@ -810,7 +809,7 @@ def asuntos_de(L, fotos, b, oficial, licencias, puntos, resenas_rep, base_m, dic
     anadir("tamano_incoherente", sep, "beds, bedrooms, accommodates", int(incoherente.sum()), incoherente, opciones=["se quedan", "salen de la base"], medicion=medidor(L, excluir=incoherente), bloque="3.10",
            nota="Más camas o habitaciones que huéspedes. Son las reglas candidatas RC-01 y RC-02.")
     anadir("estancia_larga", sep, "minimum_nights", int(larga.sum()), larga, opciones=["se quedan en la tabla", "salen de la tabla de trabajo"],
-           no_medible="No entran en la base: el filtro de hasta 3 noches, o de 6 en las variantes, ya los quita.", bloque="3.8", nota="Lista del cuaderno.")
+           no_medible="No entran en la base: el filtro de hasta 3 noches, o de 6 en las repeticiones, ya los quita.", bloque="3.8", nota="Lista del cuaderno.")
     pf = puntos.loc[~puntos["x"].between(-3.95, -3.45) | ~puntos["y"].between(40.25, 40.65)]
     anadir("puntos_de_interes", "puntos de interés", "coordenadas, COD_BARRIO", len(pf), opciones=["se quitan esos puntos", "se buscan sus coordenadas"],
            no_medible="La rentabilidad no usa los puntos de interés: no pueden cambiar el grupo ni el tipo. Afectan al atractivo, que aún no tiene distancia ni peso (reglas §3).", bloque="3.8",
@@ -836,7 +835,7 @@ def asuntos_de(L, fotos, b, oficial, licencias, puntos, resenas_rep, base_m, dic
         ("precio_extremo", sep, "price", int((L["precio"].notna() & ~L["precio"].between(20, 1000)).sum()), None, "reglas §3: precio entre 20 y 1.000 €", "3.8"),
         ("dormitorios_cero", sep, "bedrooms", int(L["bedrooms"].eq(0).sum()), L["bedrooms"].eq(0), "reglas §2: hasta 1 habitación, 50 m²", "3.8"),
         ("anuncio_lleno", sep, "availability_365", int((L["availability_365"].eq(0) & L["number_of_reviews_ltm"].gt(0)).sum()), L["availability_365"].eq(0), "reglas §1 y §7: se quedan", "3.10"),
-        ("temporada", sep, "licencia_exencion", int(L["temporada"].sum()), L["temporada"], "reglas §3: se quedan; deciden grupo firme y segunda línea", "3.10"),
+        ("temporada", sep, "licencia_exencion", int(L["temporada"].sum()), L["temporada"], "reglas §3: se quedan; deciden grupo recomendado y resto del grupo", "3.10"),
         ("borde", sep, "latitude, longitude", int(cerca.sum()), cerca, "reglas §1: cerca del borde su lado no se puede asegurar y se cuentan", "3.10"),
         ("foto_sin_precio", TABLA_FOTO["dic"], "price", len(fotos["dic"]), None, "briefing, alcance: diciembre mide la oferta y no trae precio", "3.2"),
         ("dos_anuncios_iguales", sep, "id", duplicados, None, "reglas §1: dos anuncios son distintos si tienen distinto número", "3.5"),
@@ -915,7 +914,7 @@ def informe(s):
             r.append(f"- `{c['tabla']}.{c['columna']}` = {c['codigo']}: {c['filas']} filas ({c['pct_filas']} %), documentado {c['documentado']}.")
     juntas = [c for c in s["codigos_de_ausencia"] if c["tipo"] == "vacío en las mismas filas" and c["tabla"] == TABLA_FOTO["sep"]]
     r += [f"- En septiembre, `{c['columna']}` y {', '.join(f'`{x}`' for x in c['mismas_filas_que'])} están vacías en las mismas {c['filas']} filas: es una ausencia de la fila." for c in juntas]
-    r += ["", "Vacíos por fila, en la foto principal:", ""]
+    r += ["", "Vacíos por fila, en la descarga principal:", ""]
     v = next(x for x in s["vacios_por_fila"] if x["tabla"] == TABLA_FOTO["sep"])
     r += [f"- Sin las columnas casi vacías, {v['sin_casi_vacias'].get('0', 0)} filas no tienen ningún vacío; se excluyen {', '.join(v['excluidas'])}."]
     r += ["", "## Duplicados", ""]
@@ -965,14 +964,14 @@ def informe(s):
         r.append(f"- Magnitudes enteras vacías, sin escala ni colas: {len(s['avisos'])}; están en `avisos` del JSON.")
     r += ["", "## Tabla de decisiones", "",
           f"La base de referencia tiene {s['medicion']['base']['pisos']} pisos y su grupo son {len(s['medicion']['base']['grupo'])} barrios: {', '.join(s['medicion']['base']['grupo'])}. "
-          f"Los firmes son {', '.join(s['medicion']['base']['firmes'])}. Se distinguen {len(s['medicion']['base']['pares_que_se_distinguen'])} pares de los {s['medicion']['base']['barrios_comparados']} barrios con 30 pisos o más. "
+          f"Los recomendados son {', '.join(s['medicion']['base']['firmes'])}. Se distinguen {len(s['medicion']['base']['pares_que_se_distinguen'])} pares de los {s['medicion']['base']['barrios_comparados']} barrios con 30 pisos o más. "
           "Dos barrios se distinguen si el intervalo del 95 % de su diferencia de medianas no cruza el cero. Un cambio en pocos pares puede venir de un intervalo que ya rozaba el cero. "
           "Esta es la única tabla del informe, porque aquí hay que comparar y decidir.", "",
           "| Id | Tabla y columna | Filas | En la base | Decisión que existe | Opciones | Qué cambia en la base | Nota |", "|---|---|---|---|---|---|---|---|"]
     for f in s["tabla_de_decisiones"]:
         cambia = f["veredicto"] or (f["no_medible"] or ("no se mide: ya hay decisión" if f["decision"] else ""))
         r.append("| " + " | ".join(celda(x) for x in [f["id"], f"{f['tabla']} · {f['columna']}", f["filas_afectadas"], f["en_base"], f["decision"] or "no existe", " / ".join(f["opciones"]), cambia, f["nota"]]) + " |")
-    r += ["", "Ninguna opción está elegida. Cada fila sin decisión la resuelve la persona responsable."]
+    r += ["", "Ninguna opción está elegida. Cada fila sin decisión la resuelve quien dirige el proyecto."]
     return "\n".join(r) + "\n"
 
 
@@ -989,7 +988,7 @@ def texto_datos_personales(proteccion):
               "En el trabajo local quedan el número del anuncio, las coordenadas y el recuento de anuncios por anfitrión; lo que se publica los deja fuera, como explica `docs/datos.md`.", ""]
     lineas += [f"- {t}, {r}: {', '.join(sorted(c))}." for (t, r), c in sorted(tecnicas.items())]
     lineas += ["", "Este paso no copia ningún valor de `licencia_nacional`, `licencia_exencion`, `licencia_vt` ni `licencia_otro`. Usa `licencia_exencion` solo para saber qué pisos "
-               "declaran alquiler de temporada, como pide la regla del grupo firme."]
+               "declaran alquiler de temporada, como pide la regla del grupo recomendado."]
     return lineas
 
 
@@ -1114,7 +1113,7 @@ def principal():
     s["datos_personales_en_claro"] = personales
     if personales:
         s["resultado"] = {"estado": "PARADO", "riesgo": "alto", "resumen": "Hay datos con forma de dato personal en claro: " + "; ".join(f"{x['tabla']}.{x['columna']}, {x['clase']}, {x['filas']} filas" for x in personales),
-                          "artefactos": ["informes/calidad-datos.json", "informes/calidad-datos.md"], "siguiente": "avisar a la persona responsable (reglas §4)"}
+                          "artefactos": ["informes/calidad-datos.json", "informes/calidad-datos.md"], "siguiente": "avisar a quien dirige el proyecto (reglas §4)"}
         guardar(s)
         print(s["resultado"]["estado"], s["resultado"]["resumen"])
         return 0
@@ -1316,7 +1315,7 @@ def principal():
     no_salen = [c["nombre"] for c in s["controles"] if c["sale"] is False]
     s["resultado"] = {
         "estado": "ERROR" if fallos else "AVISO", "riesgo": "alto" if fallos else "medio",
-        "resumen": (f"{len(tabla_d)} asuntos con criterio, {decisiones_abiertas} sin decisión; {len(cambian)} de los medidos cambian el grupo, los firmes o el tipo ({', '.join(cambian) or 'ninguno'}). "
+        "resumen": (f"{len(tabla_d)} asuntos con criterio, {decisiones_abiertas} sin decisión; {len(cambian)} de los medidos cambian el grupo, los recomendados o el tipo ({', '.join(cambian) or 'ninguno'}). "
                     "El plan se escribió antes de calcular." + (f" Controles que no salen: {', '.join(no_salen)}." if no_salen else "") + (" Fallos: " + "; ".join(fallos) if fallos else "")),
         "artefactos": ["informes/calidad-datos.json", "informes/calidad-datos.md"], "siguiente": "la persona resuelve la tabla de decisiones; después, correccion-datos"}
     guardar(s)

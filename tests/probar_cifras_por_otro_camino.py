@@ -20,7 +20,7 @@ CASO = Path(__file__).resolve().parents[1]
 RAW = CASO / "data" / "raw"
 csv.field_size_limit(10_000_000)
 # La mediana de Opañel del cuaderno de reconocimiento, sección 8 bis, y su precio del m², leído de su libro abajo.
-RENTABILIDAD_OPANEL = 18.7
+RENTABILIDAD_OPANEL = 14.1
 FALLOS = []
 
 
@@ -130,7 +130,7 @@ def principal():
     # La rentabilidad mediana de un barrio se rehace con el precio del m² que da el reconocimiento aprobado.
     libro = load_workbook(RAW / "externos/E3210626_precio_declarado_2025.xlsx", read_only=True, data_only=True).worksheets[0]
     m2_opanel = next(f[2] for f in libro.iter_rows(values_only=True) if isinstance(f[1], str) and f[1].endswith(". Opañel"))
-    opanel = 100 * statistics.median(rent["Opañel"]) / (m2_opanel * 0.75)
+    opanel = 100 * statistics.median(rent["Opañel"]) / m2_opanel
     caso("rentabilidad mediana de Opañel, en décimas", round(opanel, 1), RENTABILIDAD_OPANEL)
     control = {c["nombre"]: c for c in cal_json["controles"]}
     for nombre in ("barrios_sin_precio_propio", "barrios_con_otro_nombre", "barrios_del_grupo", "barrios_tras_temporada"):

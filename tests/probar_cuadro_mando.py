@@ -60,13 +60,13 @@ def pisos_pequenos():
     """Distrito A con el barrio X (31 de 1 habitación y 5 de 2) y distrito B con el barrio Y (4 de 3 habitaciones)."""
     filas = []
     for i in range(31):
-        filas.append(("A", "X", 1.0, 10.0 + i, 7.5 + 0.75 * i, 100.0 + i, 100 + i, 150000.0, 200000.0))
+        filas.append(("A", "X", 1.0, 10.0 + i, 100.0 + i, 100 + i, 150000.0))
     for i in range(5):
-        filas.append(("A", "X", 2.0, 50.0 + i, 37.5 + 0.75 * i, 300.0, 200, 195000.0, 260000.0))
+        filas.append(("A", "X", 2.0, 50.0 + i, 300.0, 200, 195000.0))
     for i in range(4):
-        filas.append(("B", "Y", 3.0, 3.0 + i, 2.25 + 0.75 * i, 90.0, 60, 300000.0, 400000.0))
-    return pd.DataFrame(filas, columns=["distrito", "barrio", "dormitorios", "rent_valoraciones_desc_pct", "rent_valoraciones_sin_pct",
-                                        "precio_eur", "ocupacion_dias", "compra_valoraciones_desc_eur", "compra_valoraciones_sin_eur"])
+        filas.append(("B", "Y", 3.0, 3.0 + i, 90.0, 60, 300000.0))
+    return pd.DataFrame(filas, columns=["distrito", "barrio", "dormitorios", "rent_valoraciones_pct",
+                                        "precio_eur", "ocupacion_dias", "compra_valoraciones_eur"])
 
 
 GEO_PEQUENO = {"type": "FeatureCollection", "features": [
@@ -100,7 +100,6 @@ def parte_a():
     celda = sel[cm.clave("A", "X", "1")]
     caso("una celda de 31 pisos da cifras", celda["pisos"] == 31 and celda["rent"] == 25.0 and celda["precio"] == 115.0, str(celda))
     caso("el cuartil bajo sale de esos 31 pisos", celda["cuartil"] == 17.5, str(celda))
-    caso("la cifra sin descuento es la de la columna sin descuento", celda["rent_sin"] == 18.75, str(celda))
     pequena = sel[cm.clave("A", "X", "2")]
     caso("una celda de 5 pisos solo da el recuento", set(pequena) == {"pisos"} and pequena["pisos"] == 5, str(pequena))
     caso("un distrito con pocos pisos solo da el recuento", set(sel[cm.clave("B", "Todos", "Todos")]) == {"pisos"})
@@ -136,13 +135,13 @@ def parte_a():
     para("para si la tabla no es la que usaron los indicadores", cm.misma_entrada, entradas, "data/processed/analisis_anuncios.parquet", "otra")
     para("para si los indicadores no dicen qué tabla usaron", cm.misma_entrada, entradas, "data/processed/analisis_barrios.parquet", "abc")
 
-    clases = {"X": "firme", "Y": "menos de 30"}
+    clases = {"X": "5 de 5 veces", "Y": "menos de 30"}
     svg = cm.mapa_svg(GEO_PEQUENO, clases, {"X": "A", "Y": "B"}, ["X"])
     caso("el mapa lleva un trazado por barrio", svg.count("<path") == 2 and 'data-barrio="X"' in svg and 'data-barrio="Y"' in svg)
-    caso("cada barrio sale con el color de su clase", cm.COLOR_CLASE["firme"] in svg)
+    caso("cada barrio sale con el color de su clase", cm.COLOR_CLASE["5 de 5 veces"] in svg)
     caso("el mapa no pide nada de fuera", "http" not in svg.replace('xmlns="http://www.w3.org/2000/svg"', ""))
     caso("los barrios del grupo llevan su nombre en el mapa", ">X</text>" in svg and ">Y</text>" not in svg)
-    para("para si falta un barrio en los límites", cm.mapa_svg, GEO_PEQUENO, {"X": "firme", "Y": "firme", "Z": "firme"}, {}, [])
+    para("para si falta un barrio en los límites", cm.mapa_svg, GEO_PEQUENO, {"X": "5 de 5 veces", "Y": "5 de 5 veces", "Z": "5 de 5 veces"}, {}, [])
 
     texto = cm.datos_en_html({"a": "</script><b>"})
     caso("los datos no pueden cerrar su etiqueta", "</script>" not in texto, texto)
@@ -187,7 +186,7 @@ def parte_b():
     malas = []
     for f in p["P1"]["dormitorios"]["tabla"]:
         c = sel[f"Todos|{f['grupo']}"]
-        if (c["pisos"], round(c["rent"], 5), round(c["cuartil"], 5), round(c["rent_sin"], 5)) != (f["pisos"], round(f["rentabilidad_mediana_pct"], 5), round(f["cuartil_bajo_pct"], 5), round(f["sin_descuento_pct"], 5)):
+        if (c["pisos"], round(c["rent"], 5), round(c["cuartil"], 5)) != (f["pisos"], round(f["rentabilidad_mediana_pct"], 5), round(f["cuartil_bajo_pct"], 5)):
             malas.append(f["grupo"])
     caso("las cuatro filas de habitaciones", not malas, str(malas))
     caso("los 4 o más habitaciones no se ordenan", set(sel["Todos|4 o más"]) == {"pisos"} and sel["Todos|4 o más"]["pisos"] == p["P1"]["dormitorios"]["sin_conclusion"][0]["casos"])
@@ -199,8 +198,6 @@ def parte_b():
             malas.append(f["barrio"])
         if datos["barrios"][f["barrio"]]["clase"] != f["clase"]:
             malas.append(f["barrio"] + " (clase)")
-        if abs(c["rent_sin"] - c["rent"] * 0.75) > 2e-5:
-            malas.append(f["barrio"] + " (sin descuento)")
     caso("las 36 filas de barrios, con su clase", not malas and len(p["P2"]["tabla_barrios"]) == 36, str(malas))
     caso("solo 36 barrios llevan ficha", set(datos["barrios"]) == {f["barrio"] for f in p["P2"]["tabla_barrios"]})
 
@@ -219,8 +216,8 @@ def parte_b():
     filas_s14 = s["S14"]["base_decision"]["datos"]["distritos"]
     # Tres distritos se escriben distinto en las dos fuentes: se casan sin los espacios
     nombre = {d.replace(" ", ""): d for d in datos["distritos"]}
-    malas = [f["distrito"] for f in filas_s14 if f["anuncios_de_la_base"] >= 30 and abs(sel[f"D:{nombre[f['distrito'].replace(' ', '')]}|Todos"]["compra_sin"] - f["compra_mediana_valoraciones_sin_descuento_eur"]) > 2e-4]
-    caso("precio de compra sin descuento de cada distrito", not malas, str(malas))
+    malas = [f["distrito"] for f in filas_s14 if f["anuncios_de_la_base"] >= 30 and abs(sel[f"D:{nombre[f['distrito'].replace(' ', '')]}|Todos"]["compra"] - f["compra_mediana_valoraciones_eur"]) > 2e-4]
+    caso("precio de compra de cada distrito", not malas, str(malas))
 
     trazados = re.findall(r'<path d="[^"]*" fill="([^"]*)" data-barrio="([^"]*)"', texto)
     caso("el mapa tiene los 128 barrios", len({b for _, b in trazados}) == 128, str(len(trazados)))
@@ -228,15 +225,15 @@ def parte_b():
     caso("el color de cada barrio del grupo es el de su clase", all(color[b] == c for b, c in (("Ventas", "#2a78d6"), ("Opañel", "#eb6834"), ("Quintana", "#1baf7a"), ("Atocha", "#898781"), ("Sol", "url(#rayado)"))))
     pisos_de = lambda b: sel[f"B:{b}|Todos"]["pisos"]
     caso("pisos del grupo", sum(pisos_de(b) for b in p["P2"]["grupo"]) == p["P2"]["pisos_del_grupo"])
-    caso("pisos del grupo firme", sum(pisos_de(b) for b in p["P2"]["firmes"]) == p["P2"]["pisos_del_grupo_firme"])
+    caso("pisos del grupo recomendado", sum(pisos_de(b) for b in p["P2"]["firmes"]) == p["P2"]["pisos_del_grupo_firme"])
     caso("pisos en barrios comparados", sum(pisos_de(f["barrio"]) for f in p["P2"]["tabla_barrios"]) == p["P2"]["referencia"]["filas"])
     caso("barrios con pisos", len({c[0] for c in datos["celdas"]}) == p["P2"]["cobertura"]["barrios_con_pisos"])
 
     caso("los textos de la recomendación salen del JSON", all(b in texto for b in p["P2"]["firmes"]))
-    caso("el límite está en la primera pantalla", "no dice si un piso se puede comprar para este uso" in texto.split('id="p-mapa"')[0].lower())
-    firmes = [f for f in p["P2"]["fichas_del_grupo"] if f["clase"] == "firme"]
-    dicho = "dependen del tope" in texto
-    caso("el aviso del tope sale solo si vale para todos los firmes", dicho == all(f["avisos_del_barrio"]["depende_del_tope"] for f in firmes))
+    caso("el límite está en la primera pantalla", "no si un piso se puede alquilar a turistas" in texto.split('id="p-mapa"')[0].lower())
+    firmes = [f for f in p["P2"]["fichas_del_grupo"] if f["clase"] == "5 de 5 veces"]
+    dicho = "salen de la lista al quitar los pisos" in texto
+    caso("el aviso del tope sale solo si vale para todos los recomendados", dicho == all(f["avisos_del_barrio"]["depende_del_tope"] for f in firmes))
     caso("la atribución está entera", all(x in texto for x in ("Inside Airbnb", "CC BY 4.0", "17/09/2026", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España")))
 
     # Ningún anuncio suelto: ni columnas de anuncio, ni cifras con menos de 30, ni identificadores ni coordenadas
@@ -445,7 +442,7 @@ def parte_c(datos):
     caso("el filtro se lee de la dirección", r["inicial"]["pisos"] == distrito["pisos"], str(r["inicial"]))
     caso("el filtro se escribe en la dirección", r["escrita"] == "#pestana=mapa&distrito=Puente%20de%20Vallecas&dorm=2", r["escrita"])
     caso("la definición sale a un clic", r["definicion"].startswith("Rentabilidad bruta:"), r["definicion"])
-    caso("la etiqueta da la selección, la medida y la cifra", "Rentabilidad bruta" in r["etiqueta"] and "11,1 %" in r["etiqueta"], r["etiqueta"])
+    caso("la etiqueta da la selección, la medida y la cifra", "Rentabilidad bruta" in r["etiqueta"] and "8,3 %" in r["etiqueta"], r["etiqueta"])
     caso("la etiqueta se esconde con Escape", r["etiqueta_oculta"])
     caso("cada cifra, barra y barrio lleva etiqueta", r["sin_tip"] == 0, str(r["sin_tip"]))
     pequena = next(v for v in vistas if 0 < v["pisos"] < 30)

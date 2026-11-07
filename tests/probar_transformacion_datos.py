@@ -35,15 +35,14 @@ def principal():
             p.caso("estancia publicada con su origen", fila["estancia_origen"] == "publicada")
             sup = 65.0 if fila["dormitorios"] == 2 else 50.0
             p.caso("superficie de valoraciones", fila["superficie_valoraciones_m2"] == sup)
-            compra = sup * 2000 * 0.75
-            p.caso("precio de compra con descuento", abs(fila["compra_valoraciones_desc_eur"] - compra) < 1e-6)
-            p.caso("precio de compra sin descuento", abs(fila["compra_valoraciones_sin_eur"] - compra / 0.75) < 1e-6)
+            compra = sup * 2000
+            p.caso("precio de compra", abs(fila["compra_valoraciones_eur"] - compra) < 1e-6)
             ingreso = fila["precio_eur"] * fila["ocupacion_dias"]
             p.caso("ingreso anual", abs(fila["ingreso_anual_eur"] - ingreso) < 1e-6)
-            p.caso("rentabilidad con descuento", abs(fila["rent_valoraciones_desc_pct"] - 100 * ingreso / compra) < 1e-6)
-            p.caso("rentabilidad con la superficie oficial", abs(fila["rent_oficial_sin_pct"] - 100 * ingreso / (75.0 * 2000)) < 1e-6)
+            p.caso("rentabilidad", abs(fila["rent_valoraciones_pct"] - 100 * ingreso / compra) < 1e-6)
+            p.caso("rentabilidad con la superficie oficial", abs(fila["rent_oficial_pct"] - 100 * ingreso / (75.0 * 2000)) < 1e-6)
             vacio = a.loc[cp.ID["vacio"]]
-            p.caso("un precio vacío deja vacía la rentabilidad, no cero", pd.isna(vacio["ingreso_anual_eur"]) and pd.isna(vacio["rent_valoraciones_desc_pct"]))
+            p.caso("un precio vacío deja vacía la rentabilidad, no cero", pd.isna(vacio["ingreso_anual_eur"]) and pd.isna(vacio["rent_valoraciones_pct"]))
             aero = a.loc[a["barrio"].eq("Aeropuerto")].iloc[0]
             p.caso("Aeropuerto toma el precio de su distrito", aero["precio_m2_eur"] == 5000 and aero["precio_m2_origen"] == "distrito", str(aero["precio_m2_eur"]))
             p.caso("un barrio con su precio dice su origen", fila["precio_m2_origen"] == "barrio")

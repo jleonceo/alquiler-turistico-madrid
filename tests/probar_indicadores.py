@@ -115,12 +115,12 @@ def pruebas_de_funciones(p, ind):
     p.caso("el barrio que depende de temporada no es firme", firmes == ["Alto"], str(firmes))
     pruebas_de_las_cinco(p, ind, reglas)
 
-    # 2 pisos de 50 m² a 4.000 €/m² y 100 días: junio a 50 € sin descuento da 2,5 %; marzo a 200 € con descuento da 13,33 %.
+    # 2 pisos de 50 m² a 4.000 €/m² y 100 días: junio a 50 € da 2,5 %; marzo a 200 € da 10 %.
     t = pd.DataFrame({"precio": [100.0, 100.0], "p_mar": [200.0, 200.0], "p_jun": [50.0, 50.0], "ocupacion": [100, 100], "sup_regla": [50.0, 50.0], "m2": [4000.0, 4000.0], "estancia": [2.0, 2.0]})
     r = ind.rango_de_rentabilidad(t)
-    p.caso("la peor combinación es junio sin descuento", abs(r["minimo"] - 2.5) < 1e-9 and r["peor"] == {"foto": "junio", "descuento": False}, str(r))
-    p.caso("la mejor combinación es marzo con descuento", abs(r["maximo"] - 100 * 200 * 100 / (50 * 4000 * 0.75)) < 1e-9 and r["mejor"] == {"foto": "marzo", "descuento": True}, str(r))
-    p.caso("seis combinaciones", len(r["combinaciones"]) == 6)
+    p.caso("la fecha más baja es junio", abs(r["minimo"] - 2.5) < 1e-9 and r["peor"] == "junio", str(r))
+    p.caso("la fecha más alta es marzo", abs(r["maximo"] - 10.0) < 1e-9 and r["mejor"] == "marzo", str(r))
+    p.caso("tres fechas", len(r["combinaciones"]) == 3)
 
     # «No supere»: un cuartil bajo igual a la mediana de la base también lleva aviso.
     p.caso("aviso con el cuartil por debajo", ind.lleva_aviso(5.0, 6.0))
@@ -156,16 +156,16 @@ def pruebas_de_las_cinco(p, ind, reglas):
     nadie = pd.Series(False, index=L.index)
     r = rc.pruebas_del_grupo(L, nadie, reglas)
     p.caso("son cinco pruebas", len(rc.PRUEBAS) == 5 and set(r["barrios"]["Alto"]["aguanta"]) == set(rc.PRUEBAS), str(r["barrios"].get("Alto")))
-    p.caso("el que aguanta las cinco es firme", r["barrios"]["Alto"]["clase"] == "firme" and r["firmes"] == ["Alto"], str(r["barrios"]))
-    p.caso("el que aguanta cuatro lleva aviso", r["barrios"]["Medio"]["clase"] == "con aviso" and r["con_aviso"] == ["Medio"], str(r["barrios"]))
+    p.caso("el que aguanta las cinco es firme", r["barrios"]["Alto"]["clase"] == "5 de 5 veces" and r["firmes"] == ["Alto"], str(r["barrios"]))
+    p.caso("el que aguanta cuatro lleva aviso", r["barrios"]["Medio"]["clase"] == "4 de 5 veces" and r["con_aviso"] == ["Medio"], str(r["barrios"]))
     p.caso("Medio cae solo en la temporada", r["barrios"]["Medio"]["no_aguanta"] == ["sin_temporada"], str(r["barrios"]["Medio"]))
 
-    # ROJO a propósito: con los anuncios de un anfitrión grande, Medio cae en dos pruebas y baja a segunda línea.
+    # ROJO a propósito: con los anuncios de un anfitrión grande, Medio cae en dos pruebas y baja a resto del grupo.
     x = tabla_grupos()
     x.loc[x["barrio"].eq("Medio"), "anuncios_anfitrion"] = 10
     r2 = rc.pruebas_del_grupo(x, nadie, reglas)
     p.caso("10 anuncios ya es anfitrión grande", "sin_anfitriones_grandes" in r2["barrios"]["Medio"]["no_aguanta"], str(r2["barrios"]["Medio"]))
-    p.caso("el que aguanta tres va en segunda línea", r2["barrios"]["Medio"]["clase"] == "segunda línea" and r2["segunda_linea"] == ["Medio"], str(r2["barrios"]))
+    p.caso("el que aguanta tres va en resto del grupo", r2["barrios"]["Medio"]["clase"] == "menos de 4 veces" and r2["segunda_linea"] == ["Medio"], str(r2["barrios"]))
     x.loc[x["barrio"].eq("Medio"), "anuncios_anfitrion"] = 9
     p.caso("9 anuncios no lo es", "sin_anfitriones_grandes" in rc.pruebas_del_grupo(x, nadie, reglas)["barrios"]["Medio"]["aguanta"])
 
@@ -208,7 +208,7 @@ def pruebas_de_las_cinco(p, ind, reglas):
     rng = np.random.default_rng(3)
     d = pd.DataFrame({"grupo_dormitorios": ["0"] * 40 + ["1"] * 40 + ["2"] * 40, "superficie_valoraciones_m2": [50.0] * 80 + [65.0] * 40, "ingreso_anual_eur": np.r_[rng.normal(1000, 5, 40), rng.normal(1200, 5, 40), rng.normal(1200, 5, 40) * 1.3],
                       "precio_m2_eur": 4000.0, "dormitorios": [0.0] * 40 + [1.0] * 40 + [2.0] * 40})
-    s = ind.sensibilidad_superficie(d, {"0": [35, 50], "1": [45, 60], "2": [60, 75]}, cd_descuento=0.75)
+    s = ind.sensibilidad_superficie(d, {"0": [35, 50], "1": [45, 60], "2": [60, 75]})
     p.caso("ocho combinaciones", len(s["combinaciones"]) == 8, str(len(s["combinaciones"])))
     tipos = {tuple(sorted(c["se_dan"])) for c in s["combinaciones"]}
     p.caso("se ve qué tipos se dan en cada una", len(tipos) >= 2, str(tipos))
@@ -254,7 +254,7 @@ def caso_entero(p):
         p.caso("trae la tabla de las cinco pruebas", set(q2["pruebas"]) == {"barrios", "firmes", "con_aviso", "segunda_linea", "por_prueba", "variantes_por_prueba"}, str(list(q2.get("pruebas", {}))))
         p.caso("trae la sensibilidad de superficie", len(q1["sensibilidad_superficie"]["combinaciones"]) == 8)
         p.caso("trae la referencia de los baratos", {"comparados", "toda_la_ciudad"} <= set(q2["referencia_baratos"]))
-        p.caso("trae el rango de firmes y con aviso", "rango_de_rentabilidad_de_firmes_y_con_aviso" in q3)
+        p.caso("trae el rango de recomendados y los que siguen en la lista 4 veces", "rango_de_rentabilidad_de_firmes_y_con_aviso" in q3)
         p.caso("trae la parte sin ocupación en la misma base", all("sin_ocupacion_misma_base_pct" in f for f in q3["fichas_del_grupo"]))
         p.caso("P-01 queda resuelto", not any("no fijan cuándo" in x["pregunta"] for x in j["pendientes"]) and j["pendientes_resueltos"][0]["id"] == "P-01", str(j["pendientes"]))
         p.caso("el corte de pocos anuncios no se decide en el script", "corte_de_pocos_anuncios" not in q3)

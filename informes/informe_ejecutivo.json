@@ -1,57 +1,57 @@
 {
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T23:05:40",
+ "fecha_ejecucion": "2026-11-07T00:39:54",
  "script": "scripts/informe_ejecutivo.py",
  "indicadores": "informes/indicadores.json",
- "indicadores_fecha_ejecucion": "2026-11-06T23:05:20",
+ "indicadores_fecha_ejecucion": "2026-11-07T00:39:31",
  "lector": "equipo directivo",
  "se_pide": [
   "Comprobar planta y norma en el Ayuntamiento",
-  "Pedir a valoraciones superficie real",
-  "Repetir el análisis con la foto siguiente"
+  "Pedir a valoraciones la superficie real",
+  "Repetir el análisis con los datos siguientes"
  ],
  "acciones": [
   {
    "nombre": "Comprobar planta y norma en el Ayuntamiento",
    "que": "Empezar por bajos y primeras plantas con acceso independiente y preguntar en el Ayuntamiento qué norma rige en cada barrio de la lista antes de comprar.",
    "quien": "Dirección de Inversiones",
-   "cuando": "fecha pendiente, porque no consta",
+   "cuando": "fecha por fijar",
    "por_que": "930 de las 1.031 licencias municipales incluyen planta baja.",
    "pagina": "Lo que puede cambiar estas conclusiones"
   },
   {
-   "nombre": "Pedir a valoraciones superficie real",
+   "nombre": "Pedir a valoraciones la superficie real",
    "que": "Sustituir el supuesto de m² por la superficie real de cada oportunidad que se estudie.",
    "quien": "Equipo de valoraciones, a petición de la Dirección de Inversiones",
-   "cuando": "fecha pendiente, porque no consta",
-   "por_que": "El supuesto de m² cambia los tipos que se dan en 7 de las 8 combinaciones.",
+   "cuando": "fecha por fijar",
+   "por_que": "El tipo de piso más rentable cambia en 7 de las 8 superficies probadas.",
    "pagina": "Pregunta 1, sigue"
   },
   {
-   "nombre": "Repetir el análisis con la foto siguiente",
+   "nombre": "Repetir el análisis con los datos siguientes",
    "que": "Volver a calcular la lista con las mismas reglas.",
    "quien": "Dirección de Inversiones y equipo de valoraciones",
-   "cuando": "cuando se publique la foto siguiente de Inside Airbnb; la fecha no consta",
-   "por_que": "Entre las tres fotos de precio, la mediana de Ventas se mueve 3,6 puntos, y la de toda la base, 1,1.",
+   "cuando": "cuando Inside Airbnb publique sus datos siguientes",
+   "por_que": "Entre las tres fechas de precio, la rentabilidad mediana del barrio de Ventas varía 2,7 puntos; la de todos los pisos, 0,8.",
    "pagina": "Pregunta 3"
   }
  ],
  "consultas": [
   {
    "pregunta": "¿Cuántos anuncios hay en Madrid?",
-   "respuesta": "23.109 en la foto del 17/09/2026 y 26.004 en la foto de Inside Airbnb de junio de 2025. El cambio no dice por qué ocurre."
+   "respuesta": "23.109 en la descarga del 17/09/2026 y 26.004 en la descarga de Inside Airbnb de junio de 2025. El cambio no dice por qué ocurre."
   },
   {
-   "pregunta": "¿Cuántos anuncios deciden la lista?",
+   "pregunta": "¿Cuántos pisos se analizaron?",
    "respuesta": "2.940, en 99 barrios."
   },
   {
-   "pregunta": "¿Cuántos pisos fuera del centro no tienen ocupación?",
-   "respuesta": "1.385, el 24,7 %, y quedan fuera de la lista."
+   "pregunta": "¿Cuántos pisos fuera del centro histórico no tienen días ocupados estimados?",
+   "respuesta": "1.385, el 24,7 %. Quedan fuera de la lista."
   },
   {
-   "pregunta": "¿Qué parte de los anuncios llega al tope?",
-   "respuesta": "El 26,7 % de la base."
+   "pregunta": "¿Qué parte de los pisos llega al máximo?",
+   "respuesta": "El 26,7 % de los analizados."
   },
   {
    "pregunta": "¿En qué mes hay más reseñas?",
@@ -63,11 +63,11 @@
   }
  ],
  "palabras_por_apartado": {
-  "titulo_y_resumen": 300,
-  "encontrado": 399,
-  "limites": 99,
-  "recomendaciones": 171,
-  "anexo": 397
+  "titulo_y_resumen": 297,
+  "encontrado": 377,
+  "limites": 95,
+  "recomendaciones": 155,
+  "anexo": 394
  },
  "topes": {
   "titulo_y_resumen": 300,
@@ -90,7 +90,7 @@
    ]
   },
   {
-   "cifra": "1,1",
+   "cifra": "0,8",
    "claves": [
     "preguntas[2].referencia.rango_entre_fotos_puntos"
    ]
@@ -123,6 +123,7 @@
   {
    "cifra": "10,6",
    "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].cuartil_bajo_pct",
     "recomendacion.precio_de_mercado.fuentes[fuente=Idealista].rentabilidad_mediana_pct"
    ]
   },
@@ -135,6 +136,7 @@
   {
    "cifra": "10,9",
    "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=San Diego].rentabilidad_mediana_pct",
     "recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].rentabilidad_mediana_pct"
    ]
   },
@@ -145,105 +147,51 @@
    ]
   },
   {
-   "cifra": "11,1",
-   "claves": [
-    "preguntas[1].mediana_de_toda_la_base"
-   ]
-  },
-  {
-   "cifra": "11,3",
-   "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=2].rentabilidad_mediana_pct"
-   ]
-  },
-  {
-   "cifra": "12,1",
-   "claves": [
-    "recomendacion.rentabilidad_sin_descuento_pct"
-   ]
-  },
-  {
-   "cifra": "12,2",
-   "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=1].rentabilidad_mediana_pct"
-   ]
-  },
-  {
-   "cifra": "121.480",
-   "claves": [
-    "recomendacion.compra_con_descuento_eur"
-   ]
-  },
-  {
-   "cifra": "14,1",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].cuartil_bajo_pct"
-   ]
-  },
-  {
-   "cifra": "14,5",
-   "claves": [
-    "preguntas[1].que_ordena_la_lista.m2_baratos.mediana_pct"
-   ]
-  },
-  {
-   "cifra": "14,6",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=San Diego].rentabilidad_mediana_pct"
-   ]
-  },
-  {
-   "cifra": "15,2",
-   "claves": [
-    "preguntas[2].rentabilidad_del_grupo_firme.mediana"
-   ]
-  },
-  {
-   "cifra": "15,4",
+   "cifra": "11,5",
    "claves": [
     "preguntas[2].rango_de_rentabilidad_del_grupo_firme.maximo"
    ]
   },
   {
-   "cifra": "15,7",
+   "cifra": "12,1",
    "claves": [
-    "preguntas[1].que_ordena_la_lista.grupo.mediana_pct"
+    "recomendacion.rentabilidad_pct"
    ]
   },
   {
-   "cifra": "16,2",
-   "claves": [
-    "recomendacion.rentabilidad_con_descuento_pct"
-   ]
-  },
-  {
-   "cifra": "161.973",
-   "claves": [
-    "recomendacion.compra_sin_descuento_eur"
-   ]
-  },
-  {
-   "cifra": "17,0",
+   "cifra": "12,7",
    "claves": [
     "preguntas[1].fichas_del_grupo[barrio=Ventas].rentabilidad_mediana_pct"
    ]
   },
   {
-   "cifra": "17,7",
+   "cifra": "13,3",
    "claves": [
     "preguntas[1].fichas_del_grupo[barrio=Numancia].rentabilidad_mediana_pct"
+   ]
+  },
+  {
+   "cifra": "14,1",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Opañel].rentabilidad_mediana_pct"
+   ]
+  },
+  {
+   "cifra": "14,2",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].rentabilidad_mediana_pct"
+   ]
+  },
+  {
+   "cifra": "161.973",
+   "claves": [
+    "recomendacion.compra_eur"
    ]
   },
   {
    "cifra": "171.600",
    "claves": [
     "recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].compra_mediana_eur"
-   ]
-  },
-  {
-   "cifra": "18,7",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Opañel].rentabilidad_mediana_pct"
    ]
   },
   {
@@ -259,15 +207,15 @@
    ]
   },
   {
-   "cifra": "19,0",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].rentabilidad_mediana_pct"
-   ]
-  },
-  {
    "cifra": "2",
    "claves": [
     "preguntas[1].con_un_ano_o_mas.barrios[barrio=Numancia].puesto"
+   ]
+  },
+  {
+   "cifra": "2,7",
+   "claves": [
+    "preguntas[2].fichas_del_grupo[barrio=Ventas].rango_entre_fotos_puntos"
    ]
   },
   {
@@ -349,9 +297,9 @@
    ]
   },
   {
-   "cifra": "3,6",
+   "cifra": "3,9",
    "claves": [
-    "preguntas[2].fichas_del_grupo[barrio=Ventas].rango_entre_fotos_puntos"
+    "preguntas[1].fichas_del_grupo[barrio=Numancia].cuartil_bajo_pct"
    ]
   },
   {
@@ -387,13 +335,20 @@
   {
    "cifra": "4",
    "claves": [
-    "preguntas[1].segunda_linea"
+    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].pruebas_que_aguanta",
+    "preguntas[1].fichas_del_grupo[barrio=Opañel].pruebas_que_aguanta"
    ]
   },
   {
-   "cifra": "4,05",
+   "cifra": "4,6",
    "claves": [
-    "preguntas[1].cuartil_bajo_de_toda_la_base"
+    "preguntas[0].dormitorios.tabla[grupo=3].rentabilidad_mediana_pct"
+   ]
+  },
+  {
+   "cifra": "4,8",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=San Diego].cuartil_bajo_pct"
    ]
   },
   {
@@ -403,15 +358,17 @@
    ]
   },
   {
-   "cifra": "5,2",
+   "cifra": "5",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Numancia].cuartil_bajo_pct"
+    "preguntas[1].fichas_del_grupo[barrio=Numancia].pruebas_que_aguanta",
+    "preguntas[1].fichas_del_grupo[barrio=San Diego].pruebas_que_aguanta",
+    "preguntas[1].fichas_del_grupo[barrio=Ventas].pruebas_que_aguanta"
    ]
   },
   {
-   "cifra": "50",
+   "cifra": "5,3",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Opañel].parte_en_el_tope_pct"
+    "preguntas[1].fichas_del_grupo[barrio=Ventas].cuartil_bajo_pct"
    ]
   },
   {
@@ -427,18 +384,6 @@
    ]
   },
   {
-   "cifra": "6,1",
-   "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=3].rentabilidad_mediana_pct"
-   ]
-  },
-  {
-   "cifra": "6,4",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=San Diego].cuartil_bajo_pct"
-   ]
-  },
-  {
    "cifra": "60",
    "claves": [
     "preguntas[1].fichas_del_grupo[barrio=Opañel].pisos"
@@ -447,7 +392,6 @@
   {
    "cifra": "65",
    "claves": [
-    "licencias_y_registro.planta_baja.firmes.licencias",
     "preguntas[1].operadores_grandes.con_aviso_pct"
    ]
   },
@@ -458,15 +402,9 @@
    ]
   },
   {
-   "cifra": "7,1",
+   "cifra": "7,4",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Ventas].cuartil_bajo_pct"
-   ]
-  },
-  {
-   "cifra": "72",
-   "claves": [
-    "licencias_y_registro.planta_baja.firmes.de"
+    "preguntas[1].fichas_del_grupo[barrio=Opañel].cuartil_bajo_pct"
    ]
   },
   {
@@ -474,6 +412,12 @@
    "claves": [
     "preguntas[0].sensibilidad_superficie.combinaciones",
     "preguntas[1].con_un_ano_o_mas.barrios[barrio=San Diego].puesto"
+   ]
+  },
+  {
+   "cifra": "8,5",
+   "claves": [
+    "preguntas[0].dormitorios.tabla[grupo=2].rentabilidad_mediana_pct"
    ]
   },
   {
@@ -495,9 +439,9 @@
    ]
   },
   {
-   "cifra": "9,9",
+   "cifra": "9,1",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Opañel].cuartil_bajo_pct"
+    "preguntas[0].dormitorios.tabla[grupo=1].rentabilidad_mediana_pct"
    ]
   },
   {
@@ -520,8 +464,8 @@
   }
  ],
  "constantes": {
-  "255": "reglas §2, tope de la ocupación",
-  "25": "reglas §2, descuento",
+  "255": "reglas §2, máximo de la ocupación",
+  "25": "reglas §3, el 25 % más rentable",
   "30": "reglas §3, mínimo por grupo",
   "20": "reglas §3, mínimo de las variantes",
   "12": "reglas §3, variantes",
@@ -540,7 +484,7 @@
   "4": "pruebas aguantadas",
   "9": "barrios del grupo",
   "2025": "año del precio oficial",
-  "2026": "año de las fotos",
+  "2026": "año de las descargas",
   "35": "planteamientos, estudio",
   "45": "planteamientos, una habitación",
   "50": "reglas §2, superficie",
@@ -551,8 +495,7 @@
   "110": "reglas §2, superficie",
   "140": "reglas §2, superficie",
   "1.000": "reglas §3, precio",
-  "8": "reglas §3, huéspedes",
-  "0,75": "reglas §2, factor del descuento"
+  "8": "reglas §3, huéspedes"
  },
  "paginas_pdf": 3
 }

@@ -2,7 +2,7 @@
 
 Este módulo no hace nada al importarse. assets/graficos.py no trae mapas y no se cambia, así que el mapa vive aquí: recibe los
 polígonos, la clase de cada barrio del grupo y el límite del centro histórico, y devuelve el SVG listo para `Pagina.grafico`.
-Cumple las reglas de salida: colores de la paleta en su orden, con el naranja en los barrios con aviso, que son la alerta (G3), cada barrio con su nombre
+Cumple las reglas de salida: colores de la paleta en su orden, con el naranja en los barrios que siguen en la lista 4 veces, que son la alerta (G3), cada barrio con su nombre
 escrito junto al dibujo (G16), una etiqueta al pasar el ratón con grupo y clase (G20) y la letra del informe (E4).
 """
 import html
@@ -10,7 +10,7 @@ import html
 import shapely
 
 # Color de cada clase, en el orden de la paleta: azul, naranja para la alerta y verde agua (E2 y G3).
-COLOR = {"firme": "#2a78d6", "con aviso": "#eb6834", "segunda línea": "#1baf7a"}
+COLOR = {"5 de 5 veces": "#2a78d6", "4 de 5 veces": "#eb6834", "menos de 4 veces": "#1baf7a"}
 RESTO, BORDE, TINTA, SECUNDARIO, LINEA = "#e1e0d9", "#ffffff", "#0b0b0b", "#52514e", "#898781"
 FAMILIA = "'Segoe UI', system-ui, sans-serif"
 ANCHO, ALTO = 640, 400
@@ -102,7 +102,7 @@ def mapa(poligonos, clases, limite, nombre=str):
     rotulos += f'<text x="{MARGEN_LADO - 6:.1f}" y="{ALTO - ABAJO - 6:.1f}" text-anchor="end" fill="{SECUNDARIO}" {letra}>Centro histórico</text>'
     # Leyenda pegada al mapa: cada clase con su color y su nombre; el resto de barrios, en gris.
     leyenda, x = "", 170
-    for texto, color in (("Firme", COLOR["firme"]), ("Con aviso", COLOR["con aviso"]), ("Segunda línea", COLOR["segunda línea"]), ("Otros barrios", RESTO)):
+    for texto, color in (("5 de 5 veces", COLOR["5 de 5 veces"]), ("4 de 5 veces", COLOR["4 de 5 veces"]), ("Menos de 4 veces", COLOR["menos de 4 veces"]), ("Otros barrios", RESTO)):
         leyenda += f'<rect x="{x}" y="{ALTO - 18}" width="13" height="13" fill="{color}"/><text x="{x + 18}" y="{ALTO - 7}" fill="{TINTA}" {letra}>{texto}</text>'
         x += 34 + 7 * len(texto)
     return f'<svg width="{ANCHO}" height="{ALTO}" viewBox="0 0 {ANCHO} {ALTO}" xmlns="http://www.w3.org/2000/svg">{fondo}{grupo}{centro}{rotulos}{leyenda}</svg>'

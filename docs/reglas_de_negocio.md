@@ -27,8 +27,7 @@ límite oficial. Las coordenadas vienen desplazadas hasta 150 m, así que cerca 
   110 m² con 2 o más; más de 3 habitaciones o 3 baños o más, 140 m².
 - **Precio oficial del m²:** el precio declarado de 2025 que publica el Ayuntamiento, con datos del Colegio de Registradores.
   San Andrés, Ambroz y Aeropuerto toman el de su distrito.
-- **Precio de compra:** superficie × precio oficial del m², con un 25 % de descuento y sin él. El descuento es la capacidad de
-  negociación que se supone y no tiene apoyo en los datos. Cambia el nivel y deja el orden intacto.
+- **Precio de compra:** superficie × precio oficial del m².
 - **Precio de mercado:** el m² que piden hoy Fotocasa e Idealista en los tres barrios recomendados, consultado el 06/11/2026.
   Solo sirve para comparar: repite la compra y la rentabilidad de esos pisos. No entra en la selección de barrios.
 - **Rentabilidad bruta:** ingreso anual / precio de compra, en porcentaje. No incluye gastos, impuestos, comunidad, limpieza
@@ -36,7 +35,7 @@ límite oficial. Las coordenadas vienen desplazadas hasta 150 m, así que cerca 
 
 ## 3. Qué pisos cuentan
 
-La **base de decisión** son los pisos fuera del centro histórico con precio entre 20 y 1.000 €, hasta 8 huéspedes,
+Los **pisos analizados** son los que están fuera del centro histórico con precio entre 20 y 1.000 €, hasta 8 huéspedes,
 5 baños, 5 habitaciones y 6 camas, con ocupación mayor que cero y estancia mínima de hasta 3 noches. Quedan fuera además los
 de cero baños, los de un tipo que no es un piso y los de más camas o habitaciones que huéspedes.
 
@@ -58,23 +57,21 @@ todos los tipos de alquiler. Solo sirve para ver qué cambia con ese filtro.
 
 ## 4. Cómo se forma la lista de barrios
 
-El **grupo** son los barrios que quedan en el mejor cuarto de rentabilidad en más de 6 de 12 repeticiones del cálculo: estancia de hasta 3 o
+La **lista** son los barrios que quedan en el 25 % más rentable en más de 6 de 12 repeticiones del cálculo: estancia de hasta 3 o
 hasta 6 noches, mínimo de 30 o de 20 anuncios, y precio de marzo, junio o septiembre.
 
 Después se repiten esas 12 de cinco maneras: sin los pisos que declaran temporada, sin los de anfitriones con 10
 anuncios o más, sin los precios para fechas a más de 60 días, solo con 1 y 2 habitaciones, y contando los pisos sin ocupación como
-cero. Esos pisos se quedan en la base: las pruebas solo miden si la lista aguanta.
+cero. Esos pisos siguen en el análisis: estas repeticiones solo miden si la lista se mantiene.
 
-- Firme: aguanta las cinco pruebas. Es estable, no mejor.
-- Con aviso: aguanta cuatro.
-- Segunda línea: los demás del grupo.
+- Se recomiendan los barrios que siguen en la lista las cinco veces. Eso no significa que rindan más.
+- Los que siguen cuatro veces se dicen aparte, con la repetición en la que salen.
 
-Cada barrio lleva además tres avisos: depende del máximo de días, si sale del grupo sin sus pisos en 255 días; pocos anuncios, si tiene
-40 o menos; y cuartil bajo, si no supera el de la base. El cuartil bajo es el valor que deja por debajo a un cuarto de los
-anuncios.
+Cada barrio lleva además tres avisos: depende del máximo de días, si sale de la lista sin sus pisos en 255 días; pocos anuncios, si tiene
+40 o menos; y uno de cada cuatro rinde poco, si el corte de su peor 25 % no supera el de todos los pisos.
 
-Por debajo de 30 anuncios un grupo no se ordena. Entre barrios se mira qué grupos se distinguen, con su intervalo del 95 %, y
-no su orden.
+Por debajo de 30 anuncios un barrio no se ordena. Entre barrios se mira si la diferencia se puede asegurar, con su intervalo del 95 %,
+y no su orden.
 
 ## 5. Cómo se lee
 

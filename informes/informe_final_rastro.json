@@ -1,24 +1,24 @@
 {
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T23:05:45",
+ "fecha_ejecucion": "2026-11-07T00:39:58",
  "script": "scripts/informe_final.py",
  "indicadores": "informes/indicadores.json",
- "indicadores_fecha_ejecucion": "2026-11-06T23:05:20",
+ "indicadores_fecha_ejecucion": "2026-11-07T00:39:31",
  "lector": "Dirección de Inversiones",
  "paginas": [
   {
    "id": "p1",
    "titulo": "Buscar hasta 2 habitaciones en los barrios de Ventas, Numancia y San Diego",
    "tipo": "resumen",
-   "palabras": 157,
+   "palabras": 152,
    "alto_estimado": 632,
    "cifras_clave": 4
   },
   {
    "id": "p2",
-   "titulo": "Hasta 2 habitaciones rinden más que 3 en las combinaciones de m² probadas",
+   "titulo": "Hasta 2 habitaciones rinden más que 3 en todas las superficies probadas",
    "tipo": "pregunta",
-   "palabras": 65,
+   "palabras": 74,
    "alto_estimado": 580,
    "cifras_clave": 2
   },
@@ -26,71 +26,71 @@
    "id": "p3",
    "titulo": "El orden entre estudio, una y dos habitaciones depende de los m²",
    "tipo": "pregunta",
-   "palabras": 42,
+   "palabras": 35,
    "alto_estimado": 644,
    "cifras_clave": 1
   },
   {
    "id": "p4",
-   "titulo": "Tres barrios aguantan las cinco pruebas y dos aguantan cuatro",
+   "titulo": "Tres barrios siguen en la lista las cinco veces y dos, cuatro veces",
    "tipo": "pregunta",
-   "palabras": 84,
-   "alto_estimado": 647,
+   "palabras": 86,
+   "alto_estimado": 607,
    "cifras_clave": 0
   },
   {
    "id": "p5",
-   "titulo": "El orden dentro del grupo no está cerrado",
+   "titulo": "El orden dentro de la lista no está cerrado",
    "tipo": "pregunta",
-   "palabras": 53,
-   "alto_estimado": 597,
+   "palabras": 66,
+   "alto_estimado": 623,
    "cifras_clave": 0
   },
   {
    "id": "p6",
-   "titulo": "Los firmes son los únicos que no caen en ninguna prueba",
+   "titulo": "Solo los tres recomendados siguen en la lista las cinco veces",
    "tipo": "pregunta",
-   "palabras": 31,
-   "alto_estimado": 645,
+   "palabras": 40,
+   "alto_estimado": 609,
    "cifras_clave": 0
   },
   {
    "id": "p7",
-   "titulo": "Elegir solo por m² barato no se distingue de la lista",
+   "titulo": "Elegir solo por m² barato podría rendir lo mismo que la lista",
    "tipo": "pregunta",
-   "palabras": 80,
+   "palabras": 86,
    "alto_estimado": 578,
    "cifras_clave": 3
   },
   {
    "id": "p8",
-   "titulo": "Los tres firmes dependen del tope y su cuartil bajo supera el de la base",
+   "titulo": "Los tres recomendados dependen de los pisos en el máximo de días",
    "tipo": "pregunta",
-   "palabras": 79,
+   "palabras": 73,
    "alto_estimado": 596,
    "cifras_clave": 0
   },
   {
    "id": "p9",
-   "titulo": "Entre los firmes, Ventas es la que más cambia con la foto de precio",
+   "titulo": "El barrio de Ventas es el recomendado que más cambia con la fecha",
    "tipo": "pregunta",
-   "palabras": 43,
-   "alto_estimado": 638,
+   "palabras": 32,
+   "alto_estimado": 612,
    "cifras_clave": 0
   },
   {
    "id": "p10",
-   "titulo": "El descuento del 25 % mueve el nivel más que la foto de precio",
+   "titulo": "Los recomendados rinden del 10,8 % al 11,5 % según la fecha del precio",
    "tipo": "pregunta",
-   "palabras": 52,
-   "alto_estimado": 524,
+   "palabras": 41,
+   "alto_estimado": 434,
    "cifras_clave": 0
   },
   {
    "id": "p11",
-   "titulo": "Con anuncios de un año o más, San Diego se sostiene menos",
+   "titulo": "Con anuncios de un año o más, el barrio de San Diego sale del 25 % más rentable",
    "tipo": "pregunta",
-   "palabras": 50,
+   "palabras": 67,
    "alto_estimado": 381,
    "cifras_clave": 0
   },
@@ -99,14 +99,14 @@
    "titulo": "Lo que puede cambiar estas conclusiones",
    "tipo": "limites",
    "palabras": 0,
-   "alto_estimado": 640,
+   "alto_estimado": 595,
    "cifras_clave": 0
   },
   {
    "id": "p13",
    "titulo": "Decisiones propuestas",
    "tipo": "decision",
-   "palabras": 23,
+   "palabras": 22,
    "alto_estimado": 446,
    "cifras_clave": 0
   },
@@ -114,8 +114,8 @@
    "id": "p14",
    "titulo": "Método de cada pregunta",
    "tipo": "anexo",
-   "palabras": 151,
-   "alto_estimado": 389,
+   "palabras": 187,
+   "alto_estimado": 456,
    "cifras_clave": 0
   },
   {
@@ -123,7 +123,7 @@
    "titulo": "Contexto del mercado",
    "tipo": "anexo",
    "palabras": 50,
-   "alto_estimado": 460,
+   "alto_estimado": 440,
    "cifras_clave": 0
   },
   {
@@ -138,7 +138,7 @@
    "id": "p17",
    "titulo": "Datos personales",
    "tipo": "anexo",
-   "palabras": 138,
+   "palabras": 140,
    "alto_estimado": 377,
    "cifras_clave": 0
   }
@@ -148,36 +148,30 @@
    "nombre": "Comprobar planta y norma en el Ayuntamiento",
    "que": "Empezar por bajos y primeras plantas con acceso independiente y preguntar en el Ayuntamiento qué norma rige en cada barrio de la lista antes de comprar.",
    "quien": "Dirección de Inversiones",
-   "cuando": "fecha pendiente, porque no consta",
+   "cuando": "fecha por fijar",
    "por_que": "930 de las 1.031 licencias municipales incluyen planta baja.",
    "pagina": "Lo que puede cambiar estas conclusiones"
   },
   {
-   "nombre": "Pedir a valoraciones superficie real",
+   "nombre": "Pedir a valoraciones la superficie real",
    "que": "Sustituir el supuesto de m² por la superficie real de cada oportunidad que se estudie.",
    "quien": "Equipo de valoraciones, a petición de la Dirección de Inversiones",
-   "cuando": "fecha pendiente, porque no consta",
-   "por_que": "El supuesto de m² cambia los tipos que se dan en 7 de las 8 combinaciones.",
+   "cuando": "fecha por fijar",
+   "por_que": "El tipo de piso más rentable cambia en 7 de las 8 superficies probadas.",
    "pagina": "Pregunta 1, sigue"
   },
   {
-   "nombre": "Repetir el análisis con la foto siguiente",
+   "nombre": "Repetir el análisis con los datos siguientes",
    "que": "Volver a calcular la lista con las mismas reglas.",
    "quien": "Dirección de Inversiones y equipo de valoraciones",
-   "cuando": "cuando se publique la foto siguiente de Inside Airbnb; la fecha no consta",
-   "por_que": "Entre las tres fotos de precio, la mediana de Ventas se mueve 3,6 puntos, y la de toda la base, 1,1.",
+   "cuando": "cuando Inside Airbnb publique sus datos siguientes",
+   "por_que": "Entre las tres fechas de precio, la rentabilidad mediana del barrio de Ventas varía 2,7 puntos; la de todos los pisos, 0,8.",
    "pagina": "Pregunta 3"
   }
  ],
  "rastro": [
   {
-   "cifra": "0",
-   "claves": [
-    "preguntas[1].pruebas.barrios.Puerta del Angel.cuantas"
-   ]
-  },
-  {
-   "cifra": "0,6",
+   "cifra": "0,5",
    "claves": [
     "preguntas[2].fichas_del_grupo[barrio=San Diego].rango_entre_fotos_puntos"
    ]
@@ -195,29 +189,34 @@
    ]
   },
   {
+   "cifra": "0,8",
+   "claves": [
+    "preguntas[2].referencia.rango_entre_fotos_puntos"
+   ]
+  },
+  {
+   "cifra": "0,9",
+   "claves": [
+    "preguntas[2].fichas_del_grupo[barrio=Canillejas].rango_entre_fotos_puntos"
+   ]
+  },
+  {
+   "cifra": "1,0",
+   "claves": [
+    "preguntas[2].fichas_del_grupo[barrio=Puerta del Angel].rango_entre_fotos_puntos",
+    "preguntas[2].fichas_del_grupo[barrio=Quintana].rango_entre_fotos_puntos"
+   ]
+  },
+  {
    "cifra": "1,1",
    "claves": [
-    "preguntas[2].fichas_del_grupo[barrio=Canillejas].rango_entre_fotos_puntos",
-    "preguntas[2].referencia.rango_entre_fotos_puntos"
+    "preguntas[2].fichas_del_grupo[barrio=Numancia].rango_entre_fotos_puntos"
    ]
   },
   {
    "cifra": "1,26",
    "claves": [
     "estacionalidad.indice_mas_alto"
-   ]
-  },
-  {
-   "cifra": "1,3",
-   "claves": [
-    "preguntas[2].fichas_del_grupo[barrio=Quintana].rango_entre_fotos_puntos"
-   ]
-  },
-  {
-   "cifra": "1,4",
-   "claves": [
-    "preguntas[2].fichas_del_grupo[barrio=Numancia].rango_entre_fotos_puntos",
-    "preguntas[2].fichas_del_grupo[barrio=Puerta del Angel].rango_entre_fotos_puntos"
    ]
   },
   {
@@ -248,44 +247,36 @@
   {
    "cifra": "10,2",
    "claves": [
-    "preguntas[0].sensibilidad_superficie.combinaciones[2].medianas.1",
-    "preguntas[0].sensibilidad_superficie.combinaciones[3].medianas.1",
-    "preguntas[0].sensibilidad_superficie.combinaciones[6].medianas.1",
-    "preguntas[0].sensibilidad_superficie.combinaciones[7].medianas.1"
-   ]
-  },
-  {
-   "cifra": "10,4",
-   "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=0].rentabilidad_mediana_pct",
-    "preguntas[0].sensibilidad_superficie.combinaciones[4].medianas.0",
-    "preguntas[0].sensibilidad_superficie.combinaciones[5].medianas.0",
-    "preguntas[0].sensibilidad_superficie.combinaciones[6].medianas.0",
-    "preguntas[0].sensibilidad_superficie.combinaciones[7].medianas.0"
-   ]
-  },
-  {
-   "cifra": "10,5",
-   "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=2].ic_bajo"
+    "preguntas[0].sensibilidad_superficie.combinaciones[0].medianas.1",
+    "preguntas[0].sensibilidad_superficie.combinaciones[1].medianas.1",
+    "preguntas[0].sensibilidad_superficie.combinaciones[4].medianas.1",
+    "preguntas[0].sensibilidad_superficie.combinaciones[5].medianas.1"
    ]
   },
   {
    "cifra": "10,6",
    "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].cuartil_bajo_pct",
     "recomendacion.precio_de_mercado.fuentes[fuente=Idealista].rentabilidad_mediana_pct"
+   ]
+  },
+  {
+   "cifra": "10,7",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Puerta del Angel].rentabilidad_mediana_pct"
    ]
   },
   {
    "cifra": "10,8",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=San Diego].ic_bajo",
     "preguntas[2].rango_de_rentabilidad_del_grupo_firme.minimo"
    ]
   },
   {
    "cifra": "10,9",
    "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=San Diego].rentabilidad_mediana_pct",
+    "preguntas[1].que_ordena_la_lista.m2_baratos.mediana_pct",
     "recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].rentabilidad_mediana_pct"
    ]
   },
@@ -296,16 +287,50 @@
    ]
   },
   {
-   "cifra": "11,3",
+   "cifra": "11,0",
    "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=2].rentabilidad_mediana_pct"
+    "preguntas[1].fichas_del_grupo[barrio=Quintana].rentabilidad_mediana_pct"
+   ]
+  },
+  {
+   "cifra": "11,1",
+   "claves": [
+    "preguntas[0].sensibilidad_superficie.combinaciones[0].medianas.0",
+    "preguntas[0].sensibilidad_superficie.combinaciones[1].medianas.0",
+    "preguntas[0].sensibilidad_superficie.combinaciones[2].medianas.0",
+    "preguntas[0].sensibilidad_superficie.combinaciones[3].medianas.0",
+    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].ic_bajo"
+   ]
+  },
+  {
+   "cifra": "11,4",
+   "claves": [
+    "preguntas[2].rentabilidad_del_grupo_firme.mediana"
    ]
   },
   {
    "cifra": "11,5",
    "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=0].ic_alto",
-    "preguntas[0].dormitorios.tabla[grupo=1].ic_bajo"
+    "preguntas[1].con_un_ano_o_mas.barrios[barrio=San Diego].mediana_pct",
+    "preguntas[2].rango_de_rentabilidad_del_grupo_firme.maximo"
+   ]
+  },
+  {
+   "cifra": "11,7",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Canillejas].rentabilidad_mediana_pct"
+   ]
+  },
+  {
+   "cifra": "11,8",
+   "claves": [
+    "preguntas[1].que_ordena_la_lista.grupo.mediana_pct"
+   ]
+  },
+  {
+   "cifra": "11,9",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Opañel].ic_bajo"
    ]
   },
   {
@@ -321,135 +346,100 @@
    ]
   },
   {
+   "cifra": "12,0",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Puerta del Angel].ic_alto"
+   ]
+  },
+  {
    "cifra": "12,1",
    "claves": [
-    "recomendacion.rentabilidad_sin_descuento_pct"
-   ]
-  },
-  {
-   "cifra": "12,2",
-   "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=1].rentabilidad_mediana_pct",
-    "preguntas[0].sensibilidad_superficie.combinaciones[0].medianas.2",
-    "preguntas[0].sensibilidad_superficie.combinaciones[2].medianas.2",
-    "preguntas[0].sensibilidad_superficie.combinaciones[4].medianas.2",
-    "preguntas[0].sensibilidad_superficie.combinaciones[6].medianas.2"
-   ]
-  },
-  {
-   "cifra": "12,4",
-   "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=2].ic_alto"
-   ]
-  },
-  {
-   "cifra": "12,5",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Puerta del Angel].ic_bajo"
+    "preguntas[1].fichas_del_grupo[barrio=Vista Alegre].rentabilidad_mediana_pct",
+    "recomendacion.rentabilidad_pct"
    ]
   },
   {
    "cifra": "12,7",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Canillejas].ic_bajo",
-    "preguntas[1].fichas_del_grupo[barrio=Numancia].ic_bajo"
+    "preguntas[1].fichas_del_grupo[barrio=Ventas].rentabilidad_mediana_pct"
    ]
   },
   {
-   "cifra": "121.480",
+   "cifra": "12,8",
    "claves": [
-    "recomendacion.compra_con_descuento_eur"
+    "preguntas[1].fichas_del_grupo[barrio=San Diego].ic_alto"
    ]
   },
   {
    "cifra": "13,0",
    "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=1].ic_alto"
+    "preguntas[2].rango_de_rentabilidad_de_firmes_y_con_aviso.maximo"
+   ]
+  },
+  {
+   "cifra": "13,1",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Canillejas].ic_alto"
+   ]
+  },
+  {
+   "cifra": "13,3",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Numancia].rentabilidad_mediana_pct"
    ]
   },
   {
    "cifra": "13,5",
    "claves": [
-    "preguntas[0].sensibilidad_superficie.combinaciones[0].medianas.1",
-    "preguntas[0].sensibilidad_superficie.combinaciones[1].medianas.1",
-    "preguntas[0].sensibilidad_superficie.combinaciones[4].medianas.1",
-    "preguntas[0].sensibilidad_superficie.combinaciones[5].medianas.1"
+    "preguntas[1].fichas_del_grupo[barrio=Quintana].ic_alto"
+   ]
+  },
+  {
+   "cifra": "13,7",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Vista Alegre].ic_alto"
+   ]
+  },
+  {
+   "cifra": "14,0",
+   "claves": [
+    "preguntas[1].con_un_ano_o_mas.barrios[barrio=Ventas].mediana_pct"
    ]
   },
   {
    "cifra": "14,1",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].cuartil_bajo_pct"
+    "preguntas[1].fichas_del_grupo[barrio=Opañel].rentabilidad_mediana_pct"
    ]
   },
   {
-   "cifra": "14,3",
+   "cifra": "14,2",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Puerta del Angel].rentabilidad_mediana_pct"
+    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].rentabilidad_mediana_pct"
    ]
   },
   {
-   "cifra": "14,5",
+   "cifra": "14,4",
    "claves": [
-    "preguntas[1].que_ordena_la_lista.m2_baratos.mediana_pct"
+    "preguntas[1].fichas_del_grupo[barrio=Ventas].ic_alto"
    ]
   },
   {
-   "cifra": "14,6",
+   "cifra": "14,7",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Quintana].rentabilidad_mediana_pct",
-    "preguntas[1].fichas_del_grupo[barrio=San Diego].rentabilidad_mediana_pct"
+    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].ic_alto"
    ]
   },
   {
    "cifra": "14,8",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].ic_bajo"
-   ]
-  },
-  {
-   "cifra": "14,9",
-   "claves": [
-    "preguntas[0].sensibilidad_superficie.combinaciones[0].medianas.0",
-    "preguntas[0].sensibilidad_superficie.combinaciones[1].medianas.0",
-    "preguntas[0].sensibilidad_superficie.combinaciones[2].medianas.0",
-    "preguntas[0].sensibilidad_superficie.combinaciones[3].medianas.0"
-   ]
-  },
-  {
-   "cifra": "15,2",
-   "claves": [
-    "preguntas[2].rentabilidad_del_grupo_firme.mediana"
-   ]
-  },
-  {
-   "cifra": "15,3",
-   "claves": [
-    "preguntas[1].con_un_ano_o_mas.barrios[barrio=San Diego].mediana_pct"
-   ]
-  },
-  {
-   "cifra": "15,4",
-   "claves": [
-    "preguntas[2].rango_de_rentabilidad_del_grupo_firme.maximo"
+    "preguntas[1].con_un_ano_o_mas.barrios[barrio=Numancia].mediana_pct"
    ]
   },
   {
    "cifra": "15,6",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Canillejas].rentabilidad_mediana_pct"
-   ]
-  },
-  {
-   "cifra": "15,7",
-   "claves": [
-    "preguntas[1].que_ordena_la_lista.grupo.mediana_pct"
-   ]
-  },
-  {
-   "cifra": "15,8",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Opañel].ic_bajo"
+    "preguntas[1].fichas_del_grupo[barrio=Numancia].ic_alto"
    ]
   },
   {
@@ -462,24 +452,6 @@
    "cifra": "15.899",
    "claves": [
     "evolucion_oferta.fotos[foto=2026-06-20].pisos_completos"
-   ]
-  },
-  {
-   "cifra": "16,0",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Puerta del Angel].ic_alto"
-   ]
-  },
-  {
-   "cifra": "16,1",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Vista Alegre].rentabilidad_mediana_pct"
-   ]
-  },
-  {
-   "cifra": "16,2",
-   "claves": [
-    "recomendacion.rentabilidad_con_descuento_pct"
    ]
   },
   {
@@ -497,67 +469,13 @@
   {
    "cifra": "161.973",
    "claves": [
-    "recomendacion.compra_sin_descuento_eur"
-   ]
-  },
-  {
-   "cifra": "17,0",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Ventas].rentabilidad_mediana_pct"
-   ]
-  },
-  {
-   "cifra": "17,1",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=San Diego].ic_alto"
-   ]
-  },
-  {
-   "cifra": "17,3",
-   "claves": [
-    "preguntas[2].rango_de_rentabilidad_de_firmes_y_con_aviso.maximo"
-   ]
-  },
-  {
-   "cifra": "17,5",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Canillejas].ic_alto"
-   ]
-  },
-  {
-   "cifra": "17,7",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Numancia].rentabilidad_mediana_pct"
+    "recomendacion.compra_eur"
    ]
   },
   {
    "cifra": "171.600",
    "claves": [
     "recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].compra_mediana_eur"
-   ]
-  },
-  {
-   "cifra": "18,1",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Quintana].ic_alto"
-   ]
-  },
-  {
-   "cifra": "18,3",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Vista Alegre].ic_alto"
-   ]
-  },
-  {
-   "cifra": "18,6",
-   "claves": [
-    "preguntas[1].con_un_ano_o_mas.barrios[barrio=Ventas].mediana_pct"
-   ]
-  },
-  {
-   "cifra": "18,7",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Opañel].rentabilidad_mediana_pct"
    ]
   },
   {
@@ -573,35 +491,27 @@
    ]
   },
   {
-   "cifra": "19,0",
+   "cifra": "19,1",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].rentabilidad_mediana_pct"
-   ]
-  },
-  {
-   "cifra": "19,2",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Ventas].ic_alto"
-   ]
-  },
-  {
-   "cifra": "19,7",
-   "claves": [
-    "preguntas[1].con_un_ano_o_mas.barrios[barrio=Numancia].mediana_pct",
-    "preguntas[1].fichas_del_grupo[barrio=Casco Histórico de Vallecas].ic_alto"
+    "preguntas[1].fichas_del_grupo[barrio=Opañel].ic_alto"
    ]
   },
   {
    "cifra": "2",
    "claves": [
-    "preguntas[1].con_un_ano_o_mas.barrios[barrio=Numancia].puesto",
-    "preguntas[1].pruebas.barrios.Quintana.cuantas"
+    "preguntas[1].con_un_ano_o_mas.barrios[barrio=Numancia].puesto"
+   ]
+  },
+  {
+   "cifra": "2,0",
+   "claves": [
+    "preguntas[2].fichas_del_grupo[barrio=Vista Alegre].rango_entre_fotos_puntos"
    ]
   },
   {
    "cifra": "2,7",
    "claves": [
-    "preguntas[2].fichas_del_grupo[barrio=Vista Alegre].rango_entre_fotos_puntos"
+    "preguntas[2].fichas_del_grupo[barrio=Ventas].rango_entre_fotos_puntos"
    ]
   },
   {
@@ -620,12 +530,6 @@
    "cifra": "2.940",
    "claves": [
     "preguntas[0].poblacion.filas"
-   ]
-  },
-  {
-   "cifra": "20,8",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Numancia].ic_alto"
    ]
   },
   {
@@ -701,12 +605,6 @@
    ]
   },
   {
-   "cifra": "25,4",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Opañel].ic_alto"
-   ]
-  },
-  {
    "cifra": "25.763",
    "claves": [
     "preguntas[0].dormitorios.tabla[grupo=2].euros_al_ano"
@@ -751,15 +649,37 @@
   {
    "cifra": "3",
    "claves": [
-    "preguntas[1].con_un_ano_o_mas.barrios[barrio=Ventas].puesto",
-    "preguntas[1].pruebas.barrios.Canillejas.cuantas",
-    "preguntas[1].pruebas.barrios.Vista Alegre.cuantas"
+    "preguntas[1].con_un_ano_o_mas.barrios[barrio=Ventas].puesto"
+   ]
+  },
+  {
+   "cifra": "3,04",
+   "claves": [
+    "preguntas[1].cuartil_bajo_de_toda_la_base"
+   ]
+  },
+  {
+   "cifra": "3,2",
+   "claves": [
+    "preguntas[2].fichas_del_grupo[barrio=Opañel].rango_entre_fotos_puntos"
+   ]
+  },
+  {
+   "cifra": "3,4",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Quintana].cuartil_bajo_pct"
    ]
   },
   {
    "cifra": "3,6",
    "claves": [
-    "preguntas[2].fichas_del_grupo[barrio=Ventas].rango_entre_fotos_puntos"
+    "preguntas[0].dormitorios.tabla[grupo=3].ic_bajo"
+   ]
+  },
+  {
+   "cifra": "3,9",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Numancia].cuartil_bajo_pct"
    ]
   },
   {
@@ -825,34 +745,33 @@
    "cifra": "4",
    "claves": [
     "preguntas[0].por_segmentos.distritos_donde_1_supera_a_2",
-    "preguntas[1].pruebas.barrios.Casco Histórico de Vallecas.cuantas",
-    "preguntas[1].pruebas.barrios.Opañel.cuantas",
-    "preguntas[1].segunda_linea",
     "recuento de se_distinguen en preguntas[2].pares_dentro_del_grupo"
    ]
   },
   {
-   "cifra": "4,05",
+   "cifra": "4,6",
    "claves": [
-    "preguntas[1].cuartil_bajo_de_toda_la_base"
+    "preguntas[0].dormitorios.tabla[grupo=3].rentabilidad_mediana_pct",
+    "preguntas[0].sensibilidad_superficie.combinaciones[0].medianas.3",
+    "preguntas[0].sensibilidad_superficie.combinaciones[1].medianas.3",
+    "preguntas[0].sensibilidad_superficie.combinaciones[2].medianas.3",
+    "preguntas[0].sensibilidad_superficie.combinaciones[3].medianas.3",
+    "preguntas[0].sensibilidad_superficie.combinaciones[4].medianas.3",
+    "preguntas[0].sensibilidad_superficie.combinaciones[5].medianas.3",
+    "preguntas[0].sensibilidad_superficie.combinaciones[6].medianas.3",
+    "preguntas[0].sensibilidad_superficie.combinaciones[7].medianas.3"
    ]
   },
   {
-   "cifra": "4,3",
+   "cifra": "4,7",
    "claves": [
-    "preguntas[2].fichas_del_grupo[barrio=Opañel].rango_entre_fotos_puntos"
-   ]
-  },
-  {
-   "cifra": "4,5",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Quintana].cuartil_bajo_pct"
+    "preguntas[2].fichas_del_grupo[barrio=Casco Histórico de Vallecas].rango_entre_fotos_puntos"
    ]
   },
   {
    "cifra": "4,8",
    "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=3].ic_bajo"
+    "preguntas[1].fichas_del_grupo[barrio=San Diego].cuartil_bajo_pct"
    ]
   },
   {
@@ -883,17 +802,22 @@
    ]
   },
   {
-   "cifra": "5",
+   "cifra": "5,1",
    "claves": [
-    "preguntas[1].pruebas.barrios.Numancia.cuantas",
-    "preguntas[1].pruebas.barrios.San Diego.cuantas",
-    "preguntas[1].pruebas.barrios.Ventas.cuantas"
+    "preguntas[1].fichas_del_grupo[barrio=Puerta del Angel].cuartil_bajo_pct"
    ]
   },
   {
-   "cifra": "5,2",
+   "cifra": "5,3",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Numancia].cuartil_bajo_pct"
+    "preguntas[1].fichas_del_grupo[barrio=Ventas].cuartil_bajo_pct"
+   ]
+  },
+  {
+   "cifra": "5,6",
+   "claves": [
+    "preguntas[0].dormitorios.tabla[grupo=3].ic_alto",
+    "preguntas[1].fichas_del_grupo[barrio=Vista Alegre].cuartil_bajo_pct"
    ]
   },
   {
@@ -925,35 +849,15 @@
    ]
   },
   {
-   "cifra": "6,1",
+   "cifra": "6,5",
    "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=3].rentabilidad_mediana_pct",
-    "preguntas[0].sensibilidad_superficie.combinaciones[0].medianas.3",
-    "preguntas[0].sensibilidad_superficie.combinaciones[1].medianas.3",
-    "preguntas[0].sensibilidad_superficie.combinaciones[2].medianas.3",
-    "preguntas[0].sensibilidad_superficie.combinaciones[3].medianas.3",
-    "preguntas[0].sensibilidad_superficie.combinaciones[4].medianas.3",
-    "preguntas[0].sensibilidad_superficie.combinaciones[5].medianas.3",
-    "preguntas[0].sensibilidad_superficie.combinaciones[6].medianas.3",
-    "preguntas[0].sensibilidad_superficie.combinaciones[7].medianas.3"
+    "preguntas[0].dormitorios.tabla[grupo=0].ic_bajo"
    ]
   },
   {
-   "cifra": "6,2",
+   "cifra": "6,9",
    "claves": [
-    "preguntas[2].fichas_del_grupo[barrio=Casco Histórico de Vallecas].rango_entre_fotos_puntos"
-   ]
-  },
-  {
-   "cifra": "6,4",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=San Diego].cuartil_bajo_pct"
-   ]
-  },
-  {
-   "cifra": "6,8",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Puerta del Angel].cuartil_bajo_pct"
+    "preguntas[1].fichas_del_grupo[barrio=Ventas].ic_bajo"
    ]
   },
   {
@@ -979,7 +883,6 @@
   {
    "cifra": "65",
    "claves": [
-    "licencias_y_registro.planta_baja.firmes.licencias",
     "preguntas[1].operadores_grandes.con_aviso_pct"
    ]
   },
@@ -999,25 +902,49 @@
   {
    "cifra": "7,1",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Ventas].cuartil_bajo_pct"
+    "preguntas[1].fichas_del_grupo[barrio=Vista Alegre].ic_bajo"
+   ]
+  },
+  {
+   "cifra": "7,3",
+   "claves": [
+    "preguntas[0].sensibilidad_superficie.combinaciones[1].medianas.2",
+    "preguntas[0].sensibilidad_superficie.combinaciones[3].medianas.2",
+    "preguntas[0].sensibilidad_superficie.combinaciones[5].medianas.2",
+    "preguntas[0].sensibilidad_superficie.combinaciones[7].medianas.2",
+    "preguntas[1].fichas_del_grupo[barrio=Quintana].ic_bajo"
    ]
   },
   {
    "cifra": "7,4",
    "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=3].ic_alto"
+    "preguntas[1].fichas_del_grupo[barrio=Canillejas].cuartil_bajo_pct",
+    "preguntas[1].fichas_del_grupo[barrio=Opañel].cuartil_bajo_pct"
    ]
   },
   {
-   "cifra": "7,5",
+   "cifra": "7,6",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Vista Alegre].cuartil_bajo_pct"
+    "preguntas[0].sensibilidad_superficie.combinaciones[2].medianas.1",
+    "preguntas[0].sensibilidad_superficie.combinaciones[3].medianas.1",
+    "preguntas[0].sensibilidad_superficie.combinaciones[6].medianas.1",
+    "preguntas[0].sensibilidad_superficie.combinaciones[7].medianas.1"
    ]
   },
   {
-   "cifra": "72",
+   "cifra": "7,8",
    "claves": [
-    "licencias_y_registro.planta_baja.firmes.de"
+    "preguntas[0].dormitorios.tabla[grupo=0].rentabilidad_mediana_pct",
+    "preguntas[0].sensibilidad_superficie.combinaciones[4].medianas.0",
+    "preguntas[0].sensibilidad_superficie.combinaciones[5].medianas.0",
+    "preguntas[0].sensibilidad_superficie.combinaciones[6].medianas.0",
+    "preguntas[0].sensibilidad_superficie.combinaciones[7].medianas.0"
+   ]
+  },
+  {
+   "cifra": "7,9",
+   "claves": [
+    "preguntas[0].dormitorios.tabla[grupo=2].ic_bajo"
    ]
   },
   {
@@ -1045,9 +972,27 @@
    ]
   },
   {
+   "cifra": "8,1",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=San Diego].ic_bajo"
+   ]
+  },
+  {
+   "cifra": "8,5",
+   "claves": [
+    "preguntas[0].dormitorios.tabla[grupo=2].rentabilidad_mediana_pct"
+   ]
+  },
+  {
+   "cifra": "8,6",
+   "claves": [
+    "preguntas[0].dormitorios.tabla[grupo=0].ic_alto",
+    "preguntas[0].dormitorios.tabla[grupo=1].ic_bajo"
+   ]
+  },
+  {
    "cifra": "8,7",
    "claves": [
-    "preguntas[0].dormitorios.tabla[grupo=0].ic_bajo",
     "preguntas[2].fichas_del_grupo[barrio=Canillejas].pisos_fuera_sin_ocupacion_pct"
    ]
   },
@@ -1085,41 +1030,37 @@
   {
    "cifra": "9,1",
    "claves": [
+    "preguntas[0].dormitorios.tabla[grupo=1].rentabilidad_mediana_pct",
     "preguntas[2].fichas_del_grupo[barrio=Quintana].pisos_fuera_sin_ocupacion_pct"
    ]
   },
   {
    "cifra": "9,2",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Ventas].ic_bajo"
+    "preguntas[0].sensibilidad_superficie.combinaciones[0].medianas.2",
+    "preguntas[0].sensibilidad_superficie.combinaciones[2].medianas.2",
+    "preguntas[0].sensibilidad_superficie.combinaciones[4].medianas.2",
+    "preguntas[0].sensibilidad_superficie.combinaciones[6].medianas.2"
+   ]
+  },
+  {
+   "cifra": "9,3",
+   "claves": [
+    "preguntas[0].dormitorios.tabla[grupo=2].ic_alto",
+    "preguntas[1].fichas_del_grupo[barrio=Puerta del Angel].ic_bajo"
    ]
   },
   {
    "cifra": "9,5",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Vista Alegre].ic_bajo"
+    "preguntas[1].fichas_del_grupo[barrio=Canillejas].ic_bajo",
+    "preguntas[1].fichas_del_grupo[barrio=Numancia].ic_bajo"
    ]
   },
   {
    "cifra": "9,7",
    "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Quintana].ic_bajo"
-   ]
-  },
-  {
-   "cifra": "9,8",
-   "claves": [
-    "preguntas[0].sensibilidad_superficie.combinaciones[1].medianas.2",
-    "preguntas[0].sensibilidad_superficie.combinaciones[3].medianas.2",
-    "preguntas[0].sensibilidad_superficie.combinaciones[5].medianas.2",
-    "preguntas[0].sensibilidad_superficie.combinaciones[7].medianas.2"
-   ]
-  },
-  {
-   "cifra": "9,9",
-   "claves": [
-    "preguntas[1].fichas_del_grupo[barrio=Canillejas].cuartil_bajo_pct",
-    "preguntas[1].fichas_del_grupo[barrio=Opañel].cuartil_bajo_pct"
+    "preguntas[0].dormitorios.tabla[grupo=1].ic_alto"
    ]
   },
   {
@@ -1136,8 +1077,8 @@
   }
  ],
  "constantes": {
-  "255": "reglas §2, tope de la ocupación",
-  "25": "reglas §2, descuento",
+  "255": "reglas §2, máximo de la ocupación",
+  "25": "reglas §3, el 25 % más rentable",
   "30": "reglas §3, mínimo por grupo",
   "20": "reglas §3, mínimo de las variantes",
   "12": "reglas §3, variantes",
@@ -1156,7 +1097,7 @@
   "4": "pruebas aguantadas",
   "9": "barrios del grupo",
   "2025": "año del precio oficial",
-  "2026": "año de las fotos",
+  "2026": "año de las descargas",
   "35": "planteamientos, estudio",
   "45": "planteamientos, una habitación",
   "50": "reglas §2, superficie",
@@ -1167,7 +1108,6 @@
   "110": "reglas §2, superficie",
   "140": "reglas §2, superficie",
   "1.000": "reglas §3, precio",
-  "8": "reglas §3, huéspedes",
-  "0,75": "reglas §2, factor del descuento"
+  "8": "reglas §3, huéspedes"
  }
 }

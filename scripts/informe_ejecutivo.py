@@ -70,76 +70,72 @@ th.num, td.num { text-align: right; }
 # =====================================================================================================================
 
 def fila_barrio(c, b):
-    """Fila de un barrio: recuento, rentabilidad, cuartil bajo, tope y parte sin ocupación, con el % en la cabecera."""
-    return [ci.barrio(b), c.dato(ficha(b, "clase")), c.num(ficha(b, "pisos")), c.num(ficha(b, "rentabilidad_mediana_pct"), 1), c.num(ficha(b, "cuartil_bajo_pct"), 1),
+    """Fila de un barrio: veces en la lista, anuncios, rentabilidad, corte del peor 25 %, máximo y parte sin días estimados."""
+    return [ci.barrio(b), c.cuantos(ficha(b, 'pruebas_que_aguanta')), c.num(ficha(b, "pisos")), c.num(ficha(b, "rentabilidad_mediana_pct"), 1), c.num(ficha(b, "cuartil_bajo_pct"), 1),
             c.num(ficha(b, "parte_en_el_tope_pct"), 1), c.num(ficha(b, "pisos_fuera_sin_ocupacion_pct", 3), 1)]
 
 
 def contenido(c):
     """Escribe el informe como datos: cada cifra se lee del JSON y queda apuntada con su clave."""
-    base = c.num(f"{Q2}.mediana_de_toda_la_base", 1)
     rango = f"{Q3}.rango_de_rentabilidad_del_grupo_firme"
-    sup = "preguntas[0].sensibilidad_superficie"
     fot, ide = "recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa]", "recomendacion.precio_de_mercado.fuentes[fuente=Idealista]"
     dorm = lambda g, campo: f"preguntas[0].dormitorios.tabla[grupo={g}].{campo}"
     acciones = ci.acciones(c)
 
-    # Antes de las viñetas va lo que limita la lista: la planta, lo que dicen las normas y lo que no se puede saber.
-    limite = (f"Es una lista de dónde buscar y no dice si un piso se puede comprar para este uso. Valoraciones empieza por bajos y primeras plantas con acceso independiente: <b>{c.num(PLANTA + '.licencias')}</b> de las {c.num(PLANTA + '.de')} licencias incluyen planta baja, "
-              f"y {c.num(PLANTA + '.firmes.licencias')} de las {c.num(PLANTA + '.firmes.de')} de los firmes. Fuera del centro histórico, en el nivel B de la zona 1, el hospedaje cabe en planta baja, inferior a la baja y primera, siempre con ese acceso. "
-              "El ingreso de un bajo no se conoce. Qué norma rige en cada barrio no se puede saber aquí: se pregunta en el Ayuntamiento.")
+    # Antes de las viñetas va lo que limita la recomendación: la normativa y la planta.
+    limite = (f"Esta recomendación dice dónde buscar. No dice si un piso concreto se puede comprar para alquilarlo a turistas: eso depende de la normativa y se pregunta en el Ayuntamiento antes de comprar. "
+              f"Conviene empezar por bajos y primeras plantas con acceso independiente, porque <b>{c.num(PLANTA + '.licencias')}</b> de las {c.num(PLANTA + '.de')} licencias incluyen planta baja. "
+              "Lo que ingresa un bajo no se conoce: los datos mezclan todas las plantas.")
 
-    # Resumen: seis viñetas, la primera en dinero, cada una con su cifra en negrita.
+    # Resumen: cinco viñetas, la primera en dinero.
     resumen = [
-        f"Un piso firme de hasta 2 habitaciones cuesta <b>{c.eur(REC + '.compra_sin_descuento_eur')}</b> sin descuento, ingresa {c.eur(REC + '.ingreso_anual_eur')} al año y rinde {c.pct(REC + '.rentabilidad_sin_descuento_pct')} bruto, en mediana y sin gastos. Con descuento supuesto, {c.pct(REC + '.rentabilidad_con_descuento_pct')}; a precios pedidos hoy, {c.pct(ide + '.rentabilidad_mediana_pct')} a {c.pct(fot + '.rentabilidad_mediana_pct')}.",
-        f"Firme es estable, no mejor: aguanta las <b>5</b> pruebas, que repiten la lista quitando algo. Numancia supera la mediana de la base; Ventas y San Diego no se distinguen de ella.",
-        f"Casco Histórico de Vallecas y Opañel rinden más que San Diego, pero dependen de operadores grandes, <b>{c.pct(Q2 + '.operadores_grandes.con_aviso_pct', 0)}</b> de sus anuncios.",
-        f"Los firmes dependen del tope, y con anuncios de un año o más San Diego cae a la <b>{c.num(ci.puesto('San Diego'))}.ª</b> de {c.num(UN_ANO + '.barrios_comparados')}.",
-        f"Elegir por m² barato da <b>{c.pct(ORDENA + '.m2_baratos.mediana_pct')}</b> con descuento, sin distinguirse de la lista.",
-        f"Entre estudio, uno y dos no hay ganador en las <b>{c.cuantos(sup + '.combinaciones')}</b> combinaciones de m².",
+        f"Un piso de hasta 2 habitaciones en estos barrios costaría <b>{c.eur(REC + '.compra_eur')}</b> e ingresaría {c.eur(REC + '.ingreso_anual_eur')} al año. Eso da un <b>{c.pct(REC + '.rentabilidad_pct')}</b> de rentabilidad en mediana, antes de gastos e impuestos. A los precios que se piden hoy baja al {c.pct(fot + '.rentabilidad_mediana_pct')} en Fotocasa y al {c.pct(ide + '.rentabilidad_mediana_pct')} en Idealista.",
+        "Se recomiendan porque el resultado se mantiene: el cálculo se repitió de cinco formas, quitando cada vez un grupo de anuncios, y estos tres barrios siguieron entre los más rentables las cinco veces. Eso no significa que rindan más que los demás de la lista.",
+        f"Los barrios de Casco Histórico de Vallecas y Opañel rinden más que el de San Diego, pero el <b>{c.pct(Q2 + '.operadores_grandes.con_aviso_pct', 0)}</b> de sus anuncios es de anfitriones con 10 anuncios o más. Sin esos anfitriones, salen de la lista.",
+        "Los días ocupados son una estimación con un máximo de <b>255</b> al año. Si se quitan los pisos que llegan a ese máximo, los tres barrios salen de la lista.",
+        "Entre estudio, una y dos habitaciones no hay ganador: depende de la superficie supuesta.",
     ]
 
     # Lo encontrado: una evidencia por viñeta, en el mismo orden, con su base y sin repetir la frase.
     encontrado = [
-        f"<b>Dinero:</b> son {c.num(REC + '.pisos')} anuncios en Airbnb, no pisos en venta. La inversión total no consta. Con el 25 % de descuento, la compra baja a {c.eur(REC + '.compra_con_descuento_eur')}. El rango, de {c.pct(rango + '.minimo')} a {c.pct(rango + '.maximo')}, son seis combinaciones de foto y descuento. Su mediana conjunta, {c.pct(Q3 + '.rentabilidad_del_grupo_firme.mediana')} con descuento, no es la media de sus barrios.",
-        f"<b>Ventas, Numancia y San Diego:</b> la base de decisión son {c.num('preguntas[0].poblacion.filas')} anuncios de pisos fuera del centro histórico. Una variante repite el cálculo con otra estancia, otro mínimo de anuncios u otra foto de precio. El grupo son {c.cuantos(Q2 + '.grupo')} barrios en el mejor cuarto en más de 6 de 12. Una prueba repite esas variantes quitando algo. No se distingue significa que la diferencia puede ser cero con un intervalo de confianza del 95 %.",
-        "<b>Dos con aviso:</b> operadores grandes son los anfitriones de 10 anuncios o más. Puerta del Ángel está en el grupo y no aguanta ninguna prueba.",
-        f"<b>Riesgo:</b> depender del tope es salir del grupo sin los pisos que llegan a 255 días; Opañel, con el {c.pct(ficha('Opañel', 'parte_en_el_tope_pct'), 0)}, no depende. En uno de cada cuatro anuncios la rentabilidad no llega a {c.pct(Q2 + '.cuartil_bajo_de_toda_la_base', 2)}, y los firmes quedan por encima. La ocupación cuenta reseñas de 12 meses y un anuncio nuevo sale bajo: con los de un año o más, Numancia queda {c.num(ci.puesto('Numancia'))}.ª, Ventas {c.num(ci.puesto('Ventas'))}.ª y San Diego {c.num(ci.puesto('San Diego'))}.ª de {c.num(UN_ANO + '.barrios_comparados')}. San Diego se sostiene menos.",
-        f"<b>Precio:</b> entre los {c.num(ORDENA + '.barrios')} barrios, la rentabilidad se asocia más con la ocupación ({c.num(ORDENA + '.rentabilidad_con_ocupacion', 2)}) que con el m² ({c.num(ORDENA + '.rentabilidad_con_m2', 2)}), y la ocupación es la cifra más débil del caso. El grupo da {c.pct(ORDENA + '.grupo.mediana_pct')}. La lista añade qué barrios aguantan las pruebas, no más rentabilidad.",
-        f"<b>Habitaciones:</b> 1 habitación da {c.pct(dorm(1, 'rentabilidad_mediana_pct'))} y 2, {c.pct(dorm(2, 'rentabilidad_mediana_pct'))}, frente a {c.pct(dorm(3, 'rentabilidad_mediana_pct'))} con 3.",
+        f"Las cifras de compra e ingreso son medianas de {c.num(REC + '.pisos')} anuncios en Airbnb, no de pisos en venta. La rentabilidad bruta es el ingreso anual dividido entre el precio de compra. Con todos los pisos de estos barrios, de cualquier tamaño, va del {c.pct(rango + '.minimo')} al {c.pct(rango + '.maximo')} según la fecha del precio.",
+        f"Para elegirlos se partió de {c.num('preguntas[0].poblacion.filas')} pisos fuera del centro histórico. El cálculo se repitió 12 veces cambiando la estancia mínima, el mínimo de anuncios por barrio o la fecha del precio. {c.cuantos(Q2 + '.grupo')} barrios quedaron en el 25 % más rentable en más de la mitad de las repeticiones, y esa es la lista.",
+        "El barrio de Numancia rinde más que la mediana de todos los pisos. En los barrios de Ventas y San Diego no se puede asegurar: la diferencia podría ser cero, con un 95 % de confianza.",
+        f"El barrio de San Diego es el más débil de los tres. Los días ocupados salen de las reseñas del último año, y un anuncio con menos de un año ha tenido menos tiempo para recibirlas, así que parece menos ocupado. Con los anuncios de un año o más, los barrios de Numancia y Ventas quedan en los puestos {c.num(ci.puesto('Numancia'))} y {c.num(ci.puesto('Ventas'))} de {c.num(UN_ANO + '.barrios_comparados')}, y el de San Diego en el {c.num(ci.puesto('San Diego'))}.",
+        f"Entre los {c.num(ORDENA + '.barrios')} barrios comparados, la rentabilidad va más ligada a los días ocupados ({c.num(ORDENA + '.rentabilidad_con_ocupacion', 2)}) que al precio del m² ({c.num(ORDENA + '.rentabilidad_con_m2', 2)}), en una escala de -1 a 1. Los días ocupados son la cifra menos fiable de este análisis.",
+        f"En todos los pisos analizados, 1 habitación rinde {c.pct(dorm(1, 'rentabilidad_mediana_pct'))} y 2 habitaciones, {c.pct(dorm(2, 'rentabilidad_mediana_pct'))}, frente a {c.pct(dorm(3, 'rentabilidad_mediana_pct'))} con 3.",
     ]
     filas = [fila_barrio(c, b) for b in FIRMES + CON_AVISO]
 
     limites = [
-        "La ocupación es una estimación con tope de 255 días, y en la parte alta no ordena.",
-        "Contar además los pisos sin ocupación ni precio dejaría solo a Ventas como firme.",
-        "Superficie y descuento son supuestos. La rentabilidad bruta no es beneficio.",
-        f"La compra es la declarada en 2025. A lo que piden hoy Fotocasa e Idealista sube a {c.eur(fot + '.compra_mediana_eur')} y {c.eur(ide + '.compra_mediana_eur')}; no se midió si cambian los barrios.",
-        "El ingreso de los anuncios mezcla todas las plantas.",
-        "Una diferencia entre barrios es una asociación: no dice por qué ocurre. Este informe no es asesoramiento jurídico.",
+        "Los días ocupados son una estimación, no noches vendidas.",
+        "Si los pisos sin días ocupados ni precio se contaran como cero, solo seguiría en la lista el barrio de Ventas.",
+        "La superficie de cada piso es un supuesto. La rentabilidad bruta no incluye gastos ni impuestos.",
+        f"El precio de compra es el declarado en 2025. A lo que se pide hoy sube a {c.eur(fot + '.compra_mediana_eur')} en Fotocasa y {c.eur(ide + '.compra_mediana_eur')} en Idealista. No se midió si cambiarían los barrios.",
+        "Una diferencia entre barrios no explica por qué ocurre. Este informe no es asesoramiento jurídico.",
     ]
 
     # Anexo para el equipo: tablas, pasos, consultas, protección de datos, fichero de cifras y fuentes.
     s08 = "las_16[id=S08].base_decision.datos.toda_la_base.255"
     oferta = "evolucion_oferta"
     consultas = [
-        ("¿Cuántos anuncios hay en Madrid?", f"{c.num(oferta + '.fotos[foto=2026-09-17].anuncios')} en la foto del 17/09/2026 y {c.num(oferta + '.junio_2025.anuncios')} en la foto de Inside Airbnb de junio de 2025. El cambio no dice por qué ocurre."),
-        ("¿Cuántos anuncios deciden la lista?", f"{c.num('preguntas[0].poblacion.filas')}, en {c.num(Q2 + '.cobertura.barrios_con_pisos')} barrios."),
-        ("¿Cuántos pisos fuera del centro no tienen ocupación?", f"{c.num(Q3 + '.pisos_fuera_sin_ocupacion.pisos')}, el {c.pct(Q3 + '.pisos_fuera_sin_ocupacion.pct')}, y quedan fuera de la lista."),
-        ("¿Qué parte de los anuncios llega al tope?", f"El {c.pct(s08)} de la base."),
+        ("¿Cuántos anuncios hay en Madrid?", f"{c.num(oferta + '.fotos[foto=2026-09-17].anuncios')} en la descarga del 17/09/2026 y {c.num(oferta + '.junio_2025.anuncios')} en la descarga de Inside Airbnb de junio de 2025. El cambio no dice por qué ocurre."),
+        ("¿Cuántos pisos se analizaron?", f"{c.num('preguntas[0].poblacion.filas')}, en {c.num(Q2 + '.cobertura.barrios_con_pisos')} barrios."),
+        ("¿Cuántos pisos fuera del centro histórico no tienen días ocupados estimados?", f"{c.num(Q3 + '.pisos_fuera_sin_ocupacion.pisos')}, el {c.pct(Q3 + '.pisos_fuera_sin_ocupacion.pct')}. Quedan fuera de la lista."),
+        ("¿Qué parte de los pisos llega al máximo?", f"El {c.pct(s08)} de los analizados."),
         ("¿En qué mes hay más reseñas?", f"En junio, con un índice de {c.num('estacionalidad.indice_mas_alto', 2)}, y menos en febrero, con {c.num('estacionalidad.indice_mas_bajo', 2)}. Son {c.num('estacionalidad.meses')} meses completos."),
         ("¿Cuántas licencias municipales hay?", f"{c.num('licencias_y_registro.totales.licencias')}, con {c.num('licencias_y_registro.totales.viviendas_con_licencia')} viviendas. Una licencia no se puede unir a un anuncio."),
     ]
     anexo = {
-        "tablas": ("Fotos de anuncios de Inside Airbnb del 14/12/2025, 24/03/2026, 20/06/2026 y 17/09/2026; calendario y reseñas de la última; precio y superficie oficiales de 2025; "
+        "tablas": ("Anuncios de Inside Airbnb del 14/12/2025, 24/03/2026, 20/06/2026 y 17/09/2026; calendario y reseñas de la última; precio y superficie oficiales de 2025; "
                    "límite del centro histórico, licencias y puntos de interés del Ayuntamiento de Madrid."),
-        "pasos": ("Se corrigieron e integraron los datos, se calculó la rentabilidad bruta de cada piso, se repitió la lista en 12 variantes y 5 pruebas y se compararon grupos con intervalo del 95 %, "
-                  "con 2.000 remuestreos y semilla 63. Las pruebas quitan la temporada, los operadores grandes o las cotizaciones a más de 60 días, se quedan solo con 1 y 2 habitaciones o cuentan a cero los pisos sin ocupación. La rentabilidad bruta es el ingreso anual estimado entre el precio de compra."),
+        "pasos": ("Se limpiaron y unieron los datos, se calculó la rentabilidad bruta de cada piso y se repitió el cálculo como se explica arriba. Las comparaciones entre barrios llevan un intervalo de confianza del 95 %. "
+                  "Las cinco formas de repetirlo quitan los pisos de temporada, quitan a los anfitriones con 10 anuncios o más, quitan los precios para fechas a más de 60 días, dejan solo 1 y 2 habitaciones o cuentan como cero los pisos sin días estimados."),
         "consultas": consultas,
         "datos": ("Son datos públicos. Antes de llegar al análisis se suprimieron las columnas que identifican al anfitrión, los enlaces, las fotos, los textos y el número de licencia, del que queda su tipo. "
-                  "Es una supresión sin códigos con clave, de modo que no hay seudonimización. Quedan el número del anuncio, con el que se llega a su página pública, las coordenadas, desplazadas hasta 150 m, y el recuento de anuncios por anfitrión. "
+                  "Se borraron sin sustituirlas por códigos, así que no hay seudonimización. Quedan el número del anuncio, con el que se llega a su página pública, las coordenadas, desplazadas hasta 150 m, y el recuento de anuncios por anfitrión. "
                   "Se decidió el 06/11/2026 y el análisis trabajó siempre sin esas columnas. El apartado entero va en el informe final."),
-        "fichero": "Cada cifra sale de informes/indicadores.json; su ruta está en informes/informe_ejecutivo.json.",
+        "fichero": "Cada cifra de este informe sale de los cálculos publicados en la carpeta informes/ del repositorio.",
         "fuentes": ci.ATRIBUCION + ["Plan RESIDE, BOCM 226 de 22/09/2025."],
     }
     return {"limite": limite, "resumen": resumen, "encontrado": encontrado, "filas": filas, "limites": limites, "acciones": acciones, "anexo": anexo}
@@ -156,7 +152,7 @@ def lista(items, etiqueta="ul"):
 
 def tabla_riesgo(filas):
     """Monta la tabla de barrios, con los números a la derecha."""
-    cab = ["Barrio", "Clase", "Anuncios", "Rentabilidad con descuento (%)", "Cuartil bajo (%)", "En el tope (%)", "Sin ocupación (%)"]
+    cab = ["Barrio", "Veces en la lista (de 5)", "Anuncios", "Rentabilidad (%)", "Uno de cada cuatro rinde menos de (%)", "Pisos en el máximo de días (%)", "Pisos sin días estimados (%)"]
     num = [False, False, True, True, True, True, True]
     th = "".join(f'<th{" class=\"num\"" if n else ""}>{t}</th>' for t, n in zip(cab, num))
     td = "".join("<tr>" + "".join(f'<td{" class=\"num\"" if n else ""}>{html.escape(str(v))}</td>' for v, n in zip(f, num)) + "</tr>" for f in filas)
@@ -166,17 +162,17 @@ def tabla_riesgo(filas):
 def montar(t, c, emision):
     """Monta el HTML A4 y devuelve el documento y el texto de cada apartado."""
     fecha = ci.fecha_es(c.dato("fecha_datos"))
-    meta = f"Informe para el equipo directivo. Datos de la foto del {fecha}. Cierre de datos: {fecha}. Emisión: {emision}."
-    aprobar = f"<p>Se pide al equipo directivo que apruebe {ci.numero(len(t['acciones']))} acciones:</p>" + lista([a["nombre"] for a in t["acciones"]], "ol")
+    meta = f"Informe para la dirección. Datos de anuncios de Airbnb del {fecha}. Emisión: {emision}."
+    aprobar = f"<p>Se piden {ci.numero(len(t["acciones"]))} acciones:</p>" + lista([a["nombre"] for a in t["acciones"]], "ol")
     resumen = f"<h2>Resumen ejecutivo</h2><p>{t['limite']}</p>{lista(t['resumen'])}{aprobar}"
     sin_ocupacion = c.pct(f"{Q3}.pisos_fuera_sin_ocupacion.pct")
     encontrado = ("<h3>Lo que hemos encontrado</h3>" + lista(t["encontrado"]) + tabla_riesgo(t["filas"])
-                  + f'<p class="nota">Con descuento del 25 %. Sin ocupación: parte de los pisos fuera del centro, frente a {sin_ocupacion} en todos ellos. Los otros {c.cuantos(Q2 + '.segunda_linea')} barrios del grupo van en el informe final. Fuente: Inside Airbnb y Ayuntamiento de Madrid, foto del 17/09/2026.</p>')
+                  + f'<p class="nota">Rentabilidad: mediana de cada barrio. Pisos sin días estimados: {sin_ocupacion} en todos los pisos fuera del centro histórico. Fuente: Inside Airbnb y Ayuntamiento de Madrid, datos del 17/09/2026.</p>')
     limites = "<h3>Límites</h3>" + lista(t["limites"])
-    recomendaciones = "<h3>Recomendaciones</h3>" + lista([f"<b>{a['nombre']}.</b> {a['que']} Quién: {a['quien']}; {a['cuando']}. Sale de esto: {a['por_que'][0].lower() + a['por_que'][1:]}" for a in t["acciones"]], "ol")
+    recomendaciones = "<h3>Recomendaciones</h3>" + lista([f"<b>{a['nombre']}.</b> {a['que']} Quién: {a['quien']}; {a['cuando']}. Motivo: {a['por_que'][0].lower() + a['por_que'][1:]}" for a in t["acciones"]], "ol")
     x = t["anexo"]
     anexo = ('<section class="anexo"><h2>Anexo: trabajo realizado</h2>'
-             f"<h3>Tablas y periodo</h3><p>{x['tablas']}</p><h3>Pasos seguidos</h3><p>{x['pasos']}</p>"
+             f"<h3>Datos usados</h3><p>{x['tablas']}</p><h3>Pasos seguidos</h3><p>{x['pasos']}</p>"
              "<h3>Consultas</h3>" + lista([f"{q} {r}" for q, r in x["consultas"]]) +
              f"<h3>Datos personales</h3><p>{x['datos']}</p><h3>Origen de las cifras</h3><p>{x['fichero']}</p>"
              "<h3>Fuentes externas</h3>" + lista(x["fuentes"], "ol") + "</section>")

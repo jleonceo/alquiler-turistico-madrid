@@ -8,7 +8,6 @@
  "prefijo_distrito_licencias": "Distrito de ",
  "poblacion": {"precio_min": 20, "precio_max": 1000, "huespedes_max": 8, "banos_max": 5, "dormitorios_max": 5, "camas_max": 6,
                "estancia_max": 3, "dias_comparacion": 180},
- "descuento": 0.75,
  "tasa_de_uso": 0.5,
  "radio_atractivo_m": 500,
  "borde_incierto_m": 150,

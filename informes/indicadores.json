@@ -3,15 +3,15 @@
  "version_etapa": "1.0",
  "script": "scripts/indicadores.py",
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T23:05:20",
+ "fecha_ejecucion": "2026-11-07T00:39:31",
  "python": "3.13.18",
  "pandas": "3.1.0",
  "entradas": [
   {
    "ruta": "data/processed/analisis_anuncios.parquet",
-   "sha256": "29397cb49e50009179d9e7939112207da2ab63ca29c8f2a0ff178840369f3ecc",
+   "sha256": "9ec6357f241355373fa96c293ca0a078659c7b35a6de238b266d088f8e4330bb",
    "filas": 23109,
-   "columnas": 68
+   "columnas": 64
   },
   {
    "ruta": "data/processed/analisis_barrios.parquet",
@@ -59,7 +59,7 @@
  "resultado": {
   "estado": "AVISO",
   "riesgo": "medio",
-  "resumen": "Tres preguntas y 16 comprobaciones contestadas sobre 2.940 pisos: 9 barrios en el grupo, 3 firmes y 2 con aviso.",
+  "resumen": "Tres preguntas y 16 comprobaciones contestadas sobre 2.940 pisos: 9 barrios en la lista, 3 que siguen en ella las 5 veces y 2 que siguen 4 veces.",
   "artefactos": [
    "informes/indicadores.json",
    "informes/indicadores.md",
@@ -97,56 +97,56 @@
    "cifras": [
     {
      "nombre": "rentabilidad de toda la base: media",
-     "valor": 12.308987,
+     "valor": 9.23174,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 12.308987,
+     "segunda_via": 9.23174,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base: mediana",
-     "valor": 11.104171,
+     "valor": 8.328128,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 11.104171,
+     "segunda_via": 8.328128,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base: minimo",
-     "valor": 0.109122,
+     "valor": 0.081841,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 0.109122,
+     "segunda_via": 0.081841,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base: maximo",
-     "valor": 110.879585,
+     "valor": 83.159689,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 110.879585,
+     "segunda_via": 83.159689,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base: q25",
-     "valor": 4.050353,
+     "valor": 3.037764,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 4.050353,
+     "segunda_via": 3.037764,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base: q75",
-     "valor": 18.054086,
+     "valor": 13.540565,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 18.054086,
+     "segunda_via": 13.540565,
      "coinciden": true
     },
     {
@@ -206,7 +206,7 @@
    ],
    "referencia": {
     "que_es": "mediana de toda la base",
-    "valor": 11.104171,
+    "valor": 8.328128,
     "filas": 2940
    },
    "dormitorios": {
@@ -214,50 +214,46 @@
      {
       "grupo": "1",
       "pisos": 1646,
-      "rentabilidad_mediana_pct": 12.190336,
-      "cuartil_bajo_pct": 4.435775,
-      "ic_bajo": 11.514824,
-      "ic_alto": 12.974841,
+      "rentabilidad_mediana_pct": 9.142752,
+      "cuartil_bajo_pct": 3.326831,
+      "ic_bajo": 8.636118,
+      "ic_alto": 9.731131,
       "frente_al_total": "por encima",
-      "sin_descuento_pct": 9.142752,
       "euros_al_ano": 21165.0,
-      "superficie_oficial_pct": 7.648271
+      "superficie_oficial_pct": 5.736203
      },
      {
       "grupo": "2",
       "pisos": 726,
-      "rentabilidad_mediana_pct": 11.299629,
-      "cuartil_bajo_pct": 5.073443,
-      "ic_bajo": 10.543113,
-      "ic_alto": 12.40432,
+      "rentabilidad_mediana_pct": 8.474722,
+      "cuartil_bajo_pct": 3.805082,
+      "ic_bajo": 7.907334,
+      "ic_alto": 9.30324,
       "frente_al_total": "no se distingue",
-      "sin_descuento_pct": 8.474722,
       "euros_al_ano": 25762.71,
-      "superficie_oficial_pct": 9.654148
+      "superficie_oficial_pct": 7.240611
      },
      {
       "grupo": "0",
       "pisos": 324,
-      "rentabilidad_mediana_pct": 10.403691,
-      "cuartil_bajo_pct": 3.5579,
-      "ic_bajo": 8.716049,
-      "ic_alto": 11.507576,
+      "rentabilidad_mediana_pct": 7.802768,
+      "cuartil_bajo_pct": 2.668425,
+      "ic_bajo": 6.537037,
+      "ic_alto": 8.630682,
       "frente_al_total": "no se distingue",
-      "sin_descuento_pct": 7.802768,
       "euros_al_ano": 16477.05,
-      "superficie_oficial_pct": 6.893494
+      "superficie_oficial_pct": 5.170121
      },
      {
       "grupo": "3",
       "pisos": 217,
-      "rentabilidad_mediana_pct": 6.104187,
-      "cuartil_bajo_pct": 2.338978,
-      "ic_bajo": 4.819787,
-      "ic_alto": 7.409902,
+      "rentabilidad_mediana_pct": 4.57814,
+      "cuartil_bajo_pct": 1.754233,
+      "ic_bajo": 3.61484,
+      "ic_alto": 5.557426,
       "frente_al_total": "por debajo",
-      "sin_descuento_pct": 4.57814,
       "euros_al_ano": 20961.0,
-      "superficie_oficial_pct": 8.773057
+      "superficie_oficial_pct": 6.579793
      }
     ],
     "sin_conclusion": [
@@ -278,49 +274,49 @@
      {
       "a": "1",
       "b": "2",
-      "diferencia": 0.890707,
-      "bajo": -0.375724,
-      "alto": 1.972689,
+      "diferencia": 0.66803,
+      "bajo": -0.281793,
+      "alto": 1.479517,
       "se_distinguen": false
      },
      {
       "a": "1",
       "b": "0",
-      "diferencia": 1.786645,
-      "bajo": 0.465565,
-      "alto": 3.817593,
+      "diferencia": 1.339983,
+      "bajo": 0.349174,
+      "alto": 2.863195,
       "se_distinguen": true
      },
      {
       "a": "1",
       "b": "3",
-      "diferencia": 6.086149,
-      "bajo": 4.598462,
-      "alto": 7.585465,
+      "diferencia": 4.564611,
+      "bajo": 3.448847,
+      "alto": 5.689099,
       "se_distinguen": true
      },
      {
       "a": "2",
       "b": "0",
-      "diferencia": 0.895938,
-      "bajo": -0.449134,
-      "alto": 2.962147,
+      "diferencia": 0.671953,
+      "bajo": -0.336851,
+      "alto": 2.22161,
       "se_distinguen": false
      },
      {
       "a": "2",
       "b": "3",
-      "diferencia": 5.195442,
-      "bajo": 3.687112,
-      "alto": 6.831438,
+      "diferencia": 3.896581,
+      "bajo": 2.765334,
+      "alto": 5.123579,
       "se_distinguen": true
      },
      {
       "a": "0",
       "b": "3",
-      "diferencia": 4.299504,
-      "bajo": 2.041827,
-      "alto": 5.997246,
+      "diferencia": 3.224628,
+      "bajo": 1.531371,
+      "alto": 4.497934,
       "se_distinguen": true
      }
     ],
@@ -387,50 +383,46 @@
      {
       "grupo": "Entire loft",
       "pisos": 94,
-      "rentabilidad_mediana_pct": 12.408369,
-      "cuartil_bajo_pct": 5.479577,
-      "ic_bajo": 9.291894,
-      "ic_alto": 14.142922,
+      "rentabilidad_mediana_pct": 9.306276,
+      "cuartil_bajo_pct": 4.109683,
+      "ic_bajo": 6.96892,
+      "ic_alto": 10.607191,
       "frente_al_total": "no se distingue",
-      "sin_descuento_pct": 9.306276,
       "euros_al_ano": 22417.5,
-      "superficie_oficial_pct": 7.368492
+      "superficie_oficial_pct": 5.526369
      },
      {
       "grupo": "Entire rental unit",
       "pisos": 2665,
-      "rentabilidad_mediana_pct": 11.289847,
-      "cuartil_bajo_pct": 4.144493,
-      "ic_bajo": 10.760626,
-      "ic_alto": 11.775329,
+      "rentabilidad_mediana_pct": 8.467385,
+      "cuartil_bajo_pct": 3.10837,
+      "ic_bajo": 8.070469,
+      "ic_alto": 8.831496,
       "frente_al_total": "no se distingue",
-      "sin_descuento_pct": 8.467385,
       "euros_al_ano": 22032.0,
-      "superficie_oficial_pct": 8.215778
+      "superficie_oficial_pct": 6.161834
      },
      {
       "grupo": "Entire condo",
       "pisos": 60,
-      "rentabilidad_mediana_pct": 9.626166,
-      "cuartil_bajo_pct": 3.854416,
-      "ic_bajo": 7.738369,
-      "ic_alto": 11.655475,
+      "rentabilidad_mediana_pct": 7.219625,
+      "cuartil_bajo_pct": 2.890812,
+      "ic_bajo": 5.803777,
+      "ic_alto": 8.741606,
       "frente_al_total": "no se distingue",
-      "sin_descuento_pct": 7.219625,
       "euros_al_ano": 21904.05,
-      "superficie_oficial_pct": 6.277228
+      "superficie_oficial_pct": 4.707921
      },
      {
       "grupo": "Entire home",
       "pisos": 60,
-      "rentabilidad_mediana_pct": 8.576261,
-      "cuartil_bajo_pct": 2.532926,
-      "ic_bajo": 5.297067,
-      "ic_alto": 10.786206,
+      "rentabilidad_mediana_pct": 6.432195,
+      "cuartil_bajo_pct": 1.899695,
+      "ic_bajo": 3.9728,
+      "ic_alto": 8.089654,
       "frente_al_total": "por debajo",
-      "sin_descuento_pct": 6.432195,
       "euros_al_ano": 17964.0,
-      "superficie_oficial_pct": 6.85992
+      "superficie_oficial_pct": 5.14494
      }
     ],
     "sin_conclusion": [
@@ -483,49 +475,49 @@
      {
       "a": "Entire loft",
       "b": "Entire rental unit",
-      "diferencia": 1.118522,
-      "bajo": -2.143506,
-      "alto": 2.76502,
+      "diferencia": 0.838892,
+      "bajo": -1.60763,
+      "alto": 2.073765,
       "se_distinguen": false
      },
      {
       "a": "Entire loft",
       "b": "Entire condo",
-      "diferencia": 2.782202,
-      "bajo": -0.871636,
-      "alto": 5.197604,
+      "diferencia": 2.086652,
+      "bajo": -0.653727,
+      "alto": 3.898203,
       "se_distinguen": false
      },
      {
       "a": "Entire loft",
       "b": "Entire home",
-      "diferencia": 3.832108,
-      "bajo": -0.231903,
-      "alto": 7.668138,
+      "diferencia": 2.874081,
+      "bajo": -0.173927,
+      "alto": 5.751104,
       "se_distinguen": false
      },
      {
       "a": "Entire rental unit",
       "b": "Entire condo",
-      "diferencia": 1.66368,
-      "bajo": -0.382414,
-      "alto": 3.497891,
+      "diferencia": 1.24776,
+      "bajo": -0.28681,
+      "alto": 2.623418,
       "se_distinguen": false
      },
      {
       "a": "Entire rental unit",
       "b": "Entire home",
-      "diferencia": 2.713586,
-      "bajo": 0.302557,
-      "alto": 6.127928,
+      "diferencia": 2.035189,
+      "bajo": 0.226918,
+      "alto": 4.595946,
       "se_distinguen": true
      },
      {
       "a": "Entire condo",
       "b": "Entire home",
-      "diferencia": 1.049906,
-      "bajo": -2.047784,
-      "alto": 4.939047,
+      "diferencia": 0.787429,
+      "bajo": -1.535838,
+      "alto": 3.704285,
       "se_distinguen": false
      }
     ],
@@ -606,10 +598,10 @@
      "Entire rental unit"
     ],
     "medianas_con_la_regla": {
-     "1": 12.190336,
-     "2": 11.299629,
-     "0": 10.403691,
-     "3": 6.104187
+     "1": 9.142752,
+     "2": 8.474722,
+     "0": 7.802768,
+     "3": 4.57814
     },
     "combinaciones": [
      {
@@ -619,10 +611,10 @@
        "2": 60
       },
       "medianas": {
-       "0": 14.862416,
-       "1": 13.544817,
-       "2": 12.241265,
-       "3": 6.104187
+       "0": 11.146812,
+       "1": 10.158613,
+       "2": 9.180948,
+       "3": 4.57814
       },
       "se_dan": [
        "0",
@@ -642,10 +634,10 @@
        "2": 75
       },
       "medianas": {
-       "0": 14.862416,
-       "1": 13.544817,
-       "2": 9.793012,
-       "3": 6.104187
+       "0": 11.146812,
+       "1": 10.158613,
+       "2": 7.344759,
+       "3": 4.57814
       },
       "se_dan": [
        "0",
@@ -665,10 +657,10 @@
        "2": 60
       },
       "medianas": {
-       "0": 14.862416,
-       "2": 12.241265,
-       "1": 10.158613,
-       "3": 6.104187
+       "0": 11.146812,
+       "2": 9.180948,
+       "1": 7.61896,
+       "3": 4.57814
       },
       "se_dan": [
        "0",
@@ -687,10 +679,10 @@
        "2": 75
       },
       "medianas": {
-       "0": 14.862416,
-       "1": 10.158613,
-       "2": 9.793012,
-       "3": 6.104187
+       "0": 11.146812,
+       "1": 7.61896,
+       "2": 7.344759,
+       "3": 4.57814
       },
       "se_dan": [
        "0"
@@ -709,10 +701,10 @@
        "2": 60
       },
       "medianas": {
-       "1": 13.544817,
-       "2": 12.241265,
-       "0": 10.403691,
-       "3": 6.104187
+       "1": 10.158613,
+       "2": 9.180948,
+       "0": 7.802768,
+       "3": 4.57814
       },
       "se_dan": [
        "1",
@@ -731,10 +723,10 @@
        "2": 75
       },
       "medianas": {
-       "1": 13.544817,
-       "0": 10.403691,
-       "2": 9.793012,
-       "3": 6.104187
+       "1": 10.158613,
+       "0": 7.802768,
+       "2": 7.344759,
+       "3": 4.57814
       },
       "se_dan": [
        "1"
@@ -752,10 +744,10 @@
        "2": 60
       },
       "medianas": {
-       "2": 12.241265,
-       "0": 10.403691,
-       "1": 10.158613,
-       "3": 6.104187
+       "2": 9.180948,
+       "0": 7.802768,
+       "1": 7.61896,
+       "3": 4.57814
       },
       "se_dan": [
        "2"
@@ -774,10 +766,10 @@
        "2": 75
       },
       "medianas": {
-       "0": 10.403691,
-       "1": 10.158613,
-       "2": 9.793012,
-       "3": 6.104187
+       "0": 7.802768,
+       "1": 7.61896,
+       "2": 7.344759,
+       "3": 4.57814
       },
       "se_dan": [
        "0",
@@ -829,62 +821,62 @@
     {
      "grupo": "1 habitaciones, Entire rental unit",
      "casos": 1481,
-     "media": 13.107219,
-     "mediana": 12.513407,
-     "q25": 4.517059,
-     "q75": 19.061633,
-     "minimo": 0.109122,
-     "maximo": 110.879585
+     "media": 9.830414,
+     "mediana": 9.385055,
+     "q25": 3.387795,
+     "q75": 14.296225,
+     "minimo": 0.081841,
+     "maximo": 83.159689
     },
     {
      "grupo": "1 habitaciones, Entire loft",
      "casos": 65,
-     "media": 13.90609,
-     "mediana": 12.44444,
-     "q25": 7.603588,
-     "q75": 16.474273,
-     "minimo": 0.511003,
-     "maximo": 75.362319
+     "media": 10.429568,
+     "mediana": 9.33333,
+     "q25": 5.702691,
+     "q75": 12.355705,
+     "minimo": 0.383253,
+     "maximo": 56.521739
     },
     {
      "grupo": "2 habitaciones, Entire rental unit",
      "casos": 664,
-     "media": 12.45323,
-     "mediana": 11.232476,
-     "q25": 5.154024,
-     "q75": 18.361368,
-     "minimo": 0.177461,
-     "maximo": 62.242742
+     "media": 9.339923,
+     "mediana": 8.424357,
+     "q25": 3.865518,
+     "q75": 13.771026,
+     "minimo": 0.133096,
+     "maximo": 46.682056
     },
     {
      "grupo": "0 habitaciones, Entire rental unit",
      "casos": 299,
-     "media": 11.416358,
-     "mediana": 10.547487,
-     "q25": 3.583702,
-     "q75": 15.374584,
-     "minimo": 0.226488,
-     "maximo": 61.117864
+     "media": 8.562268,
+     "mediana": 7.910616,
+     "q25": 2.687776,
+     "q75": 11.530938,
+     "minimo": 0.169866,
+     "maximo": 45.838398
     },
     {
      "grupo": "1 habitaciones, Entire condo",
      "casos": 37,
-     "media": 11.78842,
-     "mediana": 9.080293,
-     "q25": 2.480336,
-     "q75": 18.856811,
-     "minimo": 0.460961,
-     "maximo": 36.744979
+     "media": 8.841315,
+     "mediana": 6.81022,
+     "q25": 1.860252,
+     "q75": 14.142608,
+     "minimo": 0.345721,
+     "maximo": 27.558734
     },
     {
      "grupo": "3 habitaciones, Entire rental unit",
      "casos": 201,
-     "media": 8.140855,
-     "mediana": 6.296232,
-     "q25": 2.467158,
-     "q75": 11.326689,
-     "minimo": 0.156581,
-     "maximo": 43.46595
+     "media": 6.105641,
+     "mediana": 4.722174,
+     "q25": 1.850369,
+     "q75": 8.495017,
+     "minimo": 0.117436,
+     "maximo": 32.599462
     }
    ],
    "cruce_sin_conclusion": [
@@ -1078,7 +1070,7 @@
    "limites": [
     "empates: no hay tramos ni puestos que repartir, se comparan medianas con intervalo.",
     "pesos: no hay puntuación con pesos.",
-    "hacia_adelante: la pregunta describe una foto y no predice.",
+    "hacia_adelante: la pregunta describe una descarga y no predice.",
     "periodos: la pregunta usa una sola foto; las demás van en la pregunta 3.",
     "La ventaja de una habitación sobre dos no se repite en todos los distritos: de 8 comparables, gana en 4.",
     "La superficie de valoraciones es un supuesto, y la oficial no sirve para comparar tipos porque es igual para todos los pisos del barrio: va solo como contraste.",
@@ -1091,7 +1083,7 @@
    "decision": "dónde concentra la búsqueda el equipo de valoraciones.",
    "planteamiento": "metodo/04_planteamientos.md §Pregunta 2",
    "funcion": "comparar_con_total",
-   "funcion_adaptada": "en la parte de pisos en el tope se usa tal cual; en la rentabilidad, adaptada a la mediana con remuestreo",
+   "funcion_adaptada": "en la parte de pisos en el máximo se usa tal cual; en la rentabilidad, adaptada a la mediana con remuestreo",
    "poblacion": {
     "regla": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
@@ -1102,101 +1094,101 @@
    "cifras": [
     {
      "nombre": "rentabilidad de toda la base, pregunta 2: media",
-     "valor": 12.308987,
+     "valor": 9.23174,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 12.308987,
+     "segunda_via": 9.23174,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base, pregunta 2: mediana",
-     "valor": 11.104171,
+     "valor": 8.328128,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 11.104171,
+     "segunda_via": 8.328128,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base, pregunta 2: minimo",
-     "valor": 0.109122,
+     "valor": 0.081841,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 0.109122,
+     "segunda_via": 0.081841,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base, pregunta 2: maximo",
-     "valor": 110.879585,
+     "valor": 83.159689,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 110.879585,
+     "segunda_via": 83.159689,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base, pregunta 2: q25",
-     "valor": 4.050353,
+     "valor": 3.037764,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 4.050353,
+     "segunda_via": 3.037764,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base, pregunta 2: q75",
-     "valor": 18.054086,
+     "valor": 13.540565,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 18.054086,
+     "segunda_via": 13.540565,
      "coinciden": true
     },
     {
      "nombre": "mediana de los barrios con 30 o más",
-     "valor": 11.529263,
+     "valor": 8.646947,
      "filas": 36,
      "poblacion": "barrios con 30 pisos o más de la base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 11.529263,
+     "segunda_via": 8.646947,
      "coinciden": true
     },
     {
-     "nombre": "parte de operadores grandes en los barrios con aviso",
+     "nombre": "parte de operadores grandes en los barrios que siguen en la lista 4 veces",
      "valor": 64.948454,
      "filas": 97,
-     "poblacion": "pisos de los barrios con aviso",
+     "poblacion": "pisos de los barrios que siguen en la lista 4 veces",
      "periodo": "foto del 17/09/2026",
      "segunda_via": 64.948454,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad conjunta: m2_baratos",
-     "valor": 14.483895,
+     "valor": 10.862922,
      "filas": 555,
      "poblacion": "pisos de m2_baratos",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 14.483895,
+     "segunda_via": 10.862922,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad conjunta: firmes",
-     "valor": 15.157859,
+     "valor": 11.368394,
      "filas": 280,
      "poblacion": "pisos de firmes",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 15.157859,
+     "segunda_via": 11.368394,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad conjunta: grupo",
-     "valor": 15.740358,
+     "valor": 11.805268,
      "filas": 561,
      "poblacion": "pisos de grupo",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 15.740358,
+     "segunda_via": 11.805268,
      "coinciden": true
     },
     {
@@ -1209,7 +1201,7 @@
      "coinciden": true
     },
     {
-     "nombre": "pisos del grupo firme",
+     "nombre": "pisos del grupo recomendado",
      "valor": 280,
      "filas": 2940,
      "poblacion": "base de decisión",
@@ -1220,11 +1212,11 @@
    ],
    "referencia": {
     "que_es": "mediana de los barrios con 30 anuncios o más",
-    "valor": 11.529263,
+    "valor": 8.646947,
     "filas": 2322,
     "barrios": 36
    },
-   "mediana_de_toda_la_base": 11.104171,
+   "mediana_de_toda_la_base": 8.328128,
    "grupo": [
     "Canillejas",
     "Casco Histórico de Vallecas",
@@ -1252,15 +1244,15 @@
     "Vista Alegre"
    ],
    "clases": {
-    "Canillejas": "segunda línea",
-    "Casco Histórico de Vallecas": "con aviso",
-    "Numancia": "firme",
-    "Opañel": "con aviso",
-    "Puerta del Angel": "segunda línea",
-    "Quintana": "segunda línea",
-    "San Diego": "firme",
-    "Ventas": "firme",
-    "Vista Alegre": "segunda línea"
+    "Canillejas": "menos de 4 veces",
+    "Casco Histórico de Vallecas": "4 de 5 veces",
+    "Numancia": "5 de 5 veces",
+    "Opañel": "4 de 5 veces",
+    "Puerta del Angel": "menos de 4 veces",
+    "Quintana": "menos de 4 veces",
+    "San Diego": "5 de 5 veces",
+    "Ventas": "5 de 5 veces",
+    "Vista Alegre": "menos de 4 veces"
    },
    "pruebas": {
     "barrios": {
@@ -1275,7 +1267,7 @@
        "sin_anfitriones_grandes"
       ],
       "cuantas": 3,
-      "clase": "segunda línea"
+      "clase": "menos de 4 veces"
      },
      "Casco Histórico de Vallecas": {
       "aguanta": [
@@ -1288,7 +1280,7 @@
        "sin_anfitriones_grandes"
       ],
       "cuantas": 4,
-      "clase": "con aviso"
+      "clase": "4 de 5 veces"
      },
      "Numancia": {
       "aguanta": [
@@ -1300,7 +1292,7 @@
       ],
       "no_aguanta": [],
       "cuantas": 5,
-      "clase": "firme"
+      "clase": "5 de 5 veces"
      },
      "Opañel": {
       "aguanta": [
@@ -1313,7 +1305,7 @@
        "sin_anfitriones_grandes"
       ],
       "cuantas": 4,
-      "clase": "con aviso"
+      "clase": "4 de 5 veces"
      },
      "Puerta del Angel": {
       "aguanta": [],
@@ -1325,7 +1317,7 @@
        "sin_ocupacion_como_cero"
       ],
       "cuantas": 0,
-      "clase": "segunda línea"
+      "clase": "menos de 4 veces"
      },
      "Quintana": {
       "aguanta": [
@@ -1338,7 +1330,7 @@
        "solo_1_y_2_dormitorios"
       ],
       "cuantas": 2,
-      "clase": "segunda línea"
+      "clase": "menos de 4 veces"
      },
      "San Diego": {
       "aguanta": [
@@ -1350,7 +1342,7 @@
       ],
       "no_aguanta": [],
       "cuantas": 5,
-      "clase": "firme"
+      "clase": "5 de 5 veces"
      },
      "Ventas": {
       "aguanta": [
@@ -1362,7 +1354,7 @@
       ],
       "no_aguanta": [],
       "cuantas": 5,
-      "clase": "firme"
+      "clase": "5 de 5 veces"
      },
      "Vista Alegre": {
       "aguanta": [
@@ -1375,7 +1367,7 @@
        "solo_1_y_2_dormitorios"
       ],
       "cuantas": 3,
-      "clase": "segunda línea"
+      "clase": "menos de 4 veces"
      }
     },
     "firmes": [
@@ -1521,12 +1513,12 @@
    "fichas_del_grupo": [
     {
      "barrio": "Canillejas",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 35,
-     "rentabilidad_mediana_pct": 15.635668,
-     "cuartil_bajo_pct": 9.917763,
-     "ic_bajo": 12.655882,
-     "ic_alto": 17.450523,
+     "rentabilidad_mediana_pct": 11.726751,
+     "cuartil_bajo_pct": 7.438322,
+     "ic_bajo": 9.491911,
+     "ic_alto": 13.087892,
      "frente_a_la_base": "por encima",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 10,
@@ -1548,18 +1540,18 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días",
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días",
       "pocos anuncios: 35 pisos"
      ]
     },
     {
      "barrio": "Casco Histórico de Vallecas",
-     "clase": "con aviso",
+     "clase": "4 de 5 veces",
      "pisos": 37,
-     "rentabilidad_mediana_pct": 18.952322,
-     "cuartil_bajo_pct": 14.121796,
-     "ic_bajo": 14.807853,
-     "ic_alto": 19.652101,
+     "rentabilidad_mediana_pct": 14.214242,
+     "cuartil_bajo_pct": 10.591347,
+     "ic_bajo": 11.105889,
+     "ic_alto": 14.739075,
      "frente_a_la_base": "por encima",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 19,
@@ -1581,18 +1573,18 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días",
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días",
       "pocos anuncios: 37 pisos"
      ]
     },
     {
      "barrio": "Numancia",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 84,
-     "rentabilidad_mediana_pct": 17.674378,
-     "cuartil_bajo_pct": 5.227209,
-     "ic_bajo": 12.651415,
-     "ic_alto": 20.781241,
+     "rentabilidad_mediana_pct": 13.255783,
+     "cuartil_bajo_pct": 3.920406,
+     "ic_bajo": 9.488561,
+     "ic_alto": 15.585931,
      "frente_a_la_base": "por encima",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 38,
@@ -1613,17 +1605,17 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días"
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días"
      ]
     },
     {
      "barrio": "Opañel",
-     "clase": "con aviso",
+     "clase": "4 de 5 veces",
      "pisos": 60,
-     "rentabilidad_mediana_pct": 18.733469,
-     "cuartil_bajo_pct": 9.895402,
-     "ic_bajo": 15.837731,
-     "ic_alto": 25.406111,
+     "rentabilidad_mediana_pct": 14.050102,
+     "cuartil_bajo_pct": 7.421552,
+     "ic_bajo": 11.878298,
+     "ic_alto": 19.054583,
      "frente_a_la_base": "por encima",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 30,
@@ -1648,12 +1640,12 @@
     },
     {
      "barrio": "Puerta del Angel",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 75,
-     "rentabilidad_mediana_pct": 14.330697,
-     "cuartil_bajo_pct": 6.799868,
-     "ic_bajo": 12.450198,
-     "ic_alto": 15.978344,
+     "rentabilidad_mediana_pct": 10.748023,
+     "cuartil_bajo_pct": 5.099901,
+     "ic_bajo": 9.337649,
+     "ic_alto": 11.983758,
      "frente_a_la_base": "por encima",
      "variantes_en_el_mejor_cuarto": 7,
      "pisos_en_el_tope": 31,
@@ -1677,12 +1669,12 @@
     },
     {
      "barrio": "Quintana",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 42,
-     "rentabilidad_mediana_pct": 14.633871,
-     "cuartil_bajo_pct": 4.517213,
-     "ic_bajo": 9.705187,
-     "ic_alto": 18.052259,
+     "rentabilidad_mediana_pct": 10.975404,
+     "cuartil_bajo_pct": 3.387909,
+     "ic_bajo": 7.27889,
+     "ic_alto": 13.539194,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 10,
      "pisos_en_el_tope": 9,
@@ -1707,12 +1699,12 @@
     },
     {
      "barrio": "San Diego",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 107,
-     "rentabilidad_mediana_pct": 14.579381,
-     "cuartil_bajo_pct": 6.35666,
-     "ic_bajo": 10.765353,
-     "ic_alto": 17.128224,
+     "rentabilidad_mediana_pct": 10.934536,
+     "cuartil_bajo_pct": 4.767495,
+     "ic_bajo": 8.074014,
+     "ic_alto": 12.846168,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 34,
@@ -1733,17 +1725,17 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días"
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días"
      ]
     },
     {
      "barrio": "Ventas",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 89,
-     "rentabilidad_mediana_pct": 16.951452,
-     "cuartil_bajo_pct": 7.062218,
-     "ic_bajo": 9.206716,
-     "ic_alto": 19.249613,
+     "rentabilidad_mediana_pct": 12.713589,
+     "cuartil_bajo_pct": 5.296663,
+     "ic_bajo": 6.905037,
+     "ic_alto": 14.43721,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 29,
@@ -1764,17 +1756,17 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días"
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días"
      ]
     },
     {
      "barrio": "Vista Alegre",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 32,
-     "rentabilidad_mediana_pct": 16.125688,
-     "cuartil_bajo_pct": 7.46177,
-     "ic_bajo": 9.464923,
-     "ic_alto": 18.294799,
+     "rentabilidad_mediana_pct": 12.094266,
+     "cuartil_bajo_pct": 5.596327,
+     "ic_bajo": 7.098692,
+     "ic_alto": 13.7211,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 10,
@@ -1796,7 +1788,7 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días",
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días",
       "pocos anuncios: 32 pisos"
      ]
     }
@@ -1853,7 +1845,7 @@
      "barrios_entre_los_que_se_elige": 128
     }
    },
-   "cuartil_bajo_de_toda_la_base": 4.050353,
+   "cuartil_bajo_de_toda_la_base": 3.037764,
    "aviso_del_cuartil": {
     "barrios_comparados": 36,
     "no_superan_la_mediana": 35,
@@ -1867,182 +1859,182 @@
      {
       "barrio": "Opañel",
       "pisos": 42,
-      "mediana_pct": 25.173027,
+      "mediana_pct": 18.879771,
       "puesto": 1,
       "en_el_mejor_cuarto": true
      },
      {
       "barrio": "Numancia",
       "pisos": 66,
-      "mediana_pct": 19.69559,
+      "mediana_pct": 14.771693,
       "puesto": 2,
       "en_el_mejor_cuarto": true
      },
      {
       "barrio": "Ventas",
       "pisos": 62,
-      "mediana_pct": 18.614889,
+      "mediana_pct": 13.961167,
       "puesto": 3,
       "en_el_mejor_cuarto": true
      },
      {
       "barrio": "Pinar del Rey",
       "pisos": 34,
-      "mediana_pct": 18.36767,
+      "mediana_pct": 13.775753,
       "puesto": 4,
       "en_el_mejor_cuarto": true
      },
      {
       "barrio": "Quintana",
       "pisos": 30,
-      "mediana_pct": 15.984635,
+      "mediana_pct": 11.988476,
       "puesto": 5,
       "en_el_mejor_cuarto": true
      },
      {
       "barrio": "San Isidro",
       "pisos": 42,
-      "mediana_pct": 15.643098,
+      "mediana_pct": 11.732324,
       "puesto": 6,
       "en_el_mejor_cuarto": true
      },
      {
       "barrio": "Orcasur",
       "pisos": 37,
-      "mediana_pct": 15.492746,
+      "mediana_pct": 11.61956,
       "puesto": 7,
       "en_el_mejor_cuarto": true
      },
      {
       "barrio": "San Diego",
       "pisos": 80,
-      "mediana_pct": 15.320045,
+      "mediana_pct": 11.490034,
       "puesto": 8,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Berruguete",
       "pisos": 59,
-      "mediana_pct": 15.179091,
+      "mediana_pct": 11.384318,
       "puesto": 9,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Almenara",
       "pisos": 66,
-      "mediana_pct": 15.110422,
+      "mediana_pct": 11.332816,
       "puesto": 10,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Cuatro Caminos",
       "pisos": 114,
-      "mediana_pct": 15.095385,
+      "mediana_pct": 11.321539,
       "puesto": 11,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Puerta del Angel",
       "pisos": 48,
-      "mediana_pct": 14.298275,
+      "mediana_pct": 10.723706,
       "puesto": 12,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Adelfas",
       "pisos": 30,
-      "mediana_pct": 13.977781,
+      "mediana_pct": 10.483336,
       "puesto": 13,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Rejas",
       "pisos": 69,
-      "mediana_pct": 13.800501,
+      "mediana_pct": 10.350375,
       "puesto": 14,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Comillas",
       "pisos": 48,
-      "mediana_pct": 13.276267,
+      "mediana_pct": 9.9572,
       "puesto": 15,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Pueblo Nuevo",
       "pisos": 71,
-      "mediana_pct": 13.028286,
+      "mediana_pct": 9.771214,
       "puesto": 16,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Castillejos",
       "pisos": 48,
-      "mediana_pct": 11.836595,
+      "mediana_pct": 8.877446,
       "puesto": 17,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Valdeacederas",
       "pisos": 71,
-      "mediana_pct": 11.649182,
+      "mediana_pct": 8.736887,
       "puesto": 18,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Guindalera",
       "pisos": 119,
-      "mediana_pct": 11.284101,
+      "mediana_pct": 8.463075,
       "puesto": 19,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Bellas Vistas",
       "pisos": 44,
-      "mediana_pct": 10.238991,
+      "mediana_pct": 7.679243,
       "puesto": 20,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Hispanoamérica",
       "pisos": 35,
-      "mediana_pct": 10.040658,
+      "mediana_pct": 7.530494,
       "puesto": 21,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Almendrales",
       "pisos": 30,
-      "mediana_pct": 9.468244,
+      "mediana_pct": 7.101183,
       "puesto": 22,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Prosperidad",
       "pisos": 81,
-      "mediana_pct": 9.247159,
+      "mediana_pct": 6.935369,
       "puesto": 23,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Fuente del Berro",
       "pisos": 31,
-      "mediana_pct": 8.144134,
+      "mediana_pct": 6.1081,
       "puesto": 24,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Canillas",
       "pisos": 33,
-      "mediana_pct": 5.626469,
+      "mediana_pct": 4.219852,
       "puesto": 25,
       "en_el_mejor_cuarto": false
      },
      {
       "barrio": "Nueva España",
       "pisos": 34,
-      "mediana_pct": 4.552629,
+      "mediana_pct": 3.414472,
       "puesto": 26,
       "en_el_mejor_cuarto": false
      }
@@ -2069,37 +2061,37 @@
     "rentabilidad_con_m2": -0.600772,
     "m2_baratos": {
      "pisos": 555,
-     "mediana_pct": 14.483895,
-     "ic_bajo": 13.695417,
-     "ic_alto": 15.323542
+     "mediana_pct": 10.862922,
+     "ic_bajo": 10.271562,
+     "ic_alto": 11.492656
     },
     "firmes": {
      "pisos": 280,
-     "mediana_pct": 15.157859,
-     "ic_bajo": 13.490158,
-     "ic_alto": 17.473268
+     "mediana_pct": 11.368394,
+     "ic_bajo": 10.117618,
+     "ic_alto": 13.104951
     },
     "grupo": {
      "pisos": 561,
-     "mediana_pct": 15.740358,
-     "ic_bajo": 14.579381,
-     "ic_alto": 17.02824
+     "mediana_pct": 11.805268,
+     "ic_bajo": 10.934536,
+     "ic_alto": 12.77118
     },
     "pares": [
      {
       "a": "firmes",
       "b": "m2_baratos",
-      "diferencia": 0.673964,
-      "bajo": -1.272273,
-      "alto": 3.173077,
+      "diferencia": 0.505473,
+      "bajo": -0.954205,
+      "alto": 2.379808,
       "se_distinguen": false
      },
      {
       "a": "grupo",
       "b": "m2_baratos",
-      "diferencia": 1.256462,
-      "bajo": -0.085908,
-      "alto": 2.766978,
+      "diferencia": 0.942347,
+      "bajo": -0.064431,
+      "alto": 2.075233,
       "se_distinguen": false
      }
     ]
@@ -2107,12 +2099,12 @@
    "tabla_barrios": [
     {
      "barrio": "Casco Histórico de Vallecas",
-     "clase": "con aviso",
+     "clase": "4 de 5 veces",
      "pisos": 37,
-     "rentabilidad_mediana_pct": 18.952322,
-     "cuartil_bajo_pct": 14.121796,
-     "ic_bajo": 14.807853,
-     "ic_alto": 19.652101,
+     "rentabilidad_mediana_pct": 14.214242,
+     "cuartil_bajo_pct": 10.591347,
+     "ic_bajo": 11.105889,
+     "ic_alto": 14.739075,
      "frente_a_la_base": "por encima",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 19,
@@ -2134,18 +2126,18 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días",
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días",
       "pocos anuncios: 37 pisos"
      ]
     },
     {
      "barrio": "Opañel",
-     "clase": "con aviso",
+     "clase": "4 de 5 veces",
      "pisos": 60,
-     "rentabilidad_mediana_pct": 18.733469,
-     "cuartil_bajo_pct": 9.895402,
-     "ic_bajo": 15.837731,
-     "ic_alto": 25.406111,
+     "rentabilidad_mediana_pct": 14.050102,
+     "cuartil_bajo_pct": 7.421552,
+     "ic_bajo": 11.878298,
+     "ic_alto": 19.054583,
      "frente_a_la_base": "por encima",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 30,
@@ -2170,12 +2162,12 @@
     },
     {
      "barrio": "Numancia",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 84,
-     "rentabilidad_mediana_pct": 17.674378,
-     "cuartil_bajo_pct": 5.227209,
-     "ic_bajo": 12.651415,
-     "ic_alto": 20.781241,
+     "rentabilidad_mediana_pct": 13.255783,
+     "cuartil_bajo_pct": 3.920406,
+     "ic_bajo": 9.488561,
+     "ic_alto": 15.585931,
      "frente_a_la_base": "por encima",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 38,
@@ -2196,17 +2188,17 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días"
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días"
      ]
     },
     {
      "barrio": "Ventas",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 89,
-     "rentabilidad_mediana_pct": 16.951452,
-     "cuartil_bajo_pct": 7.062218,
-     "ic_bajo": 9.206716,
-     "ic_alto": 19.249613,
+     "rentabilidad_mediana_pct": 12.713589,
+     "cuartil_bajo_pct": 5.296663,
+     "ic_bajo": 6.905037,
+     "ic_alto": 14.43721,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 29,
@@ -2227,17 +2219,17 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días"
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días"
      ]
     },
     {
      "barrio": "Vista Alegre",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 32,
-     "rentabilidad_mediana_pct": 16.125688,
-     "cuartil_bajo_pct": 7.46177,
-     "ic_bajo": 9.464923,
-     "ic_alto": 18.294799,
+     "rentabilidad_mediana_pct": 12.094266,
+     "cuartil_bajo_pct": 5.596327,
+     "ic_bajo": 7.098692,
+     "ic_alto": 13.7211,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 10,
@@ -2259,18 +2251,18 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días",
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días",
       "pocos anuncios: 32 pisos"
      ]
     },
     {
      "barrio": "Canillejas",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 35,
-     "rentabilidad_mediana_pct": 15.635668,
-     "cuartil_bajo_pct": 9.917763,
-     "ic_bajo": 12.655882,
-     "ic_alto": 17.450523,
+     "rentabilidad_mediana_pct": 11.726751,
+     "cuartil_bajo_pct": 7.438322,
+     "ic_bajo": 9.491911,
+     "ic_alto": 13.087892,
      "frente_a_la_base": "por encima",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 10,
@@ -2292,18 +2284,18 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días",
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días",
       "pocos anuncios: 35 pisos"
      ]
     },
     {
      "barrio": "San Isidro",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 63,
-     "rentabilidad_mediana_pct": 15.448288,
-     "cuartil_bajo_pct": 5.20866,
-     "ic_bajo": 9.869735,
-     "ic_alto": 17.245719,
+     "rentabilidad_mediana_pct": 11.586216,
+     "cuartil_bajo_pct": 3.906495,
+     "ic_bajo": 7.402301,
+     "ic_alto": 12.93429,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 3,
      "pisos_en_el_tope": 23,
@@ -2312,12 +2304,12 @@
     },
     {
      "barrio": "Quintana",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 42,
-     "rentabilidad_mediana_pct": 14.633871,
-     "cuartil_bajo_pct": 4.517213,
-     "ic_bajo": 9.705187,
-     "ic_alto": 18.052259,
+     "rentabilidad_mediana_pct": 10.975404,
+     "cuartil_bajo_pct": 3.387909,
+     "ic_bajo": 7.27889,
+     "ic_alto": 13.539194,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 10,
      "pisos_en_el_tope": 9,
@@ -2342,12 +2334,12 @@
     },
     {
      "barrio": "San Diego",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 107,
-     "rentabilidad_mediana_pct": 14.579381,
-     "cuartil_bajo_pct": 6.35666,
-     "ic_bajo": 10.765353,
-     "ic_alto": 17.128224,
+     "rentabilidad_mediana_pct": 10.934536,
+     "cuartil_bajo_pct": 4.767495,
+     "ic_bajo": 8.074014,
+     "ic_alto": 12.846168,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 12,
      "pisos_en_el_tope": 34,
@@ -2368,17 +2360,17 @@
      },
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días"
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días"
      ]
     },
     {
      "barrio": "Puerta del Angel",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 75,
-     "rentabilidad_mediana_pct": 14.330697,
-     "cuartil_bajo_pct": 6.799868,
-     "ic_bajo": 12.450198,
-     "ic_alto": 15.978344,
+     "rentabilidad_mediana_pct": 10.748023,
+     "cuartil_bajo_pct": 5.099901,
+     "ic_bajo": 9.337649,
+     "ic_alto": 11.983758,
      "frente_a_la_base": "por encima",
      "variantes_en_el_mejor_cuarto": 7,
      "pisos_en_el_tope": 31,
@@ -2402,12 +2394,12 @@
     },
     {
      "barrio": "Berruguete",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 71,
-     "rentabilidad_mediana_pct": 13.722484,
-     "cuartil_bajo_pct": 5.534022,
-     "ic_bajo": 10.45265,
-     "ic_alto": 15.402955,
+     "rentabilidad_mediana_pct": 10.291863,
+     "cuartil_bajo_pct": 4.150516,
+     "ic_bajo": 7.839487,
+     "ic_alto": 11.552216,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 1,
      "pisos_en_el_tope": 25,
@@ -2416,12 +2408,12 @@
     },
     {
      "barrio": "Pinar del Rey",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 46,
-     "rentabilidad_mediana_pct": 13.333104,
-     "cuartil_bajo_pct": 4.691245,
-     "ic_bajo": 9.155715,
-     "ic_alto": 18.481039,
+     "rentabilidad_mediana_pct": 9.999828,
+     "cuartil_bajo_pct": 3.518434,
+     "ic_bajo": 6.866786,
+     "ic_alto": 13.860779,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 8,
@@ -2430,12 +2422,12 @@
     },
     {
      "barrio": "Valdezarza",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 31,
-     "rentabilidad_mediana_pct": 13.305858,
-     "cuartil_bajo_pct": 6.335907,
-     "ic_bajo": 9.130228,
-     "ic_alto": 16.226439,
+     "rentabilidad_mediana_pct": 9.979394,
+     "cuartil_bajo_pct": 4.75193,
+     "ic_bajo": 6.847671,
+     "ic_alto": 12.169829,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 12,
@@ -2444,12 +2436,12 @@
     },
     {
      "barrio": "Comillas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 61,
-     "rentabilidad_mediana_pct": 13.094597,
-     "cuartil_bajo_pct": 5.186276,
-     "ic_bajo": 9.783595,
-     "ic_alto": 14.788633,
+     "rentabilidad_mediana_pct": 9.820948,
+     "cuartil_bajo_pct": 3.889707,
+     "ic_bajo": 7.337696,
+     "ic_alto": 11.091475,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 13,
@@ -2458,12 +2450,12 @@
     },
     {
      "barrio": "Cuatro Caminos",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 140,
-     "rentabilidad_mediana_pct": 12.892461,
-     "cuartil_bajo_pct": 6.345921,
-     "ic_bajo": 11.134063,
-     "ic_alto": 15.1002,
+     "rentabilidad_mediana_pct": 9.669346,
+     "cuartil_bajo_pct": 4.759441,
+     "ic_bajo": 8.350547,
+     "ic_alto": 11.32515,
      "frente_a_la_base": "por encima",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 30,
@@ -2472,12 +2464,12 @@
     },
     {
      "barrio": "Almenara",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 86,
-     "rentabilidad_mediana_pct": 12.745604,
-     "cuartil_bajo_pct": 6.137241,
-     "ic_bajo": 9.82273,
-     "ic_alto": 15.272828,
+     "rentabilidad_mediana_pct": 9.559203,
+     "cuartil_bajo_pct": 4.602931,
+     "ic_bajo": 7.367048,
+     "ic_alto": 11.454621,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 3,
      "pisos_en_el_tope": 36,
@@ -2486,12 +2478,12 @@
     },
     {
      "barrio": "Bellas Vistas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 83,
-     "rentabilidad_mediana_pct": 11.71534,
-     "cuartil_bajo_pct": 5.415208,
-     "ic_bajo": 9.277722,
-     "ic_alto": 14.219085,
+     "rentabilidad_mediana_pct": 8.786505,
+     "cuartil_bajo_pct": 4.061406,
+     "ic_bajo": 6.958292,
+     "ic_alto": 10.664313,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 20,
@@ -2500,12 +2492,12 @@
     },
     {
      "barrio": "Pueblo Nuevo",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 95,
-     "rentabilidad_mediana_pct": 11.687511,
-     "cuartil_bajo_pct": 4.755422,
-     "ic_bajo": 9.385425,
-     "ic_alto": 13.63924,
+     "rentabilidad_mediana_pct": 8.765633,
+     "cuartil_bajo_pct": 3.566566,
+     "ic_bajo": 7.039069,
+     "ic_alto": 10.22943,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 27,
@@ -2514,12 +2506,12 @@
     },
     {
      "barrio": "Guindalera",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 164,
-     "rentabilidad_mediana_pct": 11.371014,
-     "cuartil_bajo_pct": 4.883237,
-     "ic_bajo": 9.811817,
-     "ic_alto": 12.894172,
+     "rentabilidad_mediana_pct": 8.528261,
+     "cuartil_bajo_pct": 3.662428,
+     "ic_bajo": 7.358863,
+     "ic_alto": 9.670629,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 50,
@@ -2528,12 +2520,12 @@
     },
     {
      "barrio": "San Andrés",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 53,
-     "rentabilidad_mediana_pct": 11.349638,
-     "cuartil_bajo_pct": 5.69064,
-     "ic_bajo": 8.178684,
-     "ic_alto": 13.006317,
+     "rentabilidad_mediana_pct": 8.512228,
+     "cuartil_bajo_pct": 4.26798,
+     "ic_bajo": 6.134013,
+     "ic_alto": 9.754738,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 5,
@@ -2542,12 +2534,12 @@
     },
     {
      "barrio": "Castillejos",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 72,
-     "rentabilidad_mediana_pct": 10.313762,
-     "cuartil_bajo_pct": 6.010264,
-     "ic_bajo": 7.995551,
-     "ic_alto": 12.463498,
+     "rentabilidad_mediana_pct": 7.735322,
+     "cuartil_bajo_pct": 4.507698,
+     "ic_bajo": 5.996664,
+     "ic_alto": 9.347623,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 23,
@@ -2556,12 +2548,12 @@
     },
     {
      "barrio": "Valdeacederas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 90,
-     "rentabilidad_mediana_pct": 9.942759,
-     "cuartil_bajo_pct": 2.953553,
-     "ic_bajo": 7.933123,
-     "ic_alto": 11.649182,
+     "rentabilidad_mediana_pct": 7.457069,
+     "cuartil_bajo_pct": 2.215165,
+     "ic_bajo": 5.949843,
+     "ic_alto": 8.736887,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 31,
@@ -2570,12 +2562,12 @@
     },
     {
      "barrio": "Hispanoamérica",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 38,
-     "rentabilidad_mediana_pct": 9.594163,
-     "cuartil_bajo_pct": 6.628434,
-     "ic_bajo": 8.684236,
-     "ic_alto": 12.002387,
+     "rentabilidad_mediana_pct": 7.195622,
+     "cuartil_bajo_pct": 4.971326,
+     "ic_bajo": 6.513177,
+     "ic_alto": 9.00179,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 6,
@@ -2584,12 +2576,12 @@
     },
     {
      "barrio": "Simancas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 33,
-     "rentabilidad_mediana_pct": 9.421736,
-     "cuartil_bajo_pct": 5.722492,
-     "ic_bajo": 7.738369,
-     "ic_alto": 15.060558,
+     "rentabilidad_mediana_pct": 7.066302,
+     "cuartil_bajo_pct": 4.291869,
+     "ic_bajo": 5.803777,
+     "ic_alto": 11.295418,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 3,
@@ -2598,12 +2590,12 @@
     },
     {
      "barrio": "Rejas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 101,
-     "rentabilidad_mediana_pct": 9.259921,
-     "cuartil_bajo_pct": 3.03897,
-     "ic_bajo": 6.060064,
-     "ic_alto": 13.800501,
+     "rentabilidad_mediana_pct": 6.944941,
+     "cuartil_bajo_pct": 2.279228,
+     "ic_bajo": 4.545048,
+     "ic_alto": 10.350375,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 5,
      "pisos_en_el_tope": 25,
@@ -2612,12 +2604,12 @@
     },
     {
      "barrio": "Prosperidad",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 107,
-     "rentabilidad_mediana_pct": 8.857805,
-     "cuartil_bajo_pct": 3.741616,
-     "ic_bajo": 6.721511,
-     "ic_alto": 11.219589,
+     "rentabilidad_mediana_pct": 6.643354,
+     "cuartil_bajo_pct": 2.806212,
+     "ic_bajo": 5.041133,
+     "ic_alto": 8.414692,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 31,
@@ -2626,12 +2618,12 @@
     },
     {
      "barrio": "Almendrales",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 39,
-     "rentabilidad_mediana_pct": 8.417981,
-     "cuartil_bajo_pct": 2.850639,
-     "ic_bajo": 4.578755,
-     "ic_alto": 9.812288,
+     "rentabilidad_mediana_pct": 6.313486,
+     "cuartil_bajo_pct": 2.13798,
+     "ic_bajo": 3.434067,
+     "ic_alto": 7.359216,
      "frente_a_la_base": "por debajo",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 1,
@@ -2640,12 +2632,12 @@
     },
     {
      "barrio": "Orcasur",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 46,
-     "rentabilidad_mediana_pct": 7.757693,
-     "cuartil_bajo_pct": 3.857455,
-     "ic_bajo": 5.247879,
-     "ic_alto": 17.114642,
+     "rentabilidad_mediana_pct": 5.818269,
+     "cuartil_bajo_pct": 2.893091,
+     "ic_bajo": 3.935909,
+     "ic_alto": 12.835982,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 2,
@@ -2654,12 +2646,12 @@
     },
     {
      "barrio": "Canillas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 38,
-     "rentabilidad_mediana_pct": 7.755293,
-     "cuartil_bajo_pct": 2.627691,
-     "ic_bajo": 3.392781,
-     "ic_alto": 12.667078,
+     "rentabilidad_mediana_pct": 5.81647,
+     "cuartil_bajo_pct": 1.970769,
+     "ic_bajo": 2.544585,
+     "ic_alto": 9.500308,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 4,
@@ -2668,12 +2660,12 @@
     },
     {
      "barrio": "Adelfas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 50,
-     "rentabilidad_mediana_pct": 7.277679,
-     "cuartil_bajo_pct": 1.035553,
-     "ic_bajo": 2.168903,
-     "ic_alto": 12.47122,
+     "rentabilidad_mediana_pct": 5.458259,
+     "cuartil_bajo_pct": 0.776665,
+     "ic_bajo": 1.626677,
+     "ic_alto": 9.353415,
      "frente_a_la_base": "no se distingue",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 14,
@@ -2682,12 +2674,12 @@
     },
     {
      "barrio": "Moscardó",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 47,
-     "rentabilidad_mediana_pct": 7.188742,
-     "cuartil_bajo_pct": 4.192018,
-     "ic_bajo": 5.156211,
-     "ic_alto": 9.766024,
+     "rentabilidad_mediana_pct": 5.391556,
+     "cuartil_bajo_pct": 3.144014,
+     "ic_bajo": 3.867158,
+     "ic_alto": 7.324518,
      "frente_a_la_base": "por debajo",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 1,
@@ -2696,12 +2688,12 @@
     },
     {
      "barrio": "Valdefuentes",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 40,
-     "rentabilidad_mediana_pct": 6.641122,
-     "cuartil_bajo_pct": 1.747423,
-     "ic_bajo": 2.661286,
-     "ic_alto": 9.798702,
+     "rentabilidad_mediana_pct": 4.980842,
+     "cuartil_bajo_pct": 1.310567,
+     "ic_bajo": 1.995965,
+     "ic_alto": 7.349026,
      "frente_a_la_base": "por debajo",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 10,
@@ -2710,12 +2702,12 @@
     },
     {
      "barrio": "Ciudad Jardín",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 40,
-     "rentabilidad_mediana_pct": 6.542902,
-     "cuartil_bajo_pct": 2.007555,
-     "ic_bajo": 3.406115,
-     "ic_alto": 11.050758,
+     "rentabilidad_mediana_pct": 4.907177,
+     "cuartil_bajo_pct": 1.505666,
+     "ic_bajo": 2.554586,
+     "ic_alto": 8.288069,
      "frente_a_la_base": "por debajo",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 11,
@@ -2724,12 +2716,12 @@
     },
     {
      "barrio": "Fuente del Berro",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 55,
-     "rentabilidad_mediana_pct": 6.408895,
-     "cuartil_bajo_pct": 2.512551,
-     "ic_bajo": 3.393288,
-     "ic_alto": 8.263137,
+     "rentabilidad_mediana_pct": 4.806671,
+     "cuartil_bajo_pct": 1.884413,
+     "ic_bajo": 2.544966,
+     "ic_alto": 6.197353,
      "frente_a_la_base": "por debajo",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 12,
@@ -2738,12 +2730,12 @@
     },
     {
      "barrio": "Nueva España",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 42,
-     "rentabilidad_mediana_pct": 4.552629,
-     "cuartil_bajo_pct": 1.954112,
-     "ic_bajo": 2.991758,
-     "ic_alto": 7.044668,
+     "rentabilidad_mediana_pct": 3.414472,
+     "cuartil_bajo_pct": 1.465584,
+     "ic_bajo": 2.243818,
+     "ic_alto": 5.283501,
      "frente_a_la_base": "por debajo",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 7,
@@ -2752,12 +2744,12 @@
     },
     {
      "barrio": "Atocha",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 30,
-     "rentabilidad_mediana_pct": 3.397659,
-     "cuartil_bajo_pct": 1.556805,
-     "ic_bajo": 2.250571,
-     "ic_alto": 4.396466,
+     "rentabilidad_mediana_pct": 2.548244,
+     "cuartil_bajo_pct": 1.167603,
+     "ic_bajo": 1.687928,
+     "ic_alto": 3.297349,
      "frente_a_la_base": "por debajo",
      "variantes_en_el_mejor_cuarto": 0,
      "pisos_en_el_tope": 1,
@@ -3131,7 +3123,7 @@
    ],
    "limites": [
     "pesos: el grupo cuenta variantes y no suma componentes con pesos.",
-    "hacia_adelante: la pregunta no predice; las variantes de marzo y junio miden cuánto depende del momento, con la ocupación de septiembre.",
+    "hacia_adelante: la pregunta no predice; las repeticiones de marzo y junio miden cuánto depende del momento, con la ocupación de septiembre.",
     "Un barrio que no llega a 30 pisos en ninguna variante solo se mide en las seis de mínimo 20 y no puede llegar a siete.",
     "El resultado no dice si un piso concreto cumple la norma.",
     "Competencia cuenta solo anuncios de Airbnb, y un anuncio no es un inmueble."
@@ -3154,146 +3146,146 @@
    "cifras": [
     {
      "nombre": "rentabilidad de toda la base, pregunta 3: media",
-     "valor": 12.308987,
+     "valor": 9.23174,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 12.308987,
+     "segunda_via": 9.23174,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base, pregunta 3: mediana",
-     "valor": 11.104171,
+     "valor": 8.328128,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 11.104171,
+     "segunda_via": 8.328128,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base, pregunta 3: minimo",
-     "valor": 0.109122,
+     "valor": 0.081841,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 0.109122,
+     "segunda_via": 0.081841,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base, pregunta 3: maximo",
-     "valor": 110.879585,
+     "valor": 83.159689,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 110.879585,
+     "segunda_via": 83.159689,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base, pregunta 3: q25",
-     "valor": 4.050353,
+     "valor": 3.037764,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 4.050353,
+     "segunda_via": 3.037764,
      "coinciden": true
     },
     {
      "nombre": "rentabilidad de toda la base, pregunta 3: q75",
-     "valor": 18.054086,
+     "valor": 13.540565,
      "filas": 2940,
      "poblacion": "base de decisión",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 18.054086,
+     "segunda_via": 13.540565,
      "coinciden": true
     },
     {
-     "nombre": "rango del grupo firme: mínimo",
+     "nombre": "rango del grupo recomendado: mínimo",
      "valor": 10.782505,
      "filas": 295,
-     "poblacion": "pisos del grupo firme con precio en cada foto",
+     "poblacion": "pisos del grupo recomendado con precio en cada foto",
      "periodo": "foto del 17/09/2026",
      "segunda_via": 10.782505,
      "coinciden": true
     },
     {
-     "nombre": "rango del grupo firme: máximo",
-     "valor": 15.358106,
+     "nombre": "rango del grupo recomendado: máximo",
+     "valor": 11.51858,
      "filas": 295,
-     "poblacion": "pisos del grupo firme con precio en cada foto",
+     "poblacion": "pisos del grupo recomendado con precio en cada foto",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 15.358106,
+     "segunda_via": 11.51858,
      "coinciden": true
     },
     {
-     "nombre": "rango de firmes y con aviso: mínimo",
+     "nombre": "rango de recomendados y los que siguen en la lista 4 veces: mínimo",
      "valor": 11.422129,
      "filas": 403,
-     "poblacion": "pisos de firmes y con aviso con precio en cada foto",
+     "poblacion": "pisos de recomendados y los que siguen en la lista 4 veces con precio en cada foto",
      "periodo": "foto del 17/09/2026",
      "segunda_via": 11.422129,
      "coinciden": true
     },
     {
-     "nombre": "rango de firmes y con aviso: máximo",
-     "valor": 17.345348,
+     "nombre": "rango de recomendados y los que siguen en la lista 4 veces: máximo",
+     "valor": 13.009011,
      "filas": 403,
-     "poblacion": "pisos de firmes y con aviso con precio en cada foto",
+     "poblacion": "pisos de recomendados y los que siguen en la lista 4 veces con precio en cada foto",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 17.345348,
+     "segunda_via": 13.009011,
      "coinciden": true
     },
     {
-     "nombre": "rentabilidad del grupo firme: media",
-     "valor": 15.759566,
+     "nombre": "rentabilidad del grupo recomendado: media",
+     "valor": 11.819674,
      "filas": 280,
-     "poblacion": "pisos del grupo firme",
+     "poblacion": "pisos del grupo recomendado",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 15.759566,
+     "segunda_via": 11.819674,
      "coinciden": true
     },
     {
-     "nombre": "rentabilidad del grupo firme: mediana",
-     "valor": 15.157859,
+     "nombre": "rentabilidad del grupo recomendado: mediana",
+     "valor": 11.368394,
      "filas": 280,
-     "poblacion": "pisos del grupo firme",
+     "poblacion": "pisos del grupo recomendado",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 15.157859,
+     "segunda_via": 11.368394,
      "coinciden": true
     },
     {
-     "nombre": "rentabilidad del grupo firme: minimo",
-     "valor": 0.259726,
+     "nombre": "rentabilidad del grupo recomendado: minimo",
+     "valor": 0.194795,
      "filas": 280,
-     "poblacion": "pisos del grupo firme",
+     "poblacion": "pisos del grupo recomendado",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 0.259726,
+     "segunda_via": 0.194795,
      "coinciden": true
     },
     {
-     "nombre": "rentabilidad del grupo firme: maximo",
-     "valor": 62.242742,
+     "nombre": "rentabilidad del grupo recomendado: maximo",
+     "valor": 46.682056,
      "filas": 280,
-     "poblacion": "pisos del grupo firme",
+     "poblacion": "pisos del grupo recomendado",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 62.242742,
+     "segunda_via": 46.682056,
      "coinciden": true
     },
     {
-     "nombre": "rentabilidad del grupo firme: q25",
-     "valor": 5.910583,
+     "nombre": "rentabilidad del grupo recomendado: q25",
+     "valor": 4.432937,
      "filas": 280,
-     "poblacion": "pisos del grupo firme",
+     "poblacion": "pisos del grupo recomendado",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 5.910583,
+     "segunda_via": 4.432937,
      "coinciden": true
     },
     {
-     "nombre": "rentabilidad del grupo firme: q75",
-     "valor": 23.74974,
+     "nombre": "rentabilidad del grupo recomendado: q75",
+     "valor": 17.812305,
      "filas": 280,
-     "poblacion": "pisos del grupo firme",
+     "poblacion": "pisos del grupo recomendado",
      "periodo": "foto del 17/09/2026",
-     "segunda_via": 23.74974,
+     "segunda_via": 17.812305,
      "coinciden": true
     },
     {
@@ -3306,46 +3298,28 @@
      "coinciden": true
     },
     {
-     "nombre": "recomendación: rentabilidad_sin_descuento_pct",
+     "nombre": "recomendación: rentabilidad_pct",
      "valor": 12.115439,
      "filas": 256,
-     "poblacion": "pisos de hasta 2 habitaciones del grupo firme",
+     "poblacion": "pisos de hasta 2 habitaciones del grupo recomendado",
      "periodo": "foto del 17/09/2026",
      "segunda_via": 12.115439,
      "coinciden": true
     },
     {
-     "nombre": "recomendación: rentabilidad_con_descuento_pct",
-     "valor": 16.153918,
-     "filas": 256,
-     "poblacion": "pisos de hasta 2 habitaciones del grupo firme",
-     "periodo": "foto del 17/09/2026",
-     "segunda_via": 16.153918,
-     "coinciden": true
-    },
-    {
-     "nombre": "recomendación: compra_sin_descuento_eur",
+     "nombre": "recomendación: compra_eur",
      "valor": 161973.0,
      "filas": 256,
-     "poblacion": "pisos de hasta 2 habitaciones del grupo firme",
+     "poblacion": "pisos de hasta 2 habitaciones del grupo recomendado",
      "periodo": "foto del 17/09/2026",
      "segunda_via": 161973.0,
-     "coinciden": true
-    },
-    {
-     "nombre": "recomendación: compra_con_descuento_eur",
-     "valor": 121479.75,
-     "filas": 256,
-     "poblacion": "pisos de hasta 2 habitaciones del grupo firme",
-     "periodo": "foto del 17/09/2026",
-     "segunda_via": 121479.75,
      "coinciden": true
     },
     {
      "nombre": "recomendación: ingreso_anual_eur",
      "valor": 21674.79,
      "filas": 256,
-     "poblacion": "pisos de hasta 2 habitaciones del grupo firme",
+     "poblacion": "pisos de hasta 2 habitaciones del grupo recomendado",
      "periodo": "foto del 17/09/2026",
      "segunda_via": 21674.79,
      "coinciden": true
@@ -3353,21 +3327,21 @@
    ],
    "referencia": {
     "que_es": "el mismo cálculo para toda la base",
-    "valor": 4.050353,
+    "valor": 3.037764,
     "filas": 2940,
     "pisos": 2940,
-    "cuartil_bajo_pct": 4.050353,
+    "cuartil_bajo_pct": 3.037764,
     "medianas_por_foto": {
-     "marzo": 11.489585,
-     "junio": 10.435738,
-     "septiembre": 11.104171
+     "marzo": 8.617189,
+     "junio": 7.826804,
+     "septiembre": 8.328128
     },
     "pisos_por_foto": {
      "marzo": 2454,
      "junio": 2784,
      "septiembre": 2940
     },
-    "rango_entre_fotos_puntos": 1.053847
+    "rango_entre_fotos_puntos": 0.790385
    },
    "primero": "Casco Histórico de Vallecas",
    "barrios_comparados": 36,
@@ -3416,21 +3390,21 @@
    "tabla_riesgo": [
     {
      "barrio": "Casco Histórico de Vallecas",
-     "clase": "con aviso",
+     "clase": "4 de 5 veces",
      "pisos": 37,
-     "cuartil_bajo_pct": 14.121796,
-     "mediana_pct": 18.952322,
+     "cuartil_bajo_pct": 10.591347,
+     "mediana_pct": 14.214242,
      "medianas_por_foto": {
-      "marzo": 23.914915,
-      "junio": 17.683803,
-      "septiembre": 18.952322
+      "marzo": 17.936186,
+      "junio": 13.262852,
+      "septiembre": 14.214242
      },
      "pisos_por_foto": {
       "marzo": 34,
       "junio": 37,
       "septiembre": 37
      },
-     "rango_entre_fotos_puntos": 6.231112,
+     "rango_entre_fotos_puntos": 4.673334,
      "parte_en_el_tope_pct": 51.351351,
      "pisos_fuera_sin_ocupacion_pct": 27.586207,
      "se_distingue_del_primero": null,
@@ -3438,1016 +3412,1016 @@
     },
     {
      "barrio": "Opañel",
-     "clase": "con aviso",
+     "clase": "4 de 5 veces",
      "pisos": 60,
-     "cuartil_bajo_pct": 9.895402,
-     "mediana_pct": 18.733469,
+     "cuartil_bajo_pct": 7.421552,
+     "mediana_pct": 14.050102,
      "medianas_por_foto": {
-      "marzo": 21.171759,
-      "junio": 16.846505,
-      "septiembre": 18.733469
+      "marzo": 15.878819,
+      "junio": 12.634879,
+      "septiembre": 14.050102
      },
      "pisos_por_foto": {
       "marzo": 56,
       "junio": 60,
       "septiembre": 60
      },
-     "rango_entre_fotos_puntos": 4.325254,
+     "rango_entre_fotos_puntos": 3.243941,
      "parte_en_el_tope_pct": 50.0,
      "pisos_fuera_sin_ocupacion_pct": 21.649485,
      "se_distingue_del_primero": false,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Opañel",
-      "diferencia": 0.218853,
-      "bajo": -8.276049,
-      "alto": 3.114592,
+      "diferencia": 0.16414,
+      "bajo": -6.207037,
+      "alto": 2.335944,
       "se_distinguen": false
      }
     },
     {
      "barrio": "Numancia",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 84,
-     "cuartil_bajo_pct": 5.227209,
-     "mediana_pct": 17.674378,
+     "cuartil_bajo_pct": 3.920406,
+     "mediana_pct": 13.255783,
      "medianas_por_foto": {
-      "marzo": 18.262303,
-      "junio": 16.862193,
-      "septiembre": 17.674378
+      "marzo": 13.696727,
+      "junio": 12.646645,
+      "septiembre": 13.255783
      },
      "pisos_por_foto": {
       "marzo": 69,
       "junio": 79,
       "septiembre": 84
      },
-     "rango_entre_fotos_puntos": 1.40011,
+     "rango_entre_fotos_puntos": 1.050082,
      "parte_en_el_tope_pct": 45.238095,
      "pisos_fuera_sin_ocupacion_pct": 32.394366,
      "se_distingue_del_primero": false,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Numancia",
-      "diferencia": 1.277945,
-      "bajo": -3.675455,
-      "alto": 6.055645,
+      "diferencia": 0.958458,
+      "bajo": -2.756591,
+      "alto": 4.541734,
       "se_distinguen": false
      }
     },
     {
      "barrio": "Ventas",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 89,
-     "cuartil_bajo_pct": 7.062218,
-     "mediana_pct": 16.951452,
+     "cuartil_bajo_pct": 5.296663,
+     "mediana_pct": 12.713589,
      "medianas_por_foto": {
-      "marzo": 14.080124,
-      "junio": 13.361804,
-      "septiembre": 16.951452
+      "marzo": 10.560093,
+      "junio": 10.021353,
+      "septiembre": 12.713589
      },
      "pisos_por_foto": {
       "marzo": 74,
       "junio": 83,
       "septiembre": 89
      },
-     "rango_entre_fotos_puntos": 3.589648,
+     "rango_entre_fotos_puntos": 2.692236,
      "parte_en_el_tope_pct": 32.58427,
      "pisos_fuera_sin_ocupacion_pct": 18.897638,
      "se_distingue_del_primero": false,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Ventas",
-      "diferencia": 2.00087,
-      "bajo": -2.120162,
-      "alto": 9.745607,
+      "diferencia": 1.500653,
+      "bajo": -1.590122,
+      "alto": 7.309205,
       "se_distinguen": false
      }
     },
     {
      "barrio": "Vista Alegre",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 32,
-     "cuartil_bajo_pct": 7.46177,
-     "mediana_pct": 16.125688,
+     "cuartil_bajo_pct": 5.596327,
+     "mediana_pct": 12.094266,
      "medianas_por_foto": {
-      "marzo": 16.149482,
-      "junio": 13.417071,
-      "septiembre": 16.125688
+      "marzo": 12.112112,
+      "junio": 10.062803,
+      "septiembre": 12.094266
      },
      "pisos_por_foto": {
       "marzo": 31,
       "junio": 31,
       "septiembre": 32
      },
-     "rango_entre_fotos_puntos": 2.732412,
+     "rango_entre_fotos_puntos": 2.049309,
      "parte_en_el_tope_pct": 31.25,
      "pisos_fuera_sin_ocupacion_pct": 8.888889,
      "se_distingue_del_primero": false,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Vista Alegre",
-      "diferencia": 2.826634,
-      "bajo": -1.165604,
-      "alto": 9.487399,
+      "diferencia": 2.119976,
+      "bajo": -0.874203,
+      "alto": 7.11555,
       "se_distinguen": false
      }
     },
     {
      "barrio": "Canillejas",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 35,
-     "cuartil_bajo_pct": 9.917763,
-     "mediana_pct": 15.635668,
+     "cuartil_bajo_pct": 7.438322,
+     "mediana_pct": 11.726751,
      "medianas_por_foto": {
-      "marzo": 15.904905,
-      "junio": 16.772445,
-      "septiembre": 15.635668
+      "marzo": 11.928679,
+      "junio": 12.579334,
+      "septiembre": 11.726751
      },
      "pisos_por_foto": {
       "marzo": 34,
       "junio": 33,
       "septiembre": 35
      },
-     "rango_entre_fotos_puntos": 1.136777,
+     "rango_entre_fotos_puntos": 0.852583,
      "parte_en_el_tope_pct": 28.571429,
      "pisos_fuera_sin_ocupacion_pct": 8.695652,
      "se_distingue_del_primero": false,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Canillejas",
-      "diferencia": 3.316654,
-      "bajo": -0.827816,
-      "alto": 5.905195,
+      "diferencia": 2.487491,
+      "bajo": -0.620862,
+      "alto": 4.428896,
       "se_distinguen": false
      }
     },
     {
      "barrio": "San Isidro",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 63,
-     "cuartil_bajo_pct": 5.20866,
-     "mediana_pct": 15.448288,
+     "cuartil_bajo_pct": 3.906495,
+     "mediana_pct": 11.586216,
      "medianas_por_foto": {
-      "marzo": 12.026823,
-      "junio": 12.043498,
-      "septiembre": 15.448288
+      "marzo": 9.020117,
+      "junio": 9.032624,
+      "septiembre": 11.586216
      },
      "pisos_por_foto": {
       "marzo": 59,
       "junio": 61,
       "septiembre": 63
      },
-     "rango_entre_fotos_puntos": 3.421465,
+     "rango_entre_fotos_puntos": 2.566099,
      "parte_en_el_tope_pct": 36.507937,
      "pisos_fuera_sin_ocupacion_pct": 16.666667,
      "se_distingue_del_primero": false,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "San Isidro",
-      "diferencia": 3.504035,
-      "bajo": -0.640435,
-      "alto": 9.082588,
+      "diferencia": 2.628026,
+      "bajo": -0.480326,
+      "alto": 6.811941,
       "se_distinguen": false
      }
     },
     {
      "barrio": "Quintana",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 42,
-     "cuartil_bajo_pct": 4.517213,
-     "mediana_pct": 14.633871,
+     "cuartil_bajo_pct": 3.387909,
+     "mediana_pct": 10.975404,
      "medianas_por_foto": {
-      "marzo": 13.2889,
-      "junio": 13.914098,
-      "septiembre": 14.633871
+      "marzo": 9.966675,
+      "junio": 10.435573,
+      "septiembre": 10.975404
      },
      "pisos_por_foto": {
       "marzo": 32,
       "junio": 39,
       "septiembre": 42
      },
-     "rango_entre_fotos_puntos": 1.344972,
+     "rango_entre_fotos_puntos": 1.008729,
      "parte_en_el_tope_pct": 21.428571,
      "pisos_fuera_sin_ocupacion_pct": 9.090909,
      "se_distingue_del_primero": false,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Quintana",
-      "diferencia": 4.318451,
-      "bajo": -0.376341,
-      "alto": 9.292637,
+      "diferencia": 3.238838,
+      "bajo": -0.282256,
+      "alto": 6.969478,
       "se_distinguen": false
      }
     },
     {
      "barrio": "San Diego",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 107,
-     "cuartil_bajo_pct": 6.35666,
-     "mediana_pct": 14.579381,
+     "cuartil_bajo_pct": 4.767495,
+     "mediana_pct": 10.934536,
      "medianas_por_foto": {
-      "marzo": 14.843261,
-      "junio": 14.241534,
-      "septiembre": 14.579381
+      "marzo": 11.132446,
+      "junio": 10.681151,
+      "septiembre": 10.934536
      },
      "pisos_por_foto": {
       "marzo": 87,
       "junio": 103,
       "septiembre": 107
      },
-     "rango_entre_fotos_puntos": 0.601727,
+     "rango_entre_fotos_puntos": 0.451295,
      "parte_en_el_tope_pct": 31.775701,
      "pisos_fuera_sin_ocupacion_pct": 20.873786,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "San Diego",
-      "diferencia": 4.372942,
-      "bajo": 0.228472,
-      "alto": 7.431221,
+      "diferencia": 3.279706,
+      "bajo": 0.171354,
+      "alto": 5.573416,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Puerta del Angel",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 75,
-     "cuartil_bajo_pct": 6.799868,
-     "mediana_pct": 14.330697,
+     "cuartil_bajo_pct": 5.099901,
+     "mediana_pct": 10.748023,
      "medianas_por_foto": {
-      "marzo": 12.968957,
-      "junio": 13.487715,
-      "septiembre": 14.330697
+      "marzo": 9.726717,
+      "junio": 10.115786,
+      "septiembre": 10.748023
      },
      "pisos_por_foto": {
       "marzo": 63,
       "junio": 73,
       "septiembre": 75
      },
-     "rango_entre_fotos_puntos": 1.36174,
+     "rango_entre_fotos_puntos": 1.021305,
      "parte_en_el_tope_pct": 41.333333,
      "pisos_fuera_sin_ocupacion_pct": 29.078014,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Puerta del Angel",
-      "diferencia": 4.621626,
-      "bajo": 0.542,
-      "alto": 6.555526,
+      "diferencia": 3.466219,
+      "bajo": 0.4065,
+      "alto": 4.916644,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Berruguete",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 71,
-     "cuartil_bajo_pct": 5.534022,
-     "mediana_pct": 13.722484,
+     "cuartil_bajo_pct": 4.150516,
+     "mediana_pct": 10.291863,
      "medianas_por_foto": {
-      "marzo": 12.449038,
-      "junio": 11.46622,
-      "septiembre": 13.722484
+      "marzo": 9.336779,
+      "junio": 8.599665,
+      "septiembre": 10.291863
      },
      "pisos_por_foto": {
       "marzo": 64,
       "junio": 70,
       "septiembre": 71
      },
-     "rango_entre_fotos_puntos": 2.256264,
+     "rango_entre_fotos_puntos": 1.692198,
      "parte_en_el_tope_pct": 35.211268,
      "pisos_fuera_sin_ocupacion_pct": 29.746835,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Berruguete",
-      "diferencia": 5.229839,
-      "bajo": 1.157191,
-      "alto": 8.932309,
+      "diferencia": 3.922379,
+      "bajo": 0.867893,
+      "alto": 6.699232,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Pinar del Rey",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 46,
-     "cuartil_bajo_pct": 4.691245,
-     "mediana_pct": 13.333104,
+     "cuartil_bajo_pct": 3.518434,
+     "mediana_pct": 9.999828,
      "medianas_por_foto": {
-      "marzo": 11.050491,
-      "junio": 10.797436,
-      "septiembre": 13.333104
+      "marzo": 8.287868,
+      "junio": 8.098077,
+      "septiembre": 9.999828
      },
      "pisos_por_foto": {
       "marzo": 38,
       "junio": 50,
       "septiembre": 46
      },
-     "rango_entre_fotos_puntos": 2.535668,
+     "rango_entre_fotos_puntos": 1.901751,
      "parte_en_el_tope_pct": 17.391304,
      "pisos_fuera_sin_ocupacion_pct": 15.217391,
      "se_distingue_del_primero": false,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Pinar del Rey",
-      "diferencia": 5.619218,
-      "bajo": -0.773254,
-      "alto": 9.630272,
+      "diferencia": 4.214414,
+      "bajo": -0.57994,
+      "alto": 7.222704,
       "se_distinguen": false
      }
     },
     {
      "barrio": "Valdezarza",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 31,
-     "cuartil_bajo_pct": 6.335907,
-     "mediana_pct": 13.305858,
+     "cuartil_bajo_pct": 4.75193,
+     "mediana_pct": 9.979394,
      "medianas_por_foto": {
-      "marzo": 11.690957,
-      "junio": 11.693027,
-      "septiembre": 13.305858
+      "marzo": 8.768218,
+      "junio": 8.76977,
+      "septiembre": 9.979394
      },
      "pisos_por_foto": {
       "marzo": 31,
       "junio": 31,
       "septiembre": 31
      },
-     "rango_entre_fotos_puntos": 1.614901,
+     "rango_entre_fotos_puntos": 1.211176,
      "parte_en_el_tope_pct": 38.709677,
      "pisos_fuera_sin_ocupacion_pct": 17.021277,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Valdezarza",
-      "diferencia": 5.646464,
-      "bajo": 1.311095,
-      "alto": 10.017931,
+      "diferencia": 4.234848,
+      "bajo": 0.983321,
+      "alto": 7.513449,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Comillas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 61,
-     "cuartil_bajo_pct": 5.186276,
-     "mediana_pct": 13.094597,
+     "cuartil_bajo_pct": 3.889707,
+     "mediana_pct": 9.820948,
      "medianas_por_foto": {
-      "marzo": 12.507019,
-      "junio": 10.983513,
-      "septiembre": 13.094597
+      "marzo": 9.380264,
+      "junio": 8.237635,
+      "septiembre": 9.820948
      },
      "pisos_por_foto": {
       "marzo": 57,
       "junio": 62,
       "septiembre": 61
      },
-     "rango_entre_fotos_puntos": 2.111084,
+     "rango_entre_fotos_puntos": 1.583313,
      "parte_en_el_tope_pct": 21.311475,
      "pisos_fuera_sin_ocupacion_pct": 14.893617,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Comillas",
-      "diferencia": 5.857725,
-      "bajo": 1.752227,
-      "alto": 8.710317,
+      "diferencia": 4.393294,
+      "bajo": 1.314171,
+      "alto": 6.532737,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Cuatro Caminos",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 140,
-     "cuartil_bajo_pct": 6.345921,
-     "mediana_pct": 12.892461,
+     "cuartil_bajo_pct": 4.759441,
+     "mediana_pct": 9.669346,
      "medianas_por_foto": {
-      "marzo": 12.192426,
-      "junio": 10.176203,
-      "septiembre": 12.892461
+      "marzo": 9.14432,
+      "junio": 7.632152,
+      "septiembre": 9.669346
      },
      "pisos_por_foto": {
       "marzo": 128,
       "junio": 140,
       "septiembre": 140
      },
-     "rango_entre_fotos_puntos": 2.716258,
+     "rango_entre_fotos_puntos": 2.037194,
      "parte_en_el_tope_pct": 21.428571,
      "pisos_fuera_sin_ocupacion_pct": 30.033003,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Cuatro Caminos",
-      "diferencia": 6.059861,
-      "bajo": 1.813291,
-      "alto": 7.870167,
+      "diferencia": 4.544896,
+      "bajo": 1.359968,
+      "alto": 5.902625,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Almenara",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 86,
-     "cuartil_bajo_pct": 6.137241,
-     "mediana_pct": 12.745604,
+     "cuartil_bajo_pct": 4.602931,
+     "mediana_pct": 9.559203,
      "medianas_por_foto": {
-      "marzo": 13.319479,
-      "junio": 11.488717,
-      "septiembre": 12.745604
+      "marzo": 9.989609,
+      "junio": 8.616538,
+      "septiembre": 9.559203
      },
      "pisos_por_foto": {
       "marzo": 71,
       "junio": 78,
       "septiembre": 86
      },
-     "rango_entre_fotos_puntos": 1.830762,
+     "rango_entre_fotos_puntos": 1.373072,
      "parte_en_el_tope_pct": 41.860465,
      "pisos_fuera_sin_ocupacion_pct": 20.547945,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Almenara",
-      "diferencia": 6.206719,
-      "bajo": 1.864102,
-      "alto": 9.168801,
+      "diferencia": 4.655039,
+      "bajo": 1.398077,
+      "alto": 6.8766,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Bellas Vistas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 83,
-     "cuartil_bajo_pct": 5.415208,
-     "mediana_pct": 11.71534,
+     "cuartil_bajo_pct": 4.061406,
+     "mediana_pct": 8.786505,
      "medianas_por_foto": {
-      "marzo": 11.859293,
-      "junio": 11.26475,
-      "septiembre": 11.71534
+      "marzo": 8.89447,
+      "junio": 8.448563,
+      "septiembre": 8.786505
      },
      "pisos_por_foto": {
       "marzo": 67,
       "junio": 83,
       "septiembre": 83
      },
-     "rango_entre_fotos_puntos": 0.594543,
+     "rango_entre_fotos_puntos": 0.445907,
      "parte_en_el_tope_pct": 24.096386,
      "pisos_fuera_sin_ocupacion_pct": 28.143713,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Bellas Vistas",
-      "diferencia": 7.236982,
-      "bajo": 2.722956,
-      "alto": 9.677053,
+      "diferencia": 5.427737,
+      "bajo": 2.042217,
+      "alto": 7.257789,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Pueblo Nuevo",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 95,
-     "cuartil_bajo_pct": 4.755422,
-     "mediana_pct": 11.687511,
+     "cuartil_bajo_pct": 3.566566,
+     "mediana_pct": 8.765633,
      "medianas_por_foto": {
-      "marzo": 11.130963,
-      "junio": 10.182301,
-      "septiembre": 11.687511
+      "marzo": 8.348222,
+      "junio": 7.636726,
+      "septiembre": 8.765633
      },
      "pisos_por_foto": {
       "marzo": 81,
       "junio": 89,
       "septiembre": 95
      },
-     "rango_entre_fotos_puntos": 1.50521,
+     "rango_entre_fotos_puntos": 1.128907,
      "parte_en_el_tope_pct": 28.421053,
      "pisos_fuera_sin_ocupacion_pct": 15.671642,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Pueblo Nuevo",
-      "diferencia": 7.264812,
-      "bajo": 2.737833,
-      "alto": 9.566897,
+      "diferencia": 5.448609,
+      "bajo": 2.053375,
+      "alto": 7.175173,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Guindalera",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 164,
-     "cuartil_bajo_pct": 4.883237,
-     "mediana_pct": 11.371014,
+     "cuartil_bajo_pct": 3.662428,
+     "mediana_pct": 8.528261,
      "medianas_por_foto": {
-      "marzo": 10.772584,
-      "junio": 9.750604,
-      "septiembre": 11.371014
+      "marzo": 8.079438,
+      "junio": 7.312953,
+      "septiembre": 8.528261
      },
      "pisos_por_foto": {
       "marzo": 151,
       "junio": 162,
       "septiembre": 164
      },
-     "rango_entre_fotos_puntos": 1.62041,
+     "rango_entre_fotos_puntos": 1.215307,
      "parte_en_el_tope_pct": 30.487805,
      "pisos_fuera_sin_ocupacion_pct": 28.571429,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Guindalera",
-      "diferencia": 7.581308,
-      "bajo": 3.765084,
-      "alto": 9.232419,
+      "diferencia": 5.685981,
+      "bajo": 2.823813,
+      "alto": 6.924314,
       "se_distinguen": true
      }
     },
     {
      "barrio": "San Andrés",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 53,
-     "cuartil_bajo_pct": 5.69064,
-     "mediana_pct": 11.349638,
+     "cuartil_bajo_pct": 4.26798,
+     "mediana_pct": 8.512228,
      "medianas_por_foto": {
-      "marzo": 11.454849,
-      "junio": 10.781522,
-      "septiembre": 11.349638
+      "marzo": 8.591137,
+      "junio": 8.086141,
+      "septiembre": 8.512228
      },
      "pisos_por_foto": {
       "marzo": 37,
       "junio": 45,
       "septiembre": 53
      },
-     "rango_entre_fotos_puntos": 0.673328,
+     "rango_entre_fotos_puntos": 0.504996,
      "parte_en_el_tope_pct": 9.433962,
      "pisos_fuera_sin_ocupacion_pct": 8.75,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "San Andrés",
-      "diferencia": 7.602685,
-      "bajo": 3.631483,
-      "alto": 10.776049,
+      "diferencia": 5.702014,
+      "bajo": 2.723612,
+      "alto": 8.082036,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Castillejos",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 72,
-     "cuartil_bajo_pct": 6.010264,
-     "mediana_pct": 10.313762,
+     "cuartil_bajo_pct": 4.507698,
+     "mediana_pct": 7.735322,
      "medianas_por_foto": {
-      "marzo": 10.984778,
-      "junio": 9.998136,
-      "septiembre": 10.313762
+      "marzo": 8.238583,
+      "junio": 7.498602,
+      "septiembre": 7.735322
      },
      "pisos_por_foto": {
       "marzo": 55,
       "junio": 67,
       "septiembre": 72
      },
-     "rango_entre_fotos_puntos": 0.986642,
+     "rango_entre_fotos_puntos": 0.739981,
      "parte_en_el_tope_pct": 31.944444,
      "pisos_fuera_sin_ocupacion_pct": 21.875,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Castillejos",
-      "diferencia": 8.63856,
-      "bajo": 4.296332,
-      "alto": 11.076617,
+      "diferencia": 6.47892,
+      "bajo": 3.222249,
+      "alto": 8.307463,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Valdeacederas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 90,
-     "cuartil_bajo_pct": 2.953553,
-     "mediana_pct": 9.942759,
+     "cuartil_bajo_pct": 2.215165,
+     "mediana_pct": 7.457069,
      "medianas_por_foto": {
-      "marzo": 10.557071,
-      "junio": 9.458583,
-      "septiembre": 9.942759
+      "marzo": 7.917803,
+      "junio": 7.093937,
+      "septiembre": 7.457069
      },
      "pisos_por_foto": {
       "marzo": 71,
       "junio": 84,
       "septiembre": 90
      },
-     "rango_entre_fotos_puntos": 1.098488,
+     "rango_entre_fotos_puntos": 0.823866,
      "parte_en_el_tope_pct": 34.444444,
      "pisos_fuera_sin_ocupacion_pct": 19.767442,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Valdeacederas",
-      "diferencia": 9.009563,
-      "bajo": 5.12346,
-      "alto": 11.065403,
+      "diferencia": 6.757173,
+      "bajo": 3.842595,
+      "alto": 8.299053,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Hispanoamérica",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 38,
-     "cuartil_bajo_pct": 6.628434,
-     "mediana_pct": 9.594163,
+     "cuartil_bajo_pct": 4.971326,
+     "mediana_pct": 7.195622,
      "medianas_por_foto": {
-      "marzo": 10.186474,
-      "junio": 9.667373,
-      "septiembre": 9.594163
+      "marzo": 7.639856,
+      "junio": 7.25053,
+      "septiembre": 7.195622
      },
      "pisos_por_foto": {
       "marzo": 34,
       "junio": 38,
       "septiembre": 38
      },
-     "rango_entre_fotos_puntos": 0.592311,
+     "rango_entre_fotos_puntos": 0.444233,
      "parte_en_el_tope_pct": 15.789474,
      "pisos_fuera_sin_ocupacion_pct": 40.625,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Hispanoamérica",
-      "diferencia": 9.358159,
-      "bajo": 5.236412,
-      "alto": 10.797709,
+      "diferencia": 7.01862,
+      "bajo": 3.927309,
+      "alto": 8.098282,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Simancas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 33,
-     "cuartil_bajo_pct": 5.722492,
-     "mediana_pct": 9.421736,
+     "cuartil_bajo_pct": 4.291869,
+     "mediana_pct": 7.066302,
      "medianas_por_foto": {
-      "marzo": 12.16463,
-      "junio": 10.01436,
-      "septiembre": 9.421736
+      "marzo": 9.123473,
+      "junio": 7.51077,
+      "septiembre": 7.066302
      },
      "pisos_por_foto": {
       "marzo": 25,
       "junio": 31,
       "septiembre": 33
      },
-     "rango_entre_fotos_puntos": 2.742894,
+     "rango_entre_fotos_puntos": 2.057171,
      "parte_en_el_tope_pct": 9.090909,
      "pisos_fuera_sin_ocupacion_pct": 28.571429,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Simancas",
-      "diferencia": 9.530587,
-      "bajo": 2.407321,
-      "alto": 11.562648,
+      "diferencia": 7.14794,
+      "bajo": 1.805491,
+      "alto": 8.671986,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Rejas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 101,
-     "cuartil_bajo_pct": 3.03897,
-     "mediana_pct": 9.259921,
+     "cuartil_bajo_pct": 2.279228,
+     "mediana_pct": 6.944941,
      "medianas_por_foto": {
-      "marzo": 13.463823,
-      "junio": 11.827963,
-      "septiembre": 9.259921
+      "marzo": 10.097867,
+      "junio": 8.870972,
+      "septiembre": 6.944941
      },
      "pisos_por_foto": {
       "marzo": 80,
       "junio": 88,
       "septiembre": 101
      },
-     "rango_entre_fotos_puntos": 4.203902,
+     "rango_entre_fotos_puntos": 3.152926,
      "parte_en_el_tope_pct": 24.752475,
      "pisos_fuera_sin_ocupacion_pct": 17.391304,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Rejas",
-      "diferencia": 9.692401,
-      "bajo": 4.240561,
-      "alto": 12.968232,
+      "diferencia": 7.269301,
+      "bajo": 3.180421,
+      "alto": 9.726174,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Prosperidad",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 107,
-     "cuartil_bajo_pct": 3.741616,
-     "mediana_pct": 8.857805,
+     "cuartil_bajo_pct": 2.806212,
+     "mediana_pct": 6.643354,
      "medianas_por_foto": {
-      "marzo": 10.112232,
-      "junio": 8.161475,
-      "septiembre": 8.857805
+      "marzo": 7.584174,
+      "junio": 6.121106,
+      "septiembre": 6.643354
      },
      "pisos_por_foto": {
       "marzo": 92,
       "junio": 104,
       "septiembre": 107
      },
-     "rango_entre_fotos_puntos": 1.950756,
+     "rango_entre_fotos_puntos": 1.463067,
      "parte_en_el_tope_pct": 28.971963,
      "pisos_fuera_sin_ocupacion_pct": 21.390374,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Prosperidad",
-      "diferencia": 10.094517,
-      "bajo": 5.896748,
-      "alto": 12.230811,
+      "diferencia": 7.570888,
+      "bajo": 4.422561,
+      "alto": 9.173109,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Almendrales",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 39,
-     "cuartil_bajo_pct": 2.850639,
-     "mediana_pct": 8.417981,
+     "cuartil_bajo_pct": 2.13798,
+     "mediana_pct": 6.313486,
      "medianas_por_foto": {
-      "marzo": 6.977929,
-      "junio": 6.588048,
-      "septiembre": 8.417981
+      "marzo": 5.233447,
+      "junio": 4.941036,
+      "septiembre": 6.313486
      },
      "pisos_por_foto": {
       "marzo": 38,
       "junio": 39,
       "septiembre": 39
      },
-     "rango_entre_fotos_puntos": 1.829933,
+     "rango_entre_fotos_puntos": 1.37245,
      "parte_en_el_tope_pct": 2.564103,
      "pisos_fuera_sin_ocupacion_pct": 16.049383,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Almendrales",
-      "diferencia": 10.534341,
-      "bajo": 6.429439,
-      "alto": 14.373567,
+      "diferencia": 7.900756,
+      "bajo": 4.822079,
+      "alto": 10.780175,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Orcasur",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 46,
-     "cuartil_bajo_pct": 3.857455,
-     "mediana_pct": 7.757693,
+     "cuartil_bajo_pct": 2.893091,
+     "mediana_pct": 5.818269,
      "medianas_por_foto": {
-      "marzo": 5.91933,
-      "junio": 5.138934,
-      "septiembre": 7.757693
+      "marzo": 4.439498,
+      "junio": 3.8542,
+      "septiembre": 5.818269
      },
      "pisos_por_foto": {
       "marzo": 38,
       "junio": 45,
       "septiembre": 46
      },
-     "rango_entre_fotos_puntos": 2.618759,
+     "rango_entre_fotos_puntos": 1.964069,
      "parte_en_el_tope_pct": 4.347826,
      "pisos_fuera_sin_ocupacion_pct": 11.538462,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Orcasur",
-      "diferencia": 11.19463,
-      "bajo": 1.561443,
-      "alto": 13.685458,
+      "diferencia": 8.395972,
+      "bajo": 1.171082,
+      "alto": 10.264093,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Canillas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 38,
-     "cuartil_bajo_pct": 2.627691,
-     "mediana_pct": 7.755293,
+     "cuartil_bajo_pct": 1.970769,
+     "mediana_pct": 5.81647,
      "medianas_por_foto": {
-      "marzo": 6.180508,
-      "junio": 6.072608,
-      "septiembre": 7.755293
+      "marzo": 4.635381,
+      "junio": 4.554456,
+      "septiembre": 5.81647
      },
      "pisos_por_foto": {
       "marzo": 34,
       "junio": 37,
       "septiembre": 38
      },
-     "rango_entre_fotos_puntos": 1.682685,
+     "rango_entre_fotos_puntos": 1.262013,
      "parte_en_el_tope_pct": 10.526316,
      "pisos_fuera_sin_ocupacion_pct": 19.642857,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Canillas",
-      "diferencia": 11.197029,
-      "bajo": 5.436727,
-      "alto": 15.799899,
+      "diferencia": 8.397772,
+      "bajo": 4.077545,
+      "alto": 11.849924,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Adelfas",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 50,
-     "cuartil_bajo_pct": 1.035553,
-     "mediana_pct": 7.277679,
+     "cuartil_bajo_pct": 0.776665,
+     "mediana_pct": 5.458259,
      "medianas_por_foto": {
-      "marzo": 11.390273,
-      "junio": 10.671107,
-      "septiembre": 7.277679
+      "marzo": 8.542705,
+      "junio": 8.00333,
+      "septiembre": 5.458259
      },
      "pisos_por_foto": {
       "marzo": 32,
       "junio": 34,
       "septiembre": 50
      },
-     "rango_entre_fotos_puntos": 4.112594,
+     "rango_entre_fotos_puntos": 3.084446,
      "parte_en_el_tope_pct": 28.0,
      "pisos_fuera_sin_ocupacion_pct": 25.384615,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Adelfas",
-      "diferencia": 11.674644,
-      "bajo": 4.907364,
-      "alto": 16.785736,
+      "diferencia": 8.755983,
+      "bajo": 3.680523,
+      "alto": 12.589302,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Moscardó",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 47,
-     "cuartil_bajo_pct": 4.192018,
-     "mediana_pct": 7.188742,
+     "cuartil_bajo_pct": 3.144014,
+     "mediana_pct": 5.391556,
      "medianas_por_foto": {
-      "marzo": 9.86962,
-      "junio": 8.001754,
-      "septiembre": 7.188742
+      "marzo": 7.402215,
+      "junio": 6.001316,
+      "septiembre": 5.391556
      },
      "pisos_por_foto": {
       "marzo": 33,
       "junio": 44,
       "septiembre": 47
      },
-     "rango_entre_fotos_puntos": 2.680878,
+     "rango_entre_fotos_puntos": 2.010659,
      "parte_en_el_tope_pct": 2.12766,
      "pisos_fuera_sin_ocupacion_pct": 28.75,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Moscardó",
-      "diferencia": 11.763581,
-      "bajo": 7.57174,
-      "alto": 13.894218,
+      "diferencia": 8.822685,
+      "bajo": 5.678805,
+      "alto": 10.420663,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Valdefuentes",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 40,
-     "cuartil_bajo_pct": 1.747423,
-     "mediana_pct": 6.641122,
+     "cuartil_bajo_pct": 1.310567,
+     "mediana_pct": 4.980842,
      "medianas_por_foto": {
-      "marzo": 8.3077,
-      "junio": 6.783328,
-      "septiembre": 6.641122
+      "marzo": 6.230775,
+      "junio": 5.087496,
+      "septiembre": 4.980842
      },
      "pisos_por_foto": {
       "marzo": 32,
       "junio": 38,
       "septiembre": 40
      },
-     "rango_entre_fotos_puntos": 1.666578,
+     "rango_entre_fotos_puntos": 1.249934,
      "parte_en_el_tope_pct": 25.0,
      "pisos_fuera_sin_ocupacion_pct": 40.336134,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Valdefuentes",
-      "diferencia": 12.3112,
-      "bajo": 7.715186,
-      "alto": 16.319891,
+      "diferencia": 9.2334,
+      "bajo": 5.786389,
+      "alto": 12.239918,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Ciudad Jardín",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 40,
-     "cuartil_bajo_pct": 2.007555,
-     "mediana_pct": 6.542902,
+     "cuartil_bajo_pct": 1.505666,
+     "mediana_pct": 4.907177,
      "medianas_por_foto": {
-      "marzo": 7.736575,
-      "junio": 6.737754,
-      "septiembre": 6.542902
+      "marzo": 5.802432,
+      "junio": 5.053316,
+      "septiembre": 4.907177
      },
      "pisos_por_foto": {
       "marzo": 31,
       "junio": 34,
       "septiembre": 40
      },
-     "rango_entre_fotos_puntos": 1.193673,
+     "rango_entre_fotos_puntos": 0.895255,
      "parte_en_el_tope_pct": 27.5,
      "pisos_fuera_sin_ocupacion_pct": 32.967033,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Ciudad Jardín",
-      "diferencia": 12.40942,
-      "bajo": 5.847975,
-      "alto": 15.590197,
+      "diferencia": 9.307065,
+      "bajo": 4.385981,
+      "alto": 11.692648,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Fuente del Berro",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 55,
-     "cuartil_bajo_pct": 2.512551,
-     "mediana_pct": 6.408895,
+     "cuartil_bajo_pct": 1.884413,
+     "mediana_pct": 4.806671,
      "medianas_por_foto": {
-      "marzo": 7.517924,
-      "junio": 6.532118,
-      "septiembre": 6.408895
+      "marzo": 5.638443,
+      "junio": 4.899088,
+      "septiembre": 4.806671
      },
      "pisos_por_foto": {
       "marzo": 39,
       "junio": 44,
       "septiembre": 55
      },
-     "rango_entre_fotos_puntos": 1.109029,
+     "rango_entre_fotos_puntos": 0.831771,
      "parte_en_el_tope_pct": 21.818182,
      "pisos_fuera_sin_ocupacion_pct": 32.824427,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Fuente del Berro",
-      "diferencia": 12.543427,
-      "bajo": 8.398957,
-      "alto": 15.603906,
+      "diferencia": 9.407571,
+      "bajo": 6.299218,
+      "alto": 11.70293,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Nueva España",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 42,
-     "cuartil_bajo_pct": 1.954112,
-     "mediana_pct": 4.552629,
+     "cuartil_bajo_pct": 1.465584,
+     "mediana_pct": 3.414472,
      "medianas_por_foto": {
-      "marzo": 5.261505,
-      "junio": 3.348764,
-      "septiembre": 4.552629
+      "marzo": 3.946129,
+      "junio": 2.511573,
+      "septiembre": 3.414472
      },
      "pisos_por_foto": {
       "marzo": 37,
       "junio": 43,
       "septiembre": 42
      },
-     "rango_entre_fotos_puntos": 1.912741,
+     "rango_entre_fotos_puntos": 1.434556,
      "parte_en_el_tope_pct": 16.666667,
      "pisos_fuera_sin_ocupacion_pct": 18.604651,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Nueva España",
-      "diferencia": 14.399693,
-      "bajo": 10.095721,
-      "alto": 16.227039,
+      "diferencia": 10.79977,
+      "bajo": 7.571791,
+      "alto": 12.170279,
       "se_distinguen": true
      }
     },
     {
      "barrio": "Atocha",
-     "clase": "fuera del grupo",
+     "clase": "fuera de la lista",
      "pisos": 30,
-     "cuartil_bajo_pct": 1.556805,
-     "mediana_pct": 3.397659,
+     "cuartil_bajo_pct": 1.167603,
+     "mediana_pct": 2.548244,
      "medianas_por_foto": {
       "marzo": null,
-      "junio": 2.76292,
-      "septiembre": 3.397659
+      "junio": 2.07219,
+      "septiembre": 2.548244
      },
      "pisos_por_foto": {
       "marzo": 18,
       "junio": 27,
       "septiembre": 30
      },
-     "rango_entre_fotos_puntos": 0.634739,
+     "rango_entre_fotos_puntos": 0.476054,
      "parte_en_el_tope_pct": 3.333333,
      "pisos_fuera_sin_ocupacion_pct": 15.384615,
      "se_distingue_del_primero": true,
      "diferencia_con_el_primero": {
       "a": "Casco Histórico de Vallecas",
       "b": "Atocha",
-      "diferencia": 15.554664,
-      "bajo": 11.556973,
-      "alto": 16.788854,
+      "diferencia": 11.665998,
+      "bajo": 8.66773,
+      "alto": 12.591641,
       "se_distinguen": true
      }
     }
@@ -4455,10 +4429,10 @@
    "fichas_del_grupo": [
     {
      "barrio": "Numancia",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 84,
-     "cuartil_bajo_pct": 5.227209,
-     "rango_entre_fotos_puntos": 1.40011,
+     "cuartil_bajo_pct": 3.920406,
+     "rango_entre_fotos_puntos": 1.050082,
      "parte_en_el_tope_pct": 45.238095,
      "pisos_fuera_sin_ocupacion_pct": 32.394366,
      "se_distingue_del_primero": false,
@@ -4476,11 +4450,11 @@
       "cuartil_bajo": false
      },
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días"
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días"
      ],
      "pisos_sin_el_tope": 46,
      "sin_el_tope_no_llega_al_minimo_de_variantes": false,
-     "mediana_sin_el_tope_pct": 5.306119,
+     "mediana_sin_el_tope_pct": 3.979589,
      "mitad_o_mas_en_el_tope": false,
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "pisos_sin_ocupacion_misma_base": 20,
@@ -4488,10 +4462,10 @@
     },
     {
      "barrio": "San Diego",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 107,
-     "cuartil_bajo_pct": 6.35666,
-     "rango_entre_fotos_puntos": 0.601727,
+     "cuartil_bajo_pct": 4.767495,
+     "rango_entre_fotos_puntos": 0.451295,
      "parte_en_el_tope_pct": 31.775701,
      "pisos_fuera_sin_ocupacion_pct": 20.873786,
      "se_distingue_del_primero": true,
@@ -4509,11 +4483,11 @@
       "cuartil_bajo": false
      },
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días"
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días"
      ],
      "pisos_sin_el_tope": 73,
      "sin_el_tope_no_llega_al_minimo_de_variantes": false,
-     "mediana_sin_el_tope_pct": 8.306661,
+     "mediana_sin_el_tope_pct": 6.229996,
      "mitad_o_mas_en_el_tope": false,
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "pisos_sin_ocupacion_misma_base": 13,
@@ -4521,10 +4495,10 @@
     },
     {
      "barrio": "Ventas",
-     "clase": "firme",
+     "clase": "5 de 5 veces",
      "pisos": 89,
-     "cuartil_bajo_pct": 7.062218,
-     "rango_entre_fotos_puntos": 3.589648,
+     "cuartil_bajo_pct": 5.296663,
+     "rango_entre_fotos_puntos": 2.692236,
      "parte_en_el_tope_pct": 32.58427,
      "pisos_fuera_sin_ocupacion_pct": 18.897638,
      "se_distingue_del_primero": false,
@@ -4542,11 +4516,11 @@
       "cuartil_bajo": false
      },
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días"
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días"
      ],
      "pisos_sin_el_tope": 60,
      "sin_el_tope_no_llega_al_minimo_de_variantes": false,
-     "mediana_sin_el_tope_pct": 8.163054,
+     "mediana_sin_el_tope_pct": 6.12229,
      "mitad_o_mas_en_el_tope": false,
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "pisos_sin_ocupacion_misma_base": 6,
@@ -4554,10 +4528,10 @@
     },
     {
      "barrio": "Casco Histórico de Vallecas",
-     "clase": "con aviso",
+     "clase": "4 de 5 veces",
      "pisos": 37,
-     "cuartil_bajo_pct": 14.121796,
-     "rango_entre_fotos_puntos": 6.231112,
+     "cuartil_bajo_pct": 10.591347,
+     "rango_entre_fotos_puntos": 4.673334,
      "parte_en_el_tope_pct": 51.351351,
      "pisos_fuera_sin_ocupacion_pct": 27.586207,
      "se_distingue_del_primero": null,
@@ -4576,12 +4550,12 @@
       "cuartil_bajo": false
      },
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días",
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días",
       "pocos anuncios: 37 pisos"
      ],
      "pisos_sin_el_tope": 18,
      "sin_el_tope_no_llega_al_minimo_de_variantes": true,
-     "mediana_sin_el_tope_pct": 13.59216,
+     "mediana_sin_el_tope_pct": 10.19412,
      "mitad_o_mas_en_el_tope": true,
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "pisos_sin_ocupacion_misma_base": 7,
@@ -4589,10 +4563,10 @@
     },
     {
      "barrio": "Opañel",
-     "clase": "con aviso",
+     "clase": "4 de 5 veces",
      "pisos": 60,
-     "cuartil_bajo_pct": 9.895402,
-     "rango_entre_fotos_puntos": 4.325254,
+     "cuartil_bajo_pct": 7.421552,
+     "rango_entre_fotos_puntos": 3.243941,
      "parte_en_el_tope_pct": 50.0,
      "pisos_fuera_sin_ocupacion_pct": 21.649485,
      "se_distingue_del_primero": false,
@@ -4613,7 +4587,7 @@
      "avisos_en_texto": [],
      "pisos_sin_el_tope": 30,
      "sin_el_tope_no_llega_al_minimo_de_variantes": false,
-     "mediana_sin_el_tope_pct": 13.796931,
+     "mediana_sin_el_tope_pct": 10.347698,
      "mitad_o_mas_en_el_tope": true,
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "pisos_sin_ocupacion_misma_base": 8,
@@ -4621,10 +4595,10 @@
     },
     {
      "barrio": "Canillejas",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 35,
-     "cuartil_bajo_pct": 9.917763,
-     "rango_entre_fotos_puntos": 1.136777,
+     "cuartil_bajo_pct": 7.438322,
+     "rango_entre_fotos_puntos": 0.852583,
      "parte_en_el_tope_pct": 28.571429,
      "pisos_fuera_sin_ocupacion_pct": 8.695652,
      "se_distingue_del_primero": false,
@@ -4643,12 +4617,12 @@
       "cuartil_bajo": false
      },
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días",
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días",
       "pocos anuncios: 35 pisos"
      ],
      "pisos_sin_el_tope": 25,
      "sin_el_tope_no_llega_al_minimo_de_variantes": false,
-     "mediana_sin_el_tope_pct": 13.746906,
+     "mediana_sin_el_tope_pct": 10.310179,
      "mitad_o_mas_en_el_tope": false,
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "pisos_sin_ocupacion_misma_base": 1,
@@ -4656,10 +4630,10 @@
     },
     {
      "barrio": "Puerta del Angel",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 75,
-     "cuartil_bajo_pct": 6.799868,
-     "rango_entre_fotos_puntos": 1.36174,
+     "cuartil_bajo_pct": 5.099901,
+     "rango_entre_fotos_puntos": 1.021305,
      "parte_en_el_tope_pct": 41.333333,
      "pisos_fuera_sin_ocupacion_pct": 29.078014,
      "se_distingue_del_primero": true,
@@ -4679,7 +4653,7 @@
      "avisos_en_texto": [],
      "pisos_sin_el_tope": 44,
      "sin_el_tope_no_llega_al_minimo_de_variantes": false,
-     "mediana_sin_el_tope_pct": 8.911908,
+     "mediana_sin_el_tope_pct": 6.683931,
      "mitad_o_mas_en_el_tope": false,
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "pisos_sin_ocupacion_misma_base": 14,
@@ -4687,10 +4661,10 @@
     },
     {
      "barrio": "Quintana",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 42,
-     "cuartil_bajo_pct": 4.517213,
-     "rango_entre_fotos_puntos": 1.344972,
+     "cuartil_bajo_pct": 3.387909,
+     "rango_entre_fotos_puntos": 1.008729,
      "parte_en_el_tope_pct": 21.428571,
      "pisos_fuera_sin_ocupacion_pct": 9.090909,
      "se_distingue_del_primero": false,
@@ -4711,7 +4685,7 @@
      "avisos_en_texto": [],
      "pisos_sin_el_tope": 33,
      "sin_el_tope_no_llega_al_minimo_de_variantes": false,
-     "mediana_sin_el_tope_pct": 12.831489,
+     "mediana_sin_el_tope_pct": 9.623617,
      "mitad_o_mas_en_el_tope": false,
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "pisos_sin_ocupacion_misma_base": 1,
@@ -4719,10 +4693,10 @@
     },
     {
      "barrio": "Vista Alegre",
-     "clase": "segunda línea",
+     "clase": "menos de 4 veces",
      "pisos": 32,
-     "cuartil_bajo_pct": 7.46177,
-     "rango_entre_fotos_puntos": 2.732412,
+     "cuartil_bajo_pct": 5.596327,
+     "rango_entre_fotos_puntos": 2.049309,
      "parte_en_el_tope_pct": 31.25,
      "pisos_fuera_sin_ocupacion_pct": 8.888889,
      "se_distingue_del_primero": false,
@@ -4741,12 +4715,12 @@
       "cuartil_bajo": false
      },
      "avisos_en_texto": [
-      "depende del tope: sale del grupo sin los pisos en 255 días",
+      "depende del máximo de días: sale de la lista sin los pisos en 255 días",
       "pocos anuncios: 32 pisos"
      ],
      "pisos_sin_el_tope": 22,
      "sin_el_tope_no_llega_al_minimo_de_variantes": false,
-     "mediana_sin_el_tope_pct": 9.464923,
+     "mediana_sin_el_tope_pct": 7.098692,
      "mitad_o_mas_en_el_tope": false,
      "sale_quitando_solo_sus_pisos_en_el_tope": true,
      "pisos_sin_ocupacion_misma_base": 2,
@@ -4755,49 +4729,22 @@
    ],
    "rango_de_rentabilidad_del_grupo_firme": {
     "minimo": 10.782505,
-    "maximo": 15.358106,
-    "peor": {
-     "foto": "junio",
-     "descuento": false
-    },
-    "mejor": {
-     "foto": "marzo",
-     "descuento": true
-    },
+    "maximo": 11.51858,
+    "peor": "junio",
+    "mejor": "marzo",
     "combinaciones": [
      {
       "foto": "marzo",
-      "descuento": true,
-      "pisos": 230,
-      "mediana": 15.358106
-     },
-     {
-      "foto": "marzo",
-      "descuento": false,
       "pisos": 230,
       "mediana": 11.51858
      },
      {
       "foto": "junio",
-      "descuento": true,
-      "pisos": 265,
-      "mediana": 14.376673
-     },
-     {
-      "foto": "junio",
-      "descuento": false,
       "pisos": 265,
       "mediana": 10.782505
      },
      {
       "foto": "septiembre",
-      "descuento": true,
-      "pisos": 280,
-      "mediana": 15.157859
-     },
-     {
-      "foto": "septiembre",
-      "descuento": false,
       "pisos": 280,
       "mediana": 11.368394
      }
@@ -4805,49 +4752,22 @@
    },
    "rango_de_rentabilidad_de_firmes_y_con_aviso": {
     "minimo": 11.422129,
-    "maximo": 17.345348,
-    "peor": {
-     "foto": "junio",
-     "descuento": false
-    },
-    "mejor": {
-     "foto": "marzo",
-     "descuento": true
-    },
+    "maximo": 13.009011,
+    "peor": "junio",
+    "mejor": "marzo",
     "combinaciones": [
      {
       "foto": "marzo",
-      "descuento": true,
-      "pisos": 320,
-      "mediana": 17.345348
-     },
-     {
-      "foto": "marzo",
-      "descuento": false,
       "pisos": 320,
       "mediana": 13.009011
      },
      {
       "foto": "junio",
-      "descuento": true,
-      "pisos": 362,
-      "mediana": 15.229506
-     },
-     {
-      "foto": "junio",
-      "descuento": false,
       "pisos": 362,
       "mediana": 11.422129
      },
      {
       "foto": "septiembre",
-      "descuento": true,
-      "pisos": 377,
-      "mediana": 16.918869
-     },
-     {
-      "foto": "septiembre",
-      "descuento": false,
       "pisos": 377,
       "mediana": 12.689152
      }
@@ -4856,49 +4776,22 @@
    "rango_por_barrio": {
     "Numancia": {
      "minimo": 12.646645,
-     "maximo": 18.262303,
-     "peor": {
-      "foto": "junio",
-      "descuento": false
-     },
-     "mejor": {
-      "foto": "marzo",
-      "descuento": true
-     },
+     "maximo": 13.696727,
+     "peor": "junio",
+     "mejor": "marzo",
      "combinaciones": [
       {
        "foto": "marzo",
-       "descuento": true,
-       "pisos": 69,
-       "mediana": 18.262303
-      },
-      {
-       "foto": "marzo",
-       "descuento": false,
        "pisos": 69,
        "mediana": 13.696727
       },
       {
        "foto": "junio",
-       "descuento": true,
-       "pisos": 79,
-       "mediana": 16.862193
-      },
-      {
-       "foto": "junio",
-       "descuento": false,
        "pisos": 79,
        "mediana": 12.646645
       },
       {
        "foto": "septiembre",
-       "descuento": true,
-       "pisos": 84,
-       "mediana": 17.674378
-      },
-      {
-       "foto": "septiembre",
-       "descuento": false,
        "pisos": 84,
        "mediana": 13.255783
       }
@@ -4906,49 +4799,22 @@
     },
     "San Diego": {
      "minimo": 10.681151,
-     "maximo": 14.843261,
-     "peor": {
-      "foto": "junio",
-      "descuento": false
-     },
-     "mejor": {
-      "foto": "marzo",
-      "descuento": true
-     },
+     "maximo": 11.132446,
+     "peor": "junio",
+     "mejor": "marzo",
      "combinaciones": [
       {
        "foto": "marzo",
-       "descuento": true,
-       "pisos": 87,
-       "mediana": 14.843261
-      },
-      {
-       "foto": "marzo",
-       "descuento": false,
        "pisos": 87,
        "mediana": 11.132446
       },
       {
        "foto": "junio",
-       "descuento": true,
-       "pisos": 103,
-       "mediana": 14.241534
-      },
-      {
-       "foto": "junio",
-       "descuento": false,
        "pisos": 103,
        "mediana": 10.681151
       },
       {
        "foto": "septiembre",
-       "descuento": true,
-       "pisos": 107,
-       "mediana": 14.579381
-      },
-      {
-       "foto": "septiembre",
-       "descuento": false,
        "pisos": 107,
        "mediana": 10.934536
       }
@@ -4956,49 +4822,22 @@
     },
     "Ventas": {
      "minimo": 10.021353,
-     "maximo": 16.951452,
-     "peor": {
-      "foto": "junio",
-      "descuento": false
-     },
-     "mejor": {
-      "foto": "septiembre",
-      "descuento": true
-     },
+     "maximo": 12.713589,
+     "peor": "junio",
+     "mejor": "septiembre",
      "combinaciones": [
       {
        "foto": "marzo",
-       "descuento": true,
-       "pisos": 74,
-       "mediana": 14.080124
-      },
-      {
-       "foto": "marzo",
-       "descuento": false,
        "pisos": 74,
        "mediana": 10.560093
       },
       {
        "foto": "junio",
-       "descuento": true,
-       "pisos": 83,
-       "mediana": 13.361804
-      },
-      {
-       "foto": "junio",
-       "descuento": false,
        "pisos": 83,
        "mediana": 10.021353
       },
       {
        "foto": "septiembre",
-       "descuento": true,
-       "pisos": 89,
-       "mediana": 16.951452
-      },
-      {
-       "foto": "septiembre",
-       "descuento": false,
        "pisos": 89,
        "mediana": 12.713589
       }
@@ -5006,49 +4845,22 @@
     },
     "Casco Histórico de Vallecas": {
      "minimo": 13.262852,
-     "maximo": 23.914915,
-     "peor": {
-      "foto": "junio",
-      "descuento": false
-     },
-     "mejor": {
-      "foto": "marzo",
-      "descuento": true
-     },
+     "maximo": 17.936186,
+     "peor": "junio",
+     "mejor": "marzo",
      "combinaciones": [
       {
        "foto": "marzo",
-       "descuento": true,
-       "pisos": 34,
-       "mediana": 23.914915
-      },
-      {
-       "foto": "marzo",
-       "descuento": false,
        "pisos": 34,
        "mediana": 17.936186
       },
       {
        "foto": "junio",
-       "descuento": true,
-       "pisos": 37,
-       "mediana": 17.683803
-      },
-      {
-       "foto": "junio",
-       "descuento": false,
        "pisos": 37,
        "mediana": 13.262852
       },
       {
        "foto": "septiembre",
-       "descuento": true,
-       "pisos": 37,
-       "mediana": 18.952322
-      },
-      {
-       "foto": "septiembre",
-       "descuento": false,
        "pisos": 37,
        "mediana": 14.214242
       }
@@ -5056,49 +4868,22 @@
     },
     "Opañel": {
      "minimo": 12.634879,
-     "maximo": 21.171759,
-     "peor": {
-      "foto": "junio",
-      "descuento": false
-     },
-     "mejor": {
-      "foto": "marzo",
-      "descuento": true
-     },
+     "maximo": 15.878819,
+     "peor": "junio",
+     "mejor": "marzo",
      "combinaciones": [
       {
        "foto": "marzo",
-       "descuento": true,
-       "pisos": 56,
-       "mediana": 21.171759
-      },
-      {
-       "foto": "marzo",
-       "descuento": false,
        "pisos": 56,
        "mediana": 15.878819
       },
       {
        "foto": "junio",
-       "descuento": true,
-       "pisos": 60,
-       "mediana": 16.846505
-      },
-      {
-       "foto": "junio",
-       "descuento": false,
        "pisos": 60,
        "mediana": 12.634879
       },
       {
        "foto": "septiembre",
-       "descuento": true,
-       "pisos": 60,
-       "mediana": 18.733469
-      },
-      {
-       "foto": "septiembre",
-       "descuento": false,
        "pisos": 60,
        "mediana": 14.050102
       }
@@ -5107,300 +4892,300 @@
    },
    "rentabilidad_del_grupo_firme": {
     "casos": 280,
-    "media": 15.759566,
-    "mediana": 15.157859,
-    "minimo": 0.259726,
-    "maximo": 62.242742,
-    "q25": 5.910583,
-    "q75": 23.74974
+    "media": 11.819674,
+    "mediana": 11.368394,
+    "minimo": 0.194795,
+    "maximo": 46.682056,
+    "q25": 4.432937,
+    "q75": 17.812305
    },
    "pares_dentro_del_grupo": [
     {
      "a": "Canillejas",
      "b": "Casco Histórico de Vallecas",
-     "diferencia": -3.316654,
-     "bajo": -5.905195,
-     "alto": 0.827816,
+     "diferencia": -2.487491,
+     "bajo": -4.428896,
+     "alto": 0.620862,
      "se_distinguen": false
     },
     {
      "a": "Canillejas",
      "b": "Numancia",
-     "diferencia": -2.03871,
-     "bajo": -6.39359,
-     "alto": 3.27754,
+     "diferencia": -1.529032,
+     "bajo": -4.795192,
+     "alto": 2.458155,
      "se_distinguen": false
     },
     {
      "a": "Canillejas",
      "b": "Opañel",
-     "diferencia": -3.097801,
-     "bajo": -11.100926,
-     "alto": 0.59932,
+     "diferencia": -2.323351,
+     "bajo": -8.325694,
+     "alto": 0.44949,
      "se_distinguen": false
     },
     {
      "a": "Canillejas",
      "b": "Puerta del Angel",
-     "diferencia": 1.304971,
-     "bajo": -1.906358,
-     "alto": 4.224238,
+     "diferencia": 0.978729,
+     "bajo": -1.429768,
+     "alto": 3.168179,
      "se_distinguen": false
     },
     {
      "a": "Canillejas",
      "b": "Quintana",
-     "diferencia": 1.001797,
-     "bajo": -3.406477,
-     "alto": 7.232802,
+     "diferencia": 0.751348,
+     "bajo": -2.554858,
+     "alto": 5.424602,
      "se_distinguen": false
     },
     {
      "a": "Canillejas",
      "b": "San Diego",
-     "diferencia": 1.056287,
-     "bajo": -2.699723,
-     "alto": 5.258329,
+     "diferencia": 0.792215,
+     "bajo": -2.024792,
+     "alto": 3.943746,
      "se_distinguen": false
     },
     {
      "a": "Canillejas",
      "b": "Ventas",
-     "diferencia": -1.315784,
-     "bajo": -4.721393,
-     "alto": 5.85265,
+     "diferencia": -0.986838,
+     "bajo": -3.541045,
+     "alto": 4.389487,
      "se_distinguen": false
     },
     {
      "a": "Canillejas",
      "b": "Vista Alegre",
-     "diferencia": -0.49002,
-     "bajo": -3.875866,
-     "alto": 6.170745,
+     "diferencia": -0.367515,
+     "bajo": -2.9069,
+     "alto": 4.628059,
      "se_distinguen": false
     },
     {
      "a": "Casco Histórico de Vallecas",
      "b": "Numancia",
-     "diferencia": 1.277945,
-     "bajo": -3.675455,
-     "alto": 6.055645,
+     "diferencia": 0.958458,
+     "bajo": -2.756591,
+     "alto": 4.541734,
      "se_distinguen": false
     },
     {
      "a": "Casco Histórico de Vallecas",
      "b": "Opañel",
-     "diferencia": 0.218853,
-     "bajo": -8.276049,
-     "alto": 3.114592,
+     "diferencia": 0.16414,
+     "bajo": -6.207037,
+     "alto": 2.335944,
      "se_distinguen": false
     },
     {
      "a": "Casco Histórico de Vallecas",
      "b": "Puerta del Angel",
-     "diferencia": 4.621626,
-     "bajo": 0.542,
-     "alto": 6.555526,
+     "diferencia": 3.466219,
+     "bajo": 0.4065,
+     "alto": 4.916644,
      "se_distinguen": true
     },
     {
      "a": "Casco Histórico de Vallecas",
      "b": "Quintana",
-     "diferencia": 4.318451,
-     "bajo": -0.376341,
-     "alto": 9.292637,
+     "diferencia": 3.238838,
+     "bajo": -0.282256,
+     "alto": 6.969478,
      "se_distinguen": false
     },
     {
      "a": "Casco Histórico de Vallecas",
      "b": "San Diego",
-     "diferencia": 4.372942,
-     "bajo": 0.228472,
-     "alto": 7.431221,
+     "diferencia": 3.279706,
+     "bajo": 0.171354,
+     "alto": 5.573416,
      "se_distinguen": true
     },
     {
      "a": "Casco Histórico de Vallecas",
      "b": "Ventas",
-     "diferencia": 2.00087,
-     "bajo": -2.120162,
-     "alto": 9.745607,
+     "diferencia": 1.500653,
+     "bajo": -1.590122,
+     "alto": 7.309205,
      "se_distinguen": false
     },
     {
      "a": "Casco Histórico de Vallecas",
      "b": "Vista Alegre",
-     "diferencia": 2.826634,
-     "bajo": -1.165604,
-     "alto": 9.487399,
+     "diferencia": 2.119976,
+     "bajo": -0.874203,
+     "alto": 7.11555,
      "se_distinguen": false
     },
     {
      "a": "Numancia",
      "b": "Opañel",
-     "diferencia": -1.059091,
-     "bajo": -10.689132,
-     "alto": 3.41987,
+     "diferencia": -0.794319,
+     "bajo": -8.016849,
+     "alto": 2.564902,
      "se_distinguen": false
     },
     {
      "a": "Numancia",
      "b": "Puerta del Angel",
-     "diferencia": 3.343681,
-     "bajo": -1.813042,
-     "alto": 6.915064,
+     "diferencia": 2.507761,
+     "bajo": -1.359781,
+     "alto": 5.186298,
      "se_distinguen": false
     },
     {
      "a": "Numancia",
      "b": "Quintana",
-     "diferencia": 3.040506,
-     "bajo": -2.977962,
-     "alto": 8.867041,
+     "diferencia": 2.28038,
+     "bajo": -2.233471,
+     "alto": 6.65028,
      "se_distinguen": false
     },
     {
      "a": "Numancia",
      "b": "San Diego",
-     "diferencia": 3.094997,
-     "bajo": -2.186618,
-     "alto": 7.61717,
+     "diferencia": 2.321248,
+     "bajo": -1.639964,
+     "alto": 5.712878,
      "se_distinguen": false
     },
     {
      "a": "Numancia",
      "b": "Ventas",
-     "diferencia": 0.722926,
-     "bajo": -4.614741,
-     "alto": 9.149923,
+     "diferencia": 0.542194,
+     "bajo": -3.461055,
+     "alto": 6.862442,
      "se_distinguen": false
     },
     {
      "a": "Numancia",
      "b": "Vista Alegre",
-     "diferencia": 1.548689,
-     "bajo": -3.698541,
-     "alto": 9.322159,
+     "diferencia": 1.161517,
+     "bajo": -2.773905,
+     "alto": 6.991619,
      "se_distinguen": false
     },
     {
      "a": "Opañel",
      "b": "Puerta del Angel",
-     "diferencia": 4.402772,
-     "bajo": 0.959702,
-     "alto": 11.963813,
+     "diferencia": 3.302079,
+     "bajo": 0.719777,
+     "alto": 8.97286,
      "se_distinguen": true
     },
     {
      "a": "Opañel",
      "b": "Quintana",
-     "diferencia": 4.099598,
-     "bajo": -0.597916,
-     "alto": 12.387794,
+     "diferencia": 3.074698,
+     "bajo": -0.448437,
+     "alto": 9.290845,
      "se_distinguen": false
     },
     {
      "a": "Opañel",
      "b": "San Diego",
-     "diferencia": 4.154088,
-     "bajo": 0.330571,
-     "alto": 12.590679,
+     "diferencia": 3.115566,
+     "bajo": 0.247928,
+     "alto": 9.44301,
      "se_distinguen": true
     },
     {
      "a": "Opañel",
      "b": "Ventas",
-     "diferencia": 1.782017,
-     "bajo": -1.794761,
-     "alto": 13.236719,
+     "diferencia": 1.336513,
+     "bajo": -1.34607,
+     "alto": 9.927539,
      "se_distinguen": false
     },
     {
      "a": "Opañel",
      "b": "Vista Alegre",
-     "diferencia": 2.607781,
-     "bajo": -1.118522,
-     "alto": 13.348625,
+     "diferencia": 1.955836,
+     "bajo": -0.838891,
+     "alto": 10.011468,
      "se_distinguen": false
     },
     {
      "a": "Puerta del Angel",
      "b": "Quintana",
-     "diferencia": -0.303174,
-     "bajo": -4.11228,
-     "alto": 5.115996,
+     "diferencia": -0.227381,
+     "bajo": -3.08421,
+     "alto": 3.836997,
      "se_distinguen": false
     },
     {
      "a": "Puerta del Angel",
      "b": "San Diego",
-     "diferencia": -0.248684,
-     "bajo": -3.110614,
-     "alto": 3.567012,
+     "diferencia": -0.186513,
+     "bajo": -2.33296,
+     "alto": 2.675259,
      "se_distinguen": false
     },
     {
      "a": "Puerta del Angel",
      "b": "Ventas",
-     "diferencia": -2.620755,
-     "bajo": -5.256109,
-     "alto": 5.124167,
+     "diferencia": -1.965566,
+     "bajo": -3.942082,
+     "alto": 3.843125,
      "se_distinguen": false
     },
     {
      "a": "Puerta del Angel",
      "b": "Vista Alegre",
-     "diferencia": -1.794991,
-     "bajo": -4.522048,
-     "alto": 4.914473,
+     "diferencia": -1.346244,
+     "bajo": -3.391536,
+     "alto": 3.685855,
      "se_distinguen": false
     },
     {
      "a": "Quintana",
      "b": "San Diego",
-     "diferencia": 0.05449,
-     "bajo": -4.99186,
-     "alto": 4.650657,
+     "diferencia": 0.040868,
+     "bajo": -3.743895,
+     "alto": 3.487992,
      "se_distinguen": false
     },
     {
      "a": "Quintana",
      "b": "Ventas",
-     "diferencia": -2.317581,
-     "bajo": -7.318417,
-     "alto": 5.454886,
+     "diferencia": -1.738186,
+     "bajo": -5.488813,
+     "alto": 4.091164,
      "se_distinguen": false
     },
     {
      "a": "Quintana",
      "b": "Vista Alegre",
-     "diferencia": -1.491817,
-     "bajo": -6.769916,
-     "alto": 5.62687,
+     "diferencia": -1.118863,
+     "bajo": -5.077437,
+     "alto": 4.220153,
      "se_distinguen": false
     },
     {
      "a": "San Diego",
      "b": "Ventas",
-     "diferencia": -2.372071,
-     "bajo": -6.065942,
-     "alto": 5.372665,
+     "diferencia": -1.779053,
+     "bajo": -4.549457,
+     "alto": 4.029499,
      "se_distinguen": false
     },
     {
      "a": "San Diego",
      "b": "Vista Alegre",
-     "diferencia": -1.546307,
-     "bajo": -5.360594,
-     "alto": 5.106389,
+     "diferencia": -1.159731,
+     "bajo": -4.020446,
+     "alto": 3.829791,
      "se_distinguen": false
     },
     {
      "a": "Ventas",
      "b": "Vista Alegre",
-     "diferencia": 0.825764,
-     "bajo": -7.060401,
-     "alto": 7.487986,
+     "diferencia": 0.619323,
+     "bajo": -5.295301,
+     "alto": 5.615989,
      "se_distinguen": false
     }
    ],
@@ -5681,9 +5466,9 @@
    "limites": [
     "empates: no hay tramos que repartir.",
     "pesos: el riesgo se da con sus medidas sueltas, sin puntuación.",
-    "hacia_adelante: el rango entre fotos describe tres fechas y no predice otras.",
+    "hacia_adelante: el rango entre fechas de precio describe tres fechas y no predice otras.",
     "azar_en_grupos: con un solo barrio no hay comparación.",
-    "Marzo y junio solo cubren los anuncios que siguen en septiembre con el mismo número, y cada foto mantiene la ocupación de septiembre.",
+    "Marzo y junio solo cubren los anuncios que siguen en septiembre con el mismo número, y cada descarga mantiene la ocupación de septiembre.",
     "Una foto con menos de 20 pisos en un barrio no da cifra, y el rango de ese barrio sale de las que quedan.",
     "La ocupación es una estimación y el calendario no distingue reservado de bloqueado."
    ]
@@ -5692,10 +5477,8 @@
  "recomendacion": {
   "dormitorios_hasta": 2,
   "pisos": 256,
-  "rentabilidad_sin_descuento_pct": 12.115439,
-  "rentabilidad_con_descuento_pct": 16.153918,
-  "compra_sin_descuento_eur": 161973.0,
-  "compra_con_descuento_eur": 121479.75,
+  "rentabilidad_pct": 12.115439,
+  "compra_eur": 161973.0,
   "ingreso_anual_eur": 21674.79,
   "precio_de_mercado": {
    "consulta": "2026-11-06",
@@ -5704,7 +5487,6 @@
      "fuente": "Fotocasa",
      "compra_mediana_eur": 171600.0,
      "rentabilidad_mediana_pct": 10.869148,
-     "rebaja_que_supone_el_descuento_pct": 29.207605,
      "barrios": [
       {
        "barrio": "Numancia",
@@ -5736,7 +5518,6 @@
      "fuente": "Idealista",
      "compra_mediana_eur": 182000.0,
      "rentabilidad_mediana_pct": 10.58607,
-     "rebaja_que_supone_el_descuento_pct": 33.252885,
      "barrios": [
       {
        "barrio": "Numancia",
@@ -12114,7 +11895,7 @@
    "texto": "¿Qué probabilidad tiene cada nivel de ocupación por distrito?",
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
-    "respuesta": "Parte de anuncios en cada nivel, en toda la base: 1-85 días, 36,2 %; 86-170, 17,5 %; 171-254, 19,7 %; tope de 255, 26,7 %. El tope va del 50,0 % de Villa de Vallecas al 6,2 % de Villaverde.",
+    "respuesta": "Parte de anuncios en cada nivel, en toda la base: 1-85 días, 36,2 %; 86-170, 17,5 %; 171-254, 19,7 %; tope de 255, 26,7 %. El máximo va del 50,0 % de Villa de Vallecas al 6,2 % de Villaverde.",
     "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
@@ -12267,7 +12048,7 @@
     }
    },
    "base_comparacion": {
-    "respuesta": "Parte de anuncios en cada nivel, en toda la base: 1-85 días, 41,7 %; 86-170, 21,1 %; 171-254, 15,5 %; tope de 255, 21,7 %. El tope va del 46,2 % de Barajas al 1,8 % de Villaverde.",
+    "respuesta": "Parte de anuncios en cada nivel, en toda la base: 1-85 días, 41,7 %; 86-170, 21,1 %; 171-254, 15,5 %; tope de 255, 21,7 %. El máximo va del 46,2 % de Barajas al 1,8 % de Villaverde.",
     "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7249,
@@ -12442,7 +12223,7 @@
    "texto": "¿Cuál es el ranking de distritos y barrios por ocupación?",
    "origen_del_texto": "lista de comprobación del análisis, escrita antes de calcular",
    "base_decision": {
-    "respuesta": "Por distrito, de Villa de Vallecas (244,5 días) a Arganzuela (81,0 días). Por barrio, de Casco Histórico de Vallecas (255,0 días) a Atocha (45,0 días). En la parte alta el orden no dice nada, por el tope.",
+    "respuesta": "Por distrito, de Villa de Vallecas (244,5 días) a Arganzuela (81,0 días). Por barrio, de Casco Histórico de Vallecas (255,0 días) a Atocha (45,0 días). En la parte alta el orden no dice nada, por el máximo.",
     "poblacion": "base de decisión, reglas §3: pisos fuera del centro histórico con los filtros de tamaño, precio, ocupación y estancia",
     "periodo": "foto del 17/09/2026",
     "filas": 2940,
@@ -13037,7 +12818,7 @@
     }
    },
    "base_comparacion": {
-    "respuesta": "Por distrito, de Barajas (186,0 días) a Villaverde (66,0 días). Por barrio, de Palos de Moguer (198,0 días) a Adelfas (21,0 días). En la parte alta el orden no dice nada, por el tope.",
+    "respuesta": "Por distrito, de Barajas (186,0 días) a Villaverde (66,0 días). Por barrio, de Palos de Moguer (198,0 días) a Adelfas (21,0 días). En la parte alta el orden no dice nada, por el máximo.",
     "poblacion": "base de comparación, reglas §3: los filtros de un análisis habitual de este mercado, con los 180 días y todos los tipos de alquiler",
     "periodo": "foto del 17/09/2026",
     "filas": 7249,
@@ -14443,8 +14224,8 @@
        "puesto_m2": 1,
        "puesto_inmueble": 1,
        "anuncios_de_la_base": 219,
-       "compra_mediana_valoraciones_sin_descuento_eur": 379926.5,
-       "compra_mediana_oficial_sin_descuento_eur": 526889.955
+       "compra_mediana_valoraciones_eur": 379926.5,
+       "compra_mediana_oficial_eur": 526889.955
       },
       {
        "distrito": "Chamberí",
@@ -14454,8 +14235,8 @@
        "puesto_m2": 2,
        "puesto_inmueble": 2,
        "anuncios_de_la_base": 1,
-       "compra_mediana_valoraciones_sin_descuento_eur": 337618.0,
-       "compra_mediana_oficial_sin_descuento_eur": 803733.4108
+       "compra_mediana_valoraciones_eur": 337618.0,
+       "compra_mediana_oficial_eur": 803733.4108
       },
       {
        "distrito": "Retiro",
@@ -14465,8 +14246,8 @@
        "puesto_m2": 3,
        "puesto_inmueble": 4,
        "anuncios_de_la_base": 75,
-       "compra_mediana_valoraciones_sin_descuento_eur": 287093.0,
-       "compra_mediana_oficial_sin_descuento_eur": 453894.033
+       "compra_mediana_valoraciones_eur": 287093.0,
+       "compra_mediana_oficial_eur": 453894.033
       },
       {
        "distrito": "Chamartín",
@@ -14476,8 +14257,8 @@
        "puesto_m2": 4,
        "puesto_inmueble": 3,
        "anuncios_de_la_base": 260,
-       "compra_mediana_valoraciones_sin_descuento_eur": 393034.0,
-       "compra_mediana_oficial_sin_descuento_eur": 589443.022
+       "compra_mediana_valoraciones_eur": 393034.0,
+       "compra_mediana_oficial_eur": 589443.022
       },
       {
        "distrito": "Centro",
@@ -14487,8 +14268,8 @@
        "puesto_m2": 5,
        "puesto_inmueble": 7,
        "anuncios_de_la_base": 0,
-       "compra_mediana_valoraciones_sin_descuento_eur": null,
-       "compra_mediana_oficial_sin_descuento_eur": null
+       "compra_mediana_valoraciones_eur": null,
+       "compra_mediana_oficial_eur": null
       },
       {
        "distrito": "Arganzuela",
@@ -14498,8 +14279,8 @@
        "puesto_m2": 6,
        "puesto_inmueble": 10,
        "anuncios_de_la_base": 78,
-       "compra_mediana_valoraciones_sin_descuento_eur": 340518.0,
-       "compra_mediana_oficial_sin_descuento_eur": 379712.1798
+       "compra_mediana_valoraciones_eur": 340518.0,
+       "compra_mediana_oficial_eur": 379712.1798
       },
       {
        "distrito": "Moncloa-Aravaca",
@@ -14509,8 +14290,8 @@
        "puesto_m2": 7,
        "puesto_inmueble": 5,
        "anuncios_de_la_base": 69,
-       "compra_mediana_valoraciones_sin_descuento_eur": 282241.0,
-       "compra_mediana_oficial_sin_descuento_eur": 447070.8944
+       "compra_mediana_valoraciones_eur": 282241.0,
+       "compra_mediana_oficial_eur": 447070.8944
       },
       {
        "distrito": "Tetuán",
@@ -14520,8 +14301,8 @@
        "puesto_m2": 8,
        "puesto_inmueble": 11,
        "anuncios_de_la_base": 542,
-       "compra_mediana_valoraciones_sin_descuento_eur": 321900.0,
-       "compra_mediana_oficial_sin_descuento_eur": 416206.0405
+       "compra_mediana_valoraciones_eur": 321900.0,
+       "compra_mediana_oficial_eur": 416206.0405
       },
       {
        "distrito": "Fuencarral-El Pardo",
@@ -14531,8 +14312,8 @@
        "puesto_m2": 9,
        "puesto_inmueble": 6,
        "anuncios_de_la_base": 61,
-       "compra_mediana_valoraciones_sin_descuento_eur": 253229.0,
-       "compra_mediana_oficial_sin_descuento_eur": 404933.76
+       "compra_mediana_valoraciones_eur": 253229.0,
+       "compra_mediana_oficial_eur": 404933.76
       },
       {
        "distrito": "Hortaleza",
@@ -14542,8 +14323,8 @@
        "puesto_m2": 10,
        "puesto_inmueble": 8,
        "anuncios_de_la_base": 138,
-       "compra_mediana_valoraciones_sin_descuento_eur": 298863.0,
-       "compra_mediana_oficial_sin_descuento_eur": 390437.801
+       "compra_mediana_valoraciones_eur": 298863.0,
+       "compra_mediana_oficial_eur": 390437.801
       },
       {
        "distrito": "Ciudad Lineal",
@@ -14553,8 +14334,8 @@
        "puesto_m2": 11,
        "puesto_inmueble": 12,
        "anuncios_de_la_base": 291,
-       "compra_mediana_valoraciones_sin_descuento_eur": 246663.3,
-       "compra_mediana_oficial_sin_descuento_eur": 273567.9033
+       "compra_mediana_valoraciones_eur": 246663.3,
+       "compra_mediana_oficial_eur": 273567.9033
       },
       {
        "distrito": "Barajas",
@@ -14564,8 +14345,8 @@
        "puesto_m2": 12,
        "puesto_inmueble": 9,
        "anuncios_de_la_base": 42,
-       "compra_mediana_valoraciones_sin_descuento_eur": 225764.5,
-       "compra_mediana_oficial_sin_descuento_eur": 268611.7739
+       "compra_mediana_valoraciones_eur": 225764.5,
+       "compra_mediana_oficial_eur": 268611.7739
       },
       {
        "distrito": "Moratalaz",
@@ -14575,8 +14356,8 @@
        "puesto_m2": 13,
        "puesto_inmueble": 13,
        "anuncios_de_la_base": 17,
-       "compra_mediana_valoraciones_sin_descuento_eur": 245052.6,
-       "compra_mediana_oficial_sin_descuento_eur": 325256.808
+       "compra_mediana_valoraciones_eur": 245052.6,
+       "compra_mediana_oficial_eur": 325256.808
       },
       {
        "distrito": "Vicálvaro",
@@ -14586,8 +14367,8 @@
        "puesto_m2": 14,
        "puesto_inmueble": 15,
        "anuncios_de_la_base": 9,
-       "compra_mediana_valoraciones_sin_descuento_eur": 218088.0,
-       "compra_mediana_oficial_sin_descuento_eur": 200775.168
+       "compra_mediana_valoraciones_eur": 218088.0,
+       "compra_mediana_oficial_eur": 200775.168
       },
       {
        "distrito": "Latina",
@@ -14597,8 +14378,8 @@
        "puesto_m2": 15,
        "puesto_inmueble": 18,
        "anuncios_de_la_base": 127,
-       "compra_mediana_valoraciones_sin_descuento_eur": 201665.0,
-       "compra_mediana_oficial_sin_descuento_eur": 271763.754
+       "compra_mediana_valoraciones_eur": 201665.0,
+       "compra_mediana_oficial_eur": 271763.754
       },
       {
        "distrito": "San Blas - Canillejas",
@@ -14608,8 +14389,8 @@
        "puesto_m2": 16,
        "puesto_inmueble": 14,
        "anuncios_de_la_base": 194,
-       "compra_mediana_valoraciones_sin_descuento_eur": 179008.0,
-       "compra_mediana_oficial_sin_descuento_eur": 341046.0416
+       "compra_mediana_valoraciones_eur": 179008.0,
+       "compra_mediana_oficial_eur": 341046.0416
       },
       {
        "distrito": "Usera",
@@ -14619,8 +14400,8 @@
        "puesto_m2": 17,
        "puesto_inmueble": 16,
        "anuncios_de_la_base": 181,
-       "compra_mediana_valoraciones_sin_descuento_eur": 216191.5,
-       "compra_mediana_oficial_sin_descuento_eur": 245664.126
+       "compra_mediana_valoraciones_eur": 216191.5,
+       "compra_mediana_oficial_eur": 245664.126
       },
       {
        "distrito": "Carabanchel",
@@ -14630,8 +14411,8 @@
        "puesto_m2": 18,
        "puesto_inmueble": 19,
        "anuncios_de_la_base": 270,
-       "compra_mediana_valoraciones_sin_descuento_eur": 188828.9,
-       "compra_mediana_oficial_sin_descuento_eur": 238295.0479
+       "compra_mediana_valoraciones_eur": 188828.9,
+       "compra_mediana_oficial_eur": 238295.0479
       },
       {
        "distrito": "Villa de Vallecas",
@@ -14641,8 +14422,8 @@
        "puesto_m2": 19,
        "puesto_inmueble": 17,
        "anuncios_de_la_base": 42,
-       "compra_mediana_valoraciones_sin_descuento_eur": 145760.5,
-       "compra_mediana_oficial_sin_descuento_eur": 189809.3231
+       "compra_mediana_valoraciones_eur": 145760.5,
+       "compra_mediana_oficial_eur": 189809.3231
       },
       {
        "distrito": "Puente de Vallecas",
@@ -14652,8 +14433,8 @@
        "puesto_m2": 20,
        "puesto_inmueble": 20,
        "anuncios_de_la_base": 243,
-       "compra_mediana_valoraciones_sin_descuento_eur": 161973.0,
-       "compra_mediana_oficial_sin_descuento_eur": 188860.518
+       "compra_mediana_valoraciones_eur": 161973.0,
+       "compra_mediana_oficial_eur": 188860.518
       },
       {
        "distrito": "Villaverde",
@@ -14663,8 +14444,8 @@
        "puesto_m2": 21,
        "puesto_inmueble": 21,
        "anuncios_de_la_base": 81,
-       "compra_mediana_valoraciones_sin_descuento_eur": 132480.0,
-       "compra_mediana_oficial_sin_descuento_eur": 179748.864
+       "compra_mediana_valoraciones_eur": 132480.0,
+       "compra_mediana_oficial_eur": 179748.864
       }
      ]
     }
@@ -14684,8 +14465,8 @@
        "puesto_m2": 1,
        "puesto_inmueble": 1,
        "anuncios_de_la_base": 427,
-       "compra_mediana_valoraciones_sin_descuento_eur": 584269.5,
-       "compra_mediana_oficial_sin_descuento_eur": 976355.6544
+       "compra_mediana_valoraciones_eur": 584269.5,
+       "compra_mediana_oficial_eur": 976355.6544
       },
       {
        "distrito": "Chamberí",
@@ -14695,8 +14476,8 @@
        "puesto_m2": 2,
        "puesto_inmueble": 2,
        "anuncios_de_la_base": 387,
-       "compra_mediana_valoraciones_sin_descuento_eur": 428420.5,
-       "compra_mediana_oficial_sin_descuento_eur": 724202.0132
+       "compra_mediana_valoraciones_eur": 428420.5,
+       "compra_mediana_oficial_eur": 724202.0132
       },
       {
        "distrito": "Retiro",
@@ -14706,8 +14487,8 @@
        "puesto_m2": 3,
        "puesto_inmueble": 4,
        "anuncios_de_la_base": 266,
-       "compra_mediana_valoraciones_sin_descuento_eur": 408604.3,
-       "compra_mediana_oficial_sin_descuento_eur": 469203.4608
+       "compra_mediana_valoraciones_eur": 408604.3,
+       "compra_mediana_oficial_eur": 469203.4608
       },
       {
        "distrito": "Chamartín",
@@ -14717,8 +14498,8 @@
        "puesto_m2": 4,
        "puesto_inmueble": 3,
        "anuncios_de_la_base": 252,
-       "compra_mediana_valoraciones_sin_descuento_eur": 393034.0,
-       "compra_mediana_oficial_sin_descuento_eur": 589443.022
+       "compra_mediana_valoraciones_eur": 393034.0,
+       "compra_mediana_oficial_eur": 589443.022
       },
       {
        "distrito": "Centro",
@@ -14728,8 +14509,8 @@
        "puesto_m2": 5,
        "puesto_inmueble": 7,
        "anuncios_de_la_base": 3195,
-       "compra_mediana_valoraciones_sin_descuento_eur": 384830.5,
-       "compra_mediana_oficial_sin_descuento_eur": 514102.384
+       "compra_mediana_valoraciones_eur": 384830.5,
+       "compra_mediana_oficial_eur": 514102.384
       },
       {
        "distrito": "Arganzuela",
@@ -14739,8 +14520,8 @@
        "puesto_m2": 6,
        "puesto_inmueble": 10,
        "anuncios_de_la_base": 408,
-       "compra_mediana_valoraciones_sin_descuento_eur": 292756.0,
-       "compra_mediana_oficial_sin_descuento_eur": 386935.2385
+       "compra_mediana_valoraciones_eur": 292756.0,
+       "compra_mediana_oficial_eur": 386935.2385
       },
       {
        "distrito": "Moncloa-Aravaca",
@@ -14750,8 +14531,8 @@
        "puesto_m2": 7,
        "puesto_inmueble": 5,
        "anuncios_de_la_base": 177,
-       "compra_mediana_valoraciones_sin_descuento_eur": 377743.5,
-       "compra_mediana_oficial_sin_descuento_eur": 827409.3624
+       "compra_mediana_valoraciones_eur": 377743.5,
+       "compra_mediana_oficial_eur": 827409.3624
       },
       {
        "distrito": "Tetuán",
@@ -14761,8 +14542,8 @@
        "puesto_m2": 8,
        "puesto_inmueble": 11,
        "anuncios_de_la_base": 537,
-       "compra_mediana_valoraciones_sin_descuento_eur": 324186.85,
-       "compra_mediana_oficial_sin_descuento_eur": 416206.0405
+       "compra_mediana_valoraciones_eur": 324186.85,
+       "compra_mediana_oficial_eur": 416206.0405
       },
       {
        "distrito": "Fuencarral-El Pardo",
@@ -14772,8 +14553,8 @@
        "puesto_m2": 9,
        "puesto_inmueble": 6,
        "anuncios_de_la_base": 112,
-       "compra_mediana_valoraciones_sin_descuento_eur": 273363.0,
-       "compra_mediana_oficial_sin_descuento_eur": 404933.76
+       "compra_mediana_valoraciones_eur": 273363.0,
+       "compra_mediana_oficial_eur": 404933.76
       },
       {
        "distrito": "Hortaleza",
@@ -14783,8 +14564,8 @@
        "puesto_m2": 10,
        "puesto_inmueble": 8,
        "anuncios_de_la_base": 127,
-       "compra_mediana_valoraciones_sin_descuento_eur": 239297.5,
-       "compra_mediana_oficial_sin_descuento_eur": 390437.801
+       "compra_mediana_valoraciones_eur": 239297.5,
+       "compra_mediana_oficial_eur": 390437.801
       },
       {
        "distrito": "Ciudad Lineal",
@@ -14794,8 +14575,8 @@
        "puesto_m2": 11,
        "puesto_inmueble": 12,
        "anuncios_de_la_base": 301,
-       "compra_mediana_valoraciones_sin_descuento_eur": 221800.5,
-       "compra_mediana_oficial_sin_descuento_eur": 273567.9033
+       "compra_mediana_valoraciones_eur": 221800.5,
+       "compra_mediana_oficial_eur": 273567.9033
       },
       {
        "distrito": "Barajas",
@@ -14805,8 +14586,8 @@
        "puesto_m2": 12,
        "puesto_inmueble": 9,
        "anuncios_de_la_base": 39,
-       "compra_mediana_valoraciones_sin_descuento_eur": 220946.5,
-       "compra_mediana_oficial_sin_descuento_eur": 418958.7533
+       "compra_mediana_valoraciones_eur": 220946.5,
+       "compra_mediana_oficial_eur": 418958.7533
       },
       {
        "distrito": "Moratalaz",
@@ -14816,8 +14597,8 @@
        "puesto_m2": 13,
        "puesto_inmueble": 13,
        "anuncios_de_la_base": 34,
-       "compra_mediana_valoraciones_sin_descuento_eur": 194983.0,
-       "compra_mediana_oficial_sin_descuento_eur": 325256.808
+       "compra_mediana_valoraciones_eur": 194983.0,
+       "compra_mediana_oficial_eur": 325256.808
       },
       {
        "distrito": "Vicálvaro",
@@ -14827,8 +14608,8 @@
        "puesto_m2": 14,
        "puesto_inmueble": 15,
        "anuncios_de_la_base": 19,
-       "compra_mediana_valoraciones_sin_descuento_eur": 167760.0,
-       "compra_mediana_oficial_sin_descuento_eur": 200775.168
+       "compra_mediana_valoraciones_eur": 167760.0,
+       "compra_mediana_oficial_eur": 200775.168
       },
       {
        "distrito": "Latina",
@@ -14838,8 +14619,8 @@
        "puesto_m2": 15,
        "puesto_inmueble": 18,
        "anuncios_de_la_base": 140,
-       "compra_mediana_valoraciones_sin_descuento_eur": 201665.0,
-       "compra_mediana_oficial_sin_descuento_eur": 260452.5924
+       "compra_mediana_valoraciones_eur": 201665.0,
+       "compra_mediana_oficial_eur": 260452.5924
       },
       {
        "distrito": "San Blas - Canillejas",
@@ -14849,8 +14630,8 @@
        "puesto_m2": 16,
        "puesto_inmueble": 14,
        "anuncios_de_la_base": 159,
-       "compra_mediana_valoraciones_sin_descuento_eur": 179008.0,
-       "compra_mediana_oficial_sin_descuento_eur": 283777.923
+       "compra_mediana_valoraciones_eur": 179008.0,
+       "compra_mediana_oficial_eur": 283777.923
       },
       {
        "distrito": "Usera",
@@ -14860,8 +14641,8 @@
        "puesto_m2": 17,
        "puesto_inmueble": 16,
        "anuncios_de_la_base": 157,
-       "compra_mediana_valoraciones_sin_descuento_eur": 200788.25,
-       "compra_mediana_oficial_sin_descuento_eur": 245664.126
+       "compra_mediana_valoraciones_eur": 200788.25,
+       "compra_mediana_oficial_eur": 245664.126
       },
       {
        "distrito": "Carabanchel",
@@ -14871,8 +14652,8 @@
        "puesto_m2": 18,
        "puesto_inmueble": 19,
        "anuncios_de_la_base": 231,
-       "compra_mediana_valoraciones_sin_descuento_eur": 183501.5,
-       "compra_mediana_oficial_sin_descuento_eur": 238295.0479
+       "compra_mediana_valoraciones_eur": 183501.5,
+       "compra_mediana_oficial_eur": 238295.0479
       },
       {
        "distrito": "Villa de Vallecas",
@@ -14882,8 +14663,8 @@
        "puesto_m2": 19,
        "puesto_inmueble": 17,
        "anuncios_de_la_base": 23,
-       "compra_mediana_valoraciones_sin_descuento_eur": 145760.5,
-       "compra_mediana_oficial_sin_descuento_eur": 189809.3231
+       "compra_mediana_valoraciones_eur": 145760.5,
+       "compra_mediana_oficial_eur": 189809.3231
       },
       {
        "distrito": "Puente de Vallecas",
@@ -14893,8 +14674,8 @@
        "puesto_m2": 20,
        "puesto_inmueble": 20,
        "anuncios_de_la_base": 201,
-       "compra_mediana_valoraciones_sin_descuento_eur": 161973.0,
-       "compra_mediana_oficial_sin_descuento_eur": 188860.518
+       "compra_mediana_valoraciones_eur": 161973.0,
+       "compra_mediana_oficial_eur": 188860.518
       },
       {
        "distrito": "Villaverde",
@@ -14904,8 +14685,8 @@
        "puesto_m2": 21,
        "puesto_inmueble": 21,
        "anuncios_de_la_base": 57,
-       "compra_mediana_valoraciones_sin_descuento_eur": 147801.5,
-       "compra_mediana_oficial_sin_descuento_eur": 191661.198
+       "compra_mediana_valoraciones_eur": 147801.5,
+       "compra_mediana_oficial_eur": 191661.198
       }
      ]
     }
@@ -14931,8 +14712,8 @@
        "puesto_m2": 1,
        "puesto_inmueble": 1,
        "anuncios_de_la_base": 219,
-       "compra_mediana_valoraciones_sin_descuento_eur": 379926.5,
-       "compra_mediana_oficial_sin_descuento_eur": 526889.955
+       "compra_mediana_valoraciones_eur": 379926.5,
+       "compra_mediana_oficial_eur": 526889.955
       },
       {
        "distrito": "Chamberí",
@@ -14942,8 +14723,8 @@
        "puesto_m2": 2,
        "puesto_inmueble": 2,
        "anuncios_de_la_base": 1,
-       "compra_mediana_valoraciones_sin_descuento_eur": 337618.0,
-       "compra_mediana_oficial_sin_descuento_eur": 803733.4108
+       "compra_mediana_valoraciones_eur": 337618.0,
+       "compra_mediana_oficial_eur": 803733.4108
       },
       {
        "distrito": "Chamartín",
@@ -14953,8 +14734,8 @@
        "puesto_m2": 4,
        "puesto_inmueble": 3,
        "anuncios_de_la_base": 260,
-       "compra_mediana_valoraciones_sin_descuento_eur": 393034.0,
-       "compra_mediana_oficial_sin_descuento_eur": 589443.022
+       "compra_mediana_valoraciones_eur": 393034.0,
+       "compra_mediana_oficial_eur": 589443.022
       },
       {
        "distrito": "Retiro",
@@ -14964,8 +14745,8 @@
        "puesto_m2": 3,
        "puesto_inmueble": 4,
        "anuncios_de_la_base": 75,
-       "compra_mediana_valoraciones_sin_descuento_eur": 287093.0,
-       "compra_mediana_oficial_sin_descuento_eur": 453894.033
+       "compra_mediana_valoraciones_eur": 287093.0,
+       "compra_mediana_oficial_eur": 453894.033
       },
       {
        "distrito": "Moncloa-Aravaca",
@@ -14975,8 +14756,8 @@
        "puesto_m2": 7,
        "puesto_inmueble": 5,
        "anuncios_de_la_base": 69,
-       "compra_mediana_valoraciones_sin_descuento_eur": 282241.0,
-       "compra_mediana_oficial_sin_descuento_eur": 447070.8944
+       "compra_mediana_valoraciones_eur": 282241.0,
+       "compra_mediana_oficial_eur": 447070.8944
       },
       {
        "distrito": "Fuencarral-El Pardo",
@@ -14986,8 +14767,8 @@
        "puesto_m2": 9,
        "puesto_inmueble": 6,
        "anuncios_de_la_base": 61,
-       "compra_mediana_valoraciones_sin_descuento_eur": 253229.0,
-       "compra_mediana_oficial_sin_descuento_eur": 404933.76
+       "compra_mediana_valoraciones_eur": 253229.0,
+       "compra_mediana_oficial_eur": 404933.76
       },
       {
        "distrito": "Centro",
@@ -14997,8 +14778,8 @@
        "puesto_m2": 5,
        "puesto_inmueble": 7,
        "anuncios_de_la_base": 0,
-       "compra_mediana_valoraciones_sin_descuento_eur": null,
-       "compra_mediana_oficial_sin_descuento_eur": null
+       "compra_mediana_valoraciones_eur": null,
+       "compra_mediana_oficial_eur": null
       },
       {
        "distrito": "Hortaleza",
@@ -15008,8 +14789,8 @@
        "puesto_m2": 10,
        "puesto_inmueble": 8,
        "anuncios_de_la_base": 138,
-       "compra_mediana_valoraciones_sin_descuento_eur": 298863.0,
-       "compra_mediana_oficial_sin_descuento_eur": 390437.801
+       "compra_mediana_valoraciones_eur": 298863.0,
+       "compra_mediana_oficial_eur": 390437.801
       },
       {
        "distrito": "Barajas",
@@ -15019,8 +14800,8 @@
        "puesto_m2": 12,
        "puesto_inmueble": 9,
        "anuncios_de_la_base": 42,
-       "compra_mediana_valoraciones_sin_descuento_eur": 225764.5,
-       "compra_mediana_oficial_sin_descuento_eur": 268611.7739
+       "compra_mediana_valoraciones_eur": 225764.5,
+       "compra_mediana_oficial_eur": 268611.7739
       },
       {
        "distrito": "Arganzuela",
@@ -15030,8 +14811,8 @@
        "puesto_m2": 6,
        "puesto_inmueble": 10,
        "anuncios_de_la_base": 78,
-       "compra_mediana_valoraciones_sin_descuento_eur": 340518.0,
-       "compra_mediana_oficial_sin_descuento_eur": 379712.1798
+       "compra_mediana_valoraciones_eur": 340518.0,
+       "compra_mediana_oficial_eur": 379712.1798
       },
       {
        "distrito": "Tetuán",
@@ -15041,8 +14822,8 @@
        "puesto_m2": 8,
        "puesto_inmueble": 11,
        "anuncios_de_la_base": 542,
-       "compra_mediana_valoraciones_sin_descuento_eur": 321900.0,
-       "compra_mediana_oficial_sin_descuento_eur": 416206.0405
+       "compra_mediana_valoraciones_eur": 321900.0,
+       "compra_mediana_oficial_eur": 416206.0405
       },
       {
        "distrito": "Ciudad Lineal",
@@ -15052,8 +14833,8 @@
        "puesto_m2": 11,
        "puesto_inmueble": 12,
        "anuncios_de_la_base": 291,
-       "compra_mediana_valoraciones_sin_descuento_eur": 246663.3,
-       "compra_mediana_oficial_sin_descuento_eur": 273567.9033
+       "compra_mediana_valoraciones_eur": 246663.3,
+       "compra_mediana_oficial_eur": 273567.9033
       },
       {
        "distrito": "Moratalaz",
@@ -15063,8 +14844,8 @@
        "puesto_m2": 13,
        "puesto_inmueble": 13,
        "anuncios_de_la_base": 17,
-       "compra_mediana_valoraciones_sin_descuento_eur": 245052.6,
-       "compra_mediana_oficial_sin_descuento_eur": 325256.808
+       "compra_mediana_valoraciones_eur": 245052.6,
+       "compra_mediana_oficial_eur": 325256.808
       },
       {
        "distrito": "San Blas - Canillejas",
@@ -15074,8 +14855,8 @@
        "puesto_m2": 16,
        "puesto_inmueble": 14,
        "anuncios_de_la_base": 194,
-       "compra_mediana_valoraciones_sin_descuento_eur": 179008.0,
-       "compra_mediana_oficial_sin_descuento_eur": 341046.0416
+       "compra_mediana_valoraciones_eur": 179008.0,
+       "compra_mediana_oficial_eur": 341046.0416
       },
       {
        "distrito": "Vicálvaro",
@@ -15085,8 +14866,8 @@
        "puesto_m2": 14,
        "puesto_inmueble": 15,
        "anuncios_de_la_base": 9,
-       "compra_mediana_valoraciones_sin_descuento_eur": 218088.0,
-       "compra_mediana_oficial_sin_descuento_eur": 200775.168
+       "compra_mediana_valoraciones_eur": 218088.0,
+       "compra_mediana_oficial_eur": 200775.168
       },
       {
        "distrito": "Usera",
@@ -15096,8 +14877,8 @@
        "puesto_m2": 17,
        "puesto_inmueble": 16,
        "anuncios_de_la_base": 181,
-       "compra_mediana_valoraciones_sin_descuento_eur": 216191.5,
-       "compra_mediana_oficial_sin_descuento_eur": 245664.126
+       "compra_mediana_valoraciones_eur": 216191.5,
+       "compra_mediana_oficial_eur": 245664.126
       },
       {
        "distrito": "Villa de Vallecas",
@@ -15107,8 +14888,8 @@
        "puesto_m2": 19,
        "puesto_inmueble": 17,
        "anuncios_de_la_base": 42,
-       "compra_mediana_valoraciones_sin_descuento_eur": 145760.5,
-       "compra_mediana_oficial_sin_descuento_eur": 189809.3231
+       "compra_mediana_valoraciones_eur": 145760.5,
+       "compra_mediana_oficial_eur": 189809.3231
       },
       {
        "distrito": "Latina",
@@ -15118,8 +14899,8 @@
        "puesto_m2": 15,
        "puesto_inmueble": 18,
        "anuncios_de_la_base": 127,
-       "compra_mediana_valoraciones_sin_descuento_eur": 201665.0,
-       "compra_mediana_oficial_sin_descuento_eur": 271763.754
+       "compra_mediana_valoraciones_eur": 201665.0,
+       "compra_mediana_oficial_eur": 271763.754
       },
       {
        "distrito": "Carabanchel",
@@ -15129,8 +14910,8 @@
        "puesto_m2": 18,
        "puesto_inmueble": 19,
        "anuncios_de_la_base": 270,
-       "compra_mediana_valoraciones_sin_descuento_eur": 188828.9,
-       "compra_mediana_oficial_sin_descuento_eur": 238295.0479
+       "compra_mediana_valoraciones_eur": 188828.9,
+       "compra_mediana_oficial_eur": 238295.0479
       },
       {
        "distrito": "Puente de Vallecas",
@@ -15140,8 +14921,8 @@
        "puesto_m2": 20,
        "puesto_inmueble": 20,
        "anuncios_de_la_base": 243,
-       "compra_mediana_valoraciones_sin_descuento_eur": 161973.0,
-       "compra_mediana_oficial_sin_descuento_eur": 188860.518
+       "compra_mediana_valoraciones_eur": 161973.0,
+       "compra_mediana_oficial_eur": 188860.518
       },
       {
        "distrito": "Villaverde",
@@ -15151,8 +14932,8 @@
        "puesto_m2": 21,
        "puesto_inmueble": 21,
        "anuncios_de_la_base": 81,
-       "compra_mediana_valoraciones_sin_descuento_eur": 132480.0,
-       "compra_mediana_oficial_sin_descuento_eur": 179748.864
+       "compra_mediana_valoraciones_eur": 132480.0,
+       "compra_mediana_oficial_eur": 179748.864
       }
      ]
     }
@@ -15172,8 +14953,8 @@
        "puesto_m2": 1,
        "puesto_inmueble": 1,
        "anuncios_de_la_base": 427,
-       "compra_mediana_valoraciones_sin_descuento_eur": 584269.5,
-       "compra_mediana_oficial_sin_descuento_eur": 976355.6544
+       "compra_mediana_valoraciones_eur": 584269.5,
+       "compra_mediana_oficial_eur": 976355.6544
       },
       {
        "distrito": "Chamberí",
@@ -15183,8 +14964,8 @@
        "puesto_m2": 2,
        "puesto_inmueble": 2,
        "anuncios_de_la_base": 387,
-       "compra_mediana_valoraciones_sin_descuento_eur": 428420.5,
-       "compra_mediana_oficial_sin_descuento_eur": 724202.0132
+       "compra_mediana_valoraciones_eur": 428420.5,
+       "compra_mediana_oficial_eur": 724202.0132
       },
       {
        "distrito": "Chamartín",
@@ -15194,8 +14975,8 @@
        "puesto_m2": 4,
        "puesto_inmueble": 3,
        "anuncios_de_la_base": 252,
-       "compra_mediana_valoraciones_sin_descuento_eur": 393034.0,
-       "compra_mediana_oficial_sin_descuento_eur": 589443.022
+       "compra_mediana_valoraciones_eur": 393034.0,
+       "compra_mediana_oficial_eur": 589443.022
       },
       {
        "distrito": "Retiro",
@@ -15205,8 +14986,8 @@
        "puesto_m2": 3,
        "puesto_inmueble": 4,
        "anuncios_de_la_base": 266,
-       "compra_mediana_valoraciones_sin_descuento_eur": 408604.3,
-       "compra_mediana_oficial_sin_descuento_eur": 469203.4608
+       "compra_mediana_valoraciones_eur": 408604.3,
+       "compra_mediana_oficial_eur": 469203.4608
       },
       {
        "distrito": "Moncloa-Aravaca",
@@ -15216,8 +14997,8 @@
        "puesto_m2": 7,
        "puesto_inmueble": 5,
        "anuncios_de_la_base": 177,
-       "compra_mediana_valoraciones_sin_descuento_eur": 377743.5,
-       "compra_mediana_oficial_sin_descuento_eur": 827409.3624
+       "compra_mediana_valoraciones_eur": 377743.5,
+       "compra_mediana_oficial_eur": 827409.3624
       },
       {
        "distrito": "Fuencarral-El Pardo",
@@ -15227,8 +15008,8 @@
        "puesto_m2": 9,
        "puesto_inmueble": 6,
        "anuncios_de_la_base": 112,
-       "compra_mediana_valoraciones_sin_descuento_eur": 273363.0,
-       "compra_mediana_oficial_sin_descuento_eur": 404933.76
+       "compra_mediana_valoraciones_eur": 273363.0,
+       "compra_mediana_oficial_eur": 404933.76
       },
       {
        "distrito": "Centro",
@@ -15238,8 +15019,8 @@
        "puesto_m2": 5,
        "puesto_inmueble": 7,
        "anuncios_de_la_base": 3195,
-       "compra_mediana_valoraciones_sin_descuento_eur": 384830.5,
-       "compra_mediana_oficial_sin_descuento_eur": 514102.384
+       "compra_mediana_valoraciones_eur": 384830.5,
+       "compra_mediana_oficial_eur": 514102.384
       },
       {
        "distrito": "Hortaleza",
@@ -15249,8 +15030,8 @@
        "puesto_m2": 10,
        "puesto_inmueble": 8,
        "anuncios_de_la_base": 127,
-       "compra_mediana_valoraciones_sin_descuento_eur": 239297.5,
-       "compra_mediana_oficial_sin_descuento_eur": 390437.801
+       "compra_mediana_valoraciones_eur": 239297.5,
+       "compra_mediana_oficial_eur": 390437.801
       },
       {
        "distrito": "Barajas",
@@ -15260,8 +15041,8 @@
        "puesto_m2": 12,
        "puesto_inmueble": 9,
        "anuncios_de_la_base": 39,
-       "compra_mediana_valoraciones_sin_descuento_eur": 220946.5,
-       "compra_mediana_oficial_sin_descuento_eur": 418958.7533
+       "compra_mediana_valoraciones_eur": 220946.5,
+       "compra_mediana_oficial_eur": 418958.7533
       },
       {
        "distrito": "Arganzuela",
@@ -15271,8 +15052,8 @@
        "puesto_m2": 6,
        "puesto_inmueble": 10,
        "anuncios_de_la_base": 408,
-       "compra_mediana_valoraciones_sin_descuento_eur": 292756.0,
-       "compra_mediana_oficial_sin_descuento_eur": 386935.2385
+       "compra_mediana_valoraciones_eur": 292756.0,
+       "compra_mediana_oficial_eur": 386935.2385
       },
       {
        "distrito": "Tetuán",
@@ -15282,8 +15063,8 @@
        "puesto_m2": 8,
        "puesto_inmueble": 11,
        "anuncios_de_la_base": 537,
-       "compra_mediana_valoraciones_sin_descuento_eur": 324186.85,
-       "compra_mediana_oficial_sin_descuento_eur": 416206.0405
+       "compra_mediana_valoraciones_eur": 324186.85,
+       "compra_mediana_oficial_eur": 416206.0405
       },
       {
        "distrito": "Ciudad Lineal",
@@ -15293,8 +15074,8 @@
        "puesto_m2": 11,
        "puesto_inmueble": 12,
        "anuncios_de_la_base": 301,
-       "compra_mediana_valoraciones_sin_descuento_eur": 221800.5,
-       "compra_mediana_oficial_sin_descuento_eur": 273567.9033
+       "compra_mediana_valoraciones_eur": 221800.5,
+       "compra_mediana_oficial_eur": 273567.9033
       },
       {
        "distrito": "Moratalaz",
@@ -15304,8 +15085,8 @@
        "puesto_m2": 13,
        "puesto_inmueble": 13,
        "anuncios_de_la_base": 34,
-       "compra_mediana_valoraciones_sin_descuento_eur": 194983.0,
-       "compra_mediana_oficial_sin_descuento_eur": 325256.808
+       "compra_mediana_valoraciones_eur": 194983.0,
+       "compra_mediana_oficial_eur": 325256.808
       },
       {
        "distrito": "San Blas - Canillejas",
@@ -15315,8 +15096,8 @@
        "puesto_m2": 16,
        "puesto_inmueble": 14,
        "anuncios_de_la_base": 159,
-       "compra_mediana_valoraciones_sin_descuento_eur": 179008.0,
-       "compra_mediana_oficial_sin_descuento_eur": 283777.923
+       "compra_mediana_valoraciones_eur": 179008.0,
+       "compra_mediana_oficial_eur": 283777.923
       },
       {
        "distrito": "Vicálvaro",
@@ -15326,8 +15107,8 @@
        "puesto_m2": 14,
        "puesto_inmueble": 15,
        "anuncios_de_la_base": 19,
-       "compra_mediana_valoraciones_sin_descuento_eur": 167760.0,
-       "compra_mediana_oficial_sin_descuento_eur": 200775.168
+       "compra_mediana_valoraciones_eur": 167760.0,
+       "compra_mediana_oficial_eur": 200775.168
       },
       {
        "distrito": "Usera",
@@ -15337,8 +15118,8 @@
        "puesto_m2": 17,
        "puesto_inmueble": 16,
        "anuncios_de_la_base": 157,
-       "compra_mediana_valoraciones_sin_descuento_eur": 200788.25,
-       "compra_mediana_oficial_sin_descuento_eur": 245664.126
+       "compra_mediana_valoraciones_eur": 200788.25,
+       "compra_mediana_oficial_eur": 245664.126
       },
       {
        "distrito": "Villa de Vallecas",
@@ -15348,8 +15129,8 @@
        "puesto_m2": 19,
        "puesto_inmueble": 17,
        "anuncios_de_la_base": 23,
-       "compra_mediana_valoraciones_sin_descuento_eur": 145760.5,
-       "compra_mediana_oficial_sin_descuento_eur": 189809.3231
+       "compra_mediana_valoraciones_eur": 145760.5,
+       "compra_mediana_oficial_eur": 189809.3231
       },
       {
        "distrito": "Latina",
@@ -15359,8 +15140,8 @@
        "puesto_m2": 15,
        "puesto_inmueble": 18,
        "anuncios_de_la_base": 140,
-       "compra_mediana_valoraciones_sin_descuento_eur": 201665.0,
-       "compra_mediana_oficial_sin_descuento_eur": 260452.5924
+       "compra_mediana_valoraciones_eur": 201665.0,
+       "compra_mediana_oficial_eur": 260452.5924
       },
       {
        "distrito": "Carabanchel",
@@ -15370,8 +15151,8 @@
        "puesto_m2": 18,
        "puesto_inmueble": 19,
        "anuncios_de_la_base": 231,
-       "compra_mediana_valoraciones_sin_descuento_eur": 183501.5,
-       "compra_mediana_oficial_sin_descuento_eur": 238295.0479
+       "compra_mediana_valoraciones_eur": 183501.5,
+       "compra_mediana_oficial_eur": 238295.0479
       },
       {
        "distrito": "Puente de Vallecas",
@@ -15381,8 +15162,8 @@
        "puesto_m2": 20,
        "puesto_inmueble": 20,
        "anuncios_de_la_base": 201,
-       "compra_mediana_valoraciones_sin_descuento_eur": 161973.0,
-       "compra_mediana_oficial_sin_descuento_eur": 188860.518
+       "compra_mediana_valoraciones_eur": 161973.0,
+       "compra_mediana_oficial_eur": 188860.518
       },
       {
        "distrito": "Villaverde",
@@ -15392,8 +15173,8 @@
        "puesto_m2": 21,
        "puesto_inmueble": 21,
        "anuncios_de_la_base": 57,
-       "compra_mediana_valoraciones_sin_descuento_eur": 147801.5,
-       "compra_mediana_oficial_sin_descuento_eur": 191661.198
+       "compra_mediana_valoraciones_eur": 147801.5,
+       "compra_mediana_oficial_eur": 191661.198
       }
      ]
     }
@@ -15489,7 +15270,7 @@
   }
  ],
  "evolucion_oferta": {
-  "poblacion": "todos los anuncios de cada foto de Madrid",
+  "poblacion": "todos los anuncios de cada descarga de Madrid",
   "fotos": [
    {
     "foto": "2025-12-14",
@@ -15517,7 +15298,7 @@
   ],
   "junio_2025": {
    "anuncios": 26004,
-   "origen": "02_datos_necesarios.md: recuento anotado cuando esa foto se podía consultar, que ya no se puede descargar"
+   "origen": "02_datos_necesarios.md: recuento anotado cuando esa descarga se podía consultar, que ya no se puede descargar"
   },
   "grupo_por_foto": [
    {
@@ -15584,10 +15365,10 @@
     "2026-09-17": 109
    }
   ],
-  "limites": "Una foto no se compara con otra sin decirlo: es la misma ciudad en otra fecha, y un cambio entre fotos no dice por qué ocurre."
+  "limites": "Una foto no se compara con otra sin decirlo: es la misma ciudad en otra fecha, y un cambio entre descargas no dice por qué ocurre."
  },
  "estacionalidad": {
-  "poblacion": "reseñas de los anuncios de la foto de septiembre",
+  "poblacion": "reseñas de los anuncios de la descarga de septiembre",
   "ventana": [
    "2024-09",
    "2026-08"
@@ -15913,82 +15694,82 @@
    "corte_puntos": 2.0,
    "pisos_con_mas_puntos": 276,
    "pisos_con_menos_puntos": 285,
-   "con_mas_puntos": 15.638547,
-   "con_menos_puntos": 15.932363,
+   "con_mas_puntos": 11.72891,
+   "con_menos_puntos": 11.949272,
    "diferencia": {
     "a": "con más puntos",
     "b": "con menos puntos",
-    "diferencia": -0.293816,
-    "bajo": -2.814613,
-    "alto": 1.679597,
+    "diferencia": -0.220362,
+    "bajo": -2.11096,
+    "alto": 1.259698,
     "se_distinguen": false
    },
    "spearman_dentro_del_barrio": {
     "pearson": 0.000482,
-    "spearman": 0.017083,
+    "spearman": 0.017079,
     "pares": 561
    }
   },
   "fichas_del_grupo": [
    {
     "barrio": "Canillejas",
-    "clase": "segunda línea",
+    "clase": "menos de 4 veces",
     "pisos": 35,
     "puntos_medianos_500m": 1.0,
     "competencia_anuncios": 107
    },
    {
     "barrio": "Casco Histórico de Vallecas",
-    "clase": "con aviso",
+    "clase": "4 de 5 veces",
     "pisos": 37,
     "puntos_medianos_500m": 1.0,
     "competencia_anuncios": 86
    },
    {
     "barrio": "Numancia",
-    "clase": "firme",
+    "clase": "5 de 5 veces",
     "pisos": 84,
     "puntos_medianos_500m": 2.0,
     "competencia_anuncios": 220
    },
    {
     "barrio": "Opañel",
-    "clase": "con aviso",
+    "clase": "4 de 5 veces",
     "pisos": 60,
     "puntos_medianos_500m": 5.0,
     "competencia_anuncios": 149
    },
    {
     "barrio": "Puerta del Angel",
-    "clase": "segunda línea",
+    "clase": "menos de 4 veces",
     "pisos": 75,
     "puntos_medianos_500m": 2.0,
     "competencia_anuncios": 230
    },
    {
     "barrio": "Quintana",
-    "clase": "segunda línea",
+    "clase": "menos de 4 veces",
     "pisos": 42,
     "puntos_medianos_500m": 2.0,
     "competencia_anuncios": 95
    },
    {
     "barrio": "San Diego",
-    "clase": "firme",
+    "clase": "5 de 5 veces",
     "pisos": 107,
     "puntos_medianos_500m": 4.0,
     "competencia_anuncios": 266
    },
    {
     "barrio": "Ventas",
-    "clase": "firme",
+    "clase": "5 de 5 veces",
     "pisos": 89,
     "puntos_medianos_500m": 1.0,
     "competencia_anuncios": 220
    },
    {
     "barrio": "Vista Alegre",
-    "clase": "segunda línea",
+    "clase": "menos de 4 veces",
     "pisos": 32,
     "puntos_medianos_500m": 3.0,
     "competencia_anuncios": 109
@@ -16017,7 +15798,7 @@
   "fichas_del_grupo": [
    {
     "barrio": "Canillejas",
-    "clase": "segunda línea",
+    "clase": "menos de 4 veces",
     "anuncios": 107,
     "pisos_completos": 46,
     "licencias": 8,
@@ -16025,7 +15806,7 @@
    },
    {
     "barrio": "Casco Histórico de Vallecas",
-    "clase": "con aviso",
+    "clase": "4 de 5 veces",
     "anuncios": 86,
     "pisos_completos": 58,
     "licencias": 8,
@@ -16033,7 +15814,7 @@
    },
    {
     "barrio": "Numancia",
-    "clase": "firme",
+    "clase": "5 de 5 veces",
     "anuncios": 220,
     "pisos_completos": 142,
     "licencias": 19,
@@ -16041,7 +15822,7 @@
    },
    {
     "barrio": "Opañel",
-    "clase": "con aviso",
+    "clase": "4 de 5 veces",
     "anuncios": 149,
     "pisos_completos": 97,
     "licencias": 9,
@@ -16049,7 +15830,7 @@
    },
    {
     "barrio": "Puerta del Angel",
-    "clase": "segunda línea",
+    "clase": "menos de 4 veces",
     "anuncios": 230,
     "pisos_completos": 141,
     "licencias": 32,
@@ -16057,7 +15838,7 @@
    },
    {
     "barrio": "Quintana",
-    "clase": "segunda línea",
+    "clase": "menos de 4 veces",
     "anuncios": 95,
     "pisos_completos": 55,
     "licencias": 9,
@@ -16065,7 +15846,7 @@
    },
    {
     "barrio": "San Diego",
-    "clase": "firme",
+    "clase": "5 de 5 veces",
     "anuncios": 266,
     "pisos_completos": 206,
     "licencias": 18,
@@ -16073,7 +15854,7 @@
    },
    {
     "barrio": "Ventas",
-    "clase": "firme",
+    "clase": "5 de 5 veces",
     "anuncios": 220,
     "pisos_completos": 127,
     "licencias": 35,
@@ -16081,7 +15862,7 @@
    },
    {
     "barrio": "Vista Alegre",
-    "clase": "segunda línea",
+    "clase": "menos de 4 veces",
     "anuncios": 109,
     "pisos_completos": 45,
     "licencias": 11,
@@ -16342,12 +16123,6 @@
    "coinciden": true
   },
   {
-   "tabla": "P1 dormitorios: sin descuento",
-   "celdas": 16,
-   "diferencia_maxima": 0.0,
-   "coinciden": true
-  },
-  {
    "tabla": "P1 dormitorios: superficie oficial",
    "celdas": 16,
    "diferencia_maxima": 0.0,
@@ -16361,12 +16136,6 @@
   },
   {
    "tabla": "P1 tipo de inmueble: euros",
-   "celdas": 16,
-   "diferencia_maxima": 0.0,
-   "coinciden": true
-  },
-  {
-   "tabla": "P1 tipo de inmueble: sin descuento",
    "celdas": 16,
    "diferencia_maxima": 0.0,
    "coinciden": true
@@ -16462,7 +16231,7 @@
    "coinciden": true
   },
   {
-   "tabla": "parte de operadores grandes en los barrios con aviso",
+   "tabla": "parte de operadores grandes en los barrios que siguen en la lista 4 veces",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
@@ -16504,7 +16273,7 @@
    "coinciden": true
   },
   {
-   "tabla": "pisos del grupo firme",
+   "tabla": "pisos del grupo recomendado",
    "celdas": 1,
    "diferencia_maxima": 0,
    "coinciden": true
@@ -16546,61 +16315,61 @@
    "coinciden": true
   },
   {
-   "tabla": "rango del grupo firme: mínimo",
+   "tabla": "rango del grupo recomendado: mínimo",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
   },
   {
-   "tabla": "rango del grupo firme: máximo",
+   "tabla": "rango del grupo recomendado: máximo",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
   },
   {
-   "tabla": "rango de firmes y con aviso: mínimo",
+   "tabla": "rango de recomendados y los que siguen en la lista 4 veces: mínimo",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
   },
   {
-   "tabla": "rango de firmes y con aviso: máximo",
+   "tabla": "rango de recomendados y los que siguen en la lista 4 veces: máximo",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
   },
   {
-   "tabla": "rentabilidad del grupo firme: media",
+   "tabla": "rentabilidad del grupo recomendado: media",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
   },
   {
-   "tabla": "rentabilidad del grupo firme: mediana",
+   "tabla": "rentabilidad del grupo recomendado: mediana",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
   },
   {
-   "tabla": "rentabilidad del grupo firme: minimo",
+   "tabla": "rentabilidad del grupo recomendado: minimo",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
   },
   {
-   "tabla": "rentabilidad del grupo firme: maximo",
+   "tabla": "rentabilidad del grupo recomendado: maximo",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
   },
   {
-   "tabla": "rentabilidad del grupo firme: q25",
+   "tabla": "rentabilidad del grupo recomendado: q25",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
   },
   {
-   "tabla": "rentabilidad del grupo firme: q75",
+   "tabla": "rentabilidad del grupo recomendado: q75",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
@@ -16612,25 +16381,13 @@
    "coinciden": true
   },
   {
-   "tabla": "recomendación: rentabilidad_sin_descuento_pct",
+   "tabla": "recomendación: rentabilidad_pct",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
   },
   {
-   "tabla": "recomendación: rentabilidad_con_descuento_pct",
-   "celdas": 1,
-   "diferencia_maxima": 0.0,
-   "coinciden": true
-  },
-  {
-   "tabla": "recomendación: compra_sin_descuento_eur",
-   "celdas": 1,
-   "diferencia_maxima": 0.0,
-   "coinciden": true
-  },
-  {
-   "tabla": "recomendación: compra_con_descuento_eur",
+   "tabla": "recomendación: compra_eur",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
@@ -17867,7 +17624,7 @@
    "origen": "reglas §3"
   },
   {
-   "nombre": "mínimo en las variantes que lo fijan",
+   "nombre": "mínimo en las repeticiones que lo fijan",
    "valor": "20",
    "origen": "reglas §3"
   },
@@ -17910,12 +17667,12 @@
  },
  "decisiones_propias": [
   "Texto de las 16 preguntas: la lista de comprobación del análisis.",
-  "El rango del grupo firme es la mediana conjunta de sus pisos en cada una de las seis combinaciones; también se da barrio a barrio.",
-  "Rango entre fotos: mediana del barrio con estancia de hasta 3 noches, y una foto con menos de 20 pisos no da cifra, el mínimo de las variantes.",
-  "«Depende del tope»: el barrio sale del grupo al repetir las 12 variantes sin los pisos en 255 días de toda la base, porque así se mide cada prueba. Al lado va lo que da quitando solo los del barrio.",
-  "Anuncios del anfitrión: `calculated_host_listings_count`, el recuento de la foto.",
-  "Cotización a más de 60 días: cada variante mira la foto de la que toma el precio. Una cotización vacía no se cuenta como lejana.",
-  "Pisos sin ocupación como cero: se les aplican los demás filtros de cada variante, también el del precio.",
+  "El rango del grupo recomendado es la mediana conjunta de sus pisos en cada una de las seis combinaciones; también se da barrio a barrio.",
+  "Rango entre fotos: mediana del barrio con estancia de hasta 3 noches, y una descarga con menos de 20 pisos no da cifra, el mínimo de las repeticiones.",
+  "«Depende del máximo»: el barrio sale del grupo al repetir las 12 repeticiones sin los pisos en 255 días de toda la base, porque así se mide cada prueba. Al lado va lo que da quitando solo los del barrio.",
+  "Anuncios del anfitrión: `calculated_host_listings_count`, el recuento de la descarga.",
+  "Cotización a más de 60 días: cada repetición mira la descarga de la que toma el precio. Una cotización vacía no se cuenta como lejana.",
+  "Pisos sin ocupación como cero: se les aplican los demás filtros de cada repetición, también el del precio.",
   "Sensibilidad de superficie: las ocho combinaciones de los extremos, el estudio es el piso sin habitación, y los pisos que la regla lleva a otra superficie por sus baños no se mueven.",
   "Barrios baratos: tantos como barrios tiene el grupo, entre los comparados con 30 pisos o más y, aparte, en toda la ciudad.",
   "La pregunta 1 no agrupa los pisos sin habitación con los de uno, aunque la superficie sea la misma.",
@@ -17923,15 +17680,15 @@
   "Precio de la base de comparación: el de vivienda de las reglas §3, y el publicado al lado en la pregunta S01.",
   "Atractivo dentro del grupo: se parte en dos por la mediana de puntos del grupo, y se resta la mediana del barrio para mirarlo dentro de cada uno.",
   "Estacionalidad: los últimos 24 meses completos, la misma ventana del reconocimiento.",
-  "Pisos de un año o más: primera reseña en la fecha de la foto menos un año o antes; es la única fecha de antigüedad del anuncio en los datos.",
+  "Pisos de un año o más: primera reseña en la fecha de la descarga menos un año o antes; es la única fecha de antigüedad del anuncio en los datos.",
   "Licencias con planta baja: las que nombran BAJA en su texto, sola o con otras plantas. La columna es texto libre y solo se le pregunta eso.",
-  "Cifra de la recomendación: mediana conjunta de los pisos de 2 habitaciones o menos de los tres firmes, estudios incluidos.",
+  "Cifra de la recomendación: mediana conjunta de los pisos de 2 habitaciones o menos de los tres recomendados, estudios incluidos.",
   "Barrios de m² más barato frente a la lista: los 9 de los comparados; sus pares se miden aunque compartan barrios con la lista, de modo que el intervalo es orientativo."
  ],
  "pendientes_resueltos": [
   {
    "id": "P-01",
-   "pregunta": "Cuándo un barrio depende del tope y cuándo tiene pocos anuncios.",
+   "pregunta": "Cuándo un barrio depende del máximo y cuándo tiene pocos anuncios.",
    "resuelto_por": "reglas §3, con las cinco pruebas y los tres avisos"
   }
  ]

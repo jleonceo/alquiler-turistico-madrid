@@ -50,11 +50,11 @@ def principal():
     malos = {}
     x = copy.deepcopy(base)
     x["preguntas"][1]["firmes"] = ["Ventas"]
-    malos["cambian los firmes"] = x
+    malos["cambian los recomendados"] = x
     x = copy.deepcopy(base)
     f = next(k for k in x["preguntas"][1]["fichas_del_grupo"] if k["barrio"] == "Ventas")
     f["cuartil_bajo_pct"] = 1.0
-    malos["un firme no supera el cuartil bajo de la base"] = x
+    malos["un barrio recomendado no supera el cuartil bajo de la base"] = x
     x = copy.deepcopy(base)
     next(k for k in x["preguntas"][1]["con_un_ano_o_mas"]["barrios"] if k["barrio"] == "San Diego")["en_el_mejor_cuarto"] = True
     malos["San Diego deja de sostenerse menos"] = x
@@ -95,8 +95,8 @@ def principal():
         caso("fecha de datos igual que indicadores", j["fecha_datos"] == base["fecha_datos"])
         for nombre, tope in {"titulo_y_resumen": 300, "encontrado": 400, "limites": 100, "recomendaciones": 200, "anexo": 500}.items():
             caso(f"{nombre} dentro de su tope", j["palabras_por_apartado"][nombre] <= tope, j["palabras_por_apartado"][nombre])
-        caso("el límite va antes de la primera viñeta", texto.index("lista de dónde buscar") < texto.index("10,8 %"))
-        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo a Ventas", "tope de 255 días", "no es beneficio"):
+        caso("el límite va antes de la primera viñeta", texto.index("dice dónde buscar") < texto.index("12,1 %"))
+        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo seguiría en la lista el barrio de Ventas", "máximo de 255", "antes de gastos e impuestos"):
             caso(f"dice «{frase}»", frase in texto)
         caso("tres acciones", len(j["acciones"]) == 3)
         for a in j["acciones"]:

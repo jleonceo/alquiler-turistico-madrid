@@ -35,7 +35,7 @@ def construir(a, dec):
         t[f"lejana_{foto}"] = L[dias].gt(reglas["cotizacion_dias"]).astype("int64")
         t[f"rent_{foto}_pct"] = cd.rentabilidad(L, precio).where(L[precio].between(20, 1000)).round(4)
     t["ingreso_sep_eur"] = x["ingreso_anual_eur"].where(L["precio"].between(20, 1000)).round(2)
-    t["compra_sin_descuento_eur"] = x["compra_valoraciones_sin_eur"].round(2)
+    t["compra_eur"] = x["compra_valoraciones_eur"].round(2)
     pocos = t["barrio"].map(t["barrio"].value_counts()).lt(MINIMO_BARRIO)
     t.loc[pocos, "barrio"] = OTROS
     return t.sample(frac=1, random_state=cd.SEMILLA).reset_index(drop=True)

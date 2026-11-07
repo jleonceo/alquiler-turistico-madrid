@@ -73,7 +73,7 @@ def spearman(x, y):
 def leer():
     """Lee las columnas que hacen falta como filas de diccionarios."""
     columnas = ["id", "barrio", "distrito", "tipo_alquiler", "tipo_inmueble", "lado_centro", "ocupacion_dias", "huespedes", "banos", "dormitorios", "camas", "estancia_noches", "precio_eur", "precio_mar_eur", "precio_jun_eur", "superficie_valoraciones_m2", "precio_m2_eur",
-                "declara_temporada", "anuncios_anfitrion", "dias_cotizacion", "dias_cotizacion_mar", "dias_cotizacion_jun", "excl_cero_banos", "excl_no_vivienda", "excl_tamano_incoherente", "base_decision", "base_comparacion", "ingreso_anual_eur", "precio_vivienda_comparacion_eur", "rent_valoraciones_desc_pct", "rent_valoraciones_sin_pct", "compra_valoraciones_sin_eur", "compra_valoraciones_desc_eur"]
+                "declara_temporada", "anuncios_anfitrion", "dias_cotizacion", "dias_cotizacion_mar", "dias_cotizacion_jun", "excl_cero_banos", "excl_no_vivienda", "excl_tamano_incoherente", "base_decision", "base_comparacion", "ingreso_anual_eur", "precio_vivienda_comparacion_eur", "rent_valoraciones_pct", "compra_valoraciones_eur"]
     t = pq.read_table(CASO / "data" / "processed" / "analisis_anuncios.parquet", columns=columnas).to_pylist()
     for f in t:
         for c, v in f.items():
@@ -88,9 +88,9 @@ def fija(f, cero=False):
             and f["camas"] is not None and f["camas"] <= 6 and not (f["excl_cero_banos"] or f["excl_no_vivienda"] or f["excl_tamano_incoherente"]))
 
 
-def rent(f, col, factor=0.75):
+def rent(f, col):
     """Rentabilidad bruta de las reglas §2."""
-    return 100 * f[col] * f["ocupacion_dias"] / (f["superficie_valoraciones_m2"] * f["precio_m2_eur"] * factor)
+    return 100 * f[col] * f["ocupacion_dias"] / (f["superficie_valoraciones_m2"] * f["precio_m2_eur"])
 
 
 def en_precio(f, col):
@@ -147,19 +147,18 @@ def principal():
     grupo_d = defaultdict(list)
     for f in d:
         grupo_d["4 o más" if f["dormitorios"] >= 4 else str(int(f["dormitorios"]))].append(f)
-    caso("referencia de la pregunta 1", statistics.median(f["rent_valoraciones_desc_pct"] for f in d), p1["referencia"]["valor"], TOL)
+    caso("referencia de la pregunta 1", statistics.median(f["rent_valoraciones_pct"] for f in d), p1["referencia"]["valor"], TOL)
     for x in p1["dormitorios"]["tabla"]:
         v = grupo_d[x["grupo"]]
         caso(f"{x['grupo']} habitaciones, recuento", len(v), x["pisos"])
         caso(f"{x['grupo']} habitaciones, rentabilidad", statistics.median(rent(f, "precio_eur") for f in v), x["rentabilidad_mediana_pct"], TOL)
-        caso(f"{x['grupo']} habitaciones, sin descuento", statistics.median(rent(f, "precio_eur", 1.0) for f in v), x["sin_descuento_pct"], TOL)
         caso(f"{x['grupo']} habitaciones, euros", statistics.median(f["ingreso_anual_eur"] for f in v), x["euros_al_ano"], TOL)
     # Sensibilidad de superficie: las medianas de cada combinación, a mano.
     regla_sup = {"0": 50.0, "1": 50.0, "2": 65.0}
     for comb in p1["sensibilidad_superficie"]["combinaciones"]:
         for g_, v in grupo_d.items():
             if g_ in comb["medianas"]:
-                val = [f["ingreso_anual_eur"] * 100 / ((comb["superficies"][g_] if g_ in comb["superficies"] and f["superficie_valoraciones_m2"] == regla_sup[g_] else f["superficie_valoraciones_m2"]) * f["precio_m2_eur"] * 0.75) for f in v]
+                val = [f["ingreso_anual_eur"] * 100 / ((comb["superficies"][g_] if g_ in comb["superficies"] and f["superficie_valoraciones_m2"] == regla_sup[g_] else f["superficie_valoraciones_m2"]) * f["precio_m2_eur"]) for f in v]
                 caso(f"sensibilidad {comb['superficies']}, {g_} habitaciones", statistics.median(val), comb["medianas"][g_], TOL)
 
     gen = random.Random(63)
@@ -181,45 +180,44 @@ def principal():
     ref = json.loads((CASO / "tests" / "cifras_de_referencia.json").read_text(encoding="utf-8"))
     caso("grupo rehecho frente al control", grupo, CONTROL["grupo"])
     caso("firmes rehechos frente al control", firmes, CONTROL["firmes"])
-    caso("con aviso rehechos frente al control", con_aviso, CONTROL["con_aviso"])
+    caso("que siguen en la lista 4 veces rehechos frente al control", con_aviso, CONTROL["con_aviso"])
     caso("barrios del grupo frente a la referencia", len(grupo), ref["barrios_del_grupo"])
-    caso("barrios firmes frente a la referencia", len(firmes), ref["barrios_firmes"])
+    caso("barrios recomendados frente a la referencia", len(firmes), ref["barrios_firmes"])
     caso("grupo del JSON", p2["grupo"], grupo)
     caso("firmes del JSON", p2["firmes"], firmes)
-    caso("con aviso del JSON", p2["pruebas"]["con_aviso"], con_aviso)
-    caso("segunda línea del JSON", p2["pruebas"]["segunda_linea"], sorted(set(grupo) - set(firmes) - set(con_aviso)))
+    caso("que siguen en la lista 4 veces del JSON", p2["pruebas"]["con_aviso"], con_aviso)
+    caso("resto del grupo del JSON", p2["pruebas"]["segunda_linea"], sorted(set(grupo) - set(firmes) - set(con_aviso)))
     for nombre, v in pruebas.items():
         caso(f"variantes de la prueba {nombre}", p2["pruebas"]["variantes_por_prueba"][nombre], dict(sorted(v.items())))
     for b, x in aguanta.items():
         caso(f"{b}, pruebas que aguanta", sorted(p2["pruebas"]["barrios"][b]["aguanta"]), x)
     caso("variantes por barrio del JSON", p2["variantes_por_barrio"], dict(sorted((k, v) for k, v in veces.items())))
-    caso("mediana de los barrios", statistics.median(statistics.median(f["rent_valoraciones_desc_pct"] for f in v) for v in por_barrio.values() if len(v) >= 30), p2["referencia"]["valor"], TOL)
+    caso("mediana de los barrios", statistics.median(statistics.median(f["rent_valoraciones_pct"] for f in v) for v in por_barrio.values() if len(v) >= 30), p2["referencia"]["valor"], TOL)
     sin_tope = variantes(t, lambda f: f["ocupacion_dias"] == 255)
     for x in p2["fichas_del_grupo"]:
         v = por_barrio[x["barrio"]]
-        r = [f["rent_valoraciones_desc_pct"] for f in v]
+        r = [f["rent_valoraciones_pct"] for f in v]
         caso(f"{x['barrio']}, pisos", len(v), x["pisos"])
         caso(f"{x['barrio']}, mediana", statistics.median(r), x["rentabilidad_mediana_pct"], TOL)
         caso(f"{x['barrio']}, cuartil bajo", cuantil(r, 0.25), x["cuartil_bajo_pct"], TOL)
         caso(f"{x['barrio']}, tope", 100 * sum(1 for f in v if f["ocupacion_dias"] == 255) / len(v), x["parte_en_el_tope_pct"], TOL)
-        caso(f"{x['barrio']}, aviso de cuartil bajo", cuantil(r, 0.25) <= cuantil([f["rent_valoraciones_desc_pct"] for f in d], 0.25), x["avisos_del_barrio"]["cuartil_bajo"])
+        caso(f"{x['barrio']}, aviso de cuartil bajo", cuantil(r, 0.25) <= cuantil([f["rent_valoraciones_pct"] for f in d], 0.25), x["avisos_del_barrio"]["cuartil_bajo"])
         caso(f"{x['barrio']}, aviso de pocos anuncios", len(v) <= POCOS, x["avisos_del_barrio"]["pocos_anuncios"])
         caso(f"{x['barrio']}, aviso del tope", sin_tope[x["barrio"]] < 7, x["avisos_del_barrio"]["depende_del_tope"])
 
-    # Pregunta 3: rango del grupo firme, rango entre fotos y barrios frente al primero.
+    # Pregunta 3: rango del grupo recomendado, rango entre fotos y barrios frente al primero.
     fil = [f for f in t if fija(f) and f["estancia_noches"] is not None and f["estancia_noches"] <= 3 and f["barrio"] in firmes]
     meds = []
     for foto, col in (("marzo", "precio_mar_eur"), ("junio", "precio_jun_eur"), ("septiembre", "precio_eur")):
-        for factor in (0.75, 1.0):
-            meds.append(statistics.median(rent(f, col, factor) for f in fil if en_precio(f, col)))
+        meds.append(statistics.median(rent(f, col) for f in fil if en_precio(f, col)))
     r = p3["rango_de_rentabilidad_del_grupo_firme"]
-    caso("rango del grupo firme, mínimo", min(meds), r["minimo"], TOL)
-    caso("rango del grupo firme, máximo", max(meds), r["maximo"], TOL)
+    caso("rango del grupo recomendado, mínimo", min(meds), r["minimo"], TOL)
+    caso("rango del grupo recomendado, máximo", max(meds), r["maximo"], TOL)
     fil2 = [f for f in t if fija(f) and f["estancia_noches"] is not None and f["estancia_noches"] <= 3 and f["barrio"] in firmes + con_aviso]
-    meds2 = [statistics.median(rent(f, col, factor) for f in fil2 if en_precio(f, col)) for col in ("precio_mar_eur", "precio_jun_eur", "precio_eur") for factor in (0.75, 1.0)]
+    meds2 = [statistics.median(rent(f, col) for f in fil2 if en_precio(f, col)) for col in ("precio_mar_eur", "precio_jun_eur", "precio_eur")]
     r2 = p3["rango_de_rentabilidad_de_firmes_y_con_aviso"]
-    caso("rango de firmes y con aviso, mínimo", min(meds2), r2["minimo"], TOL)
-    caso("rango de firmes y con aviso, máximo", max(meds2), r2["maximo"], TOL)
+    caso("rango de recomendados y los que siguen en la lista 4 veces, mínimo", min(meds2), r2["minimo"], TOL)
+    caso("rango de recomendados y los que siguen en la lista 4 veces, máximo", max(meds2), r2["maximo"], TOL)
 
     # Pisos sin ocupación, con los mismos filtros de la base y sin el de la ocupación.
     for x in p3["fichas_del_grupo"]:
@@ -246,12 +244,12 @@ def principal():
         caso(f"{x['barrio']}, rango entre fotos", max(por_foto) - min(por_foto), x["rango_entre_fotos_puntos"], TOL)
     primero = p3["primero"]
     gen = random.Random(630)
-    base_primero = remuestreo([f["rent_valoraciones_desc_pct"] for f in por_barrio[primero]], gen)
+    base_primero = remuestreo([f["rent_valoraciones_pct"] for f in por_barrio[primero]], gen)
     distinguen = 0
     for x in p3["tabla_riesgo"]:
         if x["barrio"] == primero:
             continue
-        otro = remuestreo([f["rent_valoraciones_desc_pct"] for f in por_barrio[x["barrio"]]], gen)
+        otro = remuestreo([f["rent_valoraciones_pct"] for f in por_barrio[x["barrio"]]], gen)
         dif = sorted(a - b for a, b in zip(base_primero, otro))
         distinguen += dif[50] > 0 or dif[1949] < 0
     caso("barrios que se distinguen del primero, con otro generador", distinguen, len(p3["se_distinguen_del_primero"]), 2)
@@ -259,24 +257,24 @@ def principal():
     # La recomendación, el cuartil de la base, los baratos frente a la lista, el orden entre barrios y los pisos de un año o más.
     rec = [f for f in d if f["barrio"] in firmes and f["dormitorios"] <= 2]
     caso("recomendación, pisos", len(rec), j["recomendacion"]["pisos"])
-    for clave, col in (("rentabilidad_sin_descuento_pct", "rent_valoraciones_sin_pct"), ("rentabilidad_con_descuento_pct", "rent_valoraciones_desc_pct"), ("compra_sin_descuento_eur", "compra_valoraciones_sin_eur"), ("compra_con_descuento_eur", "compra_valoraciones_desc_eur"), ("ingreso_anual_eur", "ingreso_anual_eur")):
+    for clave, col in (("rentabilidad_pct", "rent_valoraciones_pct"), ("compra_eur", "compra_valoraciones_eur"), ("ingreso_anual_eur", "ingreso_anual_eur")):
         caso(f"recomendación, {clave}", statistics.median(f[col] for f in rec), j["recomendacion"][clave], TOL)
-    caso("cuartil bajo de toda la base", cuantil([f["rent_valoraciones_desc_pct"] for f in d], 0.25), p2["cuartil_bajo_de_toda_la_base"], TOL)
-    caso("barrios sin superar la mediana", sum(1 for b in comparados if cuantil([f["rent_valoraciones_desc_pct"] for f in por_barrio[b]], 0.25) <= statistics.median(f["rent_valoraciones_desc_pct"] for f in d)), p2["aviso_del_cuartil"]["no_superan_la_mediana"])
+    caso("cuartil bajo de toda la base", cuantil([f["rent_valoraciones_pct"] for f in d], 0.25), p2["cuartil_bajo_de_toda_la_base"], TOL)
+    caso("barrios sin superar la mediana", sum(1 for b in comparados if cuantil([f["rent_valoraciones_pct"] for f in por_barrio[b]], 0.25) <= statistics.median(f["rent_valoraciones_pct"] for f in d)), p2["aviso_del_cuartil"]["no_superan_la_mediana"])
     q = p2["que_ordena_la_lista"]
     for nombre, barrios in (("m2_baratos", baratos), ("firmes", firmes), ("grupo", grupo)):
-        caso(f"rentabilidad conjunta de {nombre}", statistics.median(f["rent_valoraciones_desc_pct"] for f in d if f["barrio"] in barrios), q[nombre]["mediana_pct"], TOL)
-    medianas = [statistics.median(f["rent_valoraciones_desc_pct"] for f in por_barrio[b]) for b in comparados]
+        caso(f"rentabilidad conjunta de {nombre}", statistics.median(f["rent_valoraciones_pct"] for f in d if f["barrio"] in barrios), q[nombre]["mediana_pct"], TOL)
+    medianas = [statistics.median(f["rent_valoraciones_pct"] for f in por_barrio[b]) for b in comparados]
     caso("rentabilidad y ocupación entre barrios", spearman(medianas, [statistics.median(f["ocupacion_dias"] for f in por_barrio[b]) for b in comparados]), q["rentabilidad_con_ocupacion"], TOL)
     caso("rentabilidad y m² entre barrios", spearman(medianas, [m2[b] for b in comparados]), q["rentabilidad_con_m2"], TOL)
     con_aviso_d = [f for f in d if f["barrio"] in con_aviso]
-    caso("operadores grandes en los barrios con aviso", 100 * sum(1 for f in con_aviso_d if f["anuncios_anfitrion"] >= ANFITRION) / len(con_aviso_d), p2["operadores_grandes"]["con_aviso_pct"], TOL)
+    caso("operadores grandes en los barrios que siguen en la lista 4 veces", 100 * sum(1 for f in con_aviso_d if f["anuncios_anfitrion"] >= ANFITRION) / len(con_aviso_d), p2["operadores_grandes"]["con_aviso_pct"], TOL)
     # La primera reseña no está en la tabla de análisis: se lee de la foto corregida, por el número del anuncio.
     primera = dict(zip(*(pq.read_table(CASO / "data" / "processed" / "anuncios_integrado.parquet", columns=["id", "first_review"]).column(c).to_pylist() for c in ("id", "first_review"))))
     un_ano = defaultdict(list)
     for f in d:
         if primera[f["id"]] is not None and primera[f["id"]] <= "2025-09-17":
-            un_ano[f["barrio"]].append(f["rent_valoraciones_desc_pct"])
+            un_ano[f["barrio"]].append(f["rent_valoraciones_pct"])
     orden_un_ano = sorted((b for b, v in un_ano.items() if len(v) >= 30), key=lambda b: (-statistics.median(un_ano[b]), b))
     caso("barrios con 30 anuncios de un año o más", len(orden_un_ano), p2["con_un_ano_o_mas"]["barrios_comparados"])
     for x in p2["con_un_ano_o_mas"]["barrios"]:
@@ -285,7 +283,7 @@ def principal():
     with open(CASO / "data" / "raw" / "externos" / "licencias_vut_por_barrio.csv", encoding="utf-8") as fichero:
         licencias = list(csv.DictReader(fichero))
     caso("licencias con planta baja", sum(1 for f in licencias if "BAJA" in f["planta"].upper()), j["licencias_y_registro"]["planta_baja"]["licencias"])
-    caso("licencias con planta baja, en los firmes", sum(1 for f in licencias if "BAJA" in f["planta"].upper() and f["barrio"] in firmes), j["licencias_y_registro"]["planta_baja"]["firmes"]["licencias"])
+    caso("licencias con planta baja, en los recomendados", sum(1 for f in licencias if "BAJA" in f["planta"].upper() and f["barrio"] in firmes), j["licencias_y_registro"]["planta_baja"]["firmes"]["licencias"])
 
     # Las 16: las que dan una cifra sola, en las dos bases.
     s = {q["id"]: q for q in j["las_16"]}

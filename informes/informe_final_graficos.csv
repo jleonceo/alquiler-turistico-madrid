@@ -1,39 +1,36 @@
 ﻿pagina;grafico;grupo;medida;cifra;unidad
-2;Hasta 2 habitaciones rinden más que 3 en las combinaciones de m² probadas;1;rentabilidad bruta mediana;12,19;%
-2;Hasta 2 habitaciones rinden más que 3 en las combinaciones de m² probadas;2;rentabilidad bruta mediana;11,30;%
-2;Hasta 2 habitaciones rinden más que 3 en las combinaciones de m² probadas;0;rentabilidad bruta mediana;10,40;%
-2;Hasta 2 habitaciones rinden más que 3 en las combinaciones de m² probadas;3;rentabilidad bruta mediana;6,10;%
-2;Hasta 2 habitaciones rinden más que 3 en las combinaciones de m² probadas;base de decisión;referencia;11,10;%
-4;Tres barrios aguantan las cinco pruebas y dos aguantan cuatro;Canillejas;clase de barrio;3,00;pruebas que aguanta
-4;Tres barrios aguantan las cinco pruebas y dos aguantan cuatro;Casco Histórico de Vallecas;clase de barrio;4,00;pruebas que aguanta
-4;Tres barrios aguantan las cinco pruebas y dos aguantan cuatro;Numancia;clase de barrio;5,00;pruebas que aguanta
-4;Tres barrios aguantan las cinco pruebas y dos aguantan cuatro;Opañel;clase de barrio;4,00;pruebas que aguanta
-4;Tres barrios aguantan las cinco pruebas y dos aguantan cuatro;Puerta del Angel;clase de barrio;0,00;pruebas que aguanta
-4;Tres barrios aguantan las cinco pruebas y dos aguantan cuatro;Quintana;clase de barrio;2,00;pruebas que aguanta
-4;Tres barrios aguantan las cinco pruebas y dos aguantan cuatro;San Diego;clase de barrio;5,00;pruebas que aguanta
-4;Tres barrios aguantan las cinco pruebas y dos aguantan cuatro;Ventas;clase de barrio;5,00;pruebas que aguanta
-4;Tres barrios aguantan las cinco pruebas y dos aguantan cuatro;Vista Alegre;clase de barrio;3,00;pruebas que aguanta
-5;El orden dentro del grupo no está cerrado;Ventas;rentabilidad bruta mediana;16,95;%
-5;El orden dentro del grupo no está cerrado;Numancia;rentabilidad bruta mediana;17,67;%
-5;El orden dentro del grupo no está cerrado;San Diego;rentabilidad bruta mediana;14,58;%
-5;El orden dentro del grupo no está cerrado;Casco Histórico de Vallecas;rentabilidad bruta mediana;18,95;%
-5;El orden dentro del grupo no está cerrado;Opañel;rentabilidad bruta mediana;18,73;%
-5;El orden dentro del grupo no está cerrado;Canillejas;rentabilidad bruta mediana;15,64;%
-5;El orden dentro del grupo no está cerrado;Puerta del Angel;rentabilidad bruta mediana;14,33;%
-5;El orden dentro del grupo no está cerrado;Quintana;rentabilidad bruta mediana;14,63;%
-5;El orden dentro del grupo no está cerrado;Vista Alegre;rentabilidad bruta mediana;16,13;%
-9;Entre los firmes, Ventas es la que más cambia con la foto de precio;Ventas;rango entre fotos;3,59;puntos
-9;Entre los firmes, Ventas es la que más cambia con la foto de precio;Numancia;rango entre fotos;1,40;puntos
-9;Entre los firmes, Ventas es la que más cambia con la foto de precio;San Diego;rango entre fotos;0,60;puntos
-9;Entre los firmes, Ventas es la que más cambia con la foto de precio;Casco Histórico de Vallecas;rango entre fotos;6,23;puntos
-9;Entre los firmes, Ventas es la que más cambia con la foto de precio;Opañel;rango entre fotos;4,33;puntos
-9;Entre los firmes, Ventas es la que más cambia con la foto de precio;Canillejas;rango entre fotos;1,14;puntos
-9;Entre los firmes, Ventas es la que más cambia con la foto de precio;Puerta del Angel;rango entre fotos;1,36;puntos
-9;Entre los firmes, Ventas es la que más cambia con la foto de precio;Quintana;rango entre fotos;1,34;puntos
-9;Entre los firmes, Ventas es la que más cambia con la foto de precio;Vista Alegre;rango entre fotos;2,73;puntos
-10;El descuento del 25 % mueve el nivel más que la foto de precio;Marzo, con descuento;rentabilidad bruta mediana del grupo firme;15,36;%
-10;El descuento del 25 % mueve el nivel más que la foto de precio;Marzo, sin descuento;rentabilidad bruta mediana del grupo firme;11,52;%
-10;El descuento del 25 % mueve el nivel más que la foto de precio;Junio, con descuento;rentabilidad bruta mediana del grupo firme;14,38;%
-10;El descuento del 25 % mueve el nivel más que la foto de precio;Junio, sin descuento;rentabilidad bruta mediana del grupo firme;10,78;%
-10;El descuento del 25 % mueve el nivel más que la foto de precio;Septiembre, con descuento;rentabilidad bruta mediana del grupo firme;15,16;%
-10;El descuento del 25 % mueve el nivel más que la foto de precio;Septiembre, sin descuento;rentabilidad bruta mediana del grupo firme;11,37;%
+2;Hasta 2 habitaciones rinden más que 3 en todas las superficies probadas;1;rentabilidad bruta mediana;9,14;%
+2;Hasta 2 habitaciones rinden más que 3 en todas las superficies probadas;2;rentabilidad bruta mediana;8,47;%
+2;Hasta 2 habitaciones rinden más que 3 en todas las superficies probadas;0;rentabilidad bruta mediana;7,80;%
+2;Hasta 2 habitaciones rinden más que 3 en todas las superficies probadas;3;rentabilidad bruta mediana;4,58;%
+2;Hasta 2 habitaciones rinden más que 3 en todas las superficies probadas;todos los pisos;referencia;8,33;%
+4;Tres barrios siguen en la lista las cinco veces y dos, cuatro veces;Canillejas;veces que sigue en la lista;3,00;veces
+4;Tres barrios siguen en la lista las cinco veces y dos, cuatro veces;Casco Histórico de Vallecas;veces que sigue en la lista;4,00;veces
+4;Tres barrios siguen en la lista las cinco veces y dos, cuatro veces;Numancia;veces que sigue en la lista;5,00;veces
+4;Tres barrios siguen en la lista las cinco veces y dos, cuatro veces;Opañel;veces que sigue en la lista;4,00;veces
+4;Tres barrios siguen en la lista las cinco veces y dos, cuatro veces;Puerta del Angel;veces que sigue en la lista;0,00;veces
+4;Tres barrios siguen en la lista las cinco veces y dos, cuatro veces;Quintana;veces que sigue en la lista;2,00;veces
+4;Tres barrios siguen en la lista las cinco veces y dos, cuatro veces;San Diego;veces que sigue en la lista;5,00;veces
+4;Tres barrios siguen en la lista las cinco veces y dos, cuatro veces;Ventas;veces que sigue en la lista;5,00;veces
+4;Tres barrios siguen en la lista las cinco veces y dos, cuatro veces;Vista Alegre;veces que sigue en la lista;3,00;veces
+5;El orden dentro de la lista no está cerrado;Ventas;rentabilidad bruta mediana;12,71;%
+5;El orden dentro de la lista no está cerrado;Numancia;rentabilidad bruta mediana;13,26;%
+5;El orden dentro de la lista no está cerrado;San Diego;rentabilidad bruta mediana;10,93;%
+5;El orden dentro de la lista no está cerrado;Casco Histórico de Vallecas;rentabilidad bruta mediana;14,21;%
+5;El orden dentro de la lista no está cerrado;Opañel;rentabilidad bruta mediana;14,05;%
+5;El orden dentro de la lista no está cerrado;Canillejas;rentabilidad bruta mediana;11,73;%
+5;El orden dentro de la lista no está cerrado;Puerta del Angel;rentabilidad bruta mediana;10,75;%
+5;El orden dentro de la lista no está cerrado;Quintana;rentabilidad bruta mediana;10,98;%
+5;El orden dentro de la lista no está cerrado;Vista Alegre;rentabilidad bruta mediana;12,09;%
+9;El barrio de Ventas es el recomendado que más cambia con la fecha;Ventas;diferencia entre fechas de precio;2,69;puntos
+9;El barrio de Ventas es el recomendado que más cambia con la fecha;Numancia;diferencia entre fechas de precio;1,05;puntos
+9;El barrio de Ventas es el recomendado que más cambia con la fecha;San Diego;diferencia entre fechas de precio;0,45;puntos
+9;El barrio de Ventas es el recomendado que más cambia con la fecha;Casco Histórico de Vallecas;diferencia entre fechas de precio;4,67;puntos
+9;El barrio de Ventas es el recomendado que más cambia con la fecha;Opañel;diferencia entre fechas de precio;3,24;puntos
+9;El barrio de Ventas es el recomendado que más cambia con la fecha;Canillejas;diferencia entre fechas de precio;0,85;puntos
+9;El barrio de Ventas es el recomendado que más cambia con la fecha;Puerta del Angel;diferencia entre fechas de precio;1,02;puntos
+9;El barrio de Ventas es el recomendado que más cambia con la fecha;Quintana;diferencia entre fechas de precio;1,01;puntos
+9;El barrio de Ventas es el recomendado que más cambia con la fecha;Vista Alegre;diferencia entre fechas de precio;2,05;puntos
+10;Los recomendados rinden del 10,8 % al 11,5 % según la fecha del precio;Marzo;rentabilidad bruta mediana de los tres barrios recomendados;11,52;%
+10;Los recomendados rinden del 10,8 % al 11,5 % según la fecha del precio;Junio;rentabilidad bruta mediana de los tres barrios recomendados;10,78;%
+10;Los recomendados rinden del 10,8 % al 11,5 % según la fecha del precio;Septiembre;rentabilidad bruta mediana de los tres barrios recomendados;11,37;%

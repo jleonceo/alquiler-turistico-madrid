@@ -126,7 +126,7 @@ def grupo(pisos, m2, quitar, cero=False, por_foto=lambda p, clave: False):
                 pr = p[clave]
                 if quitar(p) or (p["ocupacion"] <= 0 and not cero) or por_foto(p, clave) or p["estancia"] > tope or pr is None or not 20 <= pr <= 1000:
                     continue
-                por_barrio[p["barrio"]].append(100 * pr * p["ocupacion"] / (p["sup"] * m2[p["barrio"]] * 0.75))
+                por_barrio[p["barrio"]].append(100 * pr * p["ocupacion"] / (p["sup"] * m2[p["barrio"]]))
             medianas = {b: (len(v), statistics.median(v)) for b, v in por_barrio.items()}
             for minimo in (30, 20):
                 validos = {b: m for b, (n, m) in medianas.items() if n >= minimo}
@@ -201,19 +201,19 @@ def principal():
                "sin_ocupacion_como_cero": grupo(pisos, m2, lambda p: p["marca"], cero=True)[0]}
     aguanta = {b: sum(b in v for v in pruebas.values()) for b in g}
     caso("firmes, desde data/raw", sorted(b for b, n in aguanta.items() if n == 5), sorted(dec["controles"]["firmes_esperados"]))
-    caso("con aviso, desde data/raw", sorted(b for b, n in aguanta.items() if n == 4), sorted(dec["controles"]["con_aviso_esperados"]))
+    caso("que siguen en la lista 4 veces, desde data/raw", sorted(b for b, n in aguanta.items() if n == 4), sorted(dec["controles"]["con_aviso_esperados"]))
     caso("firmes del JSON de la transformación", sorted(j["control_grupo"]["firmes"]), sorted(b for b, n in aguanta.items() if n == 5))
     caso("cada prueba frente al JSON", {b: sorted(x for x, v in pruebas.items() if b in v) for b in g}, {b: sorted(v) for b, v in j["control_grupo"]["pruebas_por_barrio"].items()})
 
     # La tabla guardada tiene que decir lo mismo, fila a fila en las cuentas de la base.
-    t = pq.read_table(CASO / "data/processed/analisis_anuncios.parquet", columns=["id", "base_decision", "base_comparacion", "ingreso_anual_eur", "rent_valoraciones_desc_pct", "puntos_interes_500m", "barrio"]).to_pylist()
+    t = pq.read_table(CASO / "data/processed/analisis_anuncios.parquet", columns=["id", "base_decision", "base_comparacion", "ingreso_anual_eur", "rent_valoraciones_pct", "puntos_interes_500m", "barrio"]).to_pylist()
     ids = {str(x["id"]) for x in t if x["base_decision"]}
     caso("los mismos pisos en la tabla", ids == {p["id"] for p in base}, True)
     caso("base de comparación en la tabla", sum(x["base_comparacion"] for x in t), comparacion)
     ingreso = round(sum(x["ingreso_anual_eur"] for x in t if x["base_decision"]), 2)
     caso("ingreso de la base", ingreso, round(sum(p["precio"] * p["ocupacion"] for p in base), 2))
-    opanel = statistics.median(100 * p["precio"] * p["ocupacion"] / (p["sup"] * m2["Opañel"] * 0.75) for p in base if p["barrio"] == "Opañel")
-    caso("rentabilidad mediana de Opañel", round(statistics.median(x["rent_valoraciones_desc_pct"] for x in t if x["base_decision"] and x["barrio"] == "Opañel"), 6), round(opanel, 6))
+    opanel = statistics.median(100 * p["precio"] * p["ocupacion"] / (p["sup"] * m2["Opañel"]) for p in base if p["barrio"] == "Opañel")
+    caso("rentabilidad mediana de Opañel", round(statistics.median(x["rent_valoraciones_pct"] for x in t if x["base_decision"] and x["barrio"] == "Opañel"), 6), round(opanel, 6))
 
     # Puntos de interés con haversine sobre la muestra.
     puntos = pq.read_table(CASO / "data/processed/puntos_interes_corregido.parquet", columns=["x", "y"]).to_pylist()

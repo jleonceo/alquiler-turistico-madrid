@@ -36,7 +36,7 @@ PARAMETROS = [{"nombre": "forma de los nombres de columna", "valor": "los del or
               {"nombre": "marca de lo imputado", "valor": "no se usa: no se imputa nada", "origen": "reglas §2"},
               {"nombre": "si los datos van a un modelo", "valor": "no van", "origen": "ficha §6"},
               {"nombre": "formato de la tabla corregida", "valor": "Parquet", "origen": "por defecto"}]
-# Lo que leen las tres preguntas y las cinco pruebas de la foto de septiembre: sin una de ellas no se puede contestar.
+# Lo que leen las tres preguntas y las cinco pruebas de la descarga de septiembre: sin una de ellas no se puede contestar.
 COLUMNAS_PREGUNTAS = ["price", "banos", "bedrooms", "beds", "accommodates", "room_type", "property_type", "neighbourhood_cleansed", "neighbourhood_group_cleansed", "latitude", "longitude", "minimum_nights", "availability_365",
                       "estimated_occupancy_l365d", "number_of_reviews_ltm", "calculated_host_listings_count", "price_quote_checkin_date"]
 CUESTIONES = cd.CASO / "docs" / "criterios_de_datos.md"
@@ -152,7 +152,7 @@ def veredicto(faltas, bien):
 
 
 def medir_completitud(antes, despues, puntos_fuera):
-    """Comprueba que la foto conserva sus anuncios."""
+    """Comprueba que la descarga conserva sus anuncios."""
     faltas = [] if antes == despues else [f"{antes} anuncios antes y {despues} después"]
     return veredicto(faltas, f"{despues} anuncios en septiembre antes y después; solo salen {puntos_fuera} puntos de interés")
 
@@ -220,7 +220,7 @@ def fichas_de(m):
          "hecho": "mapeo cerrado en scripts/decisiones_correccion.json.", "codigo": "df['clave_oficial'] = directa.replace(dec['equivalencias_barrio'])", "comprobacion": f"{m['equivalencias']} barrios cambian de clave.", "quedo": "cada barrio con su clave oficial."},
         {**base, "clave": "correccion-cp-005", "titulo": "CP-005 Casco Histórico de Vallecas, sin cambios", "tabla": "barrios", "estaba": "precio de su barrio.", "problema": "Airbnb junta en él lo que el Ayuntamiento separa.", "decision": "CP-005: precio del barrio, como riesgo.",
          "hecho": "no se cambia nada.", "codigo": "# sin código", "comprobacion": "cierre sin cambio.", "quedo": "como estaba."},
-        {**base, "clave": "correccion-cp-006", "titulo": "CP-006 camas vacías, sin relleno", "tabla": f"{sep}, `beds`", "estaba": f"{m['camas_vacias']} vacías en septiembre.", "problema": "no se sabe si pasan el tope.", "decision": "CP-006: no pasan el tope.", "hecho": "se dejan vacías; la marca la pone la transformación.",
+        {**base, "clave": "correccion-cp-006", "titulo": "CP-006 camas vacías, sin relleno", "tabla": f"{sep}, `beds`", "estaba": f"{m['camas_vacias']} vacías en septiembre.", "problema": "no se sabe si pasan el máximo.", "decision": "CP-006: no pasan el máximo.", "hecho": "se dejan vacías; la marca la pone la transformación.",
          "codigo": "# sin cambio en la corrección", "comprobacion": f"{m['camas_vacias']} vacías antes y después.", "quedo": "vacías."},
         {**base, "clave": "correccion-cp-007", "titulo": "CP-007 cero baños", "tabla": f"{sep}, `banos`, `marca_cero_banos`", "estaba": f"{m['cero_banos']} anuncios con cero baños.", "problema": "dudosos en un piso.", "decision": "CP-007: salen de la base de decisión; la fila se queda.",
          "hecho": "los baños se leen del texto (reglas §2, medio baño 0,5) y se marca el cero.", "codigo": "df['banos'] = df['bathrooms_text'].map(cd.banos_de_texto)\ndf['marca_cero_banos'] = df['banos'].eq(0)", "comprobacion": f"{m['banos_vacios']} vacíos en `banos`, los mismos que en el texto; {m['medio_bano']} con medio baño.",
@@ -236,7 +236,7 @@ def fichas_de(m):
         {**base, "clave": "correccion-cp-012", "titulo": "CP-012 escritura de las licencias", "tabla": "licencias, `distrito`, `planta`", "estaba": f"distrito en {m['distritos_antes']} formas y planta en {m['plantas_antes']}.", "problema": "el recuento por barrio y distrito se partía.", "decision": "CP-012: se normaliza.",
          "hecho": "el distrito se lleva a su nombre del maestro; la planta, a mayúsculas sin espacios de sobra.", "codigo": "sin_prefijo.map(cd.sin_guiones).map(maestro)\ndf['planta'].str.upper().str.strip()", "comprobacion": f"distrito en {m['distritos_despues']} formas y planta en {m['plantas_despues']}; {m['distritos_sin_maestro']} sin maestro; {m['licencias']} filas antes y después.",
          "quedo": "filas iguales. Las plantas escritas como texto libre siguen como están."},
-        {**base, "clave": "correccion-cp-013", "titulo": "CP-013 columnas vacías enteras", "tabla": "las cuatro fotos", "estaba": f"septiembre traía {m['vacias_sep']} columnas enteras vacías.", "problema": "no traen nada.", "decision": "CP-013: salen de las tablas de trabajo.", "hecho": "se quita en cada foto la columna que no tiene ningún valor.",
+        {**base, "clave": "correccion-cp-013", "titulo": "CP-013 columnas vacías enteras", "tabla": "las cuatro fotos", "estaba": f"septiembre traía {m['vacias_sep']} columnas enteras vacías.", "problema": "no traen nada.", "decision": "CP-013: salen de las tablas de trabajo.", "hecho": "se quita en cada descarga la columna que no tiene ningún valor.",
          "codigo": "df.drop(columns=[c for c in df.columns if df[c].isna().all()])", "comprobacion": f"salen en septiembre: {', '.join(m['lista_vacias_sep'])}.", "quedo": "cada foto con sus columnas con dato; diciembre, sin precio."},
         {**base, "clave": "correccion-cp-014", "titulo": "CP-014 polígono inválido", "tabla": "polígonos de barrio", "estaba": f"{len(m['reparados'])} polígono inválido.", "problema": "hace falta para el mapa.", "decision": "CP-014: se repara.", "hecho": "con make_valid, solo en el inválido.", "codigo": "shapely.make_valid(forma)",
          "comprobacion": f"{m['reparados']}.", "quedo": "todos válidos, en WKB y EPSG:4326."},
@@ -294,7 +294,7 @@ def principal(s):
     dicc = json.loads(cd.DICCIONARIO.read_text(encoding="utf-8"))
     fichas_dic = {t["tabla"]: t for t in dicc["tablas"]}
 
-    # 5.2 Las cuatro fotos.
+    # 5.2 Las cuatro descargas.
     fotos, brutas, censos, vacias, raros = {}, {}, {}, {}, 0
     for clave, tabla in cd.TABLA_FOTO.items():
         brutas[clave], fotos[clave], censos[clave], r, vacias[clave] = corregir_foto(cd.RAW / cd.RUTAS[tabla])
@@ -309,7 +309,7 @@ def principal(s):
     if personales:
         s["datos_personales_en_claro"] = personales
         s["resultado"] = {"estado": "PARADO", "riesgo": "alto", "resumen": "Hay datos con forma de dato personal en claro: " + "; ".join(f"{x['tabla']}.{x['columna']}, {x['filas']} filas" for x in personales),
-                          "artefactos": [], "siguiente": "avisar a la persona responsable (reglas §4)"}
+                          "artefactos": [], "siguiente": "avisar a quien dirige el proyecto (reglas §4)"}
         return s
 
     # 5.4 El resto de tablas.
@@ -323,7 +323,7 @@ def principal(s):
     cal, libres = leer_calendario()
     res = leer_resenas()
 
-    # 5.5 Validaciones antes de guardar: filas y sumas por dos caminos, en cada foto.
+    # 5.5 Validaciones antes de guardar: filas y sumas por dos caminos, en cada descarga.
     sumas, fallos = [], []
     for clave in fotos:
         b, d = brutas[clave], fotos[clave]
@@ -405,7 +405,7 @@ def principal(s):
     s["correcciones"] = [dict(c, id=f"K-{i:02d}") for i, c in enumerate((c for c in lista if c), 1)]
     s["sin_cambios"] = [{"problema_calidad": id_de.get("precio_vacio"), "motivo": f"CP-001: {medida['precio_vacio']} precios vacíos siguen vacíos en septiembre."},
                         {"problema_calidad": id_de.get("casco_vallecas"), "motivo": "CP-005: Casco Histórico de Vallecas usa el precio del barrio; va como riesgo."},
-                        {"problema_calidad": id_de.get("camas_vacias"), "motivo": f"CP-006: {medida['camas_vacias']} camas vacías siguen vacías y no pasan el tope."},
+                        {"problema_calidad": id_de.get("camas_vacias"), "motivo": f"CP-006: {medida['camas_vacias']} camas vacías siguen vacías y no pasan el máximo."},
                         {"problema_calidad": "fechas de las fotos", "motivo": "first_review, last_review y las del precio siguen en texto ISO: ningún cálculo las usa."},
                         {"problema_calidad": "plantas", "motivo": "las plantas escritas como texto libre no se interpretan; los informes solo cuentan las licencias que nombran la baja."},
                         {"problema_calidad": "reglas candidatas", "motivo": "RC-01, RC-02, RC-04, RC-10 y RC-12 no se aprueban (cuestiones-pendientes.md)."}]
@@ -420,7 +420,7 @@ def principal(s):
     s["vacias_por_foto"] = vacias
     s["comprobaciones"] = {k: f"{'pasa' if v['pasa'] else 'falla'}: {v['texto']}" for k, v in medidas.items()}
     artefactos = [x["ruta"] for x in s["salidas"]] + ["informes/correccion-datos.json", "informes/correccion-datos.md"]
-    s["resultado"] = {"estado": "OK", "riesgo": "bajo", "resumen": f"Se corrigieron {len(tablas)} tablas con {len(s['cuestiones'])} cuestiones resueltas. La foto de septiembre conserva sus {filas_sep} anuncios; solo salen {n_fuera} puntos de interés.",
+    s["resultado"] = {"estado": "OK", "riesgo": "bajo", "resumen": f"Se corrigieron {len(tablas)} tablas con {len(s['cuestiones'])} cuestiones resueltas. La descarga de septiembre conserva sus {filas_sep} anuncios; solo salen {n_fuera} puntos de interés.",
                       "artefactos": artefactos, "siguiente": "modelado-datos"}
     if cd.huellas_de_raw() != antes:
         s["resultado"] = {"estado": "ERROR", "riesgo": "alto", "resumen": "data/raw/ ha cambiado durante la ejecución.", "artefactos": [], "siguiente": "revisar"}

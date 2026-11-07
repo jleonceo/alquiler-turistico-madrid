@@ -29,7 +29,7 @@ j = json.loads(rp.INDICADORES.read_text(encoding="utf-8"))
 caso("sin número de anuncio ni coordenadas en la tabla", not ({"id", "latitud", "longitud", "anuncios_anfitrion"} & set(filas[0])), set(filas[0]))
 caso("coincide con indicadores.json", not rp.contra_indicadores(r, j), rp.contra_indicadores(r, j))
 caso("los dos README llevan las cifras", not rp.contra_readme(r), rp.contra_readme(r))
-caso("los firmes son tres", r["firmes"] == ["Numancia", "San Diego", "Ventas"], r["firmes"])
+caso("los recomendados son tres", r["firmes"] == ["Numancia", "San Diego", "Ventas"], r["firmes"])
 caso("ningún barrio con menos de 20 pisos lleva su nombre", min(sum(1 for x in filas if x["barrio"] == b) for b in {x["barrio"] for x in filas}) >= 20)
 
 # Controles que tienen que salir en rojo.
@@ -38,12 +38,12 @@ tocado["ingreso_anual"] += 500
 caso("rojo si el ingreso cambia", rp.contra_indicadores(tocado, j))
 tocado = copy.deepcopy(r)
 tocado["firmes"] = ["Numancia", "Ventas"]
-caso("rojo si cae un barrio firme", rp.contra_indicadores(tocado, j))
+caso("rojo si cae un barrio recomendado", rp.contra_indicadores(tocado, j))
 tocado = copy.deepcopy(r)
-tocado["rent_sin_descuento"] += 1
+tocado["rentabilidad"] += 1
 caso("rojo si el README no lleva la cifra", rp.contra_readme(tocado))
 sin_filas = rp.calcular([x for x in filas if not (x["barrio"] == "San Diego" and x["dormitorios"] == 1)])
-caso("rojo si faltan filas de un barrio firme", rp.contra_indicadores(sin_filas, j))
+caso("rojo si faltan filas de un barrio recomendado", rp.contra_indicadores(sin_filas, j))
 
 print("VERDE" if not FALLOS else f"ROJO: {FALLOS}")
 sys.exit(1 if FALLOS else 0)

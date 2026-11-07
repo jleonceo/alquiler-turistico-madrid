@@ -5,7 +5,7 @@ English version: [README.en.md](README.en.md)
 Una empresa ficticia quiere comprar pisos en Madrid para alquilarlos a turistas y necesita saber por dónde empezar. Este
 análisis responde con datos públicos de Airbnb y del Ayuntamiento de Madrid.
 
-**Resultado:** conviene mirar primero pisos de hasta 2 habitaciones en tres barrios de Madrid: Ventas (distrito de Ciudad
+**Resultado:** conviene mirar primero pisos de hasta 2 habitaciones en los barrios de Ventas (distrito de Ciudad
 Lineal), Numancia y San Diego (los dos en el distrito de Puente de Vallecas). El 17/09/2026 había 256 anuncios con esas
 condiciones, de los 2.940 pisos analizados. En mediana, cada piso costaría 161.973 € al precio oficial de 2025 e ingresaría
 21.675 € al año. Calculada piso a piso, la mediana de la rentabilidad bruta es del 12,1 %, antes de gastos e impuestos.
@@ -17,8 +17,8 @@ con un máximo de 255 días al año.
 Si se quitan los pisos que llegan a ese máximo, los tres barrios salen de la lista.
 
 **El precio de compra es el oficial de 2025, y hoy el mercado pide más.** Con los precios que piden Fotocasa e Idealista,
-la compra en mediana sube a 171.600 € y 182.000 €, y la rentabilidad bruta baja al 10,9 % y al 10,6 %. Son precios de anuncio,
-así que la compra real quedaría algo por debajo.
+la compra en mediana sube a 171.600 € y 182.000 €, y la rentabilidad bruta baja al 10,9 % y al 10,6 %. Son precios de anuncio y no de venta,
+así que la compra real podría ser algo menor.
 
 [![CI](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml/badge.svg)](https://github.com/jleonceo/alquiler-turistico-madrid/actions/workflows/ci.yml)
 
@@ -36,11 +36,11 @@ que ya está en el repositorio.
 
 ## Las tres entregas
 
-- [Informe ejecutivo](https://jleonceo.github.io/alquiler-turistico-madrid/informes/informe_ejecutivo.html): tres páginas para
+- [Informe ejecutivo](https://alquiler-turistico-madrid.vercel.app/informes/informe_ejecutivo.html): tres páginas para
   la dirección, también [en PDF](informes/informe_ejecutivo.pdf).
-- [Informe final](https://jleonceo.github.io/alquiler-turistico-madrid/informes/informe_final.html): el análisis completo, con
+- [Informe final](https://alquiler-turistico-madrid.vercel.app/informes/informe_final.html): el análisis completo, con
   sus gráficos.
-- [Cuadro de mando](https://jleonceo.github.io/alquiler-turistico-madrid/informes/cuadro_mando.html): para que el equipo que
+- [Cuadro de mando](https://alquiler-turistico-madrid.vercel.app/informes/cuadro_mando.html): para que el equipo que
   valora los pisos compare los barrios.
 
 ![Primera pantalla del cuadro de mando, con la recomendación y sus cifras](docs/img/cuadro_de_mando.png)
@@ -52,7 +52,7 @@ Las cuatro cifras grandes de la imagen son de todos los pisos analizados. Las de
 De los 23.109 anuncios de Airbnb en la ciudad, 14.150 están en el centro histórico, donde el Ayuntamiento, con el Plan RESIDE,
 no admite pisos turísticos en edificios residenciales. Por eso el análisis usa los pisos de fuera del centro.
 Se usan los anuncios de 20 a 1.000 € por noche. Esos límites los fija este análisis: por debajo de 20 € casi no hay anuncios
-y por encima de 1.000 € solo hay 164. Dentro quedan 18.573 de los 18.785 anuncios con precio. Después se aplican los demás
+y por encima de 1.000 € solo hay 164. Con precio hay 18.785 anuncios en toda la ciudad, y 18.573 quedan entre 20 y 1.000 €. Después se aplican los demás
 filtros, como el tamaño, la estancia mínima y la ocupación, y quedan los 2.940 pisos.
 
 ## Cómo se eligieron los barrios
@@ -60,9 +60,6 @@ filtros, como el tamaño, la estancia mínima y la ocupación, y quedan los 2.94
 La rentabilidad bruta de un piso es su ingreso anual dividido entre lo que costaría comprarlo. El ingreso es el precio por
 noche multiplicado por los días ocupados que estima Inside Airbnb. El precio de compra sale de una superficie supuesta y del
 precio oficial del m² del barrio.
-
-Si se comprara un 25 % por debajo de ese precio, la rentabilidad subiría al 16,2 %. Ese descuento es un supuesto sin datos detrás:
-frente a los precios que se piden hoy, sería una rebaja de entre el 29 % y el 33 %.
 
 Los barrios se ordenaron por rentabilidad y se miró cuáles quedaban en el 25 % más rentable. Ese orden cambia según la
 estancia mínima o el mes del precio. Por eso el cálculo se repitió 12 veces, con distintos valores. Se quedaron los 9 barrios
@@ -72,8 +69,8 @@ Después se comprobó si esos 9 barrios dependían de un grupo concreto de anunc
 por ejemplo sin los anfitriones que tienen 10 anuncios o más. Los barrios de Ventas, Numancia y San Diego siguieron en la lista
 las cinco veces.
 
-Se recomiendan por eso: ninguno rinde claramente más que los otros barrios de la lista. Numancia rinde más que
-la mediana de todos los pisos analizados, pero en Ventas y San Diego no se puede asegurar. Los barrios de Casco Histórico de Vallecas y Opañel rinden más que San Diego, pero salen de la lista si se quitan los anfitriones
+Se recomiendan porque el resultado se mantiene, no porque rindan más: ninguno rinde claramente más que los otros barrios de la lista. El barrio de Numancia rinde más que
+la mediana de todos los pisos analizados, pero en los barrios de Ventas y San Diego no se puede asegurar. Los barrios de Casco Histórico de Vallecas y Opañel rinden más que el de San Diego, pero salen de la lista si se quitan los anfitriones
 con 10 anuncios o más.
 
 ![Mapa de Madrid con los barrios seleccionados](docs/img/mapa_de_barrios.png)
@@ -83,17 +80,16 @@ con 10 anuncios o más.
 ```text
 Pisos analizados, datos del 17/09/2026: 2.940
 Barrios que rinden más: 9
-De ellos, siguen en la lista en las 5 repeticiones: Numancia, San Diego y Ventas
-Siguen en 4 de 5: Casco Histórico de Vallecas y Opañel
+Barrios que siguen en la lista en las 5 repeticiones: Numancia, San Diego y Ventas
+Barrios que siguen en 4 de 5: Casco Histórico de Vallecas y Opañel
 
 Pisos de hasta 2 habitaciones en los barrios de Numancia, San Diego y Ventas: 256 anuncios
   Precio de compra, en mediana: 161.973 €
   Ingreso al año, en mediana: 21.675 €
   Rentabilidad bruta: 12,1 %
-  Rentabilidad bruta si la compra baja un 25 %, un supuesto: 16,2 %
   Con los precios que pide hoy Fotocasa: compra de 171.600 € y rentabilidad bruta de 10,9 %
   Con los precios que pide hoy Idealista: compra de 182.000 € y rentabilidad bruta de 10,6 %
-  Rentabilidad de todos los pisos de esos barrios, según el mes del precio y el descuento: de 10,8 % a 15,4 %
+  Rentabilidad de los pisos de esos barrios con estancia de hasta 3 noches, de cualquier tamaño, según la fecha del precio: de 10,8 % a 11,5 %
 
 Estas cifras coinciden con las del análisis y con las de esta página, en español y en inglés.
 ```
@@ -134,11 +130,12 @@ publicarlos. Se descargan de su web al repetir el análisis.
 ## Límites
 
 - No se conoce la planta ni el acceso de cada piso.
-- Con los anuncios de un año o más, San Diego baja al puesto 8 de 26 barrios en rentabilidad.
-- La superficie de cada piso es un supuesto: 50 m² hasta 1 habitación, 65 m² con 2 y más con 3 o más. Por eso no se puede decir
+- Con los anuncios de un año o más, el barrio de San Diego baja al puesto 8 de 26 barrios en rentabilidad.
+- La superficie de cada piso es un supuesto: 50 m² hasta 1 habitación, 65 m² con 2 habitaciones y más con 3 o más. Por eso no se puede decir
   qué rinde más: un estudio, una habitación o dos.
 - Solo cuentan los pisos con ocupación estimada, o sea con reseñas en el último año. Quedan fuera los que no funcionan, lo que
   puede subir la rentabilidad.
+- Si además se cuentan como cero los pisos sin ocupación ni precio, solo el barrio de Ventas sigue en la lista.
 - No se ha medido si otro rango de precio cambiaría los barrios.
 - La rentabilidad no incluye gastos, impuestos, comunidad ni comisiones.
 - Los barrios se eligieron con el precio declarado en 2025. No se ha medido si cambiarían con los precios de hoy.

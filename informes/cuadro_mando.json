@@ -1,17 +1,17 @@
 {
  "script": "scripts/cuadro_mando.py",
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-06T23:05:47",
+ "fecha_ejecucion": "2026-11-07T00:40:00",
  "python": "3.13.18",
  "pandas": "3.1.0",
  "entradas": [
   {
    "ruta": "informes/indicadores.json",
-   "sha256": "c52461badd0424610a5c65ab95ecd29f51e63f0a8824e9a7716dbdb4349ec25b"
+   "sha256": "dd35a468c571f079a1849678ae6ef92d3b86e82bbfd6bf8973dc47bc9abe7019"
   },
   {
    "ruta": "data/processed/analisis_anuncios.parquet",
-   "sha256": "29397cb49e50009179d9e7939112207da2ab63ca29c8f2a0ff178840369f3ecc"
+   "sha256": "9ec6357f241355373fa96c293ca0a078659c7b35a6de238b266d088f8e4330bb"
   },
   {
    "ruta": "data/processed/analisis_barrios.parquet",
@@ -24,8 +24,8 @@
  ],
  "salida": {
   "ruta": "informes/cuadro_mando.html",
-  "bytes": 280830,
-  "sha256": "6bfb36cef6cc7e067b8556268fdceb611be8a47631c7802620c9d30488694841"
+  "bytes": 275770,
+  "sha256": "513267ea8b3b82e9d6ef09dd885839ec3772ebb8d4937f05449d1f8b7d7f24cf"
  },
  "filtros": {
   "distritos": 21,
@@ -43,32 +43,30 @@
  },
  "cifras_sin_filtros": {
   "pisos": 2940,
-  "rent": 11.104171,
-  "rent_sin": 8.328128,
+  "rent": 8.328128,
   "precio": 150.77,
   "ocupacion": 156.0,
-  "compra": 196260.1875,
-  "compra_sin": 261680.25,
-  "cuartil": 4.050353
+  "compra": 261680.25,
+  "cuartil": 3.037764
  },
- "cifras_comparadas_con_indicadores": 252,
+ "cifras_comparadas_con_indicadores": 248,
  "minimo": 30,
  "clases": {
-  "firme": 3,
-  "con aviso": 2,
-  "segunda línea": 4,
-  "fuera del grupo": 27,
+  "5 de 5 veces": 3,
+  "4 de 5 veces": 2,
+  "menos de 4 veces": 4,
+  "fuera de la lista": 27,
   "menos de 30": 92
  },
  "textos": {
   "titulo_recomendacion": "Pisos de hasta 2 habitaciones en los barrios de Ventas, Numancia y San Diego",
-  "recomendacion": "Son 256 anuncios: 12,1 % sin descuento y 16,2 % con él. Todos los firmes van del 10,8 % al 15,4 %. Firme es estable, no mejor.",
-  "limite": "Es una lista de dónde buscar: no dice si un piso se puede comprar para este uso. Primera acción: Comprobar planta y norma en el Ayuntamiento.",
-  "titulo_dormitorios": "Sin ganador entre estudio, uno y dos",
-  "titulo_barrios": "9 barrios forman el grupo y 3 aguantan las cinco pruebas",
+  "recomendacion": "Son 256 anuncios. Rentabilidad bruta del 12,1 % en mediana, sin gastos. Se recomiendan porque se mantienen al repetir el cálculo, no porque rindan más.",
+  "limite": "Dice dónde buscar, no si un piso se puede alquilar a turistas. Primera acción: Comprobar planta y norma en el Ayuntamiento.",
+  "titulo_dormitorios": "Sin ganador entre estudio, una y dos",
+  "titulo_barrios": "9 barrios forman la lista y 3 siguen en ella las 5 veces",
   "tabla_recomendacion": [
    [
-    "Firmes de hasta 2 habitaciones",
+    "Recomendados de hasta 2 habitaciones",
     "Cifra"
    ],
    [
@@ -76,12 +74,8 @@
     "256"
    ],
    [
-    "Compra por piso, sin descuento",
+    "Compra por piso",
     "161.973 €"
-   ],
-   [
-    "Compra por piso, con descuento",
-    "121.480 €"
    ],
    [
     "Ingreso anual por piso",
@@ -92,61 +86,61 @@
     "930 de 1.031"
    ],
    [
-    "Licencias con planta baja, firmes",
+    "Licencias con planta baja, barrios recomendados",
     "65 de 72"
    ],
    [
-    "Barrios de m² más barato, con descuento",
-    "14,5 %"
+    "Rentabilidad de los barrios de m² más barato",
+    "10,9 %"
    ]
   ],
-  "nota_recomendacion": "Con los precios que piden hoy Fotocasa e Idealista, la compra sube a 171.600 € y 182.000 €, y la rentabilidad sin descuento baja a 10,9 % y 10,6 %. Rentabilidad bruta, en mediana y sin gastos, en los anuncios en Airbnb de los firmes; el rango es de todos sus pisos, según la foto y el descuento. Valoraciones empieza por bajos y primeras plantas con acceso independiente. Fuera del centro histórico, en el nivel B de la zona 1, el hospedaje cabe en planta baja, inferior a la baja y primera, y siempre con acceso independiente. El ingreso de un bajo no se conoce, porque el de los anuncios mezcla todas las plantas. Qué norma rige en cada barrio no se puede saber aquí: se pregunta en el Ayuntamiento. Elegir por m² barato no se distingue de la lista. Entre barrios, la rentabilidad se asocia más con la ocupación (0,78), la cifra más débil del caso, que con el m² (−0,60).",
-  "texto_mapa": "Numancia supera la mediana de la base; Ventas y San Diego no se distinguen de ella. San Diego queda por debajo de Casco Histórico de Vallecas y de Opañel, que van detrás porque dependen de operadores grandes, el 65 % de sus anuncios. <button class=\"def\" type=\"button\" data-def=\"distingue\">Qué significa</button>",
+  "nota_recomendacion": "Con los precios que piden hoy Fotocasa e Idealista, la compra sube a 171.600 € y 182.000 €, y la rentabilidad baja a 10,9 % y 10,6 %. Con todos los pisos de estos barrios, va del 10,8 % al 11,5 % según la fecha del precio. Conviene empezar por bajos y primeras plantas con acceso independiente. Lo que ingresa un bajo no se conoce, porque los datos mezclan todas las plantas. Qué norma rige en cada barrio se pregunta en el Ayuntamiento antes de comprar. Entre barrios, la rentabilidad va más ligada a los días ocupados (0,78) que al precio del m² (−0,60). Los días ocupados son la cifra menos fiable.",
+  "texto_mapa": "El barrio de Numancia rinde más que la mediana de todos los pisos. En los barrios de Ventas y San Diego no se puede asegurar. <button class=\"def\" type=\"button\" data-def=\"distingue\">Qué significa</button>",
   "tabla_mapa": [
    [
-    "Firmes",
-    "Cuartil bajo",
-    "Sin ocupación",
-    "Con un año o más"
+    "Recomendados",
+    "Peor 25 % rinde menos de",
+    "Sin días estimados",
+    "Puesto, un año o más"
    ],
    [
     "Ventas",
-    "7,1 %",
+    "5,3 %",
     "18,9 %",
     "3.ª de 26"
    ],
    [
     "Numancia",
-    "5,2 %",
+    "3,9 %",
     "32,4 %",
     "2.ª de 26"
    ],
    [
     "San Diego",
-    "6,4 %",
+    "4,8 %",
     "20,9 %",
     "8.ª de 26"
    ],
    [
-    "Toda la base",
-    "4,05 %",
+    "Todos los pisos",
+    "3,04 %",
     "24,7 %",
     "—"
    ]
   ],
-  "nota_mapa": "Sin ocupación: pisos fuera del centro. Con un año o más: puesto entre barrios con anuncios de un año o más, porque la ocupación cuenta reseñas de 12 meses y un anuncio nuevo sale bajo. San Diego se sostiene menos con este corte.",
-  "texto_barrios": "Los firmes dependen del tope: salen del grupo al quitar los pisos que llegan a 255 días. Puerta del Ángel está en el grupo y no aguanta ninguna prueba."
+  "nota_mapa": "Los barrios de Casco Histórico de Vallecas y Opañel rinden más, pero el 65 % de sus anuncios es de anfitriones con 10 anuncios o más. El puesto cuenta solo anuncios de un año o más, porque uno más nuevo parece menos ocupado.",
+  "texto_barrios": "Los tres recomendados salen de la lista al quitar los pisos que llegan a 255 días. El barrio de Puerta del Ángel sale en las 5 formas de repetir el cálculo."
  },
  "huella_data": {
-  "antes": "f6fc83dad74e3d704d4f248e2b1e4b810aec1a7988afa0ff59e4476238a35917",
-  "despues": "f6fc83dad74e3d704d4f248e2b1e4b810aec1a7988afa0ff59e4476238a35917",
+  "antes": "4ebc338a5191f124f2048522f6cb9a72bcbfd849adcdf7b8089f93889d8fd4c1",
+  "despues": "4ebc338a5191f124f2048522f6cb9a72bcbfd849adcdf7b8089f93889d8fd4c1",
   "iguales": true
  },
  "decisiones_propias": [
   "Las medianas no se suman: cada selección de los filtros se calcula en Python y el navegador la busca.",
   "Una selección de menos de 30 pisos guarda solo su recuento, porque su mediana puede ser la cifra de un anuncio.",
   "La tabla va por clase y por nombre, porque el grupo no tiene un orden cerrado.",
-  "La recomendación sale del campo recomendacion de indicadores.json y se rehace aquí con los pisos de hasta 2 habitaciones de los firmes.",
+  "La recomendación sale del campo recomendacion de indicadores.json y se rehace aquí con los pisos de hasta 2 habitaciones de los recomendados.",
   "Las tablas fijas de la recomendación y del mapa no cambian con los filtros: repiten lo que dicen los informes."
  ]
 }

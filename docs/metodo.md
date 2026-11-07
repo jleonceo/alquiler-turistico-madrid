@@ -42,8 +42,8 @@ cuadra, el análisis se detiene sin escribir.
 
 ## Cómo se comprueba
 
-- Dos caminos por cifra. `tests/probar_indicadores_por_otro_camino.py` rehace los indicadores sin pandas ni los scripts de
-  el análisis.
+- Dos caminos por cifra. `tests/probar_indicadores_por_otro_camino.py` rehace los indicadores sin pandas ni los scripts
+  del análisis.
 - Una portada que se rehace sola. `scripts/rehacer_portada.py` usa solo la biblioteca estándar y la tabla local, y falla
   si una cifra de los README se separa del análisis.
 - Casos que tienen que fallar. Las pruebas de `tests/` montan un caso pequeño inventado con defectos plantados, y varias

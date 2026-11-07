@@ -39,7 +39,7 @@ def principal():
     malo["preguntas"][1]["firmes"] = ["Numancia"]
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         r = lanzar(tmp, malo)
-        caso("para si cambian los firmes", r.returncode != 0, r.stdout + r.stderr)
+        caso("para si cambian los recomendados", r.returncode != 0, r.stdout + r.stderr)
         caso("no deja documento si para", not (Path(tmp) / "interpretacion_resultados.md").exists())
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         r = lanzar(tmp, base)
@@ -55,7 +55,7 @@ def principal():
         for x in base["preguntas"][1]["firmes"]:
             caso(f"nombra {x}", x in cuerpo)
         caso("el inventario da la ruta de cada cifra", "informes/indicadores.json" in inventario and inventario.count("|") > 40)
-        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo a Ventas", "Datos personales"):
+        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo seguiría el barrio de Ventas", "Datos personales"):
             caso(f"dice «{frase}»", frase in md)
     print(f"{len(FALLOS)} fallos")
     return 1 if FALLOS else 0

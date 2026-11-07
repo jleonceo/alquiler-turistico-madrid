@@ -76,16 +76,16 @@ class Cifras:
 # =====================================================================================================================
 
 # Constantes de las reglas y datos de la fuente que no están en indicadores.json como cifra: cada una con su origen.
-CONSTANTES = {"255": "reglas §2, tope de la ocupación", "25": "reglas §2, descuento", "30": "reglas §3, mínimo por grupo",
+CONSTANTES = {"255": "reglas §2, máximo de la ocupación", "25": "reglas §3, el 25 % más rentable", "30": "reglas §3, mínimo por grupo",
               "20": "reglas §3, mínimo de las variantes", "12": "reglas §3, variantes", "6": "reglas §3, más de 6 de 12",
               "95": "planteamientos, intervalo", "2.000": "planteamientos, remuestreos", "63": "scripts, semilla",
               "10": "reglas §3, anfitriones", "60": "reglas §3, cotización", "40": "reglas §3, pocos anuncios",
               "150": "reglas §1, coordenadas", "1": "habitaciones", "2": "habitaciones", "3": "habitaciones y estancia",
               "5": "las cinco pruebas", "4": "pruebas aguantadas", "9": "barrios del grupo", "2025": "año del precio oficial",
-              "2026": "año de las fotos", "35": "planteamientos, estudio", "45": "planteamientos, una habitación",
+              "2026": "año de las descargas", "35": "planteamientos, estudio", "45": "planteamientos, una habitación",
               "50": "reglas §2, superficie", "65": "reglas §2, superficie", "75": "planteamientos, dos habitaciones",
               "15": "páginas del informe", "90": "reglas §2, superficie", "110": "reglas §2, superficie",
-              "140": "reglas §2, superficie", "1.000": "reglas §3, precio", "8": "reglas §3, huéspedes", "0,75": "reglas §2, factor del descuento"}
+              "140": "reglas §2, superficie", "1.000": "reglas §3, precio", "8": "reglas §3, huéspedes"}
 # Lo que parece cifra y no lo es: fechas, la licencia y los nombres de las normas.
 NO_CIFRAS = [r"\d{2}/\d{2}/\d{4}", r"CC BY 4\.0", r"BOCM \d+", r"APE \d+\.\d+"]
 
@@ -168,23 +168,23 @@ def puesto(nombre):
 def comprobar_lectura(c):
     """Comprueba con las cifras cada frase de la lectura aprobada antes de escribir nada."""
     p1, p2, p3 = c.dato("preguntas")
-    exigir(sorted(p2["firmes"]) == sorted(FIRMES), "los firmes son Ventas, Numancia y San Diego")
-    exigir(sorted(p2["con_aviso"]) == sorted(CON_AVISO), "con aviso van Casco Histórico de Vallecas y Opañel")
-    exigir(len(p2["segunda_linea"]) == 4, "cuatro barrios en segunda línea")
+    exigir(sorted(p2["firmes"]) == sorted(FIRMES), "los recomendados son Ventas, Numancia y San Diego")
+    exigir(sorted(p2["con_aviso"]) == sorted(CON_AVISO), "que siguen en la lista 4 veces van Casco Histórico de Vallecas y Opañel")
+    exigir(len(p2["segunda_linea"]) == 4, "cuatro barrios en resto del grupo")
     fichas = {f["barrio"]: f for f in p2["fichas_del_grupo"]}
-    # Los firmes aguantan las cinco pruebas, dependen del tope y su cuartil bajo supera el de la base.
+    # Los recomendados aguantan las cinco pruebas, dependen del máximo y su cuartil bajo supera el de la base.
     for b in FIRMES:
         exigir(len(fichas[b]["pruebas_que_aguanta"]) == 5, f"{b} aguanta las cinco pruebas")
-        exigir(fichas[b]["avisos_del_barrio"]["depende_del_tope"], f"{b} depende del tope")
+        exigir(fichas[b]["avisos_del_barrio"]["depende_del_tope"], f"{b} depende del máximo de días")
         exigir(fichas[b]["cuartil_bajo_pct"] > p2["cuartil_bajo_de_toda_la_base"], f"el cuartil bajo de {b} supera el de la base")
         exigir(not fichas[b]["avisos_del_barrio"]["cuartil_bajo"], f"{b} no lleva el aviso del cuartil bajo")
     # Contra la mediana el aviso no distinguía: le pasaba a casi todos los barrios.
     a = p2["aviso_del_cuartil"]
     exigir(a["no_superan_la_mediana"] >= a["barrios_comparados"] - 1, "contra la mediana el aviso le pasa a casi todos los barrios")
-    # Opañel llega a la mitad de sus pisos en el tope y no depende de él; Puerta del Ángel no aguanta ninguna prueba.
-    exigir(fichas["Opañel"]["parte_en_el_tope_pct"] >= 50 and not fichas["Opañel"]["avisos_del_barrio"]["depende_del_tope"], "Opañel no depende del tope aunque la mitad de sus pisos llega a él")
+    # Opañel llega a la mitad de sus pisos en el máximo y no depende de él; Puerta del Ángel no aguanta ninguna prueba.
+    exigir(fichas["Opañel"]["parte_en_el_tope_pct"] >= 50 and not fichas["Opañel"]["avisos_del_barrio"]["depende_del_tope"], "Opañel no depende del máximo aunque la mitad de sus pisos llega a él")
     exigir(not fichas["Puerta del Angel"]["pruebas_que_aguanta"], "Puerta del Ángel no aguanta ninguna prueba")
-    # Los que van con aviso caen justo en la prueba de los operadores grandes.
+    # Los que siguen en la lista 4 veces caen justo en la prueba de los operadores grandes.
     for b in CON_AVISO:
         exigir(fichas[b]["pruebas_que_no_aguanta"] == ["sin_anfitriones_grandes"], f"{b} depende de operadores grandes")
     # Hasta 2 dormitorios rinden más que 3 en cada combinación, y el orden entre ellos cambia con los m².
@@ -204,7 +204,7 @@ def comprobar_lectura(c):
         exigir(fichas[b]["frente_a_la_base"] == "no se distingue", f"{b} no se distingue de la mediana de la base")
     # Dentro del grupo el orden no se cierra: de los 36 pares, se distinguen 4.
     exigir(sum(1 for x in p3["pares_dentro_del_grupo"] if x["se_distinguen"]) == 4, "cuatro pares del grupo se distinguen")
-    # San Diego queda por debajo de los dos con aviso, que rinden más.
+    # San Diego queda por debajo de los dos que siguen en la lista 4 veces, que rinden más.
     for b in CON_AVISO:
         exigir(any({x["a"], x["b"]} == {b, "San Diego"} and x["se_distinguen"] for x in p3["pares_dentro_del_grupo"]), f"San Diego queda por debajo de {b}")
         exigir(fichas[b]["rentabilidad_mediana_pct"] > fichas["San Diego"]["rentabilidad_mediana_pct"], f"{b} rinde más que San Diego")
@@ -214,7 +214,7 @@ def comprobar_lectura(c):
     exigir(not u["San Diego"]["en_el_mejor_cuarto"], "San Diego se sostiene menos con pisos de un año o más")
     # La lista frente a elegir por precio: ninguno de los dos pares se distingue, y la rentabilidad va más con la ocupación que con el m².
     o = p2["que_ordena_la_lista"]
-    exigir(not any(x["se_distinguen"] for x in o["pares"]) and len(o["pares"]) == 2, "los firmes y el grupo no se distinguen de los barrios de m² más barato")
+    exigir(not any(x["se_distinguen"] for x in o["pares"]) and len(o["pares"]) == 2, "los recomendados y el grupo no se distinguen de los barrios de m² más barato")
     exigir(abs(o["rentabilidad_con_ocupacion"]) > abs(o["rentabilidad_con_m2"]), "la rentabilidad se asocia más con la ocupación que con el m²")
 
 
@@ -224,22 +224,22 @@ def comprobar_lectura(c):
 
 def acciones(c):
     """Devuelve las tres acciones: nombre, qué se hace, quién, para cuándo y de qué hallazgo sale con su cifra."""
-    pendiente = "fecha pendiente, porque no consta"
+    pendiente = "fecha por fijar"
     return [
         {"nombre": "Comprobar planta y norma en el Ayuntamiento",
          "que": "Empezar por bajos y primeras plantas con acceso independiente y preguntar en el Ayuntamiento qué norma rige en cada barrio de la lista antes de comprar.",
          "quien": "Dirección de Inversiones", "cuando": pendiente,
          "por_que": f"{c.num(PLANTA + '.licencias')} de las {c.num(PLANTA + '.de')} licencias municipales incluyen planta baja.",
          "pagina": "Lo que puede cambiar estas conclusiones"},
-        {"nombre": "Pedir a valoraciones superficie real",
+        {"nombre": "Pedir a valoraciones la superficie real",
          "que": "Sustituir el supuesto de m² por la superficie real de cada oportunidad que se estudie.",
          "quien": "Equipo de valoraciones, a petición de la Dirección de Inversiones", "cuando": pendiente,
-         "por_que": f"El supuesto de m² cambia los tipos que se dan en {c.num('preguntas[0].sensibilidad_superficie.combinaciones_que_cambian')} de las {c.cuantos('preguntas[0].sensibilidad_superficie.combinaciones')} combinaciones.",
+         "por_que": f"El tipo de piso más rentable cambia en {c.num('preguntas[0].sensibilidad_superficie.combinaciones_que_cambian')} de las {c.cuantos('preguntas[0].sensibilidad_superficie.combinaciones')} superficies probadas.",
          "pagina": "Pregunta 1, sigue"},
-        {"nombre": "Repetir el análisis con la foto siguiente",
+        {"nombre": "Repetir el análisis con los datos siguientes",
          "que": "Volver a calcular la lista con las mismas reglas.",
-         "quien": "Dirección de Inversiones y equipo de valoraciones", "cuando": "cuando se publique la foto siguiente de Inside Airbnb; la fecha no consta",
-         "por_que": f"Entre las tres fotos de precio, la mediana de Ventas se mueve {c.num(ficha('Ventas', 'rango_entre_fotos_puntos', 3), 1)} puntos, y la de toda la base, {c.num(Q3 + '.referencia.rango_entre_fotos_puntos', 1)}.",
+         "quien": "Dirección de Inversiones y equipo de valoraciones", "cuando": "cuando Inside Airbnb publique sus datos siguientes",
+         "por_que": f"Entre las tres fechas de precio, la rentabilidad mediana del barrio de Ventas varía {c.num(ficha('Ventas', 'rango_entre_fotos_puntos', 3), 1)} puntos; la de todos los pisos, {c.num(Q3 + '.referencia.rango_entre_fotos_puntos', 1)}.",
          "pagina": "Pregunta 3"},
     ]
 
@@ -248,7 +248,7 @@ def acciones(c):
 # 5. Atribución de las fuentes, igual en cada salida
 # =====================================================================================================================
 
-ATRIBUCION = ["Inside Airbnb, Madrid, foto del 17/09/2026, con licencia CC BY 4.0.",
+ATRIBUCION = ["Inside Airbnb, Madrid, descarga del 17/09/2026, con licencia CC BY 4.0.",
               "Origen de los datos: Ayuntamiento de Madrid, datos de 2025.",
               "Colegio de Registradores de España, fuente del precio declarado y de la superficie de 2025 que publica el Ayuntamiento."]
 

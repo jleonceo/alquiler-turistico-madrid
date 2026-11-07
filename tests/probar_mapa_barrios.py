@@ -25,22 +25,22 @@ def principal():
     import mapa_barrios as mb
     cuadrado = lambda x, y: shapely.box(x, y, x + 0.01, y + 0.01)
     poligonos = {"Norte": cuadrado(-3.70, 40.46), "Sur": cuadrado(-3.70, 40.40), "Este": cuadrado(-3.60, 40.43), "Otro": cuadrado(-3.75, 40.43)}
-    clases = {"Norte": "firme", "Sur": "con aviso", "Este": "segunda línea"}
+    clases = {"Norte": "5 de 5 veces", "Sur": "4 de 5 veces", "Este": "menos de 4 veces"}
     limite = cuadrado(-3.72, 40.42)
     svg = mb.mapa(poligonos, clases, limite)
     caso("empieza por <svg", svg.lstrip().startswith("<svg"))
     caso("un dato con etiqueta por barrio del grupo", svg.count('class="dato"') == 3, svg.count('class="dato"'))
-    caso("cada barrio del grupo lleva su clase en la etiqueta", "<title>Norte: firme</title>" in svg and "<title>Sur: con aviso</title>" in svg)
+    caso("cada barrio del grupo lleva su clase en la etiqueta", "<title>Norte: 5 de 5 veces</title>" in svg and "<title>Sur: 4 de 5 veces</title>" in svg)
     caso("el barrio sin clase va sin etiqueta", "<title>Otro" not in svg)
     caso("cada barrio del grupo lleva su nombre escrito", all(f">{b}</text>" in svg for b in clases))
-    caso("cada clase sale en la leyenda", all(f">{c}</text>" in svg for c in ("Firme", "Con aviso", "Segunda línea")))
+    caso("cada clase sale en la leyenda", all(f">{c}</text>" in svg for c in ("5 de 5 veces", "4 de 5 veces", "Menos de 4 veces")))
     caso("rotula el centro histórico", ">Centro histórico</text>" in svg)
     ids = re.findall(r'\bid="([^"]+)"', svg)
     caso("identificadores únicos", len(ids) == len(set(ids)), ids)
     caso("sin color fuera de la paleta", set(re.findall(r'#[0-9a-f]{6}', svg)) <= {"#2a78d6", "#eb6834", "#1baf7a", "#e1e0d9", "#ffffff", "#0b0b0b", "#52514e", "#898781"}, set(re.findall(r'#[0-9a-f]{6}', svg)))
-    caso("el naranja es de los barrios con aviso, y la firme va en azul", re.search(r'<title>Sur: con aviso</title><path[^>]*fill="#eb6834"', svg) is not None and re.search(r'<title>Norte: firme</title><path[^>]*fill="#2a78d6"', svg) is not None)
+    caso("el naranja es de los barrios que siguen en la lista 4 veces, y los de 5 de 5 van en azul", re.search(r'<title>Sur: 4 de 5 veces</title><path[^>]*fill="#eb6834"', svg) is not None and re.search(r'<title>Norte: 5 de 5 veces</title><path[^>]*fill="#2a78d6"', svg) is not None)
     try:
-        mb.mapa(poligonos, {"Falta": "firme"}, limite)
+        mb.mapa(poligonos, {"Falta": "5 de 5 veces"}, limite)
         caso("para si un barrio del grupo no tiene polígono", False)
     except ValueError:
         caso("para si un barrio del grupo no tiene polígono", True)

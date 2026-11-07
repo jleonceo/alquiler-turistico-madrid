@@ -1,4 +1,4 @@
-"""Comprueba por otro camino la frase del límite de la prueba de ocupación: contar además los pisos sin ocupación ni precio deja solo a Ventas como firme.
+"""Comprueba por otro camino la frase del límite de la prueba de ocupación: contar además los pisos sin ocupación ni precio deja solo a Ventas como recomendado.
 
 La frase viene de la lectura aprobada y no tiene clave en informes/indicadores.json. Esta prueba la rehace sobre
 data/processed/analisis_anuncios.parquet con las funciones de tests/probar_indicadores_por_otro_camino.py: repite las 12
@@ -41,7 +41,7 @@ def principal():
     j = json.loads((o.CASO / "informes" / "indicadores.json").read_text(encoding="utf-8"))
     firmes = j["preguntas"][1]["firmes"]
     t = o.leer()
-    # Caso que tiene que coincidir con el JSON: sin añadir nada, la prueba da sus variantes y todos los firmes la aguantan.
+    # Caso que tiene que coincidir con el JSON: sin añadir nada, la prueba da sus variantes y todos los recomendados la aguantan.
     sin_anadir = variantes_con_vacios(t, False)
     o.caso("sin añadir pisos sale la prueba del JSON", dict(sorted(sin_anadir.items())), j["preguntas"][1]["pruebas"]["variantes_por_prueba"]["sin_ocupacion_como_cero"])
     con_vacios = variantes_con_vacios(t, True)

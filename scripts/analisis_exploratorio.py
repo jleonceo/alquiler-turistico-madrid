@@ -54,7 +54,7 @@ IDENTIFICADORES = {"id", "latitud", "longitud"}
 # No se describen como magnitud: sus sumas no significan nada o repiten una columna que ya se describe (reglas-transformacion.md §1).
 NO_MAGNITUD = {"distancia_borde_m"}
 # Variables con histograma propio, porque son las palancas de la ficha.
-PRINCIPALES = [("precio_eur", "Precio por noche", "€", 0), ("ocupacion_dias", "Ocupación estimada", " días", 0), ("rent_valoraciones_desc_pct", "Rentabilidad bruta con descuento", " %", 1), ("compra_valoraciones_desc_eur", "Precio de compra con descuento", " €", 0)]
+PRINCIPALES = [("precio_eur", "Precio por noche", "€", 0), ("ocupacion_dias", "Ocupación estimada", " días", 0), ("rent_valoraciones_pct", "Rentabilidad bruta", " %", 1), ("compra_valoraciones_eur", "Precio de compra", " €", 0)]
 CATEGORICAS_ANUNCIOS = ["tipo_alquiler", "tipo_inmueble", "distrito", "barrio", "estancia_origen", "tipo_licencia", "exencion_licencia", "precio_m2_origen", "superficie_oficial_origen", "lado_centro", "lado_incierto", "declara_temporada", "captura_anterior"]
 COL_PRECIO_BASE = {"decision": "precio_eur", "comparacion": "precio_vivienda_comparacion_eur"}
 NOMBRE_BASE = {"decision": "base de decisión", "comparacion": "base de comparación"}
@@ -186,11 +186,11 @@ def resumen_de_base(d, clave):
 def rentabilidad_por_dormitorios_y_barrio(d):
     """Cruza habitaciones y barrio con el mínimo de 30 por celda; lo demás sale con su recuento (reglas §3)."""
     t = d.assign(grupo_dormitorios=dormitorios_de(d["dormitorios"]))
-    por_dorm = t.groupby("grupo_dormitorios")["rent_valoraciones_desc_pct"].agg(pisos="size", mediana="median", q25=lambda x: x.quantile(0.25)).reset_index()
-    celdas = t.groupby(["barrio", "grupo_dormitorios"])["rent_valoraciones_desc_pct"].agg(pisos="size", mediana="median").reset_index()
+    por_dorm = t.groupby("grupo_dormitorios")["rent_valoraciones_pct"].agg(pisos="size", mediana="median", q25=lambda x: x.quantile(0.25)).reset_index()
+    celdas = t.groupby(["barrio", "grupo_dormitorios"])["rent_valoraciones_pct"].agg(pisos="size", mediana="median").reset_index()
     llegan = celdas.loc[celdas["pisos"].ge(MINIMO)].sort_values(["mediana", "barrio"], ascending=[False, True])
     # Simpson: si 1 dormitorio gana a 2 en el total, se mira si también gana distrito a distrito.
-    dd = t.loc[t["grupo_dormitorios"].isin(["1", "2"])].groupby(["distrito", "grupo_dormitorios"])["rent_valoraciones_desc_pct"].agg(pisos="size", mediana="median").reset_index()
+    dd = t.loc[t["grupo_dormitorios"].isin(["1", "2"])].groupby(["distrito", "grupo_dormitorios"])["rent_valoraciones_pct"].agg(pisos="size", mediana="median").reset_index()
     ancho = dd.pivot(index="distrito", columns="grupo_dormitorios", values="mediana")
     conteo = dd.pivot(index="distrito", columns="grupo_dormitorios", values="pisos")
     vista_distritos = []
@@ -219,7 +219,7 @@ def ocupacion_con_su_tope(d):
 
 def compra_y_alquiler_por_distrito(d, col_precio):
     """Mide si el precio de compra y el de alquiler van juntos entre distritos con 30 anuncios o más."""
-    g = d.groupby("distrito").agg(pisos=("id", "size"), alquiler=(col_precio, "median"), m2=("precio_m2_eur", "median"), compra=("compra_valoraciones_desc_eur", "median"), ocupacion=("ocupacion_dias", "median")).reset_index()
+    g = d.groupby("distrito").agg(pisos=("id", "size"), alquiler=(col_precio, "median"), m2=("precio_m2_eur", "median"), compra=("compra_valoraciones_eur", "median"), ocupacion=("ocupacion_dias", "median")).reset_index()
     g = g.loc[g["pisos"].ge(MINIMO)].sort_values(["compra", "distrito"], ascending=[False, True])
     return {"distritos": len(g), "m2_con_alquiler": correlaciones(g["m2"], g["alquiler"]), "compra_con_alquiler": correlaciones(g["compra"], g["alquiler"]), "m2_con_ocupacion": correlaciones(g["m2"], g["ocupacion"]),
             "filas": [{"distrito": str(f["distrito"]), "pisos": int(f["pisos"]), "alquiler_mediano_eur": float(f["alquiler"]), "m2_mediano_eur": float(f["m2"]), "compra_mediana_eur": float(f["compra"])} for _, f in g.iterrows()]}
@@ -290,7 +290,7 @@ def textos_anuncios(s):
         if rd["distritos_donde_1_supera_a_2"] < rd["distritos_comparables_1_y_2"]:
             simpson.append({"texto": f"Con 30 pisos o más, la mayor rentabilidad bruta mediana del total es la de los pisos con {orden[0]['dormitorios']} {'habitación' if orden[0]['dormitorios'] == '1' else 'habitaciones'}, {n(orden[0]['mediana_pct'], 1)} %, pero de {n(rd['distritos_comparables_1_y_2'])} distritos comparables una habitación supera a dos solo en {n(rd['distritos_donde_1_supera_a_2'])}: la conclusión cambia al segmentar.", "origen": None})
         else:
-            hallazgos.append({"texto": f"Con 30 pisos o más, la mayor rentabilidad bruta mediana es la de los pisos con {orden[0]['dormitorios']} {'habitación' if orden[0]['dormitorios'] == '1' else 'habitaciones'}: {n(orden[0]['mediana_pct'], 1)} % con {n(orden[0]['pisos'])} pisos.", "dimensiones_comprobadas": dims, "filas": b["filas"], "columnas": ["rent_valoraciones_desc_pct", "dormitorios", "distrito"]})
+            hallazgos.append({"texto": f"Con 30 pisos o más, la mayor rentabilidad bruta mediana es la de los pisos con {orden[0]['dormitorios']} {'habitación' if orden[0]['dormitorios'] == '1' else 'habitaciones'}: {n(orden[0]['mediana_pct'], 1)} % con {n(orden[0]['pisos'])} pisos.", "dimensiones_comprobadas": dims, "filas": b["filas"], "columnas": ["rent_valoraciones_pct", "dormitorios", "distrito"]})
         hallazgos.append({"texto": f"El cruce de barrio y habitaciones deja {n(rd['celdas_con_30_o_mas'])} celdas con 30 pisos o más, de {n(rd['celdas_barrio_dormitorios'])}: el barrio y el tipo juntos casi nunca llegan al mínimo.", "dimensiones_comprobadas": ["barrio", "dormitorios"], "filas": rd["pisos_en_esas_celdas"], "columnas": ["barrio", "dormitorios"]})
     hallazgos.append({"texto": f"El {n(ot['decision']['pct_en_el_tope'], 1)} % de la base de decisión y el {n(ot['comparacion']['pct_en_el_tope'], 1)} % de la de comparación están en el tope de 255 días.", "dimensiones_comprobadas": ["distrito"], "filas": b["filas"], "columnas": ["ocupacion_dias"]})
     hallazgos.append({"texto": f"Entre {n(ca['decision']['distritos'])} distritos con 30 pisos o más, el precio mediano del m² de los pisos y su alquiler mediano van juntos en la base de decisión: Spearman de {n(ca['decision']['m2_con_alquiler']['spearman'], 2)}. En la de comparación, con {n(ca['comparacion']['distritos'])} distritos, da {n(ca['comparacion']['m2_con_alquiler']['spearman'], 2)}.",
@@ -301,7 +301,7 @@ def textos_anuncios(s):
     hallazgos.append({"texto": f"Los {n(f['anuncios_con_las_tres'])} pisos de la base con precio en las tres fotos tienen una mediana de {n(f['mediana_marzo'], 2)} € en marzo, {n(f['mediana_junio'], 2)} € en junio y {n(f['mediana_septiembre'], 2)} € en septiembre.", "dimensiones_comprobadas": ["foto"], "filas": f["anuncios_con_las_tres"], "columnas": ["precio_mar_eur", "precio_jun_eur", "precio_eur"]})
 
     alertas = [{"texto": "La ocupación es una estimación de la fuente con tope de 255 días, y en la parte alta no ordena.", "origen": "reglas-negocio §6"},
-               {"texto": "La superficie de valoraciones y el descuento del 25 % son supuestos: la rentabilidad compara y no promete un rendimiento.", "origen": "reglas-negocio §6"}]
+               {"texto": "La superficie de valoraciones es un supuesto: la rentabilidad compara y no promete un rendimiento.", "origen": "reglas-negocio §6"}]
     alertas += simpson + [{"texto": p["pregunta"], "origen": f"transformacion-datos {p['id']}"} for p in s["pendientes_heredados"]]
     alertas.append({"texto": f"{n(b['lado_incierto'])} pisos de la base de decisión están a menos de 150 m del borde del centro histórico, y su lado no se puede asegurar.", "origen": "reglas-negocio §4"})
     dominante = b["categoricas"]["tipo_inmueble"]
@@ -348,7 +348,7 @@ def bloques_anuncios(a, d, c, s, fallidos):
     numericos, categoricos, destacados = [], [], []
     for clave, t in (("decision", d), ("comparacion", c)):
         for col, nombre, unidad, dec in PRINCIPALES:
-            if clave == "comparacion" and col == "rent_valoraciones_desc_pct":
+            if clave == "comparacion" and col == "rent_valoraciones_pct":
                 continue
             v = t[col].dropna().tolist()
             mediana = s["bases"][clave]["numericas"].get(col, {}).get("mediana")

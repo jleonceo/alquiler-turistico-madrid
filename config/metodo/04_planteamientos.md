@@ -7,8 +7,7 @@ anuncio, con la foto del 17/09/2026. La unidad es el anuncio, que no es un inmue
 ## Pregunta 1 · Qué tipo de piso rinde más
 
 - Decisión: qué habitaciones y qué tipo de inmueble busca valoraciones.
-- Medida: rentabilidad bruta mediana por habitaciones, con la superficie de valoraciones y con descuento. Al lado, la
-  misma sin descuento y los euros al año.
+- Medida: rentabilidad bruta mediana por habitaciones, con la superficie de valoraciones. Al lado, los euros al año.
 - Referencia: la mediana de toda la base.
 - Mínimo: 30 anuncios por grupo.
 - Comparación: intervalo del 95 % de la diferencia de medianas, con 2.000 remuestreos y semilla fija.
@@ -20,7 +19,7 @@ anuncio, con la foto del 17/09/2026. La unidad es el anuncio, que no es un inmue
 - Medida: rentabilidad bruta mediana por barrio y las doce variantes de las reglas §3.
 - Referencia: la mediana de los barrios con 30 anuncios o más.
 - Mínimo: 30 anuncios en la base; 20 solo en las variantes que lo fijan.
-- Salida: grupo firme, con aviso y segunda línea, cada barrio con recuento, cuartil bajo, parte de pisos en el tope de
+- Salida: barrios con 5, 4 o menos pruebas superadas, cada barrio con recuento, cuartil bajo, parte de pisos en el tope de
   ocupación, las cinco pruebas que aguanta y sus tres avisos.
 - Qué cambia la decisión: la clase de cada barrio sale de las cinco pruebas, y sus tres avisos se escriben al lado.
 
@@ -30,8 +29,8 @@ anuncio, con la foto del 17/09/2026. La unidad es el anuncio, que no es un inmue
 - Medida: recuento, cuartil bajo, rango de la mediana entre las tres fotos de precio, y barrios que se distinguen del
   primero con el mismo intervalo.
 - Referencia: el mismo cálculo para toda la base.
-- Rango de rentabilidad bruta: el del grupo firme y, aparte, el de firmes más con aviso, de la peor a la mejor
-  combinación de foto y descuento.
+- Rango de rentabilidad bruta: el del grupo recomendado y, aparte, el de recomendados más los que siguen en la lista 4 veces, de la fecha del
+  precio más baja a la más alta.
 - Pisos sin ocupación: su parte en cada barrio del grupo, como riesgo.
 - Mínimo: 30 anuncios.
 - Qué cambia la decisión: un barrio del grupo que dependa del tope de 255 días o de pocos anuncios se dice así.
@@ -59,7 +58,7 @@ la base: las pruebas solo miden si la lista aguanta.
   2 habitaciones entre 60 y 75, en las ocho combinaciones de esos extremos.
 - Referencia: los tipos que se dan con la superficie de valoraciones.
 - Mínimo: 30 anuncios por grupo.
-- Qué cambia la decisión: si en alguna combinación se dan otros tipos, se dice cuál y el tipo deja de darse como firme.
+- Qué cambia la decisión: si en alguna combinación se dan otros tipos, se dice cuál y el tipo deja de darse como recomendado.
 
 ### Referencia del grupo: los barrios de m² más barato
 

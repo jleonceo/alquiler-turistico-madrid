@@ -50,7 +50,7 @@ def principal():
     malos = {}
     x = copy.deepcopy(base)
     x["preguntas"][1]["con_aviso"] = ["Opañel"]
-    malos["cambian los que van con aviso"] = x
+    malos["cambian los que siguen en la lista 4 veces"] = x
     x = copy.deepcopy(base)
     x["preguntas"][2]["pares_dentro_del_grupo"][0]["se_distinguen"] = True
     malos["cambian los pares que se distinguen"] = x
@@ -80,12 +80,12 @@ def principal():
         caso("15 páginas como mucho sin el anexo", len(sin_anexo) <= 15, len(sin_anexo))
         caso("unas 120 palabras por página de pregunta", all(p["palabras"] <= 140 for p in paginas if p["tipo"] == "pregunta"), [(p["titulo"], p["palabras"]) for p in paginas if p["palabras"] > 140 and p["tipo"] == "pregunta"])
         caso("ningún título con dos puntos", not [p["titulo"] for p in paginas if ":" in p["titulo"]], [p["titulo"] for p in paginas])
-        caso("el mapa está en el informe", html.count('aria-label="Los firmes') >= 1 or "Centro histórico</text>" in html)
+        caso("el mapa está en el informe", html.count('aria-label="Los recomendados') >= 1 or "Centro histórico</text>" in html)
         caso("cada barrio del grupo lleva su etiqueta en el mapa", all(f"{b.replace('Angel', 'Ángel')}: " in html for b in base["preguntas"][1]["grupo"]))
         caso("el CSV de los gráficos trae cabecera", csv.startswith("pagina;grafico;grupo;medida;cifra;unidad"))
         caso("el CSV trae filas", len(csv.splitlines()) > 20, len(csv.splitlines()))
-        caso("resumen abre con el límite antes de las preguntas", texto.index("lista de dónde buscar") < texto.index("Pregunta Respuesta"))
-        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo a Ventas", "tope de 255 días", "no es beneficio", "Datos personales", "supresión", "foto de Inside Airbnb"):
+        caso("resumen abre con el límite antes de las preguntas", texto.index("dice dónde buscar") < texto.index("Pregunta Respuesta"))
+        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo seguiría en la lista el barrio de Ventas", "máximo de 255", "gastos, impuestos ni comisiones", "Datos personales", "seudonimización", "Inside Airbnb, Madrid, descarga"):
             caso(f"dice «{frase}»", frase in texto)
         caso("nombra las tres acciones del ejecutivo", all(a["nombre"] in texto for a in rastro["acciones"]))
     print(f"{len(FALLOS)} fallos")
