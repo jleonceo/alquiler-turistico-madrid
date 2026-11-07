@@ -89,7 +89,7 @@ def montar(destino, hasta):
     # El grupo del caso pequeño no es el de Madrid: la prueba que quiera un control lo escribe aparte.
     ruta = caso / "scripts" / "decisiones_correccion.json"
     dec = json.loads(ruta.read_text(encoding="utf-8"))
-    dec["controles"] = {"grupo_esperado": None, "firmes_esperados": None, "base_comparacion_esperada": None}
+    dec["controles"] = {"grupo_esperado": None, "recomendados_esperados": None, "base_comparacion_esperada": None}
     ruta.write_text(json.dumps(dec, ensure_ascii=False), encoding="utf-8")
     ultimo = None
     for nombre in NOMBRES[:-1]:

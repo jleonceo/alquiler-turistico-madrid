@@ -15,8 +15,8 @@
  "sensibilidad_superficie": {"0": [35, 50], "1": [45, 60], "2": [60, 75]},
  "controles": {
    "grupo_esperado": ["Canillejas", "Casco Histórico de Vallecas", "Numancia", "Opañel", "Puerta del Angel", "Quintana", "San Diego", "Ventas", "Vista Alegre"],
-   "firmes_esperados": ["Numancia", "San Diego", "Ventas"],
-   "con_aviso_esperados": ["Casco Histórico de Vallecas", "Opañel"],
+   "recomendados_esperados": ["Numancia", "San Diego", "Ventas"],
+   "cuatro_de_cinco_esperados": ["Casco Histórico de Vallecas", "Opañel"],
    "base_comparacion_esperada": 7249
  }
 }

@@ -85,9 +85,9 @@ CONSTANTES = {"255": "reglas §2, máximo de la ocupación", "25": "reglas §3, 
               "2026": "año de las descargas", "35": "planteamientos, estudio", "45": "planteamientos, una habitación",
               "50": "reglas §2, superficie", "65": "reglas §2, superficie", "75": "planteamientos, dos habitaciones",
               "15": "páginas del informe", "90": "reglas §2, superficie", "110": "reglas §2, superficie",
-              "140": "reglas §2, superficie", "1.000": "reglas §3, precio", "8": "reglas §3, huéspedes"}
+              "140": "reglas §2, superficie", "7": "barrios sin los pisos en el máximo", "1.000": "reglas §3, precio", "8": "reglas §3, huéspedes"}
 # Lo que parece cifra y no lo es: fechas, la licencia y los nombres de las normas.
-NO_CIFRAS = [r"\d{2}/\d{2}/\d{4}", r"CC BY 4\.0", r"BOCM \d+", r"APE \d+\.\d+"]
+NO_CIFRAS = [r"\d{2}/\d{2}/\d{4}", r"CC BY 4\.0", r"BOCM \d+", r"Ley 49/1960(, arts\. 7\.3 y 17\.12)?", r"art\. 17 ter\.3", r"art\. 17 bis", r"Decreto (79/2014|27/2026)", r"APE \d+\.\d+"]
 
 # Palabras que las salidas no pueden llevar: método interno y nombres de código.
 PROHIBIDAS = [r"\bbase de comparaci[oó]n\b",
@@ -138,8 +138,8 @@ def palabras(texto):
 # 3. La lectura aprobada: lo que tiene que seguir cierto para escribirla
 # =====================================================================================================================
 
-FIRMES = ["Ventas", "Numancia", "San Diego"]
-CON_AVISO = ["Casco Histórico de Vallecas", "Opañel"]
+RECOMENDADOS = ["Ventas", "Numancia", "San Diego"]
+CUATRO_DE_CINCO = ["Casco Histórico de Vallecas", "Opañel"]
 Q2 = "preguntas[1]"
 Q3 = "preguntas[2]"
 REC = "recomendacion"
@@ -148,6 +148,16 @@ UN_ANO = f"{Q2}.con_un_ano_o_mas"
 PLANTA = "licencias_y_registro.planta_baja"
 # La fuente escribe sin tilde este barrio: el lector lo lee con ella en todas las salidas.
 NOMBRE_VISIBLE = {"Puerta del Angel": "Puerta del Ángel"}
+
+
+def lista_y(nombres):
+    """Une nombres con comas y una «y» final."""
+    return ", ".join(nombres[:-1]) + " y " + nombres[-1]
+
+
+def lista_sin_maximo(c):
+    """Nombra los barrios que quedan en la lista sin los pisos que llegan al máximo de días."""
+    return lista_y([barrio(b) for b in c.dato(f"{Q2}.grupo_sin_los_pisos_en_el_tope")])
 
 
 def barrio(b):
@@ -168,12 +178,12 @@ def puesto(nombre):
 def comprobar_lectura(c):
     """Comprueba con las cifras cada frase de la lectura aprobada antes de escribir nada."""
     p1, p2, p3 = c.dato("preguntas")
-    exigir(sorted(p2["firmes"]) == sorted(FIRMES), "los recomendados son Ventas, Numancia y San Diego")
-    exigir(sorted(p2["con_aviso"]) == sorted(CON_AVISO), "que siguen en la lista 4 veces van Casco Histórico de Vallecas y Opañel")
+    exigir(sorted(p2["recomendados"]) == sorted(RECOMENDADOS), "los recomendados son Ventas, Numancia y San Diego")
+    exigir(sorted(p2["cuatro_de_cinco"]) == sorted(CUATRO_DE_CINCO), "que siguen en la lista 4 veces van Casco Histórico de Vallecas y Opañel")
     exigir(len(p2["segunda_linea"]) == 4, "cuatro barrios en resto del grupo")
     fichas = {f["barrio"]: f for f in p2["fichas_del_grupo"]}
     # Los recomendados aguantan las cinco pruebas, dependen del máximo y su cuartil bajo supera el de la base.
-    for b in FIRMES:
+    for b in RECOMENDADOS:
         exigir(len(fichas[b]["pruebas_que_aguanta"]) == 5, f"{b} aguanta las cinco pruebas")
         exigir(fichas[b]["avisos_del_barrio"]["depende_del_tope"], f"{b} depende del máximo de días")
         exigir(fichas[b]["cuartil_bajo_pct"] > p2["cuartil_bajo_de_toda_la_base"], f"el cuartil bajo de {b} supera el de la base")
@@ -185,7 +195,7 @@ def comprobar_lectura(c):
     exigir(fichas["Opañel"]["parte_en_el_tope_pct"] >= 50 and not fichas["Opañel"]["avisos_del_barrio"]["depende_del_tope"], "Opañel no depende del máximo aunque la mitad de sus pisos llega a él")
     exigir(not fichas["Puerta del Angel"]["pruebas_que_aguanta"], "Puerta del Ángel no aguanta ninguna prueba")
     # Los que siguen en la lista 4 veces caen justo en la prueba de los operadores grandes.
-    for b in CON_AVISO:
+    for b in CUATRO_DE_CINCO:
         exigir(fichas[b]["pruebas_que_no_aguanta"] == ["sin_anfitriones_grandes"], f"{b} depende de operadores grandes")
     # Hasta 2 dormitorios rinden más que 3 en cada combinación, y el orden entre ellos cambia con los m².
     s = p1["sensibilidad_superficie"]
@@ -205,13 +215,22 @@ def comprobar_lectura(c):
     # Dentro del grupo el orden no se cierra: de los 36 pares, se distinguen 4.
     exigir(sum(1 for x in p3["pares_dentro_del_grupo"] if x["se_distinguen"]) == 4, "cuatro pares del grupo se distinguen")
     # San Diego queda por debajo de los dos que siguen en la lista 4 veces, que rinden más.
-    for b in CON_AVISO:
+    for b in CUATRO_DE_CINCO:
         exigir(any({x["a"], x["b"]} == {b, "San Diego"} and x["se_distinguen"] for x in p3["pares_dentro_del_grupo"]), f"San Diego queda por debajo de {b}")
         exigir(fichas[b]["rentabilidad_mediana_pct"] > fichas["San Diego"]["rentabilidad_mediana_pct"], f"{b} rinde más que San Diego")
     # Con los pisos de un año o más, Numancia y Ventas siguen en el mejor cuarto y San Diego sale de él.
     u = {x["barrio"]: x for x in p2["con_un_ano_o_mas"]["barrios"]}
     exigir(u["Numancia"]["en_el_mejor_cuarto"] and u["Ventas"]["en_el_mejor_cuarto"], "Numancia y Ventas siguen en el mejor cuarto con pisos de un año o más")
     exigir(not u["San Diego"]["en_el_mejor_cuarto"], "San Diego se sostiene menos con pisos de un año o más")
+    # Sin los pisos en el máximo la lista es otra y ninguno de los tres recomendados sigue en ella.
+    sin_tope = p2["grupo_sin_los_pisos_en_el_tope"]
+    exigir(len(sin_tope) == 7 and not set(sin_tope) & set(RECOMENDADOS), "sin los pisos en el máximo quedan 7 barrios y ninguno de los tres recomendados")
+    # La mediana de la compra es exactamente 50 m² en Numancia.
+    r = c.dato(REC)
+    exigir(next(x for x in r["compra_por_barrio"] if x["barrio"] == "Numancia")["hasta_1_habitacion_eur"] == r["compra_eur"], "la compra mediana es un piso de 50 m² en Numancia")
+    # Las superficies de los pisos de 3 habitaciones no se movieron: hay que decirlo.
+    exigir(s["tres_habitaciones"]["superficies_supuestas_m2"] == [90.0, 110.0, 140.0], "los pisos de 3 habitaciones se calculan con de 90 a 140 m²")
+    exigir(s["tres_habitaciones"]["superficie_para_igualar_a_2_m2"] < 75, "un piso de 3 habitaciones tendría que medir menos que el de 2 más grande probado")
     # La lista frente a elegir por precio: ninguno de los dos pares se distingue, y la rentabilidad va más con la ocupación que con el m².
     o = p2["que_ordena_la_lista"]
     exigir(not any(x["se_distinguen"] for x in o["pares"]) and len(o["pares"]) == 2, "los recomendados y el grupo no se distinguen de los barrios de m² más barato")
@@ -226,8 +245,8 @@ def acciones(c):
     """Devuelve las tres acciones: nombre, qué se hace, quién, para cuándo y de qué hallazgo sale con su cifra."""
     pendiente = "fecha por fijar"
     return [
-        {"nombre": "Comprobar planta y norma en el Ayuntamiento",
-         "que": "Empezar por bajos y primeras plantas con acceso independiente y preguntar en el Ayuntamiento qué norma rige en cada barrio de la lista antes de comprar.",
+        {"nombre": "Comprobar planta, norma y comunidad de propietarios",
+         "que": "Empezar por bajos y primeras plantas con acceso independiente, y antes de comprar preguntar en el Ayuntamiento qué norma rige en cada barrio de la lista y a la comunidad si lo aprobaría. El piso no puede tener protección pública.",
          "quien": "Dirección de Inversiones", "cuando": pendiente,
          "por_que": f"{c.num(PLANTA + '.licencias')} de las {c.num(PLANTA + '.de')} licencias municipales incluyen planta baja.",
          "pagina": "Lo que puede cambiar estas conclusiones"},

@@ -211,5 +211,5 @@ def pruebas_del_grupo(L, excluir, reglas):
         aguanta = [p for p in PRUEBAS if b in medidas[p][0]]
         barrios[b] = {"aguanta": aguanta, "no_aguanta": [p for p in PRUEBAS if p not in aguanta], "cuantas": len(aguanta), "clase": clase_del_barrio(len(aguanta))}
     de_clase = lambda clase: sorted(b for b, x in barrios.items() if x["clase"] == clase)
-    return {"grupo": grupo, "barrios": barrios, "firmes": de_clase("5 de 5 veces"), "con_aviso": de_clase("4 de 5 veces"), "segunda_linea": de_clase("menos de 4 veces"),
+    return {"grupo": grupo, "barrios": barrios, "recomendados": de_clase("5 de 5 veces"), "cuatro_de_cinco": de_clase("4 de 5 veces"), "segunda_linea": de_clase("menos de 4 veces"),
             "por_prueba": {p: sorted(set(grupo) & set(medidas[p][0])) for p in PRUEBAS}, "variantes_por_prueba": {p: {k: int(v) for k, v in sorted(medidas[p][1].items())} for p in PRUEBAS}}

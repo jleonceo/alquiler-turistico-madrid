@@ -110,9 +110,9 @@ def pruebas_de_funciones(p, ind):
     L = tabla_grupos()
     nadie = pd.Series(False, index=L.index)
     reglas = {"anfitrion_anuncios": 10, "cotizacion_dias": 60, "dormitorios": [1, 2], "pocos_anuncios": 40}
-    grupo, firmes, _ = ind.grupo_y_firmes(L, nadie, reglas)
+    grupo, recomendados, _ = ind.grupo_y_recomendados(L, nadie, reglas)
     p.caso("grupo de ocho barrios", grupo == ["Alto", "Medio"], str(grupo))
-    p.caso("el barrio que depende de temporada no es firme", firmes == ["Alto"], str(firmes))
+    p.caso("el barrio que depende de temporada no sale recomendado", recomendados == ["Alto"], str(recomendados))
     pruebas_de_las_cinco(p, ind, reglas)
 
     # 2 pisos de 50 m² a 4.000 €/m² y 100 días: junio a 50 € da 2,5 %; marzo a 200 € da 10 %.
@@ -156,8 +156,8 @@ def pruebas_de_las_cinco(p, ind, reglas):
     nadie = pd.Series(False, index=L.index)
     r = rc.pruebas_del_grupo(L, nadie, reglas)
     p.caso("son cinco pruebas", len(rc.PRUEBAS) == 5 and set(r["barrios"]["Alto"]["aguanta"]) == set(rc.PRUEBAS), str(r["barrios"].get("Alto")))
-    p.caso("el que aguanta las cinco es firme", r["barrios"]["Alto"]["clase"] == "5 de 5 veces" and r["firmes"] == ["Alto"], str(r["barrios"]))
-    p.caso("el que aguanta cuatro lleva aviso", r["barrios"]["Medio"]["clase"] == "4 de 5 veces" and r["con_aviso"] == ["Medio"], str(r["barrios"]))
+    p.caso("el que aguanta las cinco sale recomendado", r["barrios"]["Alto"]["clase"] == "5 de 5 veces" and r["recomendados"] == ["Alto"], str(r["barrios"]))
+    p.caso("el que aguanta cuatro lleva aviso", r["barrios"]["Medio"]["clase"] == "4 de 5 veces" and r["cuatro_de_cinco"] == ["Medio"], str(r["barrios"]))
     p.caso("Medio cae solo en la temporada", r["barrios"]["Medio"]["no_aguanta"] == ["sin_temporada"], str(r["barrios"]["Medio"]))
 
     # ROJO a propósito: con los anuncios de un anfitrión grande, Medio cae en dos pruebas y baja a resto del grupo.
@@ -251,10 +251,10 @@ def caso_entero(p):
         p.caso("todas las validaciones pasan", all(v is True for v in j["validaciones"].values()), str(j["validaciones"]))
         q1, q2, q3 = j["preguntas"]
         p.caso("cada barrio del grupo lleva sus pruebas, su clase y sus avisos", all({"clase", "pruebas_que_aguanta", "pruebas_que_no_aguanta", "avisos_del_barrio"} <= set(f) for f in q2["fichas_del_grupo"]), str(q2["fichas_del_grupo"][:1]))
-        p.caso("trae la tabla de las cinco pruebas", set(q2["pruebas"]) == {"barrios", "firmes", "con_aviso", "segunda_linea", "por_prueba", "variantes_por_prueba"}, str(list(q2.get("pruebas", {}))))
+        p.caso("trae la tabla de las cinco pruebas", set(q2["pruebas"]) == {"barrios", "recomendados", "cuatro_de_cinco", "segunda_linea", "por_prueba", "variantes_por_prueba"}, str(list(q2.get("pruebas", {}))))
         p.caso("trae la sensibilidad de superficie", len(q1["sensibilidad_superficie"]["combinaciones"]) == 8)
         p.caso("trae la referencia de los baratos", {"comparados", "toda_la_ciudad"} <= set(q2["referencia_baratos"]))
-        p.caso("trae el rango de recomendados y los que siguen en la lista 4 veces", "rango_de_rentabilidad_de_firmes_y_con_aviso" in q3)
+        p.caso("trae el rango de recomendados y los que siguen en la lista 4 veces", "rango_de_rentabilidad_de_recomendados_y_cuatro_de_cinco" in q3)
         p.caso("trae la parte sin ocupación en la misma base", all("sin_ocupacion_misma_base_pct" in f for f in q3["fichas_del_grupo"]))
         p.caso("P-01 queda resuelto", not any("no fijan cuándo" in x["pregunta"] for x in j["pendientes"]) and j["pendientes_resueltos"][0]["id"] == "P-01", str(j["pendientes"]))
         p.caso("el corte de pocos anuncios no se decide en el script", "corte_de_pocos_anuncios" not in q3)

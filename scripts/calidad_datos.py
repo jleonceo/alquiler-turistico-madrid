@@ -548,7 +548,7 @@ def medir(L, excluir=None, camas_vacias=False):
     bd["dormitorios"] = bd["bedrooms"].clip(upper=4).astype("int").astype("str").replace("4", "4 o más")
     grupo, veces = grupo_de(L, excluir, camas_vacias)
     sin_temporada = L["temporada"] if excluir is None else (excluir | L["temporada"])
-    firmes = sorted(set(grupo) & set(grupo_de(L, sin_temporada, camas_vacias)[0]))
+    recomendados = sorted(set(grupo) & set(grupo_de(L, sin_temporada, camas_vacias)[0]))
     pares, _ = pares_distintos(bd, "barrio")
     tipo = {}
     for dim in ("dormitorios", "property_type"):
@@ -558,7 +558,7 @@ def medir(L, excluir=None, camas_vacias=False):
         segundo = orden[1] if len(orden) > 1 else None
         tipo[dim] = {"ganador": ganador, "segundo": segundo, "medianas": {k: round(v, 2) for k, v in medianas.items()}, "pares": pares_t,
                      "ganador_se_distingue_del_segundo": sorted([ganador, segundo]) in pares_t if segundo else None}
-    return {"pisos": len(bd), "grupo": grupo, "variantes_por_barrio": {k: int(v) for k, v in sorted(veces.items())}, "firmes": firmes,
+    return {"pisos": len(bd), "grupo": grupo, "variantes_por_barrio": {k: int(v) for k, v in sorted(veces.items())}, "recomendados": recomendados,
             "pares_que_se_distinguen": pares, "barrios_comparados": int(bd.dropna(subset="r")["barrio"].value_counts().ge(MIN_GRUPO).sum()),
             "lista_de_comparados": sorted(bd.dropna(subset="r")["barrio"].value_counts().loc[lambda x: x.ge(MIN_GRUPO)].index), "tipo": tipo}
 
@@ -569,7 +569,7 @@ def comparar(base, otra):
     pares_o = {tuple(x) for x in otra["pares_que_se_distinguen"]}
     cambian = sorted(pares_b ^ pares_o)
     gb, go = set(base["grupo"]), set(otra["grupo"])
-    fb, fo = set(base["firmes"]), set(otra["firmes"])
+    fb, fo = set(base["recomendados"]), set(otra["recomendados"])
     implicados = (gb ^ go) | (fb ^ fo)
     comparados_b, comparados_o = set(base["lista_de_comparados"]), set(otra["lista_de_comparados"])
 
@@ -591,7 +591,7 @@ def comparar(base, otra):
                      "cambia_de_verdad": cambia and distinto, "ganador_se_distingue_del_segundo": b["ganador_se_distingue_del_segundo"],
                      "pares_que_cambian": sorted(map(list, {tuple(x) for x in a["pares"]} ^ {tuple(x) for x in b["pares"]}))}
     return {"pisos": otra["pisos"], "cambio_de_pisos": otra["pisos"] - base["pisos"], "grupo_entran": sorted(go - gb), "grupo_salen": sorted(gb - go),
-            "cambia_grupo": gb != go, "firmes_entran": sorted(fo - fb), "firmes_salen": sorted(fb - fo), "cambia_firmes": fb != fo,
+            "cambia_grupo": gb != go, "recomendados_entran": sorted(fo - fb), "recomendados_salen": sorted(fb - fo), "cambia_recomendados": fb != fo,
             "pares_entran_salen": entran_salen, "pares_que_cambian": len(cambian), "pares_del_grupo_que_cambian": sum(1 for x in cambian if set(x) & (gb | go)),
             "pares_con_barrios_afectados": [list(x) for x in cambian if set(x) & implicados][:20], "muestra_de_pares": [list(x) for x in cambian[:10]], "tipo": tipo,
             "cambia_tipo": any(v["cambia_de_verdad"] for v in tipo.values()), "cambia_primer_tipo": any(v["cambia_ganador"] for v in tipo.values()),
@@ -607,13 +607,13 @@ def veredicto_de(m):
             if x["entra"]:
                 lectura = {True: "se distinguen", False: "no se distinguen", None: "no se comparan, porque uno no llega a 30 pisos"}
                 trozos.append(f"{x['entra']} y {x['sale']}: en la base {lectura[x['se_distinguen_en_la_base']]}; en la repetición {lectura[x['se_distinguen_en_la_variante']]}")
-    if m["cambia_firmes"]:
-        trozos.append(f"cambian los recomendados: entran {', '.join(m['firmes_entran']) or 'ninguno'} y salen {', '.join(m['firmes_salen']) or 'ninguno'}")
+    if m["cambia_recomendados"]:
+        trozos.append(f"cambian los recomendados: entran {', '.join(m['recomendados_entran']) or 'ninguno'} y salen {', '.join(m['recomendados_salen']) or 'ninguno'}")
     if m["cambia_tipo"]:
         trozos.append("cambia el tipo que rinde más: " + "; ".join(f"{k}, de {v['ganador_antes']} a {v['ganador']}" for k, v in m["tipo"].items() if v["cambia_de_verdad"]))
     elif m["cambia_primer_tipo"]:
         trozos.append("el tipo no cambia con intervalo: " + "; ".join(f"{k}, primero {v['ganador']} en vez de {v['ganador_antes']}, sin distinguirse de él" for k, v in m["tipo"].items() if v["cambia_ganador"]))
-    if not (m["cambia_grupo"] or m["cambia_firmes"] or m["cambia_tipo"]):
+    if not (m["cambia_grupo"] or m["cambia_recomendados"] or m["cambia_tipo"]):
         trozos.insert(0, "no cambia el grupo ni los recomendados ni el tipo")
     trozos.append(f"pares de barrios que cambian al distinguirse: {m['pares_que_cambian']}, de ellos con algún barrio del grupo: {m['pares_del_grupo_que_cambian']}")
     if m["cambian_pares_de_tipo"]:
@@ -876,7 +876,7 @@ def informe(s):
         r.append(f"- {c['nombre']}: {da}; {estado}.")
     r += ["", "Los problemas que más pesan:", ""]
     for f in s["tabla_de_decisiones"]:
-        if f["medicion"] and (f["medicion"]["cambia_grupo"] or f["medicion"]["cambia_firmes"] or f["medicion"]["cambia_tipo"]):
+        if f["medicion"] and (f["medicion"]["cambia_grupo"] or f["medicion"]["cambia_recomendados"] or f["medicion"]["cambia_tipo"]):
             r.append(f"- {f['id']}, {f['clave']}: {f['veredicto']}.")
     r += ["", "## Inspección general", ""]
     r += [f"- `{t['tabla']}`: {t['filas']} filas y {t['columnas']} columnas; una fila es {t['que_es_una_fila']}." for t in s["inspeccion"]]
@@ -964,7 +964,7 @@ def informe(s):
         r.append(f"- Magnitudes enteras vacías, sin escala ni colas: {len(s['avisos'])}; están en `avisos` del JSON.")
     r += ["", "## Tabla de decisiones", "",
           f"La base de referencia tiene {s['medicion']['base']['pisos']} pisos y su grupo son {len(s['medicion']['base']['grupo'])} barrios: {', '.join(s['medicion']['base']['grupo'])}. "
-          f"Los recomendados son {', '.join(s['medicion']['base']['firmes'])}. Se distinguen {len(s['medicion']['base']['pares_que_se_distinguen'])} pares de los {s['medicion']['base']['barrios_comparados']} barrios con 30 pisos o más. "
+          f"Los recomendados son {', '.join(s['medicion']['base']['recomendados'])}. Se distinguen {len(s['medicion']['base']['pares_que_se_distinguen'])} pares de los {s['medicion']['base']['barrios_comparados']} barrios con 30 pisos o más. "
           "Dos barrios se distinguen si el intervalo del 95 % de su diferencia de medianas no cruza el cero. Un cambio en pocos pares puede venir de un intervalo que ya rozaba el cero. "
           "Esta es la única tabla del informe, porque aquí hay que comparar y decidir.", "",
           "| Id | Tabla y columna | Filas | En la base | Decisión que existe | Opciones | Qué cambia en la base | Nota |", "|---|---|---|---|---|---|---|---|"]
@@ -1050,7 +1050,7 @@ def controles_de(L, cal_filas, rev_filas, b, oficial, base_m):
     sin_precio = sorted(set(b.loc[~b["clave_directa"].replace(EQUIV).isin(of), "barrio"]) | set(b.loc[b["m2_total"].eq(0), "barrio"]))
     medido = {"anuncios_septiembre": len(L), "dias_calendario": cal_filas, "resenas": rev_filas, "estancia_vacia_septiembre": int(L["minimum_nights"].isna().sum()),
               "bathrooms_vacia_septiembre": bool(L["bathrooms"].isna().all()), "barrios_sin_precio_propio": sin_precio, "barrios_con_otro_nombre": con_otro,
-              "anuncios_dentro_del_centro": int(L["dentro"].sum()), "base_antes_de_cp_007_a_009": base_m["pisos"], "barrios_del_grupo": len(base_m["grupo"]), "barrios_tras_temporada": len(base_m["firmes"])}
+              "anuncios_dentro_del_centro": int(L["dentro"].sum()), "base_antes_de_cp_007_a_009": base_m["pisos"], "barrios_del_grupo": len(base_m["grupo"]), "barrios_tras_temporada": len(base_m["recomendados"])}
     return [{"nombre": k, "da": v, "esperado": referencia.get(k), "sale": (v == referencia[k]) if k in referencia else None} for k, v in medido.items()]
 
 
@@ -1311,7 +1311,7 @@ def principal():
     # 10.11 Se comprueba antes de dar por bueno.
     fallos = comprobar(s, antes)
     decisiones_abiertas = sum(1 for f in tabla_d if not f["decision"])
-    cambian = [f["id"] for f in tabla_d if f["medicion"] and (f["medicion"]["cambia_grupo"] or f["medicion"]["cambia_firmes"] or f["medicion"]["cambia_tipo"])]
+    cambian = [f["id"] for f in tabla_d if f["medicion"] and (f["medicion"]["cambia_grupo"] or f["medicion"]["cambia_recomendados"] or f["medicion"]["cambia_tipo"])]
     no_salen = [c["nombre"] for c in s["controles"] if c["sale"] is False]
     s["resultado"] = {
         "estado": "ERROR" if fallos else "AVISO", "riesgo": "alto" if fallos else "medio",

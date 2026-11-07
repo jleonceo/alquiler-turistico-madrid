@@ -37,16 +37,16 @@ def variantes_con_vacios(t, contar_sin_precio):
 
 
 def principal():
-    """Rehace la prueba con y sin los pisos sin precio y mira qué firmes siguen."""
+    """Rehace la prueba con y sin los pisos sin precio y mira qué recomendados siguen."""
     j = json.loads((o.CASO / "informes" / "indicadores.json").read_text(encoding="utf-8"))
-    firmes = j["preguntas"][1]["firmes"]
+    recomendados = j["preguntas"][1]["recomendados"]
     t = o.leer()
     # Caso que tiene que coincidir con el JSON: sin añadir nada, la prueba da sus variantes y todos los recomendados la aguantan.
     sin_anadir = variantes_con_vacios(t, False)
     o.caso("sin añadir pisos sale la prueba del JSON", dict(sorted(sin_anadir.items())), j["preguntas"][1]["pruebas"]["variantes_por_prueba"]["sin_ocupacion_como_cero"])
     con_vacios = variantes_con_vacios(t, True)
-    print({b: con_vacios[b] for b in firmes})
-    o.caso("solo Ventas sigue firme", sorted(b for b in firmes if con_vacios[b] >= 7), ["Ventas"])
+    print({b: con_vacios[b] for b in recomendados})
+    o.caso("solo Ventas sigue en la lista", sorted(b for b in recomendados if con_vacios[b] >= 7), ["Ventas"])
     return 1 if o.FALLOS else 0
 
 

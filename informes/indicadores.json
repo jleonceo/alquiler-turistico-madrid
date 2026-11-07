@@ -3,7 +3,7 @@
  "version_etapa": "1.0",
  "script": "scripts/indicadores.py",
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-07T00:39:31",
+ "fecha_ejecucion": "2026-11-07T10:41:10",
  "python": "3.13.18",
  "pandas": "3.1.0",
  "entradas": [
@@ -784,6 +784,15 @@
       ]
      }
     ],
+    "tres_habitaciones": {
+     "superficies_supuestas_m2": [
+      90.0,
+      110.0,
+      140.0
+     ],
+     "mediana_pct": 4.57814,
+     "superficie_para_igualar_a_2_m2": 54.13885
+    },
     "cambia": true,
     "combinaciones_que_cambian": 7,
     "tipos_que_aparecen": [
@@ -1174,10 +1183,10 @@
      "coinciden": true
     },
     {
-     "nombre": "rentabilidad conjunta: firmes",
+     "nombre": "rentabilidad conjunta: recomendados",
      "valor": 11.368394,
      "filas": 280,
-     "poblacion": "pisos de firmes",
+     "poblacion": "pisos de recomendados",
      "periodo": "foto del 17/09/2026",
      "segunda_via": 11.368394,
      "coinciden": true
@@ -1228,12 +1237,12 @@
     "Ventas",
     "Vista Alegre"
    ],
-   "firmes": [
+   "recomendados": [
     "Numancia",
     "San Diego",
     "Ventas"
    ],
-   "con_aviso": [
+   "cuatro_de_cinco": [
     "Casco Histórico de Vallecas",
     "Opañel"
    ],
@@ -1370,12 +1379,12 @@
       "clase": "menos de 4 veces"
      }
     },
-    "firmes": [
+    "recomendados": [
      "Numancia",
      "San Diego",
      "Ventas"
     ],
-    "con_aviso": [
+    "cuatro_de_cinco": [
      "Casco Histórico de Vallecas",
      "Opañel"
     ],
@@ -1509,7 +1518,7 @@
     }
    },
    "pisos_del_grupo": 561,
-   "pisos_del_grupo_firme": 280,
+   "pisos_de_recomendados": 280,
    "fichas_del_grupo": [
     {
      "barrio": "Canillejas",
@@ -2042,7 +2051,7 @@
    },
    "operadores_grandes": {
     "anuncios_desde": 10,
-    "con_aviso_pct": 64.948454,
+    "cuatro_de_cinco_pct": 64.948454,
     "por_barrio": {
      "Numancia": 39.285714,
      "San Diego": 42.990654,
@@ -2065,11 +2074,11 @@
      "ic_bajo": 10.271562,
      "ic_alto": 11.492656
     },
-    "firmes": {
+    "recomendados": {
      "pisos": 280,
      "mediana_pct": 11.368394,
-     "ic_bajo": 10.117618,
-     "ic_alto": 13.104951
+     "ic_bajo": 10.118776,
+     "ic_alto": 13.118483
     },
     "grupo": {
      "pisos": 561,
@@ -2079,11 +2088,11 @@
     },
     "pares": [
      {
-      "a": "firmes",
+      "a": "recomendados",
       "b": "m2_baratos",
       "diferencia": 0.505473,
-      "bajo": -0.954205,
-      "alto": 2.379808,
+      "bajo": -0.841275,
+      "alto": 2.389148,
       "se_distinguen": false
      },
      {
@@ -2825,7 +2834,7 @@
      ],
      "coincide": true
     },
-    "firmes": {
+    "recomendados": {
      "esperado": [
       "Numancia",
       "San Diego",
@@ -2838,7 +2847,7 @@
      ],
      "coincide": true
     },
-    "con_aviso": {
+    "cuatro_de_cinco": {
      "esperado": [
       "Casco Histórico de Vallecas",
       "Opañel"
@@ -4727,7 +4736,7 @@
      "sin_ocupacion_misma_base_pct": 5.882353
     }
    ],
-   "rango_de_rentabilidad_del_grupo_firme": {
+   "rango_de_rentabilidad_de_recomendados": {
     "minimo": 10.782505,
     "maximo": 11.51858,
     "peor": "junio",
@@ -4750,7 +4759,7 @@
      }
     ]
    },
-   "rango_de_rentabilidad_de_firmes_y_con_aviso": {
+   "rango_de_rentabilidad_de_recomendados_y_cuatro_de_cinco": {
     "minimo": 11.422129,
     "maximo": 13.009011,
     "peor": "junio",
@@ -4890,7 +4899,7 @@
      ]
     }
    },
-   "rentabilidad_del_grupo_firme": {
+   "rentabilidad_de_recomendados": {
     "casos": 280,
     "media": 11.819674,
     "mediana": 11.368394,
@@ -5480,6 +5489,25 @@
   "rentabilidad_pct": 12.115439,
   "compra_eur": 161973.0,
   "ingreso_anual_eur": 21674.79,
+  "compra_por_barrio": [
+   {
+    "barrio": "Numancia",
+    "hasta_1_habitacion_eur": 161973.0,
+    "dos_habitaciones_eur": 210564.9
+   },
+   {
+    "barrio": "San Diego",
+    "hasta_1_habitacion_eur": 153916.0,
+    "dos_habitaciones_eur": 200090.8
+   },
+   {
+    "barrio": "Ventas",
+    "hasta_1_habitacion_eur": 206653.5,
+    "dos_habitaciones_eur": 268649.55
+   }
+  ],
+  "compra_minima_eur": 153916.0,
+  "compra_maxima_eur": 268649.55,
   "precio_de_mercado": {
    "consulta": "2026-11-06",
    "fuentes": [
@@ -15609,7 +15637,7 @@
      "anuncios": 2940
     }
    ],
-   "grupo_firme": [
+   "recomendados": [
     {
      "mes": "2026-10",
      "parte_libre_pct": 38.317972,
@@ -15790,7 +15818,7 @@
   "planta_baja": {
    "licencias": 930,
    "de": 1031,
-   "firmes": {
+   "recomendados": {
     "licencias": 65,
     "de": 72
    }
@@ -16005,7 +16033,7 @@
    ],
    "coincide": true
   },
-  "firmes": {
+  "recomendados": {
    "esperado": [
     "Numancia",
     "San Diego",
@@ -16018,7 +16046,7 @@
    ],
    "coincide": true
   },
-  "con_aviso": {
+  "cuatro_de_cinco": {
    "esperado": [
     "Casco Histórico de Vallecas",
     "Opañel"
@@ -16255,7 +16283,7 @@
    "coinciden": true
   },
   {
-   "tabla": "rentabilidad conjunta: firmes",
+   "tabla": "rentabilidad conjunta: recomendados",
    "celdas": 1,
    "diferencia_maxima": 0.0,
    "coinciden": true
@@ -17563,7 +17591,7 @@
    "coinciden": true
   },
   {
-   "tabla": "disponibilidad, grupo_firme",
+   "tabla": "disponibilidad, recomendados",
    "celdas": 11,
    "diferencia_maxima": 0.0,
    "coinciden": true

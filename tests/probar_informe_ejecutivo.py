@@ -49,7 +49,7 @@ def principal():
     # Casos que tienen que parar: las cifras dejan de decir lo que dice una frase.
     malos = {}
     x = copy.deepcopy(base)
-    x["preguntas"][1]["firmes"] = ["Ventas"]
+    x["preguntas"][1]["recomendados"] = ["Ventas"]
     malos["cambian los recomendados"] = x
     x = copy.deepcopy(base)
     f = next(k for k in x["preguntas"][1]["fichas_del_grupo"] if k["barrio"] == "Ventas")
@@ -95,12 +95,25 @@ def principal():
         caso("fecha de datos igual que indicadores", j["fecha_datos"] == base["fecha_datos"])
         for nombre, tope in {"titulo_y_resumen": 300, "encontrado": 400, "limites": 100, "recomendaciones": 200, "anexo": 500}.items():
             caso(f"{nombre} dentro de su tope", j["palabras_por_apartado"][nombre] <= tope, j["palabras_por_apartado"][nombre])
-        caso("el límite va antes de la primera viñeta", texto.index("dice dónde buscar") < texto.index("12,1 %"))
-        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo seguiría en la lista el barrio de Ventas", "máximo de 255", "antes de gastos e impuestos"):
+        caso("el límite va antes de la primera viñeta", texto.index("primera criba") < texto.index("12,1 %"))
+        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo sigue el barrio de Ventas", "máximo de 255", "antes de gastos e impuestos"):
             caso(f"dice «{frase}»", frase in texto)
         caso("tres acciones", len(j["acciones"]) == 3)
         for a in j["acciones"]:
             caso(f"la acción sale en resumen y en recomendaciones: {a['nombre']}", texto.count(a["nombre"]) >= 2)
+        caso("dice qué se decide antes de las conclusiones", 0 < texto.index("Qué se decide") < texto.index("Conclusiones ejecutivas"))
+        caso("lleva el sello de preliminar", "Preliminar" in texto)
+        primera = texto[texto.index("Conclusiones ejecutivas"):][:220]
+        caso("la primera conclusión va en dinero", "161.973 €" in primera, primera)
+        caso("no habla en primera persona", not re.search(r"\\b(hemos|nuestr[oa]s?)\\b", texto, re.I))
+        caso("el título no destaca la cifra menos fiable", re.search(r"<h1>[^<]*12,1", html) is None)
+        caso("no dice que aguantan todas las pruebas", "aguantan todas las pruebas" not in texto)
+        caso("dice qué pasa sin los pisos en el máximo", "no la del máximo de días" in texto and "Puerta del Ángel" in texto)
+        caso("trae la columna de días sin estimar", "Sin días estimados" in texto and "24,7" in texto)
+        caso("trae las dos sensibilidades", "solo sigue el barrio de Ventas" in texto)
+        caso("las licencias no son el motivo", "aunque una licencia no se puede unir a un anuncio" in texto)
+        caso("la tabla va numerada", "Tabla 1" in texto)
+        caso("el anexo trae la base del caso de negocio", "Base para el caso de negocio" in texto and "No se calcula lo que ganaría" in texto)
         caso("el anexo empieza en página nueva", "break-before: page" in html)
         caso("sin colores por nivel ni recuadros", "box-shadow" not in html and "list-style: none" not in html)
     print(f"{len(FALLOS)} fallos")

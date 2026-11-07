@@ -49,7 +49,7 @@ def principal():
     # Casos que tienen que parar.
     malos = {}
     x = copy.deepcopy(base)
-    x["preguntas"][1]["con_aviso"] = ["Opañel"]
+    x["preguntas"][1]["cuatro_de_cinco"] = ["Opañel"]
     malos["cambian los que siguen en la lista 4 veces"] = x
     x = copy.deepcopy(base)
     x["preguntas"][2]["pares_dentro_del_grupo"][0]["se_distinguen"] = True
@@ -84,8 +84,8 @@ def principal():
         caso("cada barrio del grupo lleva su etiqueta en el mapa", all(f"{b.replace('Angel', 'Ángel')}: " in html for b in base["preguntas"][1]["grupo"]))
         caso("el CSV de los gráficos trae cabecera", csv.startswith("pagina;grafico;grupo;medida;cifra;unidad"))
         caso("el CSV trae filas", len(csv.splitlines()) > 20, len(csv.splitlines()))
-        caso("resumen abre con el límite antes de las preguntas", texto.index("dice dónde buscar") < texto.index("Pregunta Respuesta"))
-        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo seguiría en la lista el barrio de Ventas", "máximo de 255", "gastos, impuestos ni comisiones", "Datos personales", "seudonimización", "Inside Airbnb, Madrid, descarga"):
+        caso("resumen abre con el límite antes de las preguntas", texto.index("primera criba") < texto.index("Pregunta Respuesta"))
+        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo sigue el barrio de Ventas", "máximo de 255", "gastos, impuestos ni comisiones", "Datos personales", "seudonimización", "Inside Airbnb, Madrid, descarga"):
             caso(f"dice «{frase}»", frase in texto)
         caso("nombra las tres acciones del ejecutivo", all(a["nombre"] in texto for a in rastro["acciones"]))
     print(f"{len(FALLOS)} fallos")

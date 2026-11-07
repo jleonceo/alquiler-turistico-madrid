@@ -1,0 +1,289 @@
+{
+ "script": "scripts/interpretacion_resultados.py",
+ "indicadores": "informes/indicadores.json",
+ "rastro": [
+  {
+   "cifra": "0,78",
+   "claves": [
+    "preguntas[1].que_ordena_la_lista.rentabilidad_con_ocupacion"
+   ]
+  },
+  {
+   "cifra": "0,8",
+   "claves": [
+    "preguntas[2].referencia.rango_entre_fotos_puntos"
+   ]
+  },
+  {
+   "cifra": "1.031",
+   "claves": [
+    "licencias_y_registro.planta_baja.de"
+   ]
+  },
+  {
+   "cifra": "1.385",
+   "claves": [
+    "preguntas[2].pisos_fuera_sin_ocupacion.pisos"
+   ]
+  },
+  {
+   "cifra": "10,8",
+   "claves": [
+    "preguntas[2].rango_de_rentabilidad_de_recomendados.minimo"
+   ]
+  },
+  {
+   "cifra": "10,9",
+   "claves": [
+    "preguntas[1].que_ordena_la_lista.m2_baratos.mediana_pct"
+   ]
+  },
+  {
+   "cifra": "107",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=San Diego].pisos"
+   ]
+  },
+  {
+   "cifra": "11,4",
+   "claves": [
+    "preguntas[1].que_ordena_la_lista.recomendados.mediana_pct",
+    "preguntas[2].rango_de_rentabilidad_de_recomendados_y_cuatro_de_cinco.minimo"
+   ]
+  },
+  {
+   "cifra": "11,5",
+   "claves": [
+    "preguntas[2].rango_de_rentabilidad_de_recomendados.maximo"
+   ]
+  },
+  {
+   "cifra": "11,8",
+   "claves": [
+    "preguntas[1].que_ordena_la_lista.grupo.mediana_pct"
+   ]
+  },
+  {
+   "cifra": "12,1",
+   "claves": [
+    "recomendacion.rentabilidad_pct"
+   ]
+  },
+  {
+   "cifra": "13,0",
+   "claves": [
+    "preguntas[2].rango_de_rentabilidad_de_recomendados_y_cuatro_de_cinco.maximo"
+   ]
+  },
+  {
+   "cifra": "153.916",
+   "claves": [
+    "recomendacion.compra_minima_eur"
+   ]
+  },
+  {
+   "cifra": "161.973",
+   "claves": [
+    "recomendacion.compra_eur"
+   ]
+  },
+  {
+   "cifra": "18,9",
+   "claves": [
+    "preguntas[2].fichas_del_grupo[barrio=Ventas].pisos_fuera_sin_ocupacion_pct"
+   ]
+  },
+  {
+   "cifra": "2",
+   "claves": [
+    "preguntas[1].con_un_ano_o_mas.barrios[barrio=Numancia].puesto",
+    "preguntas[1].cuatro_de_cinco"
+   ]
+  },
+  {
+   "cifra": "2,7",
+   "claves": [
+    "preguntas[2].fichas_del_grupo[barrio=Ventas].rango_entre_fotos_puntos"
+   ]
+  },
+  {
+   "cifra": "2.081",
+   "claves": [
+    "preguntas[1].con_un_ano_o_mas.pisos"
+   ]
+  },
+  {
+   "cifra": "2.940",
+   "claves": [
+    "preguntas[0].poblacion.filas"
+   ]
+  },
+  {
+   "cifra": "20,9",
+   "claves": [
+    "preguntas[2].fichas_del_grupo[barrio=San Diego].pisos_fuera_sin_ocupacion_pct"
+   ]
+  },
+  {
+   "cifra": "21.675",
+   "claves": [
+    "recomendacion.ingreso_anual_eur"
+   ]
+  },
+  {
+   "cifra": "24,7",
+   "claves": [
+    "preguntas[2].pisos_fuera_sin_ocupacion.pct"
+   ]
+  },
+  {
+   "cifra": "256",
+   "claves": [
+    "recomendacion.pisos"
+   ]
+  },
+  {
+   "cifra": "26",
+   "claves": [
+    "preguntas[1].con_un_ano_o_mas.barrios_comparados"
+   ]
+  },
+  {
+   "cifra": "268.650",
+   "claves": [
+    "recomendacion.compra_maxima_eur"
+   ]
+  },
+  {
+   "cifra": "3",
+   "claves": [
+    "preguntas[1].con_un_ano_o_mas.barrios[barrio=Ventas].puesto",
+    "preguntas[1].recomendados"
+   ]
+  },
+  {
+   "cifra": "3,04",
+   "claves": [
+    "preguntas[1].cuartil_bajo_de_toda_la_base"
+   ]
+  },
+  {
+   "cifra": "3,9",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Numancia].cuartil_bajo_pct"
+   ]
+  },
+  {
+   "cifra": "32,4",
+   "claves": [
+    "preguntas[2].fichas_del_grupo[barrio=Numancia].pisos_fuera_sin_ocupacion_pct"
+   ]
+  },
+  {
+   "cifra": "36",
+   "claves": [
+    "preguntas[1].que_ordena_la_lista.barrios"
+   ]
+  },
+  {
+   "cifra": "4",
+   "claves": [
+    "preguntas[0].por_segmentos.distritos_donde_1_supera_a_2"
+   ]
+  },
+  {
+   "cifra": "5,3",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Ventas].cuartil_bajo_pct"
+   ]
+  },
+  {
+   "cifra": "50",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Opañel].parte_en_el_tope_pct"
+   ]
+  },
+  {
+   "cifra": "54",
+   "claves": [
+    "preguntas[0].sensibilidad_superficie.tres_habitaciones.superficie_para_igualar_a_2_m2"
+   ]
+  },
+  {
+   "cifra": "561",
+   "claves": [
+    "preguntas[1].pisos_del_grupo"
+   ]
+  },
+  {
+   "cifra": "6",
+   "claves": [
+    "preguntas[1].referencia_baratos.comparados.cuantos"
+   ]
+  },
+  {
+   "cifra": "65",
+   "claves": [
+    "licencias_y_registro.planta_baja.recomendados.licencias",
+    "preguntas[1].operadores_grandes.cuatro_de_cinco_pct"
+   ]
+  },
+  {
+   "cifra": "7",
+   "claves": [
+    "preguntas[0].sensibilidad_superficie.combinaciones_que_cambian"
+   ]
+  },
+  {
+   "cifra": "72",
+   "claves": [
+    "licencias_y_registro.planta_baja.recomendados.de"
+   ]
+  },
+  {
+   "cifra": "8",
+   "claves": [
+    "preguntas[0].por_segmentos.distritos_comparables_1_y_2",
+    "preguntas[0].sensibilidad_superficie.combinaciones",
+    "preguntas[1].con_un_ano_o_mas.barrios[barrio=San Diego].puesto"
+   ]
+  },
+  {
+   "cifra": "8,3",
+   "claves": [
+    "preguntas[1].mediana_de_toda_la_base"
+   ]
+  },
+  {
+   "cifra": "84",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Numancia].pisos"
+   ]
+  },
+  {
+   "cifra": "89",
+   "claves": [
+    "preguntas[1].fichas_del_grupo[barrio=Ventas].pisos"
+   ]
+  },
+  {
+   "cifra": "9",
+   "claves": [
+    "preguntas[1].grupo",
+    "preguntas[1].referencia_baratos.comparados.de"
+   ]
+  },
+  {
+   "cifra": "930",
+   "claves": [
+    "licencias_y_registro.planta_baja.licencias"
+   ]
+  },
+  {
+   "cifra": "−0,60",
+   "claves": [
+    "preguntas[1].que_ordena_la_lista.rentabilidad_con_m2"
+   ]
+  }
+ ]
+}

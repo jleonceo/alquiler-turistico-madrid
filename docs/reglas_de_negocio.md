@@ -17,8 +17,8 @@ límite oficial. Las coordenadas vienen desplazadas hasta 150 m, así que cerca 
 
 ## 2. Cómo se calcula la rentabilidad
 
-- **Precio por noche:** el que publica el anuncio. Desde 2026 es un precio para unas fechas concretas, con descuentos
-  dentro, de modo que no se compara con 2025 y no es el precio medio del año.
+- **Precio por noche:** el que publica el anuncio. Desde 2026 es un precio para unas fechas concretas, ya con las
+  rebajas del anfitrión, de modo que no se compara con 2025 y no es el precio medio del año.
 - **Ocupación:** días al año que estima la fuente: reseñas del último año × 2 × el mayor entre 3 y la estancia mínima, con
   máximo de 255 días. Es una estimación y no incluye noches reales vendidas. Un cero significa que no hay reseñas en el último
   año, no que el piso esté vacío.
@@ -62,7 +62,7 @@ hasta 6 noches, mínimo de 30 o de 20 anuncios, y precio de marzo, junio o septi
 
 Después se repiten esas 12 de cinco maneras: sin los pisos que declaran temporada, sin los de anfitriones con 10
 anuncios o más, sin los precios para fechas a más de 60 días, solo con 1 y 2 habitaciones, y contando los pisos sin ocupación como
-cero. Esos pisos siguen en el análisis: estas repeticiones solo miden si la lista se mantiene.
+cero. Esos pisos siguen en el análisis: estas repeticiones solo miden si los barrios siguen en la lista.
 
 - Se recomiendan los barrios que siguen en la lista las cinco veces. Eso no significa que rindan más.
 - Los que siguen cuatro veces se dicen aparte, con la repetición en la que salen.
@@ -78,7 +78,7 @@ y no su orden.
 Conviene no confundir estas parejas:
 
 - anuncio e inmueble;
-- estar fuera del centro histórico y poder obtener licencia: estar fuera solo significa que no aplica ese artículo;
+- estar fuera del centro histórico y poder obtener licencia: estar fuera solo significa que no aplica ese artículo. Desde el 03/04/2025 hace falta además que la comunidad de propietarios lo apruebe de forma expresa, por tres quintos de propietarios y de cuotas. La misma mayoría puede prohibirlo o subir la cuota hasta un 20 % (Ley 49/1960, arts. 7.3 y 17.12). Una vivienda sometida a algún régimen de protección pública no puede ser vivienda turística (art. 17 ter.3 del Decreto 79/2014, añadido por el Decreto 27/2026), y la declaración responsable manifiesta que no lo está (art. 17 bis, letra h). Esa declaración manifiesta también que se cuenta con dos certificados: uno de que el título constitutivo o los estatutos de la comunidad no prohíben la actividad, y otro de que la comunidad ha aprobado la solicitud (art. 17 bis, letras f y g);
 - ocupación estimada y noches vendidas;
 - rentabilidad bruta y beneficio;
 - precio declarado y precio de oferta.

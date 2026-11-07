@@ -200,9 +200,9 @@ def principal():
                "solo_1_y_2_dormitorios": grupo(pisos, m2, lambda p: p["marca"] or p["dormitorios"] not in r["dormitorios"])[0],
                "sin_ocupacion_como_cero": grupo(pisos, m2, lambda p: p["marca"], cero=True)[0]}
     aguanta = {b: sum(b in v for v in pruebas.values()) for b in g}
-    caso("firmes, desde data/raw", sorted(b for b, n in aguanta.items() if n == 5), sorted(dec["controles"]["firmes_esperados"]))
-    caso("que siguen en la lista 4 veces, desde data/raw", sorted(b for b, n in aguanta.items() if n == 4), sorted(dec["controles"]["con_aviso_esperados"]))
-    caso("firmes del JSON de la transformación", sorted(j["control_grupo"]["firmes"]), sorted(b for b, n in aguanta.items() if n == 5))
+    caso("recomendados, desde data/raw", sorted(b for b, n in aguanta.items() if n == 5), sorted(dec["controles"]["recomendados_esperados"]))
+    caso("que siguen en la lista 4 veces, desde data/raw", sorted(b for b, n in aguanta.items() if n == 4), sorted(dec["controles"]["cuatro_de_cinco_esperados"]))
+    caso("recomendados del JSON de la transformación", sorted(j["control_grupo"]["recomendados"]), sorted(b for b, n in aguanta.items() if n == 5))
     caso("cada prueba frente al JSON", {b: sorted(x for x, v in pruebas.items() if b in v) for b in g}, {b: sorted(v) for b, v in j["control_grupo"]["pruebas_por_barrio"].items()})
 
     # La tabla guardada tiene que decir lo mismo, fila a fila en las cuentas de la base.

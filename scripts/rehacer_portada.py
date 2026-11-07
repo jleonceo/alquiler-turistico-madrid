@@ -92,24 +92,24 @@ def calcular(filas):
     aguantan = Counter()
     for p in PRUEBAS:
         aguantan.update(set(grupo) & set(barrios_en_mayoria(filas, p)))
-    firmes = sorted(b for b in grupo if aguantan[b] == len(PRUEBAS))
-    con_aviso = sorted(b for b in grupo if aguantan[b] == len(PRUEBAS) - 1)
+    recomendados = sorted(b for b in grupo if aguantan[b] == len(PRUEBAS))
+    cuatro_de_cinco = sorted(b for b in grupo if aguantan[b] == len(PRUEBAS) - 1)
     base = [x for x in filas if x["estancia_hasta_3"] and x["rent_sep_pct"]]
-    recomendados = [x for x in base if x["barrio"] in firmes and x["dormitorios"] <= 2]
+    pisos_rec = [x for x in base if x["barrio"] in recomendados and x["dormitorios"] <= 2]
     rango = []
     for foto in FOTOS:
-        v = [x[f"rent_{foto}_pct"] for x in filas if x["barrio"] in firmes and x["estancia_hasta_3"] and x[f"rent_{foto}_pct"]]
+        v = [x[f"rent_{foto}_pct"] for x in filas if x["barrio"] in recomendados and x["estancia_hasta_3"] and x[f"rent_{foto}_pct"]]
         rango.append(statistics.median(v))
     cfg = json.loads(PRECIOS_MERCADO.read_text(encoding="utf-8"))
     mercado = {}
-    if {x["barrio"] for x in recomendados} <= set(cfg["oficial_2025"]):
+    if {x["barrio"] for x in pisos_rec} <= set(cfg["oficial_2025"]):
         for f in cfg["fuentes"]:
-            compra = [x["compra_eur"] * f["barrios"][x["barrio"]] / cfg["oficial_2025"][x["barrio"]] for x in recomendados]
-            rent = [100 * x["ingreso_sep_eur"] / c for x, c in zip(recomendados, compra)]
+            compra = [x["compra_eur"] * f["barrios"][x["barrio"]] / cfg["oficial_2025"][x["barrio"]] for x in pisos_rec]
+            rent = [100 * x["ingreso_sep_eur"] / c for x, c in zip(pisos_rec, compra)]
             mercado[f["fuente"]] = {"compra": statistics.median(compra), "rent": statistics.median(rent)}
-    return {"mercado": mercado, "pisos_base": len(base), "barrios_grupo": len(grupo), "grupo": grupo, "firmes": firmes, "con_aviso": con_aviso, "pisos_recomendados": len(recomendados),
-            "rentabilidad": statistics.median(x["rent_sep_pct"] for x in recomendados),
-            "compra": statistics.median(x["compra_eur"] for x in recomendados), "ingreso_anual": statistics.median(x["ingreso_sep_eur"] for x in recomendados),
+    return {"mercado": mercado, "pisos_base": len(base), "barrios_grupo": len(grupo), "grupo": grupo, "recomendados": recomendados, "cuatro_de_cinco": cuatro_de_cinco, "pisos_recomendados": len(pisos_rec),
+            "rentabilidad": statistics.median(x["rent_sep_pct"] for x in pisos_rec),
+            "compra": statistics.median(x["compra_eur"] for x in pisos_rec), "ingreso_anual": statistics.median(x["ingreso_sep_eur"] for x in pisos_rec),
             "rango_minimo": min(rango), "rango_maximo": max(rango)}
 
 
@@ -131,11 +131,11 @@ def lista(nombres):
 def imprimir(r):
     """Imprime el resultado para quien ejecuta el repositorio."""
     print(f"Pisos analizados, datos del 17/09/2026: {es(r['pisos_base'])}")
-    print(f"Barrios que rinden más: {r['barrios_grupo']}")
-    print(f"Barrios que siguen en la lista en las 5 repeticiones: {lista(r['firmes'])}")
-    print(f"Barrios que siguen en 4 de 5: {lista(r['con_aviso'])}")
+    print(f"Barrios en la lista: {r['barrios_grupo']}")
+    print(f"Barrios que siguen en la lista en las 5 repeticiones: {lista(r['recomendados'])}")
+    print(f"Barrios que siguen en 4 de 5: {lista(r['cuatro_de_cinco'])}")
     print()
-    print(f"Pisos de hasta 2 habitaciones en los barrios de {lista(r['firmes'])}: {es(r['pisos_recomendados'])} anuncios")
+    print(f"Pisos de hasta 2 habitaciones en los barrios de {lista(r['recomendados'])}: {es(r['pisos_recomendados'])} anuncios")
     print(f"  Precio de compra, en mediana: {es(r['compra'])} €")
     print(f"  Ingreso al año, en mediana: {es(r['ingreso_anual'])} €")
     print(f"  Rentabilidad bruta: {es(r['rentabilidad'], 1)} %")
@@ -147,7 +147,7 @@ def imprimir(r):
 
 def contra_indicadores(r, j):
     """Compara lo rehecho con lo que imprimió la cadena y devuelve las diferencias."""
-    p2, rec, rango = j["preguntas"][1], j["recomendacion"], j["preguntas"][2]["rango_de_rentabilidad_del_grupo_firme"]
+    p2, rec, rango = j["preguntas"][1], j["recomendacion"], j["preguntas"][2]["rango_de_rentabilidad_de_recomendados"]
     pares = [("pisos de la base", r["pisos_base"], j["preguntas"][0]["poblacion"]["filas"], 0), ("pisos recomendados", r["pisos_recomendados"], rec["pisos"], 0),
              ("rentabilidad", r["rentabilidad"], rec["rentabilidad_pct"], TOLERANCIA),
              ("compra", r["compra"], rec["compra_eur"], 1), ("ingreso anual", r["ingreso_anual"], rec["ingreso_anual_eur"], 1),
@@ -156,7 +156,7 @@ def contra_indicadores(r, j):
         m = r["mercado"].get(f["fuente"], {"compra": 0, "rent": 0})
         pares += [(f"compra con {f['fuente']}", m["compra"], f["compra_mediana_eur"], 1), (f"rentabilidad con {f['fuente']}", m["rent"], f["rentabilidad_mediana_pct"], TOLERANCIA)]
     fallos = [f"{n}: {a} frente a {b}" for n, a, b, tol in pares if abs(a - b) > tol]
-    for nombre, clave in (("grupo", "grupo"), ("firmes", "firmes"), ("4 de 5 veces", "con_aviso")):
+    for nombre, clave in (("grupo", "grupo"), ("recomendados", "recomendados"), ("4 de 5 veces", "cuatro_de_cinco")):
         if sorted(p2[clave]) != r[clave]:
             fallos.append(f"{nombre}: {r[clave]} frente a {sorted(p2[clave])}")
     return fallos

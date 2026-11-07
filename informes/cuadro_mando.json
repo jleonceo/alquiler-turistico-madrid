@@ -1,13 +1,13 @@
 {
  "script": "scripts/cuadro_mando.py",
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-07T00:40:00",
+ "fecha_ejecucion": "2026-11-07T15:18:51",
  "python": "3.13.18",
  "pandas": "3.1.0",
  "entradas": [
   {
    "ruta": "informes/indicadores.json",
-   "sha256": "dd35a468c571f079a1849678ae6ef92d3b86e82bbfd6bf8973dc47bc9abe7019"
+   "sha256": "549f117e49171639dc108075679f8002111c0e296c6f519e751c958fcd396350"
   },
   {
    "ruta": "data/processed/analisis_anuncios.parquet",
@@ -24,8 +24,8 @@
  ],
  "salida": {
   "ruta": "informes/cuadro_mando.html",
-  "bytes": 275770,
-  "sha256": "513267ea8b3b82e9d6ef09dd885839ec3772ebb8d4937f05449d1f8b7d7f24cf"
+  "bytes": 276669,
+  "sha256": "528578788c4e094755dd3f4cf077d4c2d1222f107d20109342ca498b176f58e6"
  },
  "filtros": {
   "distritos": 21,
@@ -60,9 +60,9 @@
  },
  "textos": {
   "titulo_recomendacion": "Pisos de hasta 2 habitaciones en los barrios de Ventas, Numancia y San Diego",
-  "recomendacion": "Son 256 anuncios. Rentabilidad bruta del 12,1 % en mediana, sin gastos. Se recomiendan porque se mantienen al repetir el cálculo, no porque rindan más.",
-  "limite": "Dice dónde buscar, no si un piso se puede alquilar a turistas. Primera acción: Comprobar planta y norma en el Ayuntamiento.",
-  "titulo_dormitorios": "Sin ganador entre estudio, una y dos",
+  "recomendacion": "Rentabilidad bruta mediana del 12,1 %, sin gastos. Sin los pisos en el máximo de 255 días, ninguno sigue en la lista.",
+  "limite": "Dice dónde buscar, no si un piso se puede alquilar a turistas. Primera acción: Comprobar planta, norma y comunidad de propietarios.",
+  "titulo_dormitorios": "Estudio, una o dos: sin ganador",
   "titulo_barrios": "9 barrios forman la lista y 3 siguen en ella las 5 veces",
   "tabla_recomendacion": [
    [
@@ -88,13 +88,9 @@
    [
     "Licencias con planta baja, barrios recomendados",
     "65 de 72"
-   ],
-   [
-    "Rentabilidad de los barrios de m² más barato",
-    "10,9 %"
    ]
   ],
-  "nota_recomendacion": "Con los precios que piden hoy Fotocasa e Idealista, la compra sube a 171.600 € y 182.000 €, y la rentabilidad baja a 10,9 % y 10,6 %. Con todos los pisos de estos barrios, va del 10,8 % al 11,5 % según la fecha del precio. Conviene empezar por bajos y primeras plantas con acceso independiente. Lo que ingresa un bajo no se conoce, porque los datos mezclan todas las plantas. Qué norma rige en cada barrio se pregunta en el Ayuntamiento antes de comprar. Entre barrios, la rentabilidad va más ligada a los días ocupados (0,78) que al precio del m² (−0,60). Los días ocupados son la cifra menos fiable.",
+  "nota_recomendacion": "Con los precios que piden hoy Fotocasa e Idealista, la compra sube a 171.600 € y 182.000 €, y la rentabilidad baja a 10,9 % y 10,6 %. Con todos los pisos de estos barrios, va del 10,8 % al 11,5 % según la fecha del precio. Conviene empezar por bajos y primeras plantas con acceso independiente. Lo que ingresa un bajo no se conoce, porque los datos mezclan todas las plantas. Qué norma rige en cada barrio se pregunta en el Ayuntamiento antes de comprar. Además tiene que aprobarlo su comunidad de propietarios, por tres quintos. Y no puede tener protección pública. Entre barrios, la rentabilidad va más ligada a los días ocupados que al precio del m²: la correlación es de 0,78 frente a −0,60, en una escala de −1 a 1. Los días ocupados son la cifra menos fiable.",
   "texto_mapa": "El barrio de Numancia rinde más que la mediana de todos los pisos. En los barrios de Ventas y San Diego no se puede asegurar. <button class=\"def\" type=\"button\" data-def=\"distingue\">Qué significa</button>",
   "tabla_mapa": [
    [
@@ -107,19 +103,19 @@
     "Ventas",
     "5,3 %",
     "18,9 %",
-    "3.ª de 26"
+    "3.º de 26"
    ],
    [
     "Numancia",
     "3,9 %",
     "32,4 %",
-    "2.ª de 26"
+    "2.º de 26"
    ],
    [
     "San Diego",
     "4,8 %",
     "20,9 %",
-    "8.ª de 26"
+    "8.º de 26"
    ],
    [
     "Todos los pisos",

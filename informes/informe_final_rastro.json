@@ -1,24 +1,24 @@
 {
  "fecha_datos": "2026-09-17",
- "fecha_ejecucion": "2026-11-07T00:39:58",
+ "fecha_ejecucion": "2026-11-07T15:19:29",
  "script": "scripts/informe_final.py",
  "indicadores": "informes/indicadores.json",
- "indicadores_fecha_ejecucion": "2026-11-07T00:39:31",
+ "indicadores_fecha_ejecucion": "2026-11-07T10:41:10",
  "lector": "Dirección de Inversiones",
  "paginas": [
   {
    "id": "p1",
    "titulo": "Buscar hasta 2 habitaciones en los barrios de Ventas, Numancia y San Diego",
    "tipo": "resumen",
-   "palabras": 152,
-   "alto_estimado": 632,
+   "palabras": 128,
+   "alto_estimado": 641,
    "cifras_clave": 4
   },
   {
    "id": "p2",
-   "titulo": "Hasta 2 habitaciones rinden más que 3 en todas las superficies probadas",
+   "titulo": "Hasta 2 habitaciones rinden más que 3 con las superficies supuestas",
    "tipo": "pregunta",
-   "palabras": 74,
+   "palabras": 113,
    "alto_estimado": 580,
    "cifras_clave": 2
   },
@@ -34,7 +34,7 @@
    "id": "p4",
    "titulo": "Tres barrios siguen en la lista las cinco veces y dos, cuatro veces",
    "tipo": "pregunta",
-   "palabras": 86,
+   "palabras": 106,
    "alto_estimado": 607,
    "cifras_clave": 0
   },
@@ -42,7 +42,7 @@
    "id": "p5",
    "titulo": "El orden dentro de la lista no está cerrado",
    "tipo": "pregunta",
-   "palabras": 66,
+   "palabras": 82,
    "alto_estimado": 623,
    "cifras_clave": 0
   },
@@ -58,7 +58,7 @@
    "id": "p7",
    "titulo": "Elegir solo por m² barato podría rendir lo mismo que la lista",
    "tipo": "pregunta",
-   "palabras": 86,
+   "palabras": 94,
    "alto_estimado": 578,
    "cifras_clave": 3
   },
@@ -66,8 +66,8 @@
    "id": "p8",
    "titulo": "Los tres recomendados dependen de los pisos en el máximo de días",
    "tipo": "pregunta",
-   "palabras": 73,
-   "alto_estimado": 596,
+   "palabras": 97,
+   "alto_estimado": 618,
    "cifras_clave": 0
   },
   {
@@ -96,14 +96,22 @@
   },
   {
    "id": "p12",
-   "titulo": "Lo que puede cambiar estas conclusiones",
+   "titulo": "Antes de comprar hay que comprobar norma, planta y comunidad",
    "tipo": "limites",
    "palabras": 0,
-   "alto_estimado": 595,
+   "alto_estimado": 604,
    "cifras_clave": 0
   },
   {
    "id": "p13",
+   "titulo": "Lo que puede cambiar estas conclusiones",
+   "tipo": "limites",
+   "palabras": 0,
+   "alto_estimado": 469,
+   "cifras_clave": 0
+  },
+  {
+   "id": "p14",
    "titulo": "Decisiones propuestas",
    "tipo": "decision",
    "palabras": 22,
@@ -111,7 +119,7 @@
    "cifras_clave": 0
   },
   {
-   "id": "p14",
+   "id": "p15",
    "titulo": "Método de cada pregunta",
    "tipo": "anexo",
    "palabras": 187,
@@ -119,7 +127,7 @@
    "cifras_clave": 0
   },
   {
-   "id": "p15",
+   "id": "p16",
    "titulo": "Contexto del mercado",
    "tipo": "anexo",
    "palabras": 50,
@@ -127,7 +135,7 @@
    "cifras_clave": 0
   },
   {
-   "id": "p16",
+   "id": "p17",
    "titulo": "Fuentes de cada cifra",
    "tipo": "anexo",
    "palabras": 46,
@@ -135,7 +143,7 @@
    "cifras_clave": 0
   },
   {
-   "id": "p17",
+   "id": "p18",
    "titulo": "Datos personales",
    "tipo": "anexo",
    "palabras": 140,
@@ -145,8 +153,8 @@
  ],
  "acciones": [
   {
-   "nombre": "Comprobar planta y norma en el Ayuntamiento",
-   "que": "Empezar por bajos y primeras plantas con acceso independiente y preguntar en el Ayuntamiento qué norma rige en cada barrio de la lista antes de comprar.",
+   "nombre": "Comprobar planta, norma y comunidad de propietarios",
+   "que": "Empezar por bajos y primeras plantas con acceso independiente, y antes de comprar preguntar en el Ayuntamiento qué norma rige en cada barrio de la lista y a la comunidad si lo aprobaría. El piso no puede tener protección pública.",
    "quien": "Dirección de Inversiones",
    "cuando": "fecha por fijar",
    "por_que": "930 de las 1.031 licencias municipales incluyen planta baja.",
@@ -269,7 +277,7 @@
   {
    "cifra": "10,8",
    "claves": [
-    "preguntas[2].rango_de_rentabilidad_del_grupo_firme.minimo"
+    "preguntas[2].rango_de_rentabilidad_de_recomendados.minimo"
    ]
   },
   {
@@ -305,14 +313,14 @@
   {
    "cifra": "11,4",
    "claves": [
-    "preguntas[2].rentabilidad_del_grupo_firme.mediana"
+    "preguntas[2].rentabilidad_de_recomendados.mediana"
    ]
   },
   {
    "cifra": "11,5",
    "claves": [
     "preguntas[1].con_un_ano_o_mas.barrios[barrio=San Diego].mediana_pct",
-    "preguntas[2].rango_de_rentabilidad_del_grupo_firme.maximo"
+    "preguntas[2].rango_de_rentabilidad_de_recomendados.maximo"
    ]
   },
   {
@@ -373,7 +381,7 @@
   {
    "cifra": "13,0",
    "claves": [
-    "preguntas[2].rango_de_rentabilidad_de_firmes_y_con_aviso.maximo"
+    "preguntas[2].rango_de_rentabilidad_de_recomendados_y_cuatro_de_cinco.maximo"
    ]
   },
   {
@@ -452,6 +460,12 @@
    "cifra": "15.899",
    "claves": [
     "evolucion_oferta.fotos[foto=2026-06-20].pisos_completos"
+   ]
+  },
+  {
+   "cifra": "153.916",
+   "claves": [
+    "recomendacion.compra_minima_eur"
    ]
   },
   {
@@ -626,6 +640,12 @@
    "cifra": "26.004",
    "claves": [
     "evolucion_oferta.junio_2025.anuncios"
+   ]
+  },
+  {
+   "cifra": "268.650",
+   "claves": [
+    "recomendacion.compra_maxima_eur"
    ]
   },
   {
@@ -843,6 +863,12 @@
    ]
   },
   {
+   "cifra": "54",
+   "claves": [
+    "preguntas[0].sensibilidad_superficie.tres_habitaciones.superficie_para_igualar_a_2_m2"
+   ]
+  },
+  {
    "cifra": "6",
    "claves": [
     "preguntas[1].referencia_baratos.comparados.cuantos"
@@ -883,7 +909,7 @@
   {
    "cifra": "65",
    "claves": [
-    "preguntas[1].operadores_grandes.con_aviso_pct"
+    "preguntas[1].operadores_grandes.cuatro_de_cinco_pct"
    ]
   },
   {
@@ -975,6 +1001,12 @@
    "cifra": "8,1",
    "claves": [
     "preguntas[1].fichas_del_grupo[barrio=San Diego].ic_bajo"
+   ]
+  },
+  {
+   "cifra": "8,3",
+   "claves": [
+    "preguntas[1].mediana_de_toda_la_base"
    ]
   },
   {
@@ -1107,6 +1139,7 @@
   "90": "reglas §2, superficie",
   "110": "reglas §2, superficie",
   "140": "reglas §2, superficie",
+  "7": "barrios sin los pisos en el máximo",
   "1.000": "reglas §3, precio",
   "8": "reglas §3, huéspedes"
  }

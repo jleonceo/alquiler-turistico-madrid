@@ -29,7 +29,7 @@ j = json.loads(rp.INDICADORES.read_text(encoding="utf-8"))
 caso("sin número de anuncio ni coordenadas en la tabla", not ({"id", "latitud", "longitud", "anuncios_anfitrion"} & set(filas[0])), set(filas[0]))
 caso("coincide con indicadores.json", not rp.contra_indicadores(r, j), rp.contra_indicadores(r, j))
 caso("los dos README llevan las cifras", not rp.contra_readme(r), rp.contra_readme(r))
-caso("los recomendados son tres", r["firmes"] == ["Numancia", "San Diego", "Ventas"], r["firmes"])
+caso("los recomendados son tres", r["recomendados"] == ["Numancia", "San Diego", "Ventas"], r["recomendados"])
 caso("ningún barrio con menos de 20 pisos lleva su nombre", min(sum(1 for x in filas if x["barrio"] == b) for b in {x["barrio"] for x in filas}) >= 20)
 
 # Controles que tienen que salir en rojo.
@@ -37,7 +37,7 @@ tocado = copy.deepcopy(r)
 tocado["ingreso_anual"] += 500
 caso("rojo si el ingreso cambia", rp.contra_indicadores(tocado, j))
 tocado = copy.deepcopy(r)
-tocado["firmes"] = ["Numancia", "Ventas"]
+tocado["recomendados"] = ["Numancia", "Ventas"]
 caso("rojo si cae un barrio recomendado", rp.contra_indicadores(tocado, j))
 tocado = copy.deepcopy(r)
 tocado["rentabilidad"] += 1

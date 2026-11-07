@@ -225,15 +225,15 @@ def parte_b():
     caso("el color de cada barrio del grupo es el de su clase", all(color[b] == c for b, c in (("Ventas", "#2a78d6"), ("Opañel", "#eb6834"), ("Quintana", "#1baf7a"), ("Atocha", "#898781"), ("Sol", "url(#rayado)"))))
     pisos_de = lambda b: sel[f"B:{b}|Todos"]["pisos"]
     caso("pisos del grupo", sum(pisos_de(b) for b in p["P2"]["grupo"]) == p["P2"]["pisos_del_grupo"])
-    caso("pisos del grupo recomendado", sum(pisos_de(b) for b in p["P2"]["firmes"]) == p["P2"]["pisos_del_grupo_firme"])
+    caso("pisos del grupo recomendado", sum(pisos_de(b) for b in p["P2"]["recomendados"]) == p["P2"]["pisos_de_recomendados"])
     caso("pisos en barrios comparados", sum(pisos_de(f["barrio"]) for f in p["P2"]["tabla_barrios"]) == p["P2"]["referencia"]["filas"])
     caso("barrios con pisos", len({c[0] for c in datos["celdas"]}) == p["P2"]["cobertura"]["barrios_con_pisos"])
 
-    caso("los textos de la recomendación salen del JSON", all(b in texto for b in p["P2"]["firmes"]))
+    caso("los textos de la recomendación salen del JSON", all(b in texto for b in p["P2"]["recomendados"]))
     caso("el límite está en la primera pantalla", "no si un piso se puede alquilar a turistas" in texto.split('id="p-mapa"')[0].lower())
-    firmes = [f for f in p["P2"]["fichas_del_grupo"] if f["clase"] == "5 de 5 veces"]
+    recomendados = [f for f in p["P2"]["fichas_del_grupo"] if f["clase"] == "5 de 5 veces"]
     dicho = "salen de la lista al quitar los pisos" in texto
-    caso("el aviso del tope sale solo si vale para todos los recomendados", dicho == all(f["avisos_del_barrio"]["depende_del_tope"] for f in firmes))
+    caso("el aviso del tope sale solo si vale para todos los recomendados", dicho == all(f["avisos_del_barrio"]["depende_del_tope"] for f in recomendados))
     caso("la atribución está entera", all(x in texto for x in ("Inside Airbnb", "CC BY 4.0", "17/09/2026", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España")))
 
     # Ningún anuncio suelto: ni columnas de anuncio, ni cifras con menos de 30, ni identificadores ni coordenadas

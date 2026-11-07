@@ -164,10 +164,10 @@ def control_del_grupo(df, marcas, dec):
     antes, despues = cd.medir(L), cd.medir(L, excluir=quitados)
     comparacion = cd.comparar(antes, despues)
     pruebas = rc.pruebas_del_grupo(L, quitados, dec["pruebas_del_grupo"])
-    return {"pisos_antes": antes["pisos"], "pisos_despues": despues["pisos"], "grupo": despues["grupo"], "firmes": pruebas["firmes"], "con_aviso": pruebas["con_aviso"], "segunda_linea": pruebas["segunda_linea"],
+    return {"pisos_antes": antes["pisos"], "pisos_despues": despues["pisos"], "grupo": despues["grupo"], "recomendados": pruebas["recomendados"], "cuatro_de_cinco": pruebas["cuatro_de_cinco"], "segunda_linea": pruebas["segunda_linea"],
             "pruebas_por_barrio": {b: x["aguanta"] for b, x in pruebas["barrios"].items()},
-            "variantes_por_barrio": despues["variantes_por_barrio"], "variantes_antes": antes["variantes_por_barrio"], "barrios_comparados": despues["barrios_comparados"], "grupo_antes": antes["grupo"], "tras_temporada_antes": antes["firmes"], "tras_temporada_despues": despues["firmes"],
-            "comparacion_con_intervalo": {"veredicto": cd.veredicto_de(comparacion), **{k: comparacion[k] for k in ("cambia_grupo", "cambia_firmes", "cambia_tipo", "grupo_entran", "grupo_salen", "firmes_entran", "firmes_salen", "pares_entran_salen", "pares_que_cambian", "pares_del_grupo_que_cambian")}}}
+            "variantes_por_barrio": despues["variantes_por_barrio"], "variantes_antes": antes["variantes_por_barrio"], "barrios_comparados": despues["barrios_comparados"], "grupo_antes": antes["grupo"], "tras_temporada_antes": antes["recomendados"], "tras_temporada_despues": despues["recomendados"],
+            "comparacion_con_intervalo": {"veredicto": cd.veredicto_de(comparacion), **{k: comparacion[k] for k in ("cambia_grupo", "cambia_recomendados", "cambia_tipo", "grupo_entran", "grupo_salen", "recomendados_entran", "recomendados_salen", "pares_entran_salen", "pares_que_cambian", "pares_del_grupo_que_cambian")}}}
 
 
 def embudo_y_exclusiones(df, marcas):
@@ -270,7 +270,7 @@ def fichas_de(s):
          "comprobacion": f"{f['analisis_anuncios']} filas, tantas como anuncios; id único.", "quedo": f"{f['analisis_anuncios']} filas."},
         {**comun, "clave": "transformacion-bases", "titulo": "Base de decisión y base de comparación", "tabla": "analisis_anuncios.parquet, `base_decision`, `base_comparacion`, `excl_*`, `comp_excl_*`", "problema": "cada uso tiene su población.", "decision": "reglas §3 y CP-001, CP-006 a CP-010. CP-007 a CP-009 valen solo para la base de decisión.",
          "hecho": "una marca por exclusión; ninguna fila sale de la tabla.", "codigo": "base_decision = ~marcas[de_decision].any(axis=1)", "comprobacion": f"base de decisión {s['bases']['decision']}; base de comparación {s['bases']['comparacion']}; 12 repeticiones repetidas: {g['comparacion_con_intervalo']['veredicto']}.",
-         "quedo": f"grupo de {len(g['grupo'])} barrios y {len(g['firmes'])} firmes."},
+         "quedo": f"grupo de {len(g['grupo'])} barrios y {len(g['recomendados'])} recomendados."},
         {**comun, "clave": "transformacion-atractivo", "titulo": "Atractivo: puntos a menos de 500 m", "tabla": "analisis_anuncios.parquet, `puntos_interes_500m`", "problema": "reglas §3 deja la distancia y el peso al planteamiento.", "decision": "**Supuesto**: recuento simple a menos de 500 m, unos seis minutos andando, sin pesos, porque no hay base para fijarlos. No entra en la rentabilidad.",
          "hecho": "recuento con coordenadas en EPSG:25830.", "codigo": "i, j = shapely.STRtree(pts).query(anuncios, predicate='dwithin', distance=500)\ncerca = shapely.distance(anuncios[i], pts[j]) < 500", "comprobacion": f"mediana {s['atractivo']['mediana']}, máximo {s['atractivo']['maximo']}; {s['atractivo']['puntos']} puntos.", "quedo": "una columna entera, sin vacíos."},
         {**comun, "clave": "transformacion-barrios", "titulo": "Tabla de análisis por barrio", "tabla": "analisis_barrios.parquet", "problema": "competencia, contexto oficial y licencias van por barrio.", "decision": "reglas §1, §6 y §7. La superficie oficial de un barrio marcado sin dato propio toma la de su distrito (**Supuesto**, igual que el reconocimiento).", "hecho": "recuentos y datos oficiales con su origen.",
@@ -284,7 +284,7 @@ def fichas_de(s):
         {**comun, "clave": "transformacion-cinco-pruebas", "titulo": "Columnas para las cinco pruebas del grupo", "tabla": "analisis_anuncios.parquet, `anuncios_anfitrion`, `dias_cotizacion`, `dias_cotizacion_mar`, `dias_cotizacion_jun`", "problema": "reglas §3: el grupo recomendado se decide con cinco pruebas, y dos de ellas piden datos que la tabla no traía.",
          "decision": "reglas §3. Anuncios del anfitrión: `calculated_host_listings_count`, el recuento de la descarga. Cotización: cada descarga con su fecha, porque cada repetición usa el precio de una descarga. Ninguna fila sale de la base.", "hecho": "se añaden cuatro columnas; una cotización que falta queda vacía.",
          "codigo": "df['anuncios_anfitrion'] = df['calculated_host_listings_count']\ndf['dias_cotizacion'] = (pd.to_datetime(df['price_quote_checkin_date']) - foto).dt.days", "comprobacion": f"{s['cotizacion']['con_fecha']} anuncios con cotización de septiembre y {s['cotizacion']['sin_fecha_con_precio']} con precio sin fecha; {s['cotizacion']['lejanas']} a más de {s['cotizacion']['umbral_dias']} días; {s['cotizacion']['anfitriones_grandes']} anuncios de anfitriones con {s['cotizacion']['umbral_anuncios']} o más.",
-         "quedo": f"{f['analisis_anuncios']} filas y cuatro columnas más; {len(g['firmes'])} firmes, {len(g['con_aviso'])} que siguen en la lista 4 veces y {len(g['segunda_linea'])} en resto del grupo.", "quien": "Juan Luis León"},
+         "quedo": f"{f['analisis_anuncios']} filas y cuatro columnas más; {len(g['recomendados'])} recomendados, {len(g['cuatro_de_cinco'])} que siguen en la lista 4 veces y {len(g['segunda_linea'])} en resto del grupo.", "quien": "Juan Luis León"},
     ]
 
 
@@ -319,7 +319,7 @@ Los libros oficiales llevaban código y nombre en una celda y se separaron. Las 
 
 ## Valores
 
-Quedan {miles(c['precio_vacio'])} anuncios de septiembre sin precio y no se rellenan. Las camas vacías son {miles(c['camas_vacias'])} y no pasan el máximo. El precio desde 2026 es un precio para unas fechas, con descuentos dentro, y no el precio medio del año.
+Quedan {miles(c['precio_vacio'])} anuncios de septiembre sin precio y no se rellenan. Las camas vacías son {miles(c['camas_vacias'])} y no pasan el máximo. El precio desde 2026 es un precio para unas fechas, ya con las rebajas del anfitrión, y no el precio medio del año.
 
 ## Registros
 
@@ -352,7 +352,7 @@ Cada cifra sale de un script de `scripts/` y cada regla tiene su ficha en el reg
 
 ## Límites
 
-La base de decisión tiene {miles(b['decision'])} pisos y el grupo tiene {len(g['grupo'])} barrios, de los que {len(g['firmes'])} son firmes con las cinco pruebas: {lista_si(g['firmes'])}; {len(g['con_aviso'])} superan 4 pruebas: {lista_si(g['con_aviso'])}. Qué barrios se distinguen entre sí con intervalo se contesta en el análisis. Qué tiene realmente reservado un calendario no se puede saber: no distingue reservado de bloqueado. En la base de comparación, {s['sin_precio_de_vivienda']['anuncios_base_comparacion']} habitaciones quedan sin precio de vivienda, porque la regla no dice qué hacer con cero habitaciones.
+La base de decisión tiene {miles(b['decision'])} pisos y el grupo tiene {len(g['grupo'])} barrios, de los que {len(g['recomendados'])} son recomendados con las cinco pruebas: {lista_si(g['recomendados'])}; {len(g['cuatro_de_cinco'])} superan 4 pruebas: {lista_si(g['cuatro_de_cinco'])}. Qué barrios se distinguen entre sí con intervalo se contesta en el análisis. Qué tiene realmente reservado un calendario no se puede saber: no distingue reservado de bloqueado. En la base de comparación, {s['sin_precio_de_vivienda']['anuncios_base_comparacion']} habitaciones quedan sin precio de vivienda, porque la regla no dice qué hacer con cero habitaciones.
 """
 
 
@@ -375,7 +375,7 @@ def informe(s):
     g = s.get("control_grupo", {})
     r += ["", "### El grupo tras quitar CP-007, CP-008 y CP-009", ""]
     if g:
-        r += [f"- Pisos: de {g['pisos_antes']} a {g['pisos_despues']}.", f"- Grupo: {lista_si(g['grupo'])}.", f"- Firmes: {lista_si(g['firmes'])}.", f"- De reserva: {lista_si(g['con_aviso'])}.", f"- Resto del grupo: {lista_si(g['segunda_linea'])}.", f"- Variantes por barrio: {g['variantes_por_barrio']}.", f"- Con intervalo: {g['comparacion_con_intervalo']['veredicto']}."]
+        r += [f"- Pisos: de {g['pisos_antes']} a {g['pisos_despues']}.", f"- Grupo: {lista_si(g['grupo'])}.", f"- Recomendados: {lista_si(g['recomendados'])}.", f"- De reserva: {lista_si(g['cuatro_de_cinco'])}.", f"- Resto del grupo: {lista_si(g['segunda_linea'])}.", f"- Variantes por barrio: {g['variantes_por_barrio']}.", f"- Con intervalo: {g['comparacion_con_intervalo']['veredicto']}."]
     r += ["", "## Validación", ""] + [f"- {v['validacion']}: {v['resultado']}." for v in s.get("validaciones", [])]
     r += ["", "", "## Dataset generado", ""]
     r += [f"- `{x['ruta']}`: {x['filas']} filas y {x['columnas']} columnas; una fila es {x['que_es_una_fila']}." for x in s.get("salidas", [])] or ["No se guardó ninguna tabla."]
@@ -454,10 +454,10 @@ def principal(s, con_riesgos=True):
                ("cada precio de septiembre tiene su fecha de cotización", s["cotizacion"]["sin_fecha_con_precio"] == 0), ("ninguna cotización es anterior a su foto", not any(anuncios[c].lt(0).any() for c in ("dias_cotizacion", "dias_cotizacion_mar", "dias_cotizacion_jun")))]
     if con["base_comparacion_esperada"] is not None:
         pruebas.append((f"base de comparación {con['base_comparacion_esperada']}", s["bases"]["comparacion"] == con["base_comparacion_esperada"]))
-    if con["firmes_esperados"] is not None:
-        pruebas.append(("firmes esperados", sorted(s["control_grupo"]["firmes"]) == sorted(con["firmes_esperados"])))
-    if con.get("con_aviso_esperados") is not None:
-        pruebas.append(("que siguen en la lista 4 veces esperados", sorted(s["control_grupo"]["con_aviso"]) == sorted(con["con_aviso_esperados"])))
+    if con["recomendados_esperados"] is not None:
+        pruebas.append(("recomendados esperados", sorted(s["control_grupo"]["recomendados"]) == sorted(con["recomendados_esperados"])))
+    if con.get("cuatro_de_cinco_esperados") is not None:
+        pruebas.append(("que siguen en la lista 4 veces esperados", sorted(s["control_grupo"]["cuatro_de_cinco"]) == sorted(con["cuatro_de_cinco_esperados"])))
     grupo_ok = con["grupo_esperado"] is None or sorted(s["control_grupo"]["grupo"]) == sorted(con["grupo_esperado"])
     pruebas.append(("grupo esperado", grupo_ok))
     s["validaciones"] = [{"validacion": n, "resultado": "pasa" if bool(ok) else "falla"} for n, ok in pruebas]
@@ -497,7 +497,7 @@ def principal(s, con_riesgos=True):
         RIESGOS.write_text(riesgos(s), encoding="utf-8", newline="\n")
     estado = "AVISO" if s["pendientes"] else "OK"
     g = s["control_grupo"]
-    s["resultado"] = {"estado": estado, "riesgo": "medio", "resumen": f"Cinco tablas guardadas. Base de decisión de {s['bases']['decision']} pisos, de {g['pisos_antes']} antes de CP-007 a CP-009; grupo de {len(g['grupo'])} barrios, {len(g['firmes'])} firmes y {len(g['con_aviso'])} que siguen en la lista 4 veces; {g['comparacion_con_intervalo']['veredicto']}.",
+    s["resultado"] = {"estado": estado, "riesgo": "medio", "resumen": f"Cinco tablas guardadas. Base de decisión de {s['bases']['decision']} pisos, de {g['pisos_antes']} antes de CP-007 a CP-009; grupo de {len(g['grupo'])} barrios, {len(g['recomendados'])} recomendados y {len(g['cuatro_de_cinco'])} que siguen en la lista 4 veces; {g['comparacion_con_intervalo']['veredicto']}.",
                       "artefactos": [x["ruta"] for x in s["salidas"]] + ["informes/transformacion-datos.json", "informes/transformacion-datos.md"] + (["config/negocio/03_riesgos_de_calidad.md"] if con_riesgos else []), "siguiente": "analisis-exploratorio"}
     return s
 

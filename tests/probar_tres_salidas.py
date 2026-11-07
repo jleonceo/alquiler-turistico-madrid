@@ -40,7 +40,7 @@ def faltan(texto, cifras):
 def lista_comun(j):
     """Reúne, con el formato de las salidas, las cifras que las tres salidas tienen que dar iguales."""
     p2, p3 = j["preguntas"][1], j["preguntas"][2]
-    r, rango, pl = j["recomendacion"], p3["rango_de_rentabilidad_del_grupo_firme"], j["licencias_y_registro"]["planta_baja"]
+    r, rango, pl = j["recomendacion"], p3["rango_de_rentabilidad_de_recomendados"], j["licencias_y_registro"]["planta_baja"]
     so = {f["barrio"]: f["pisos_fuera_sin_ocupacion_pct"] for f in p3["fichas_del_grupo"]}
     puesto = {x["barrio"]: x["puesto"] for x in p2["con_un_ano_o_mas"]["barrios"]}
     q = p2["que_ordena_la_lista"]

@@ -14,7 +14,8 @@ Esta lista dice dónde buscar, pero no si un piso concreto se puede alquilar a t
 urbanística. Hay que comprobarlo piso a piso en el Ayuntamiento. Los días ocupados son además una estimación de Inside Airbnb,
 con un máximo de 255 días al año.
 
-Si se quitan los pisos que llegan a ese máximo, los tres barrios salen de la lista.
+Si se quitan los pisos que llegan a ese máximo, la lista pasa a ser los barrios de Comillas, Cuatro Caminos, Opañel, Pinar del Rey, Puerta del Ángel,
+Quintana y San Andrés, y ninguno de los tres barrios sigue en ella. Por eso esta recomendación es una primera criba.
 
 **El precio de compra es el oficial de 2025, y hoy el mercado pide más.** Con los precios que piden Fotocasa e Idealista,
 la compra en mediana sube a 171.600 € y 182.000 €, y la rentabilidad bruta baja al 10,9 % y al 10,6 %. Son precios de anuncio y no de venta,
@@ -69,7 +70,7 @@ Después se comprobó si esos 9 barrios dependían de un grupo concreto de anunc
 por ejemplo sin los anfitriones que tienen 10 anuncios o más. Los barrios de Ventas, Numancia y San Diego siguieron en la lista
 las cinco veces.
 
-Se recomiendan porque el resultado se mantiene, no porque rindan más: ninguno rinde claramente más que los otros barrios de la lista. El barrio de Numancia rinde más que
+Se recomiendan porque siguen en la lista las cinco veces, lo que no significa que rindan más: ninguno rinde claramente más que los otros barrios de la lista. El barrio de Numancia rinde más que
 la mediana de todos los pisos analizados, pero en los barrios de Ventas y San Diego no se puede asegurar. Los barrios de Casco Histórico de Vallecas y Opañel rinden más que el de San Diego, pero salen de la lista si se quitan los anfitriones
 con 10 anuncios o más.
 
@@ -79,7 +80,7 @@ con 10 anuncios o más.
 
 ```text
 Pisos analizados, datos del 17/09/2026: 2.940
-Barrios que rinden más: 9
+Barrios en la lista: 9
 Barrios que siguen en la lista en las 5 repeticiones: Numancia, San Diego y Ventas
 Barrios que siguen en 4 de 5: Casco Histórico de Vallecas y Opañel
 
@@ -130,9 +131,11 @@ publicarlos. Se descargan de su web al repetir el análisis.
 ## Límites
 
 - No se conoce la planta ni el acceso de cada piso.
+- Desde el 03/04/2025 hace falta además que la comunidad de propietarios lo apruebe de forma expresa, por tres quintos de propietarios y de cuotas. La misma mayoría puede prohibirlo o subir la cuota hasta un 20 % (Ley 49/1960, arts. 7.3 y 17.12).
+- Una vivienda con protección pública no puede ser vivienda turística (art. 17 ter.3 del Decreto 79/2014, añadido por el Decreto 27/2026). La declaración responsable manifiesta contar con dos certificados: uno de que el título constitutivo o los estatutos no prohíben la actividad y otro de que la comunidad ha aprobado la solicitud (art. 17 bis, letras f y g, del mismo decreto).
 - Con los anuncios de un año o más, el barrio de San Diego baja al puesto 8 de 26 barrios en rentabilidad.
-- La superficie de cada piso es un supuesto: 50 m² hasta 1 habitación, 65 m² con 2 habitaciones y más con 3 o más. Por eso no se puede decir
-  qué rinde más: un estudio, una habitación o dos.
+- La superficie de cada piso es un supuesto: 50 m² hasta 1 habitación, 65 m² con 2 habitaciones y de 90 a 140 m² con 3. Por eso no se puede decir
+  qué rinde más: un estudio, una habitación o dos. La superficie de los pisos de 3 habitaciones no se movió en las comprobaciones.
 - Solo cuentan los pisos con ocupación estimada, o sea con reseñas en el último año. Quedan fuera los que no funcionan, lo que
   puede subir la rentabilidad.
 - Si además se cuentan como cero los pisos sin ocupación ni precio, solo el barrio de Ventas sigue en la lista.

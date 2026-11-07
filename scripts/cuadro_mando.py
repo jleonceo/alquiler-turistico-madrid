@@ -74,13 +74,13 @@ DEFINICIONES = {
     "piso": "Piso: anuncio de una vivienda fuera del centro histórico que cumple los filtros del análisis. Un mismo inmueble puede tener varios anuncios. La planta y el acceso no constan.",
     "precio": "Precio por noche: el publicado en el anuncio, en mediana. Es un precio para unas fechas concretas. No es el precio medio del año.",
     "ocupacion": "Días ocupados: días al año que estima Inside Airbnb, en mediana. Salen de las reseñas del último año, con máximo de 255. No son noches vendidas y es la cifra menos fiable del análisis.",
-    "compra": "Precio de compra: superficie del piso por el precio oficial del m² del barrio en 2025, en mediana. La superficie es un supuesto del equipo de valoraciones.",
-    "rent": "Rentabilidad bruta: precio por noche por días ocupados, entre precio de compra, en porcentaje y en mediana. No incluye gastos, impuestos, comunidad, limpieza ni comisiones.",
+    "compra": "Precio de compra: superficie del piso por el precio oficial del m² del barrio en 2025, en mediana. La superficie es un supuesto.",
+    "rent": "Rentabilidad bruta: precio por noche por días ocupados, entre precio de compra, en porcentaje y en mediana. Se calcula piso a piso, así que no sale de dividir la compra y el ingreso de la tabla. No incluye gastos, impuestos, comunidad, limpieza ni comisiones.",
     "cuartil": "Uno de cada cuatro rinde menos de: el 25 % de los anuncios no llega a esa rentabilidad.",
-    "clase": "Veces que sigue en la lista: el cálculo se repitió de 5 formas, quitando cada vez un grupo de anuncios. Se recomiendan los barrios que siguen entre los más rentables las 5 veces. La lista reúne los barrios en el 25 % más rentable en más de 6 de 12 repeticiones, que cambian la estancia, el mínimo de anuncios o la fecha del precio.",
+    "clase": "Veces que sigue en la lista: el cálculo se repitió de 5 formas, quitando cada vez un grupo de anuncios. Se recomiendan los barrios que siguen entre los más rentables las 5 veces, lo que no significa que rindan más. La lista reúne los barrios en el 25 % más rentable en más de 6 de 12 repeticiones, que cambian la estancia, el mínimo de anuncios o la fecha del precio.",
     "pruebas": "Las 5 formas de repetir el cálculo: sin los pisos que declaran temporada; sin los anfitriones con 10 anuncios o más; sin los precios para fechas a más de 60 días; solo con 1 y 2 habitaciones; con los pisos sin días estimados contados como cero. Solo se miden en los barrios de la lista.",
     "avisos": "Avisos: depende del máximo si sale de la lista al quitar los pisos que llegan a 255 días; pocos anuncios si tiene 40 o menos; uno de cada cuatro rinde poco si ese corte no supera el de todos los pisos.",
-    "distingue": "Cuando no se puede asegurar, la diferencia podría ser cero, con un 95 % de confianza.",
+    "distingue": "Asegurar significa tener un 95 % de confianza en que la diferencia existe.",
     "minimo": "Mínimo: una selección de menos de 30 pisos no se ordena y no da cifras, solo su recuento.",
 }
 
@@ -286,7 +286,7 @@ def comprobar_grupos(datos, ind):
     p2 = next(q for q in ind["preguntas"] if q["id"] == "P2")
     pisos = lambda barrios: sum(resumen(datos, TODOS, b, TODOS)["pisos"] for b in barrios)
     exigir(pisos(p2["grupo"]) == p2["pisos_del_grupo"], "los pisos del grupo no coinciden")
-    exigir(pisos(p2["firmes"]) == p2["pisos_del_grupo_firme"], "los pisos del grupo recomendado no coinciden")
+    exigir(pisos(p2["recomendados"]) == p2["pisos_de_recomendados"], "los pisos del grupo recomendado no coinciden")
     exigir(pisos(f["barrio"] for f in p2["tabla_barrios"]) == p2["referencia"]["filas"], "los pisos de los barrios comparados no coinciden")
     exigir(len({c[0] for c in datos["celdas"]}) == p2["cobertura"]["barrios_con_pisos"], "los barrios con pisos no coinciden")
 
@@ -416,37 +416,37 @@ def textos(ind):
     """Monta los textos de las pestañas desde indicadores.json, cada frase con la condición que la sostiene."""
     p = {q["id"]: q for q in ind["preguntas"]}
     sens, p2, p3 = p["P1"]["sensibilidad_superficie"], p["P2"], p["P3"]
-    r, rango, firme = ind["recomendacion"], p3["rango_de_rentabilidad_del_grupo_firme"], p3["rentabilidad_del_grupo_firme"]
-    exigir(sorted(p2["firmes"]) == sorted(ci.FIRMES), "la recomendación espera los tres barrios recomendados de los informes")
-    exigir(p2["pisos_del_grupo_firme"] == firme["casos"], "el grupo recomendado tiene dos recuentos")
+    r, rango, medianas_rec = ind["recomendacion"], p3["rango_de_rentabilidad_de_recomendados"], p3["rentabilidad_de_recomendados"]
+    exigir(sorted(p2["recomendados"]) == sorted(ci.RECOMENDADOS), "la recomendación espera los tres barrios recomendados de los informes")
+    exigir(p2["pisos_de_recomendados"] == medianas_rec["casos"], "el grupo recomendado tiene dos recuentos")
     pct = lambda x, d=1: numero(x, d, " %")
     pb = ind["licencias_y_registro"]["planta_baja"]
     q = p2["que_ordena_la_lista"]
     # Lo que debilita la conclusión va arriba (D2), y solo si es cierto de todos los barrios recomendados
     fichas = {f["barrio"]: f for f in p3["fichas_del_grupo"]}
     fichas_p2 = {f["barrio"]: f for f in p2["fichas_del_grupo"]}
-    depende = all(fichas_p2[b]["avisos_del_barrio"]["depende_del_tope"] for b in ci.FIRMES)
+    depende = all(fichas_p2[b]["avisos_del_barrio"]["depende_del_tope"] for b in ci.RECOMENDADOS)
     u = {x["barrio"]: x for x in p2["con_un_ano_o_mas"]["barrios"]}
     # El título del gráfico concluye solo si, de verdad, no hay un tipo que gane en todas las combinaciones
     sin_ganador = sens["cambia"] and len(sens["tipos_que_aparecen"]) > 1
-    return {"titulo_recomendacion": f"Pisos de hasta {numero(r['dormitorios_hasta'])} habitaciones en los barrios de {lista_y(ci.FIRMES)}",
-            "recomendacion": f"Son {numero(r['pisos'])} anuncios. Rentabilidad bruta del {pct(r['rentabilidad_pct'])} en mediana, sin gastos. Se recomiendan porque se mantienen al repetir el cálculo, no porque rindan más.",
+    return {"titulo_recomendacion": f"Pisos de hasta {numero(r['dormitorios_hasta'])} habitaciones en los barrios de {lista_y(ci.RECOMENDADOS)}",
+            "recomendacion": f"Rentabilidad bruta mediana del {pct(r['rentabilidad_pct'])}, sin gastos. Sin los pisos en el máximo de 255 días, ninguno sigue en la lista.",
             "limite": f"Dice dónde buscar, no si un piso se puede alquilar a turistas. Primera acción: {ci.acciones(ci.Cifras(INDICADORES))[0]['nombre']}.",
-            "titulo_dormitorios": "Sin ganador entre estudio, una y dos" if sin_ganador else "Rentabilidad bruta por habitaciones",
-            "titulo_barrios": f"{len(p2['grupo'])} barrios forman la lista y {len(p2['firmes'])} siguen en ella las 5 veces",
+            "titulo_dormitorios": "Estudio, una o dos: sin ganador" if sin_ganador else "Rentabilidad bruta por habitaciones",
+            "titulo_barrios": f"{len(p2['grupo'])} barrios forman la lista y {len(p2['recomendados'])} siguen en ella las 5 veces",
             "tabla_recomendacion": [["Recomendados de hasta 2 habitaciones", "Cifra"], ["Anuncios en Airbnb", numero(r["pisos"])], ["Compra por piso", numero(r["compra_eur"], 0, " €")], ["Ingreso anual por piso", numero(r["ingreso_anual_eur"], 0, " €")],
-                                    ["Licencias con planta baja", f"{numero(pb['licencias'])} de {numero(pb['de'])}"], ["Licencias con planta baja, barrios recomendados", f"{numero(pb['firmes']['licencias'])} de {numero(pb['firmes']['de'])}"], ["Rentabilidad de los barrios de m² más barato", pct(q["m2_baratos"]["mediana_pct"])]],
-            "nota_recomendacion": f"Con los precios que piden hoy Fotocasa e Idealista, la compra sube a {numero(r['precio_de_mercado']['fuentes'][0]['compra_mediana_eur'], 0, ' €')} y {numero(r['precio_de_mercado']['fuentes'][1]['compra_mediana_eur'], 0, ' €')}, y la rentabilidad baja a {pct(r['precio_de_mercado']['fuentes'][0]['rentabilidad_mediana_pct'])} y {pct(r['precio_de_mercado']['fuentes'][1]['rentabilidad_mediana_pct'])}. Con todos los pisos de estos barrios, va del {pct(rango['minimo'])} al {pct(rango['maximo'])} según la fecha del precio. Conviene empezar por bajos y primeras plantas con acceso independiente. Lo que ingresa un bajo no se conoce, porque los datos mezclan todas las plantas. Qué norma rige en cada barrio se pregunta en el Ayuntamiento antes de comprar. "
-                                  f"Entre barrios, la rentabilidad va más ligada a los días ocupados ({numero(q['rentabilidad_con_ocupacion'], 2)}) que al precio del m² ({numero(q['rentabilidad_con_m2'], 2)}). Los días ocupados son la cifra menos fiable.",
+                                    ["Licencias con planta baja", f"{numero(pb['licencias'])} de {numero(pb['de'])}"], ["Licencias con planta baja, barrios recomendados", f"{numero(pb['recomendados']['licencias'])} de {numero(pb['recomendados']['de'])}"]],
+            "nota_recomendacion": f"Con los precios que piden hoy Fotocasa e Idealista, la compra sube a {numero(r['precio_de_mercado']['fuentes'][0]['compra_mediana_eur'], 0, ' €')} y {numero(r['precio_de_mercado']['fuentes'][1]['compra_mediana_eur'], 0, ' €')}, y la rentabilidad baja a {pct(r['precio_de_mercado']['fuentes'][0]['rentabilidad_mediana_pct'])} y {pct(r['precio_de_mercado']['fuentes'][1]['rentabilidad_mediana_pct'])}. Con todos los pisos de estos barrios, va del {pct(rango['minimo'])} al {pct(rango['maximo'])} según la fecha del precio. Conviene empezar por bajos y primeras plantas con acceso independiente. Lo que ingresa un bajo no se conoce, porque los datos mezclan todas las plantas. Qué norma rige en cada barrio se pregunta en el Ayuntamiento antes de comprar. Además tiene que aprobarlo su comunidad de propietarios, por tres quintos. Y no puede tener protección pública. "
+                                  f"Entre barrios, la rentabilidad va más ligada a los días ocupados que al precio del m²: la correlación es de {numero(q['rentabilidad_con_ocupacion'], 2)} frente a {numero(q['rentabilidad_con_m2'], 2)}, en una escala de −1 a 1. Los días ocupados son la cifra menos fiable.",
             "texto_mapa": f"El barrio de Numancia rinde más que la mediana de todos los pisos. En los barrios de Ventas y San Diego no se puede asegurar. <button class=\"def\" type=\"button\" data-def=\"distingue\">Qué significa</button>",
-            "tabla_mapa": [["Recomendados", "Peor 25 % rinde menos de", "Sin días estimados", "Puesto, un año o más"]] + [[b, pct(fichas[b]["cuartil_bajo_pct"]), pct(fichas[b]["pisos_fuera_sin_ocupacion_pct"]), f"{numero(u[b]['puesto'])}.ª de {numero(p2['con_un_ano_o_mas']['barrios_comparados'])}"] for b in ci.FIRMES] + [["Todos los pisos", pct(p2["cuartil_bajo_de_toda_la_base"], 2), pct(p3["pisos_fuera_sin_ocupacion"]["pct"]), "—"]],
-            "nota_mapa": f"Los barrios de Casco Histórico de Vallecas y Opañel rinden más, pero el {pct(p2['operadores_grandes']['con_aviso_pct'], 0)} de sus anuncios es de anfitriones con 10 anuncios o más. El puesto cuenta solo anuncios de un año o más, porque uno más nuevo parece menos ocupado.",
+            "tabla_mapa": [["Recomendados", "Peor 25 % rinde menos de", "Sin días estimados", "Puesto, un año o más"]] + [[b, pct(fichas[b]["cuartil_bajo_pct"]), pct(fichas[b]["pisos_fuera_sin_ocupacion_pct"]), f"{numero(u[b]['puesto'])}.º de {numero(p2['con_un_ano_o_mas']['barrios_comparados'])}"] for b in ci.RECOMENDADOS] + [["Todos los pisos", pct(p2["cuartil_bajo_de_toda_la_base"], 2), pct(p3["pisos_fuera_sin_ocupacion"]["pct"]), "—"]],
+            "nota_mapa": f"Los barrios de Casco Histórico de Vallecas y Opañel rinden más, pero el {pct(p2['operadores_grandes']['cuatro_de_cinco_pct'], 0)} de sus anuncios es de anfitriones con 10 anuncios o más. El puesto cuenta solo anuncios de un año o más, porque uno más nuevo parece menos ocupado.",
             "texto_barrios": ("Los tres recomendados salen de la lista al quitar los pisos que llegan a 255 días. " if depende else "") + "El barrio de Puerta del Ángel sale en las 5 formas de repetir el cálculo."}
 
 
 def titulo_mapa():
     """Nombra los barrios recomendados, en el orden de los informes."""
-    return f"Los barrios recomendados son {lista_y(ci.FIRMES)}"
+    return f"Los barrios recomendados son {lista_y(ci.RECOMENDADOS)}"
 
 
 def tabla_fija(cabecera, filas):
@@ -459,7 +459,7 @@ def tabla_fija(cabecera, filas):
 def comprobar_recomendacion(anuncios, ind):
     """Para si la cifra de la recomendación no sale de los pisos de hasta 2 habitaciones de los recomendados."""
     p2 = next(q for q in ind["preguntas"] if q["id"] == "P2")
-    t = anuncios[anuncios["base_decision"] & anuncios["barrio"].isin(p2["firmes"]) & anuncios["dormitorios"].le(2)]
+    t = anuncios[anuncios["base_decision"] & anuncios["barrio"].isin(p2["recomendados"]) & anuncios["dormitorios"].le(2)]
     r = ind["recomendacion"]
     exigir(len(t) == r["pisos"], "los pisos de la recomendación no coinciden")
     for clave_r, columna in (("rentabilidad_pct", "rent_valoraciones_pct"), ("compra_eur", "compra_valoraciones_eur"), ("ingreso_anual_eur", "ingreso_anual_eur")):
@@ -503,6 +503,7 @@ button.cifra-clave:focus-visible, button.def:focus-visible { outline: 2px solid 
 .definicion[hidden] { display: none; }
 .pagina p.texto { margin: 0 0 6px; max-width: 110ch; }
 .pagina p.limite { font-weight: 600; }
+.etiqueta-cifras { margin: 6px 0 2px; font-size: 13px; color: #4a4f55; }
 .grafico { margin: 8px 0 0; }
 .g-titulo { font-size: 18px; }
 .g-subtitulo { font-size: 13px; margin: 0 0 4px; }
@@ -514,6 +515,12 @@ button.cifra-clave:focus-visible, button.def:focus-visible { outline: 2px solid 
 #mapa path.apagado { opacity: 0.15; }
 #mapa path:focus { outline: none; stroke: #0b0b0b; stroke-width: 1.5; }
 .lado-reco { display: grid; grid-template-columns: minmax(0, 640px) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 760px) {
+  .barra { flex-wrap: wrap; gap: 8px 20px; }
+  .lado-reco, .lado-mapa { grid-template-columns: minmax(0, 1fr); }
+  .pagina svg { max-width: 100%; height: auto; }
+  .pagina table { display: block; overflow-x: auto; }
+}
 .fija table { margin: 0 0 4px; width: 100%; font-size: 13px; }
 .fija td, .fija th { padding: 1px 8px 1px 0; }
 .fija .g-fuente { margin: 4px 0 6px; max-width: none; }
@@ -550,12 +557,13 @@ CUERPO = """
   <h1>__TITULO_RECOMENDACION__</h1>
   <p class="texto">__RECOMENDACION__</p>
   <p class="texto limite">__LIMITE__</p>
+  <p class="etiqueta-cifras" id="etiqueta-cifras"></p>
   <div class="cifras" id="cifras-recomendacion"></div>
   <p class="definicion" id="def-recomendacion" hidden></p>
   <div class="lado-reco">
     <div class="grafico" id="g-dormitorios">
       <p class="g-titulo" id="g-dormitorios-titulo"></p>
-      <p class="g-subtitulo">Mediana de rentabilidad en %; en gris, menos de 30 pisos</p>
+      <p class="g-subtitulo">Rentabilidad mediana en %; en gris, menos de 30 pisos</p>
       <div id="g-dormitorios-dibujo"></div>
       <p class="g-fuente">__FUENTE__</p>
     </div>
@@ -676,11 +684,13 @@ function ponerOpciones(sel, valores, valor) {
 function dibujarRecomendacion() {
   const s = seleccion(), base = D.selecciones["Todos|Todos"];
   const filtrado = estado.distrito !== TODOS || estado.barrio !== TODOS || estado.dorm !== TODOS;
+  // Las cuatro cifras grandes no son de los recomendados: la etiqueta dice de quién son
+  $("etiqueta-cifras").textContent = filtrado ? "Cifras de la selección, en mediana" : "Cifras de todos los pisos, en mediana";
   $("cifras-recomendacion").innerHTML = [
-    {id: "c-precio", etiqueta: "Precio por noche", valor: s.precio, texto: s.precio !== undefined ? eur(s.precio) : "", contexto: filtrado ? "todos los pisos: " + eur(base.precio) : "mediana", def: "precio", tip: "mediana del precio publicado"},
-    {id: "c-ocupacion", etiqueta: "Días ocupados", valor: s.ocupacion, texto: s.ocupacion !== undefined ? num(s.ocupacion, s.ocupacion % 1 ? 1 : 0) + " días" : "", contexto: filtrado ? "todos los pisos: " + num(base.ocupacion) + " días" : "al año, máximo 255", def: "ocupacion", tip: "mediana de los días que estima la fuente"},
-    {id: "c-compra", etiqueta: "Precio de compra", valor: s.compra, texto: s.compra !== undefined ? eur(s.compra) : "", contexto: "", def: "compra", tip: "mediana de superficie por precio del m²"},
-    {id: "c-rent", etiqueta: "Rentabilidad bruta", valor: s.rent, texto: s.rent !== undefined ? pct(s.rent) : "", contexto: "", def: "rent", tip: "mediana de ingreso anual entre precio de compra"},
+    {id: "c-precio", etiqueta: "Precio por noche", valor: s.precio, texto: s.precio !== undefined ? eur(s.precio) : "", contexto: filtrado ? "todos los pisos: " + eur(base.precio) : "", def: "precio", tip: "mediana del precio publicado"},
+    {id: "c-ocupacion", etiqueta: "Días ocupados", valor: s.ocupacion, texto: s.ocupacion !== undefined ? num(s.ocupacion, s.ocupacion % 1 ? 1 : 0) + " días" : "", contexto: filtrado ? "todos los pisos: " + num(base.ocupacion) + " días" : "", def: "ocupacion", tip: "mediana de los días que estima la fuente"},
+    {id: "c-compra", etiqueta: "Precio de compra", valor: s.compra, texto: s.compra !== undefined ? eur(s.compra) : "", contexto: filtrado ? "todos los pisos: " + eur(base.compra) : "", def: "compra", tip: "mediana de superficie por precio del m²"},
+    {id: "c-rent", etiqueta: "Rentabilidad bruta", valor: s.rent, texto: s.rent !== undefined ? pct(s.rent) : "", contexto: filtrado ? "todos los pisos: " + pct(base.rent) : "", def: "rent", tip: "mediana de ingreso anual entre precio de compra"},
   ].map(cifra).join("");
   // Gráfico por habitaciones: cada grupo de la selección de distrito o barrio; bajo el mínimo, gris y sin cifra
   const filas = D.tramos.map(([t, nombre]) => ({t, nombre, s: D.selecciones[clave(estado.distrito, estado.barrio, t)] || {pisos: 0}}));
@@ -723,7 +733,7 @@ function dibujarMapa() {
   const pisosGrupo = enGrupo.reduce((a, b) => a + pisosBarrio(b), 0);
   const fila = (id, etiqueta, valor, contexto, def, tip) => ({id, etiqueta, valor, texto: num(valor), contexto, def, tip});
   $("cifras-mapa").innerHTML = [
-    fila("c-firmes", "Barrios recomendados", de("5 de 5 veces").length, "siguen en la lista las 5 veces", "clase", "barrios recomendados en esta selección"),
+    fila("c-recomendados", "Barrios recomendados", de("5 de 5 veces").length, "siguen en la lista las 5 veces", "clase", "barrios recomendados en esta selección"),
     fila("c-aviso", "Barrios que siguen 4 veces", de("4 de 5 veces").length, "salen 1 de las 5 veces", "clase", "barrios que siguen en la lista 4 veces en esta selección"),
     fila("c-segunda", "Otros barrios de la lista", de("menos de 4 veces").length, "siguen menos de 4 veces", "clase", "otros barrios de la lista en esta selección"),
     fila("c-pisos-grupo", "Pisos en esos barrios", pisosGrupo, "con las habitaciones elegidas", "piso", "suma de los pisos de la selección en los barrios de la lista"),

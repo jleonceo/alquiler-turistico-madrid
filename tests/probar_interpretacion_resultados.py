@@ -36,7 +36,7 @@ def principal():
     """Recorre el caso que tiene que parar y la salida buena."""
     base = json.loads((CASO / "informes" / "indicadores.json").read_text(encoding="utf-8"))
     malo = copy.deepcopy(base)
-    malo["preguntas"][1]["firmes"] = ["Numancia"]
+    malo["preguntas"][1]["recomendados"] = ["Numancia"]
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         r = lanzar(tmp, malo)
         caso("para si cambian los recomendados", r.returncode != 0, r.stdout + r.stderr)
@@ -48,14 +48,15 @@ def principal():
         for s in SECCIONES:
             caso(f"trae {s}", s in md)
         caso("las secciones van en orden", [md.index(s) for s in SECCIONES] == sorted(md.index(s) for s in SECCIONES))
-        caso("da nivel de confianza", "Confianza media" in md)
+        caso("da nivel de confianza", "Confianza baja" in md)
         import cifras_informes as ci
-        cuerpo, inventario = md.split("## Inventario de evidencias")
+        cuerpo = md
+        inventario = (Path(tmp) / "interpretacion_rastro.json").read_text(encoding="utf-8")
         ci.sin_jerga(cuerpo.split("## Fuentes")[0])
-        for x in base["preguntas"][1]["firmes"]:
+        for x in base["preguntas"][1]["recomendados"]:
             caso(f"nombra {x}", x in cuerpo)
-        caso("el inventario da la ruta de cada cifra", "informes/indicadores.json" in inventario and inventario.count("|") > 40)
-        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo seguiría el barrio de Ventas", "Datos personales"):
+        caso("el rastro da la ruta de cada cifra", "informes/indicadores.json" in inventario and inventario.count("claves") > 20)
+        for frase in ("en el Ayuntamiento", "asesoramiento jurídico", "CC BY 4.0", "Origen de los datos: Ayuntamiento de Madrid", "Colegio de Registradores de España", "solo sigue el barrio de Ventas", "Datos personales"):
             caso(f"dice «{frase}»", frase in md)
     print(f"{len(FALLOS)} fallos")
     return 1 if FALLOS else 0

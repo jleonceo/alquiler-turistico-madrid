@@ -13,7 +13,8 @@ revenue. Calculated flat by flat, the median gross yield is 12.1%, before costs 
 This list says where to look, not whether a specific flat can be let to tourists. That depends on planning rules and has to
 be checked flat by flat with the City Council. The occupied days are also an estimate by Inside Airbnb, capped at 255 days a year.
 
-If flats at that cap are excluded, the three neighbourhoods drop off the list.
+If flats at that cap are excluded, the list becomes the neighbourhoods of Comillas, Cuatro Caminos, Opañel, Pinar del Rey, Puerta del Ángel, Quintana and
+San Andrés, and none of the three neighbourhoods stays on it. That is why this recommendation is only a first screening.
 
 **The purchase price used is the official 2025 one, and the market is asking more today.** At the prices on Fotocasa and Idealista,
 the median purchase price rises to €171,600 and €182,000 respectively, and the gross yield falls to 10.9% and 10.6%. These are asking prices, not sale prices,
@@ -69,7 +70,7 @@ The next check was whether those 9 depended on one particular group of listings.
 for example excluding hosts who have 10 or more listings. The neighbourhoods of Ventas, Numancia and San Diego stayed on the list
 all five times.
 
-They are recommended because the result holds, not because they yield more: none of them clearly outperforms the others on the list. The Numancia neighbourhood's yield is
+They are recommended because they stayed on the list all five times, which does not mean they yield more: none of them clearly outperforms the others on the list. The Numancia neighbourhood's yield is
 above the median for all the flats analysed, but the same cannot be stated with confidence for the Ventas and San Diego neighbourhoods. The neighbourhoods of Casco Histórico de Vallecas and Opañel yield more than the San Diego neighbourhood, but they drop off the list when hosts with
 10 or more listings are excluded.
 
@@ -79,7 +80,7 @@ above the median for all the flats analysed, but the same cannot be stated with 
 
 ```text
 Pisos analizados, datos del 17/09/2026: 2.940
-Barrios que rinden más: 9
+Barrios en la lista: 9
 Barrios que siguen en la lista en las 5 repeticiones: Numancia, San Diego y Ventas
 Barrios que siguen en 4 de 5: Casco Histórico de Vallecas y Opañel
 
@@ -130,9 +131,11 @@ it. It is downloaded from their website when the analysis is repeated.
 ## Limits
 
 - The storey and access of each flat are unknown.
+- Since 03/04/2025 the homeowners' association must also approve it expressly, by three fifths of owners and of shares. The same majority can ban it or raise the service charge by up to 20% (Spanish Law 49/1960, arts. 7.3 and 17.12).
+- A home under public protection cannot be a tourist home (art. 17 ter.3 of Decree 79/2014, added by Decree 27/2026). The responsible declaration must state that two certificates are held: one that the title deed or the association's bylaws do not ban the activity, and one that the association has approved the request (art. 17 bis, letters f and g, of the same decree).
 - If only listings that are a year old or more are used, the San Diego neighbourhood falls to 8th out of 26 by yield.
-- Each flat's floor area is an assumption: 50 m² for up to 1 bedroom, 65 m² for 2 bedrooms, and more for 3 or more. So we cannot say which
-  yields more: a studio, a one-bedroom flat or a two-bedroom flat.
+- Each flat's floor area is an assumption: 50 m² for up to 1 bedroom, 65 m² for 2 bedrooms, and 90 to 140 m² for 3. So we cannot say which
+  yields more: a studio, a one-bedroom flat or a two-bedroom flat. The floor area of 3-bedroom flats was not varied in the checks.
 - Only flats with estimated occupancy count, meaning those with reviews in the last year. Flats that are not being let are left out,
   which may push the yield up.
 - If flats with no estimated occupancy or price are also counted as zero, only the Ventas neighbourhood stays on the list.

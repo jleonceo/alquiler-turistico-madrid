@@ -24,7 +24,7 @@ RUTA_JSON = Path(sys.argv[1]) if len(sys.argv) > 1 else CASO / "informes" / "ind
 # Cifras de control, escritas aquí a propósito: el script no las lleva dentro.
 CONTROL = {"pisos": 2940, "ingreso": 71518518.15, "barrios": 36, "comparacion": 7249,
            "grupo": ["Canillejas", "Casco Histórico de Vallecas", "Numancia", "Opañel", "Puerta del Angel", "Quintana", "San Diego", "Ventas", "Vista Alegre"],
-           "firmes": ["Numancia", "San Diego", "Ventas"], "con_aviso": ["Casco Histórico de Vallecas", "Opañel"]}
+           "recomendados": ["Numancia", "San Diego", "Ventas"], "cuatro_de_cinco": ["Casco Histórico de Vallecas", "Opañel"]}
 ANFITRION, COTIZACION, POCOS = 10, 60, 40  # reglas §3, escritas aquí a propósito
 TOL = 1e-4
 TOL_REMUESTREO = 0.5  # puntos: otro generador no da el mismo extremo
@@ -175,18 +175,18 @@ def principal():
     pruebas = {"sin_temporada": variantes(t, lambda f: f["declara_temporada"]), "sin_anfitriones_grandes": variantes(t, lambda f: f["anuncios_anfitrion"] >= ANFITRION), "sin_cotizaciones_lejanas": variantes(t, lejos=True),
                "solo_1_y_2_dormitorios": variantes(t, lambda f: f["dormitorios"] not in (1, 2)), "sin_ocupacion_como_cero": variantes(t, cero=True)}
     aguanta = {b: sorted(x for x, v in pruebas.items() if v[b] >= 7) for b in grupo}
-    firmes = sorted(b for b, x in aguanta.items() if len(x) == 5)
-    con_aviso = sorted(b for b, x in aguanta.items() if len(x) == 4)
+    recomendados = sorted(b for b, x in aguanta.items() if len(x) == 5)
+    cuatro_de_cinco = sorted(b for b, x in aguanta.items() if len(x) == 4)
     ref = json.loads((CASO / "tests" / "cifras_de_referencia.json").read_text(encoding="utf-8"))
     caso("grupo rehecho frente al control", grupo, CONTROL["grupo"])
-    caso("firmes rehechos frente al control", firmes, CONTROL["firmes"])
-    caso("que siguen en la lista 4 veces rehechos frente al control", con_aviso, CONTROL["con_aviso"])
+    caso("recomendados rehechos frente al control", recomendados, CONTROL["recomendados"])
+    caso("que siguen en la lista 4 veces rehechos frente al control", cuatro_de_cinco, CONTROL["cuatro_de_cinco"])
     caso("barrios del grupo frente a la referencia", len(grupo), ref["barrios_del_grupo"])
-    caso("barrios recomendados frente a la referencia", len(firmes), ref["barrios_firmes"])
+    caso("barrios recomendados frente a la referencia", len(recomendados), ref["barrios_recomendados"])
     caso("grupo del JSON", p2["grupo"], grupo)
-    caso("firmes del JSON", p2["firmes"], firmes)
-    caso("que siguen en la lista 4 veces del JSON", p2["pruebas"]["con_aviso"], con_aviso)
-    caso("resto del grupo del JSON", p2["pruebas"]["segunda_linea"], sorted(set(grupo) - set(firmes) - set(con_aviso)))
+    caso("recomendados del JSON", p2["recomendados"], recomendados)
+    caso("que siguen en la lista 4 veces del JSON", p2["pruebas"]["cuatro_de_cinco"], cuatro_de_cinco)
+    caso("resto del grupo del JSON", p2["pruebas"]["segunda_linea"], sorted(set(grupo) - set(recomendados) - set(cuatro_de_cinco)))
     for nombre, v in pruebas.items():
         caso(f"variantes de la prueba {nombre}", p2["pruebas"]["variantes_por_prueba"][nombre], dict(sorted(v.items())))
     for b, x in aguanta.items():
@@ -206,16 +206,16 @@ def principal():
         caso(f"{x['barrio']}, aviso del tope", sin_tope[x["barrio"]] < 7, x["avisos_del_barrio"]["depende_del_tope"])
 
     # Pregunta 3: rango del grupo recomendado, rango entre fotos y barrios frente al primero.
-    fil = [f for f in t if fija(f) and f["estancia_noches"] is not None and f["estancia_noches"] <= 3 and f["barrio"] in firmes]
+    fil = [f for f in t if fija(f) and f["estancia_noches"] is not None and f["estancia_noches"] <= 3 and f["barrio"] in recomendados]
     meds = []
     for foto, col in (("marzo", "precio_mar_eur"), ("junio", "precio_jun_eur"), ("septiembre", "precio_eur")):
         meds.append(statistics.median(rent(f, col) for f in fil if en_precio(f, col)))
-    r = p3["rango_de_rentabilidad_del_grupo_firme"]
+    r = p3["rango_de_rentabilidad_de_recomendados"]
     caso("rango del grupo recomendado, mínimo", min(meds), r["minimo"], TOL)
     caso("rango del grupo recomendado, máximo", max(meds), r["maximo"], TOL)
-    fil2 = [f for f in t if fija(f) and f["estancia_noches"] is not None and f["estancia_noches"] <= 3 and f["barrio"] in firmes + con_aviso]
+    fil2 = [f for f in t if fija(f) and f["estancia_noches"] is not None and f["estancia_noches"] <= 3 and f["barrio"] in recomendados + cuatro_de_cinco]
     meds2 = [statistics.median(rent(f, col) for f in fil2 if en_precio(f, col)) for col in ("precio_mar_eur", "precio_jun_eur", "precio_eur")]
-    r2 = p3["rango_de_rentabilidad_de_firmes_y_con_aviso"]
+    r2 = p3["rango_de_rentabilidad_de_recomendados_y_cuatro_de_cinco"]
     caso("rango de recomendados y los que siguen en la lista 4 veces, mínimo", min(meds2), r2["minimo"], TOL)
     caso("rango de recomendados y los que siguen en la lista 4 veces, máximo", max(meds2), r2["maximo"], TOL)
 
@@ -255,20 +255,20 @@ def principal():
     caso("barrios que se distinguen del primero, con otro generador", distinguen, len(p3["se_distinguen_del_primero"]), 2)
 
     # La recomendación, el cuartil de la base, los baratos frente a la lista, el orden entre barrios y los pisos de un año o más.
-    rec = [f for f in d if f["barrio"] in firmes and f["dormitorios"] <= 2]
+    rec = [f for f in d if f["barrio"] in recomendados and f["dormitorios"] <= 2]
     caso("recomendación, pisos", len(rec), j["recomendacion"]["pisos"])
     for clave, col in (("rentabilidad_pct", "rent_valoraciones_pct"), ("compra_eur", "compra_valoraciones_eur"), ("ingreso_anual_eur", "ingreso_anual_eur")):
         caso(f"recomendación, {clave}", statistics.median(f[col] for f in rec), j["recomendacion"][clave], TOL)
     caso("cuartil bajo de toda la base", cuantil([f["rent_valoraciones_pct"] for f in d], 0.25), p2["cuartil_bajo_de_toda_la_base"], TOL)
     caso("barrios sin superar la mediana", sum(1 for b in comparados if cuantil([f["rent_valoraciones_pct"] for f in por_barrio[b]], 0.25) <= statistics.median(f["rent_valoraciones_pct"] for f in d)), p2["aviso_del_cuartil"]["no_superan_la_mediana"])
     q = p2["que_ordena_la_lista"]
-    for nombre, barrios in (("m2_baratos", baratos), ("firmes", firmes), ("grupo", grupo)):
+    for nombre, barrios in (("m2_baratos", baratos), ("recomendados", recomendados), ("grupo", grupo)):
         caso(f"rentabilidad conjunta de {nombre}", statistics.median(f["rent_valoraciones_pct"] for f in d if f["barrio"] in barrios), q[nombre]["mediana_pct"], TOL)
     medianas = [statistics.median(f["rent_valoraciones_pct"] for f in por_barrio[b]) for b in comparados]
     caso("rentabilidad y ocupación entre barrios", spearman(medianas, [statistics.median(f["ocupacion_dias"] for f in por_barrio[b]) for b in comparados]), q["rentabilidad_con_ocupacion"], TOL)
     caso("rentabilidad y m² entre barrios", spearman(medianas, [m2[b] for b in comparados]), q["rentabilidad_con_m2"], TOL)
-    con_aviso_d = [f for f in d if f["barrio"] in con_aviso]
-    caso("operadores grandes en los barrios que siguen en la lista 4 veces", 100 * sum(1 for f in con_aviso_d if f["anuncios_anfitrion"] >= ANFITRION) / len(con_aviso_d), p2["operadores_grandes"]["con_aviso_pct"], TOL)
+    cuatro_de_cinco_d = [f for f in d if f["barrio"] in cuatro_de_cinco]
+    caso("operadores grandes en los barrios que siguen en la lista 4 veces", 100 * sum(1 for f in cuatro_de_cinco_d if f["anuncios_anfitrion"] >= ANFITRION) / len(cuatro_de_cinco_d), p2["operadores_grandes"]["cuatro_de_cinco_pct"], TOL)
     # La primera reseña no está en la tabla de análisis: se lee de la foto corregida, por el número del anuncio.
     primera = dict(zip(*(pq.read_table(CASO / "data" / "processed" / "anuncios_integrado.parquet", columns=["id", "first_review"]).column(c).to_pylist() for c in ("id", "first_review"))))
     un_ano = defaultdict(list)
@@ -283,7 +283,7 @@ def principal():
     with open(CASO / "data" / "raw" / "externos" / "licencias_vut_por_barrio.csv", encoding="utf-8") as fichero:
         licencias = list(csv.DictReader(fichero))
     caso("licencias con planta baja", sum(1 for f in licencias if "BAJA" in f["planta"].upper()), j["licencias_y_registro"]["planta_baja"]["licencias"])
-    caso("licencias con planta baja, en los recomendados", sum(1 for f in licencias if "BAJA" in f["planta"].upper() and f["barrio"] in firmes), j["licencias_y_registro"]["planta_baja"]["firmes"]["licencias"])
+    caso("licencias con planta baja, en los recomendados", sum(1 for f in licencias if "BAJA" in f["planta"].upper() and f["barrio"] in recomendados), j["licencias_y_registro"]["planta_baja"]["recomendados"]["licencias"])
 
     # Las 16: las que dan una cifra sola, en las dos bases.
     s = {q["id"]: q for q in j["las_16"]}

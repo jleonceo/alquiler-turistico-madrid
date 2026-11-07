@@ -23,7 +23,7 @@ import shapely
 
 import cifras_informes as ci
 import mapa_barrios
-from cifras_informes import CON_AVISO, FIRMES, ORDENA, PLANTA, Q2, Q3, REC, UN_ANO, exigir, ficha
+from cifras_informes import CUATRO_DE_CINCO, RECOMENDADOS, ORDENA, PLANTA, Q2, Q3, REC, UN_ANO, exigir, ficha
 
 # informe.py y graficos.py viven en assets/; cifras_informes ya la puso en la ruta de importación.
 import graficos as g  # noqa: E402
@@ -100,9 +100,9 @@ def comprobar_frases(c):
     fichas = {f["barrio"]: f for f in c.dato(f"{Q3}.fichas_del_grupo")}
     exigir(c.dato(f"{DORM}.primero_en_euros") == "2" and c.dato(f"{DORM}.no_se_distinguen_del_primero_en_euros") == ["3"], "en euros encabezan los de 2 habitaciones, que no se distinguen de los de 3")
     exigir(c.dato(f"{DORM}.tabla[grupo=3].frente_al_total") == "por debajo", "los de 3 habitaciones rinden menos que la mediana de todos los pisos")
-    exigir(fichas["Ventas"]["rango_entre_fotos_puntos"] == max(fichas[b]["rango_entre_fotos_puntos"] for b in FIRMES), "entre los recomendados, Ventas es la que más cambia con la fecha del precio")
+    exigir(fichas["Ventas"]["rango_entre_fotos_puntos"] == max(fichas[b]["rango_entre_fotos_puntos"] for b in RECOMENDADOS), "entre los recomendados, Ventas es la que más cambia con la fecha del precio")
     orden = sorted(fichas, key=lambda b: -fichas[b]["rango_entre_fotos_puntos"])
-    exigir(set(orden[:2]) == set(CON_AVISO), "Los barrios de Casco Histórico de Vallecas y Opañel son los que más se mueven")
+    exigir(set(orden[:2]) == set(CUATRO_DE_CINCO), "Los barrios de Casco Histórico de Vallecas y Opañel son los que más se mueven")
     exigir(all(len(c.dato(f"{Q2}.pruebas.barrios.{b}.no_aguanta")) >= 2 for b in c.dato(f"{Q2}.segunda_linea")), "los restantes salen en dos comprobaciones o más")
 
 
@@ -112,26 +112,24 @@ def comprobar_frases(c):
 
 def pagina_resumen(inf, c):
     """Resumen: abre con la recomendación y los límites que pesan, sus cifras clave y la tabla de las tres preguntas."""
-    rango = f"{Q3}.rango_de_rentabilidad_del_grupo_firme"
     p = inf.pagina("Buscar hasta 2 habitaciones en los barrios de Ventas, Numancia y San Diego", "resumen", panel="Resumen", columnas=False)
-    p.cifra_clave(c.pct(f"{REC}.rentabilidad_pct"), "Rentabilidad bruta", "Mediana, antes de gastos")
+    p.cifra_clave(c.pct(f"{REC}.rentabilidad_pct"), "Rentabilidad bruta", "Mediana piso a piso, antes de gastos")
     p.cifra_clave(c.num(f"{REC}.pisos"), "Anuncios en Airbnb", "No son pisos en venta")
     p.cifra_clave(c.eur(f"{REC}.compra_eur"), "Precio de compra", "Mediana por piso")
     p.cifra_clave(c.eur(f"{REC}.ingreso_anual_eur"), "Ingreso anual por piso", "Mediana, antes de gastos")
-    p.texto(f"Con todos sus pisos, de cualquier tamaño, estos barrios rinden del {c.pct(rango + '.minimo')} al {c.pct(rango + '.maximo')} según la fecha del precio. "
-            f"Se recomiendan porque se mantienen al repetir el cálculo, no porque rindan más. El barrio de Numancia rinde más que la mediana de todos los pisos. En los barrios de Ventas y San Diego no se puede asegurar. Los barrios de Casco Histórico de Vallecas y Opañel rinden más que el de San Diego, pero el {c.pct(Q2 + '.operadores_grandes.con_aviso_pct', 0)} de sus anuncios es de anfitriones con 10 anuncios o más.",
-            f"Esta recomendación dice dónde buscar. Si un piso concreto se puede comprar para alquilarlo a turistas depende de la normativa, y se pregunta en el Ayuntamiento antes de comprar. Conviene empezar por bajos y primeras plantas con acceso independiente: {c.num(PLANTA + '.licencias')} de las {c.num(PLANTA + '.de')} licencias incluyen planta baja. "
-            "Lo que ingresa un bajo no se conoce, porque los datos mezclan todas las plantas.")
+    p.texto(f"Es una primera criba. Los tres barrios siguen en la lista las 5 veces, lo que no significa que rindan más. Sin los pisos en el máximo de 255 días, ninguno sigue: la lista pasa a ser los barrios de {ci.lista_sin_maximo(c)}.",
+            f"La rentabilidad se calcula piso a piso y no sale de las dos cifras de arriba. La mediana de todos los pisos es del {c.pct(Q2 + '.mediana_de_toda_la_base')}. Según barrio y tamaño, la compra va de {c.eur(REC + '.compra_minima_eur')} a {c.eur(REC + '.compra_maxima_eur')}.",
+            f"Si un piso se puede alquilar a turistas se pregunta antes en el Ayuntamiento. Además tiene que aprobarlo su comunidad de propietarios, por tres quintos. Conviene empezar por bajos y primeras plantas con acceso independiente.")
     p.tabla(["Pregunta", "Respuesta", "Qué se recomienda"],
             [["1. Tipo de piso", "Hasta 2 habitaciones, sin ganador entre ellos", "Pedir su superficie real"],
-             ["2. Barrios", "Tres siguen en la lista las 5 veces", "Comprobar planta y norma"],
+             ["2. Barrios", "Tres siguen en la lista las 5 veces", "Comprobar planta, norma y comunidad"],
              ["3. Riesgo", "Los tres dependen de los pisos en el máximo de días", "Repetir con los datos siguientes"]],
             fuente="Inside Airbnb, licencia CC BY 4.0; Ayuntamiento de Madrid")
 
 
 def paginas_pregunta_1(inf, c, ap):
     """Pregunta 1: los pisos de hasta 2 habitaciones y el peso del supuesto de superficie."""
-    t = "Hasta 2 habitaciones rinden más que 3 en todas las superficies probadas"
+    t = "Hasta 2 habitaciones rinden más que 3 con las superficies supuestas"
     p = inf.pagina(t, "pregunta", pregunta=PREGUNTAS[1], panel="Habitaciones")
     p.cifra_clave(c.eur(f"{DORM}.tabla[grupo=2].euros_al_ano"), "Ingreso estimado al año, 2 habitaciones", "Mediana de todos los pisos")
     p.cifra_clave(c.eur(f"{DORM}.tabla[grupo=1].euros_al_ano"), "Ingreso estimado al año, 1 habitación", "Mediana de todos los pisos")
@@ -144,8 +142,8 @@ def paginas_pregunta_1(inf, c, ap):
     svg = g.barras_con_intervalo(etiquetas, valores, bajos, altos, referencia=ref, rotulo_referencia="Todos los pisos", decimales=1, unidad=" %", intervalo="intervalo de confianza del 95 %", ancho=560, destacar=[etiquetas[3]], medida="rentabilidad bruta")
     ap.apuntar(len(inf.paginas), t, grupos, "rentabilidad bruta mediana", valores, "%")
     ap.apuntar(len(inf.paginas), t, ["todos los pisos"], "referencia", [ref], "%")
-    p.texto("El equipo de valoraciones puede dejar fuera los pisos de 3 habitaciones.",
-            "En ingreso anual van primero los pisos de 2 habitaciones, aunque la diferencia con los de 3 podría ser cero. Es un ingreso estimado, antes de gastos.",
+    p.texto(f"Los pisos de 3 habitaciones se calculan con 90 m² o más, y no se probó otra superficie. Para igualar a los de 2 habitaciones tendrían que medir unos {c.num(SUP + '.tres_habitaciones.superficie_para_igualar_a_2_m2')} m², menos que los 65 m² que se suponen para los de 2. El equipo de valoraciones puede dejarlos fuera.",
+            "En ingreso anual van primero los pisos de 2 habitaciones, aunque la diferencia con los de 3 no se puede asegurar. Es un ingreso estimado, antes de gastos.",
             f"La ventaja de 1 habitación sobre 2 no se repite en todos los distritos: gana en {c.num(Q1 + '.por_segmentos.distritos_donde_1_supera_a_2')} de {c.num(Q1 + '.por_segmentos.distritos_comparables_1_y_2')}. "
             f"El tipo de inmueble apenas marca diferencias: {c.num(Q1 + '.tipo_de_inmueble.tabla[grupo=Entire rental unit].pisos')} de los {c.num(Q1 + '.poblacion.filas')} pisos son apartamentos de alquiler.")
     p.grafico(svg, "Los pisos de 3 habitaciones rinden menos que la mediana de todos los pisos", f"Rentabilidad bruta mediana, en %. Fuente: {FUENTE_PISOS}")
@@ -153,7 +151,7 @@ def paginas_pregunta_1(inf, c, ap):
     t = "El orden entre estudio, una y dos habitaciones depende de los m²"
     p = inf.pagina(t, "pregunta", pregunta=PREGUNTAS[1], panel="Superficie supuesta", columnas=False)
     p.cifra_clave(c.num(f"{SUP}.combinaciones_que_cambian"), "Casos en que cambia el tipo más rentable", f"De {c.cuantos(SUP + '.combinaciones')} probados")
-    p.texto("No hay un ganador entre estudio, una y dos habitaciones, y los pisos de 3 no son los más rentables en ningún caso. Hasta conocer la superficie real, conviene tratar los tres tipos por igual.")
+    p.texto("No hay un ganador entre estudio, una y dos habitaciones. La columna de 3 habitaciones no cambia porque su superficie no se movió. Hasta conocer la superficie real, conviene tratar los tres tipos por igual.")
     filas = []
     for i, x in enumerate(c.dato(f"{SUP}.combinaciones")):
         base = f"{SUP}.combinaciones[{i}]"
@@ -169,7 +167,7 @@ def paginas_pregunta_2(inf, c, ap):
     clases = c.dato(f"{Q2}.clases")
     t = "Tres barrios siguen en la lista las cinco veces y dos, cuatro veces"
     p = inf.pagina(t, "pregunta", pregunta=PREGUNTAS[2], panel="Mapa de barrios")
-    p.texto("Conviene empezar por los tres barrios recomendados. Los barrios de Casco Histórico de Vallecas y Opañel salen sin los anfitriones con 10 anuncios o más.",
+    p.texto(f"Conviene empezar por los tres barrios recomendados. Los barrios de Casco Histórico de Vallecas y Opañel rinden más que el de San Diego, pero el {c.pct(Q2 + '.operadores_grandes.cuatro_de_cinco_pct', 0)} de sus anuncios es de anfitriones con 10 anuncios o más, y sin ellos salen de la lista.",
             f"El cálculo se repitió 12 veces cambiando la estancia mínima, el mínimo de anuncios o la fecha del precio. Los {c.cuantos(Q2 + '.grupo')} barrios de la lista quedan en el 25 % más rentable en más de 6 de las 12.",
             "Después se repitió todo de 5 formas, quitando un grupo de anuncios cada vez. Se recomiendan los que siguen las 5 veces.")
     p.grafico(mapa_barrios.mapa(poligonos, clases, limite, ci.barrio), "Los que siguen 4 o 5 veces quedan al sur y al este del centro", f"Fuente: {FUENTE_PISOS}")
@@ -177,7 +175,7 @@ def paginas_pregunta_2(inf, c, ap):
 
     t = "El orden dentro de la lista no está cerrado"
     p = inf.pagina(t, "pregunta", pregunta=PREGUNTAS[2], panel="Orden de la lista")
-    orden = FIRMES + CON_AVISO + sorted(c.dato(f"{Q2}.segunda_linea"))
+    orden = RECOMENDADOS + CUATRO_DE_CINCO + sorted(c.dato(f"{Q2}.segunda_linea"))
     etiquetas = [f"{ci.barrio(b)}, {c.num(ficha(b, 'pisos'))} anuncios" for b in orden]
     valores = [numero_celda(c, ficha(b, "rentabilidad_mediana_pct")) for b in orden]
     bajos, altos = [numero_celda(c, ficha(b, "ic_bajo")) for b in orden], [numero_celda(c, ficha(b, "ic_alto")) for b in orden]
@@ -185,8 +183,8 @@ def paginas_pregunta_2(inf, c, ap):
     svg = g.barras_con_intervalo(etiquetas, valores, bajos, altos, referencia=ref, rotulo_referencia="Todos los pisos", decimales=1, unidad=" %", intervalo="intervalo de confianza del 95 %", ancho=640, medida="rentabilidad bruta")
     ap.apuntar(len(inf.paginas), t, orden, "rentabilidad bruta mediana", valores, "%")
     distinguen = sum(1 for x in c.dato(f"{Q3}.pares_dentro_del_grupo") if x["se_distinguen"])
-    p.texto(f"La lista es un grupo, no una clasificación: de {c.cuantos(Q3 + '.pares_dentro_del_grupo')} parejas de barrios, solo en {ci.numero(distinguen)} se puede asegurar que uno rinde más que otro.",
-            f"Cuando no se puede asegurar, la diferencia podría ser cero, con un 95 % de confianza. La mediana de los pisos de los tres barrios recomendados juntos es {c.pct(Q3 + '.rentabilidad_del_grupo_firme.mediana')}, que no es la media de las medianas de cada barrio.")
+    p.texto(f"La lista no ordena a los barrios: de {c.cuantos(Q3 + '.pares_dentro_del_grupo')} parejas de barrios, solo en {ci.numero(distinguen)} se puede asegurar que uno rinde más que otro.",
+            f"El barrio de Numancia rinde más que la mediana de todos los pisos. En los barrios de Ventas y San Diego esa diferencia no se puede asegurar con un 95 % de confianza. La mediana de los pisos de los tres barrios recomendados juntos es {c.pct(Q3 + '.rentabilidad_de_recomendados.mediana')}, que no es la media de las medianas de cada barrio.")
     c.apuntadas.setdefault(ci.numero(distinguen), set()).add(f"recuento de se_distinguen en {Q3}.pares_dentro_del_grupo")
     p.grafico(svg, "En casi ninguna pareja de barrios se puede asegurar la diferencia", f"Rentabilidad bruta mediana, en %. Fuente: {FUENTE_PISOS}")
 
@@ -204,19 +202,19 @@ def paginas_pregunta_2(inf, c, ap):
     p = inf.pagina(t, "pregunta", pregunta=PREGUNTAS[2], panel="Precio de compra")
     coinciden = c.dato(f"{baratos}.coinciden")
     p.cifra_clave(c.pct(f"{ORDENA}.m2_baratos.mediana_pct"), "Barrios de m² más barato", f"Los {c.num(baratos + '.de')} más baratos")
-    p.cifra_clave(c.pct(f"{Q3}.rentabilidad_del_grupo_firme.mediana"), "Tres barrios recomendados", "Rentabilidad en mediana")
+    p.cifra_clave(c.pct(f"{Q3}.rentabilidad_de_recomendados.mediana"), "Tres barrios recomendados", "Rentabilidad en mediana")
     p.cifra_clave(c.pct(f"{ORDENA}.grupo.mediana_pct"), "Barrios de la lista", "Rentabilidad en mediana")
-    p.texto(f"La lista no gana rentabilidad frente a elegir por precio: {c.num(baratos + '.cuantos')} de los {c.num(baratos + '.de')} barrios coinciden y la diferencia entre las tres cifras podría ser cero. Lo que aporta es saber qué barrios se mantienen al repetir el cálculo.",
-            f"Entre los {c.num(ORDENA + '.barrios')} barrios, la rentabilidad va más ligada a los días ocupados ({c.num(ORDENA + '.rentabilidad_con_ocupacion', 2)}) que al precio del m² ({c.num(ORDENA + '.rentabilidad_con_m2', 2)}), en una escala de -1 a 1, y los días ocupados son la cifra menos fiable. Es una asociación: no dice por qué esos barrios rinden más.")
+    p.texto(f"No se puede asegurar que la lista rinda más que elegir por precio, porque {c.num(baratos + '.cuantos')} de los {c.num(baratos + '.de')} barrios coinciden y las tres cifras están muy cerca. Lo que aporta es saber qué barrios siguen en la lista al repetir el cálculo.",
+            f"Entre los {c.num(ORDENA + '.barrios')} barrios, la rentabilidad va más ligada a los días ocupados que al precio del m²: la correlación es de {c.num(ORDENA + '.rentabilidad_con_ocupacion', 2)} frente a {c.num(ORDENA + '.rentabilidad_con_m2', 2)}, en una escala de −1 a 1. Los días ocupados son la cifra menos fiable. Es una asociación: no dice por qué esos barrios rinden más.")
     p.tabla(["Barrio de la lista", "Veces que sigue en la lista", "Entre los de m² más barato"], [[ci.barrio(b), c.dato(ficha(b, "clase")), "sí" if b in coinciden else "no"] for b in orden], fuente="Ayuntamiento de Madrid, precio de 2025; Inside Airbnb, datos del 17/09/2026", texto=False)
 
 
 def paginas_pregunta_3(inf, c, ap):
     """Pregunta 3: el riesgo de cada barrio, lo que se mueve con la fecha del precio y el nivel de la rentabilidad."""
-    orden = FIRMES + CON_AVISO + sorted(c.dato(f"{Q2}.segunda_linea"))
+    orden = RECOMENDADOS + CUATRO_DE_CINCO + sorted(c.dato(f"{Q2}.segunda_linea"))
     t = "Los tres recomendados dependen de los pisos en el máximo de días"
     p = inf.pagina(t, "pregunta", pregunta=PREGUNTAS[3], panel="Riesgo por barrio", columnas=False)
-    p.texto(f"Un barrio depende del máximo si sale de la lista al quitar los pisos que llegan a 255 días. El barrio de Opañel, con el {c.pct(ficha('Opañel', 'parte_en_el_tope_pct'), 0)} de sus pisos en el máximo, no depende. "
+    p.texto(f"Un barrio depende del máximo si sale de la lista al quitar los pisos que llegan a 255 días. Sin ellos la lista pasa a ser los barrios de {ci.lista_sin_maximo(c)}. El barrio de Opañel, con el {c.pct(ficha('Opañel', 'parte_en_el_tope_pct'), 0)} de sus pisos en el máximo, no depende. "
             f"De todos los pisos analizados, uno de cada cuatro rinde menos del {c.pct(Q2 + '.cuartil_bajo_de_toda_la_base', 2)}; en los tres recomendados ese corte es más alto. "
             f"El {c.pct(Q3 + '.pisos_fuera_sin_ocupacion.pct')} de los pisos fuera del centro histórico no tiene días ocupados estimados.")
     filas = [[ci.barrio(b), c.dato(ficha(b, "clase")), numero_celda(c, ficha(b, "pisos"), 0), numero_celda(c, ficha(b, "cuartil_bajo_pct")), numero_celda(c, ficha(b, "parte_en_el_tope_pct")), numero_celda(c, ficha(b, "pisos_fuera_sin_ocupacion_pct", 3))] for b in orden]
@@ -232,11 +230,11 @@ def paginas_pregunta_3(inf, c, ap):
             "Marzo y junio solo cubren los anuncios que siguen en septiembre, con sus días ocupados.")
     p.grafico(svg, "Cuánto cambia cada barrio con la fecha del precio", f"Mediana más alta menos la más baja, en puntos. Fuente: {FUENTE_PISOS}")
 
-    rango = f"{Q3}.rango_de_rentabilidad_de_firmes_y_con_aviso"
-    firmes = f"{Q3}.rango_de_rentabilidad_del_grupo_firme"
-    t = f"Los recomendados rinden del {c.pct(firmes + '.minimo')} al {c.pct(firmes + '.maximo')} según la fecha del precio"
+    rango = f"{Q3}.rango_de_rentabilidad_de_recomendados_y_cuatro_de_cinco"
+    recomendados = f"{Q3}.rango_de_rentabilidad_de_recomendados"
+    t = f"Los recomendados rinden del {c.pct(recomendados + '.minimo')} al {c.pct(recomendados + '.maximo')} según la fecha del precio"
     p = inf.pagina(t, "pregunta", pregunta=PREGUNTAS[3], panel="Nivel de la rentabilidad")
-    r = {x["foto"]: x["mediana"] for x in c.dato(f"{firmes}.combinaciones")}
+    r = {x["foto"]: x["mediana"] for x in c.dato(f"{recomendados}.combinaciones")}
     fotos = ["marzo", "junio", "septiembre"]
     nombres = [f.capitalize() for f in fotos]
     valores = [r[f] for f in fotos]
@@ -249,19 +247,24 @@ def paginas_pregunta_3(inf, c, ap):
     t = "Con anuncios de un año o más, el barrio de San Diego sale del 25 % más rentable"
     p = inf.pagina(t, "pregunta", pregunta=PREGUNTAS[3], panel="Anuncios nuevos", columnas=False)
     p.texto(f"Los días ocupados salen de las reseñas del último año, y un anuncio con menos de un año ha tenido menos tiempo para recibirlas, así que parece menos ocupado. Con los {c.num(UN_ANO + '.pisos')} anuncios de un año o más, entre {c.num(UN_ANO + '.barrios_comparados')} barrios con 30 anuncios o más, los barrios de Numancia y Ventas quedan en los puestos {c.num(ci.puesto('Numancia'))} y {c.num(ci.puesto('Ventas'))}, y el de San Diego en el {c.num(ci.puesto('San Diego'))}.")
-    p.tabla(["Barrio", "Anuncios de un año o más", "Rentabilidad bruta (%)", "Puesto"], [[b, numero_celda(c, f"{UN_ANO}.barrios[barrio={b}].pisos", 0), numero_celda(c, f"{UN_ANO}.barrios[barrio={b}].mediana_pct"), numero_celda(c, ci.puesto(b), 0)] for b in FIRMES], fuente=FUENTE_PISOS, decimales=[0, 0, 1, 0])
+    p.tabla(["Barrio", "Anuncios de un año o más", "Rentabilidad bruta (%)", "Puesto"], [[b, numero_celda(c, f"{UN_ANO}.barrios[barrio={b}].pisos", 0), numero_celda(c, f"{UN_ANO}.barrios[barrio={b}].mediana_pct"), numero_celda(c, ci.puesto(b), 0)] for b in RECOMENDADOS], fuente=FUENTE_PISOS, decimales=[0, 0, 1, 0])
 
 
 def paginas_cierre(inf, c):
     """Límites y decisiones propuestas: una tabla cada una, en el orden de lo que hay en juego."""
+    p = inf.pagina("Antes de comprar hay que comprobar norma, planta y comunidad", "limites", panel="Antes de comprar")
+    p.tabla(["Qué se comprueba", "Lo que dice la norma"], [
+        ["Norma y planta", "Estar fuera del centro histórico no significa que se pueda comprar para este uso. En el nivel B de la zona 1, la de protección del patrimonio histórico, el hospedaje se admite en planta baja, inferior a la baja y primera, siempre con acceso independiente. No se ha comprobado si los tres barrios están en esa zona. Planta, acceso y norma se comprueban en el Ayuntamiento. Lo que ingresa un bajo no se conoce, porque los datos mezclan todas las plantas."],
+        ["Comunidad de propietarios", "La comunidad de propietarios tiene que aprobarlo de forma expresa, por tres quintos de propietarios y de cuotas, y la misma mayoría puede prohibirlo o subir la cuota hasta un 20 % (Ley 49/1960, arts. 7.3 y 17.12)."],
+        ["Vivienda protegida", "Una vivienda con protección pública no puede ser vivienda turística (art. 17 ter.3 del Decreto 79/2014, añadido por el Decreto 27/2026)."],
+        ["Certificados", "La declaración responsable manifiesta contar con dos certificados: uno de que el título constitutivo o los estatutos no prohíben la actividad y otro de que la comunidad ha aprobado la solicitud (art. 17 bis, letras f y g, del mismo decreto). Esto no es asesoramiento jurídico."],
+    ], fuente="BOCM 226 de 22/09/2025; Ley 49/1960; BOCM 80 de 06/04/2026")
+
     p = inf.pagina("Lo que puede cambiar estas conclusiones", "limites", panel="Límites")
     p.tabla(["Decisión a la que afecta", "Límite"], [
-        ["Comprar un piso", "Estar fuera del centro histórico no significa que se pueda comprar para este uso. En el nivel B de la zona 1, el hospedaje se admite en planta baja, en la inferior a la baja y en la primera, siempre con acceso independiente. Planta, acceso y norma se comprueban en el Ayuntamiento. Esto no es asesoramiento jurídico."],
-        ["Dónde buscar", "Los días ocupados son una estimación con máximo de 255, y entre los pisos más ocupados no sirven para ordenar."],
-        ["Dónde buscar", "Si los pisos sin días ocupados ni precio se contaran como cero, solo seguiría en la lista el barrio de Ventas."],
-        ["Qué tipo buscar", "La superficie es un supuesto del equipo de valoraciones, y el dato oficial es igual para todos los pisos del barrio."],
+        ["Dónde buscar", "Los días ocupados son una estimación con máximo de 255, y entre los pisos más ocupados no sirven para ordenar. Si se cuentan como cero los pisos sin días ocupados, los tres barrios siguen en la lista. Si también se cuentan así los pisos sin precio, solo sigue el barrio de Ventas."],
+        ["Qué tipo buscar", "La superficie es un supuesto, y el dato oficial es igual para todos los pisos del barrio."],
         ["Cuánto rinde", f"El precio de compra es el declarado en 2025 y la inversión total no consta. Con los precios que piden hoy Fotocasa e Idealista, la compra sube a {c.eur('recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].compra_mediana_eur')} y {c.eur('recomendacion.precio_de_mercado.fuentes[fuente=Idealista].compra_mediana_eur')}, y la rentabilidad baja a {c.pct('recomendacion.precio_de_mercado.fuentes[fuente=Fotocasa].rentabilidad_mediana_pct')} y {c.pct('recomendacion.precio_de_mercado.fuentes[fuente=Idealista].rentabilidad_mediana_pct')}. No se ha medido si cambiarían los barrios."],
-        ["Barrio de Casco Histórico de Vallecas", "Airbnb junta en él lo que el Ayuntamiento separa, y su precio oficial puede no representar todo el barrio."],
         ["Por qué ocurre", "Son asociaciones sobre una descarga: no dicen por qué un barrio rinde más. El calendario no distingue reservado de bloqueado."],
     ], fuente="reglas de negocio y datos del 17/09/2026")
 

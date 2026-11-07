@@ -17,7 +17,7 @@ ORIGEN = "data/raw/listings_2026-09-17.csv.gz"
 # Los bancos que abren datos reales, con el fichero sin el que no pueden ejecutarse.
 NECESITA = {"probar_portada.py": "data/publicado/pisos_fuera_del_centro.csv.gz", "probar_cifras_por_otro_camino.py": ORIGEN, "probar_preparacion_por_otro_camino.py": ORIGEN,
             "probar_indicadores_por_otro_camino.py": PROCESADO, "probar_cuadro_mando.py": PROCESADO, "probar_frase_solo_ventas.py": PROCESADO,
-            "probar_informe_final.py": "data/processed/barrios_poligonos_corregido.parquet"}
+            "probar_informe_final.py": "data/processed/barrios_poligonos_corregido.parquet", "probar_revision_de_la_entrega.py": "informes/indicadores.json"}
 
 
 def contar(salida):

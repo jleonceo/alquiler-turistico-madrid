@@ -98,7 +98,7 @@ def principal():
             p.caso("el control trae las doce variantes", "variantes_por_barrio" in j["control_grupo"])
             g = j["control_grupo"]
             p.caso("el control trae las cinco pruebas de cada barrio", set(g.get("pruebas_por_barrio", {"x": 1})) == set(g["grupo"]), str(g.get("pruebas_por_barrio")))
-            p.caso("cada barrio del grupo tiene su clase", set(g["firmes"]) | set(g.get("con_aviso", ["x"])) | set(g["segunda_linea"]) == set(g["grupo"]))
+            p.caso("cada barrio del grupo tiene su clase", set(g["recomendados"]) | set(g.get("cuatro_de_cinco", ["x"])) | set(g["segunda_linea"]) == set(g["grupo"]))
             registro = (caso / "config" / "modelo" / "registro-transformaciones.md").read_text(encoding="utf-8")
             p.caso("las columnas nuevas tienen ficha", "anuncios_anfitrion" in registro and "dias_cotizacion" in registro)
             riesgos = caso / "config" / "negocio" / "03_riesgos_de_calidad.md"
