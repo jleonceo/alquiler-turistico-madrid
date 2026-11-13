@@ -107,6 +107,21 @@ Los precios de los portales se consultaron el 06/11/2026 y solo se comparan en e
 
 ## Cómo está hecho
 
+```mermaid
+flowchart TD
+    F[Datos públicos<br/>Inside Airbnb y Ayuntamiento de Madrid] --> Q[Calidad y corrección]
+    Q --> X[Cruces por barrio]
+    X --> E[Exploración e indicadores]
+    E --> I[indicadores.json<br/>única fuente de las cifras]
+    I --> IE[Informe ejecutivo]
+    I --> IF[Informe final]
+    I --> CM[Cuadro de mando]
+    I -.-> V[Segundo script independiente<br/>rehace las cifras de la portada]
+    style I fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+    style V fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+```
+
+
 Catorce scripts de Python hacen el trabajo, desde la descarga hasta las tres entregas: calidad, corrección, cruces,
 exploración, indicadores e informes. Las tres entregas toman sus cifras de un único fichero,
 [indicadores.json](informes/indicadores.json).

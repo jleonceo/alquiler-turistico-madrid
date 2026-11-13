@@ -107,6 +107,21 @@ The portal prices were checked on 06/11/2026 and are compared only for these thr
 
 ## How it is built
 
+```mermaid
+flowchart TD
+    F[Public data<br/>Inside Airbnb and Madrid City Council] --> Q[Quality and correction]
+    Q --> X[Joins by neighbourhood]
+    X --> E[Exploration and indicators]
+    E --> I[indicadores.json<br/>single source of the figures]
+    I --> IE[Executive report]
+    I --> IF[Full report]
+    I --> CM[Dashboard]
+    I -.-> V[Independent second script<br/>redoes the figures on this page]
+    style I fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+    style V fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+```
+
+
 Fourteen Python scripts do the work, from download to the three deliverables, covering data quality checks, cleaning, joins,
 exploration, metrics and reports. The three deliverables take their figures from a single file,
 [indicadores.json](informes/indicadores.json).
