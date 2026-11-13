@@ -108,11 +108,14 @@ Los precios de los portales se consultaron el 06/11/2026 y solo se comparan en e
 ## Cómo está hecho
 
 ```mermaid
-flowchart TD
-    F[Datos públicos<br/>Inside Airbnb y Ayuntamiento de Madrid] --> Q[Calidad y corrección]
-    Q --> X[Cruces por barrio]
-    X --> E[Exploración e indicadores]
-    E --> I[indicadores.json<br/>única fuente de las cifras]
+flowchart LR
+    F[Datos públicos<br/>Inside Airbnb y<br/>Ayuntamiento de Madrid] --> S1
+    subgraph S1[Análisis]
+        direction TB
+        Q[Calidad y corrección] --> X[Cruces por barrio]
+        X --> E[Exploración e indicadores]
+    end
+    S1 --> I[indicadores.json<br/>única fuente<br/>de las cifras]
     I --> IE[Informe ejecutivo]
     I --> IF[Informe final]
     I --> CM[Cuadro de mando]

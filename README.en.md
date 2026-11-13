@@ -108,11 +108,14 @@ The portal prices were checked on 06/11/2026 and are compared only for these thr
 ## How it is built
 
 ```mermaid
-flowchart TD
-    F[Public data<br/>Inside Airbnb and Madrid City Council] --> Q[Quality and correction]
-    Q --> X[Joins by neighbourhood]
-    X --> E[Exploration and indicators]
-    E --> I[indicadores.json<br/>single source of the figures]
+flowchart LR
+    F[Public data<br/>Inside Airbnb and<br/>Madrid City Council] --> S1
+    subgraph S1[Analysis]
+        direction TB
+        Q[Quality and correction] --> X[Joins by neighbourhood]
+        X --> E[Exploration and indicators]
+    end
+    S1 --> I[indicadores.json<br/>single source<br/>of the figures]
     I --> IE[Executive report]
     I --> IF[Full report]
     I --> CM[Dashboard]
